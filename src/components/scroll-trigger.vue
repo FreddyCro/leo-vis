@@ -18,6 +18,17 @@ onMounted(() => {
     rotation: 360,
     duration: 1,
   });
+
+  // ref: https://gsap.com/docs/v3/GSAP/gsap.matchMedia()/
+  const mm = gsap.matchMedia();
+
+  mm.add('(min-width: 800px)', () => {
+    console.log('Media query matched: min-width: 800px');
+  });
+
+  mm.add('(max-width: 800px)', () => {
+    console.log('Media query matched: max-width: 800px');
+  });
 });
 
 onUnmounted(() => {

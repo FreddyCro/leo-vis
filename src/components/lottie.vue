@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
 const playerRef = ref(null);
+
+// ref: https://developers.lottiefiles.com/docs/dotlottie-player/dotlottie-web/methods/
+// setFrame
 
 onMounted(() => {
   if (playerRef.value) {
