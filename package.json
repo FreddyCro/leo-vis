@@ -1,0 +1,43 @@
+{
+  "name": "leo-vis",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --mode production",
+    "build:nmdap": "vite build --mode nmdap",
+    "build:ghpage": "vite build --mode ghpage",
+    "preview": "vite preview",
+    "prepare": "husky install",
+    "lint": "eslint \"**/*.{js,ts,vue}\" --fix"
+  },
+  "dependencies": {
+    "@udn-digital-center/common-components": "^0.3.1",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "eslint": "^8",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.4.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.5.3",
+    "sass": "^1.76",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.2",
+    "vue-tsc": "^2.2.8"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,vue}": [
+      "eslint --fix"
+    ],
+    "src/**/*.{md,css,scss,vue}": [
+      "prettier --write"
+    ]
+  }
+}
