@@ -1,0 +1,39 @@
+@import 'tailwindcss';
+@import './variables.scss';
+@import './mixins.scss';
+
+/* layout setting */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  --z-index-dialog-open: 9999;
+  --z-index-snack-bar-open: 1100;
+  --z-index-dialog-close: -1000;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  font-family: sans-serif, 'Noto Sans TC', sans-serif;
+  font-style: normal;
+  line-height: 150%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+figure {
+  margin: 0;
+}
