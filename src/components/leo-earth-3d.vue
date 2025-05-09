@@ -23,7 +23,7 @@ onMounted(() => {
     },
   });
 
-  // addStations();
+  addStations();
 
   engine.updateAllPositions(new Date());
 });
@@ -59,5 +59,5 @@ function getCorsFreeUrl(url) {
 </script>
 
 <template>
-  <div ref="el" id="earth" class="w-[100px] h-[100px]"></div>
+  <div ref="el" id="earth" class="w-[300px] h-[300px]"></div>
 </template>
