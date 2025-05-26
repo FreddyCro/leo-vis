@@ -43,8 +43,15 @@ function addStations() {
       currentGroup.value === 'active' ? 0xffffff : 0x0000ff,
     )
     .then((stations) => {
-      state.value.stations = stations;
-      console.log('Stations loaded:', stations);
+      state.value.stations = stations.filter((station) => {
+        const mash = station.mesh;
+        return currentGroup.value === 'active'
+          ? !mash.name.includes('STARLINK')
+          : mash.name.includes('STARLINK');
+      });
+
+      state.value;
+      // console.log('Stations loaded:', stations[0].name);
     });
 }
 
