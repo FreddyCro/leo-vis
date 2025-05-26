@@ -3,6 +3,78 @@ import { onMounted, ref } from 'vue';
 import { Engine } from '@/utils/engine';
 
 const UseDateSlider = false;
+
+const state = ref({
+  stations: [],
+  initialDate: new Date().getTime(),
+  currentDate: new Date().getTime(),
+  referenceFrame: UseDateSlider ? 2 : 1,
+});
+
+const el = ref<HTMLElement | null>(null);
+const engine = new Engine();
+const currentGroup = ref<'active' | 'starlink'>('active');
+
+onMounted(() => {
+  engine.referenceFrame = state.value.referenceFrame;
+  engine.initialize(el.value, {
+    onStationClicked: () => {
+      console.log('Station clicked');
+    },
+  });
+
+  addStations();
+  engine.updateAllPositions(new Date());
+});
+
+function addStations() {
+  const groupMap = {
+    active: './all.txt',
+    // 'https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle',
+    starlink: './startlink.txt',
+    // 'https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle',
+  };
+
+  const url = getCorsFreeUrl(groupMap[currentGroup.value]);
+
+  engine
+    .loadLteFileStations(
+      url,
+      currentGroup.value === 'active' ? 0xffffff : 0x0000ff,
+    )
+    .then((stations) => {
+      state.value.stations = stations;
+      console.log('Stations loaded:', stations);
+    });
+}
+
+function switchStations() {
+  currentGroup.value = currentGroup.value === 'active' ? 'starlink' : 'active';
+  addStations();
+}
+
+function getCorsFreeUrl(url: string): string {
+  return url;
+}
+</script>
+
+<template>
+  <div>
+    <button
+      @click="switchStations"
+      class="mb-2 px-4 py-1 bg-blue-600 text-white rounded"
+    >
+      Switch Stations ({{ currentGroup }})
+    </button>
+    <div ref="el" id="earth" class="w-[300px] h-[300px]"></div>
+  </div>
+</template>
+
+<!-- <script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { Engine } from '@/utils/engine';
+
+const UseDateSlider = false;
 // const DateSliderRangeInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours
 
 const state = ref({
@@ -60,4 +132,4 @@ function getCorsFreeUrl(url) {
 
 <template>
   <div ref="el" id="earth" class="w-[300px] h-[300px]"></div>
-</template>
+</template> -->
