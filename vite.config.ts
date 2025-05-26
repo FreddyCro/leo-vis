@@ -9,9 +9,11 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig((mode) => {
   // loadEnv(mode, root, prefix)
   const env = loadEnv('', process.cwd());
-  console.log('env', env);
+  const { VITE_URL } = env;
+  // console.log('env', env);
 
   return {
+    base: VITE_URL,
     plugins: [
       vue(),
       viteCompression(),
