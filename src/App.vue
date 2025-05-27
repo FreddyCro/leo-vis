@@ -1,23 +1,27 @@
 <script setup lang="ts">
-import LeoHeader from '@/components/LeoHeader.vue';
-import LeoFooter from '@/components/LeoFooter.vue';
-import Lottie from '@/components/lottie.vue';
-import LeoThreeGlobe from '@/components/leo-three-globe.vue';
-import LeoThreeMoon from '@/components/leo-three-moon.vue';
-import LeoEarth from '@/components/leo-earth-3d.vue';
-import Wording from '@/components/wording.vue';
-// import ScrollTrigger from '@/components/scroll-trigger.vue';
+import LeoHeader from '@/components/leo-header.vue';
+import LeoFooter from '@/components/leo-footer.vue';
+import SectionHero from '@/components/section-hero.vue';
+import SectionOne from '@/components/section1.vue';
+import SectionTwo from '@/components/section2.vue';
+import SectionThree from '@/components/section3.vue';
+import SectionFour from '@/components/section4.vue';
+import SectionTw from '@/components/section-tw.vue';
+// import Wording from '@/components/wording.vue';
 </script>
 
 <template>
-  <div>
+  <div class="app">
     <leo-header />
-    <leo-three-globe />
-    <leo-three-moon />
-    <leo-earth />
+    <main class="leo-main">
+      <section-hero />
+      <section-one />
+      <section-two />
+      <section-three />
+      <section-four />
+      <section-tw />
+    </main>
     <leo-footer />
-    <wording />
-    <!-- <lottie /> -->
-    <!-- <scroll-trigger /> -->
+    <!-- <wording /> -->
   </div>
 </template>

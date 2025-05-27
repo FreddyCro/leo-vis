@@ -1,5 +1,5 @@
-@import './variables';
-@import './mixins';
+@use './variables';
+@use './mixins';
 
 /* layout setting */
 html,
@@ -35,4 +35,38 @@ ul {
 
 figure {
   margin: 0;
+}
+
+.leo-article {
+}
+
+.leo-h1 {
+}
+
+.leo-h2 {
+}
+
+.leo-h3 {
+}
+
+.leo-h4 {
+}
+
+.leo-h5 {
+}
+
+.leo-caption {
+}
+
+.leo-section {
+  &--no-mt {
+    margin-top: 0;
+  }
+
+  &--no-mb {
+    margin-bottom: 0;
+  }
+}
+
+.leo-container {
 }
