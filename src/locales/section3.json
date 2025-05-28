@@ -1,4 +1,16 @@
 {
   "title": "重返月球",
-  "subTitle": "強權爭奪月面寶藏"
+  "subTitle": "強權爭奪月面寶藏",
+  "p1t1": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "p1t2": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "p1t3": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "p2t1": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "p2t2": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "p2t3": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "p3t1": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "relatedTitle": "深入解讀",
+  "related1Title": "台日攜手登月國際關注 獨家專訪日本太空新創公司",
+  "related1Link": "#",
+  "related2Title": "太空數據應用民生化 全球產業爭搶台灣科技合作",
+  "related2Link": "#"
 }

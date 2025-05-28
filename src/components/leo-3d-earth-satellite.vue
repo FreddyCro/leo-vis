@@ -1,172 +1,147 @@
-<script setup>
-import { onMounted } from 'vue';
-import ThreeGlobe from 'three-globe';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { Engine } from '@/utils/engine';
+
+const UseDateSlider = false;
+
+const state = ref({
+  stations: [],
+  initialDate: new Date().getTime(),
+  currentDate: new Date().getTime(),
+  referenceFrame: UseDateSlider ? 2 : 1,
+});
+
+const el = ref<HTMLElement | null>(null);
+const engine = new Engine();
+const currentGroup = ref<'active' | 'starlink'>('active');
 
 onMounted(() => {
-  // Gen random data
-  const N = 500;
+  engine.referenceFrame = state.value.referenceFrame;
+  engine.initialize(el.value, {
+    onStationClicked: () => {
+      console.log('Station clicked');
+    },
+  });
 
-  const arcsData = [...Array(N).keys()].map(() => ({
-    startLat: (Math.random() - 0.5) * 180,
-    startLng: (Math.random() - 0.5) * 360,
-    endLat: (Math.random() - 0.5) * 180,
-    endLng: (Math.random() - 0.5) * 360,
-    color: ['red', 'white', 'blue', 'green'][Math.floor(Math.random() * 4)],
-  }));
-
-  const Globe = new ThreeGlobe()
-    .globeImageUrl(
-      '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg',
-    )
-    .arcsData(arcsData)
-    .arcColor('color')
-    .arcAltitude(0.2)
-    .arcAltitudeAutoScale(1 )
-    .arcDashLength(0.3)
-    .arcDashGap(4)
-    .arcDashInitialGap(() => Math.random() * 5)
-    .arcDashAnimateTime(2000);
-
-  const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  document.getElementById('globeViz').appendChild(renderer.domElement);
-
-  const scene = new THREE.Scene();
-  scene.add(Globe);
-  scene.add(new THREE.AmbientLight(0xcccccc, Math.PI));
-  scene.add(new THREE.DirectionalLight(0xffffff, 0.6 * Math.PI));
-
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000,
-  );
-  camera.position.set(0, 0, 500);
-
-  // ✅ 使用 OrbitControls
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.05;
-  controls.rotateSpeed = 1;
-  controls.zoomSpeed = 100;
-  controls.minDistance = 150;
-  controls.maxDistance = 800;
-  controls.enablePan = false; // 建議禁用平移以避免破壞視角
-
-  // 渲染迴圈
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.target.x += 0.5;
-    camera.translateZ(-3);
-    controls.update(); // ✅ 必須呼叫以啟用 damping
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  // 如果需要，可以添加事件監聽器來調整大小
-  // window.addEventListener('resize', () => {
-  //   camera.aspect = window.innerWidth / window.innerHeight;
-  //   camera.updateProjectionMatrix();
-  //   renderer.setSize(window.innerWidth, window.innerHeight);
-  // });
+  addStations();
+  engine.updateAllPositions(new Date());
 });
+
+function addStations() {
+  const groupMap = {
+    active: './all.txt',
+    // 'https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle',
+    starlink: './startlink.txt',
+    // 'https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle',
+  };
+
+  const url = getCorsFreeUrl(groupMap[currentGroup.value]);
+
+  // console.log('state.value:', state.value);
+  // state.value.stations.forEach((station) => {
+  //   engine.removeSatellite(station);
+  // });
+  // state.value.stations = [];
+
+  engine
+    .loadLteFileStations(
+      url,
+      currentGroup.value === 'active' ? 0xffffff : 0x0000ff,
+    )
+    .then((stations) => {
+      state.value.stations = stations;
+      // console.log('Stations loaded:', stations, groupMap[currentGroup.value]);
+      // state.value.stations = stations.filter((station) => {
+      //   const mash = station.mesh;
+      //   return currentGroup.value === 'active'
+      //     ? !mash.name.includes('STARLINK')
+      //     : mash.name.includes('STARLINK');
+      // });
+    });
+}
+
+function switchStations() {
+  currentGroup.value = currentGroup.value === 'active' ? 'starlink' : 'active';
+  addStations();
+}
+
+function getCorsFreeUrl(url: string): string {
+  return url;
+}
 </script>
 
 <template>
-  <div id="globeViz"></div>
+  <div>
+    <button
+      @click="switchStations"
+      class="mb-2 px-4 py-1 bg-blue-600 text-white rounded"
+    >
+      Switch Stations ({{ currentGroup }})
+    </button>
+    <div ref="el" id="earth" class="w-[300px] h-[300px]"></div>
+  </div>
 </template>
 
-<!-- <script setup>
-import { onMounted } from 'vue';
-import ThreeGlobe from 'three-globe';
-import * as THREE from 'three';
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js?external=three';
+<!-- <script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { Engine } from '@/utils/engine';
+
+const UseDateSlider = false;
+// const DateSliderRangeInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours
+
+const state = ref({
+  stations: [],
+  initialDate: new Date().getTime(),
+  currentDate: new Date().getTime(),
+  referenceFrame: UseDateSlider ? 2 : 1,
+});
+
+const el = ref<HTMLElement | null>(null);
+const engine = new Engine();
 
 onMounted(() => {
-  // Gen random data
-  const N = 500;
+  engine.referenceFrame = state.value.referenceFrame;
+  engine.initialize(el.value, {
+    onStationClicked: () => {
+      console.log('Station clicked');
+    },
+  });
 
-  const arcsData = [...Array(N).keys()].map(() => ({
-    startLat: (Math.random() - 0.5) * 180,
-    startLng: (Math.random() - 0.5) * 360,
-    endLat: (Math.random() - 0.5) * 180,
-    endLng: (Math.random() - 0.5) * 360,
-    color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)],
-  }));
+  addStations();
 
-  const Globe = new ThreeGlobe()
-    .globeImageUrl(
-      '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg',
-    )
-    .arcsData(arcsData)
-    .arcColor('color')
-    .arcDashLength(0.4)
-    .arcDashGap(4)
-    .arcDashInitialGap(() => Math.random() * 5)
-    .arcDashAnimateTime(1000);
-
-  // Setup renderer
-  const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  document.getElementById('globeViz').appendChild(renderer.domElement);
-
-  // Setup scene
-  const scene = new THREE.Scene();
-  scene.add(Globe);
-  scene.add(new THREE.AmbientLight(0xcccccc, Math.PI));
-  scene.add(new THREE.DirectionalLight(0xffffff, 0.6 * Math.PI));
-
-  // Setup camera
-  // const camera = new THREE.PerspectiveCamera();
-  // camera.aspect = window.innerWidth / window.innerHeight;
-  // camera.updateProjectionMatrix();
-  // camera.position.z = 500;
-  const camera = new THREE.PerspectiveCamera();
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  camera.position.z = 1000; // 從更遠的地方開始
-  camera.position.x = 0; // 初始 x 位置
-
-  // Add camera controls
-  const tbControls = new TrackballControls(camera, renderer.domElement);
-  tbControls.minDistance = 101;
-  tbControls.rotateSpeed = 5;
-  tbControls.zoomSpeed = 0.8;
-  let frame = 0;
-  const totalFrames = 120; // 動畫持續 120 幀
-
-  (function animate() {
-    // 攝影機由遠拉近，並往左偏
-    if (frame < totalFrames) {
-      // z 由 1000 緩慢減少到 500
-      camera.position.z = 1000 - (500 * frame) / totalFrames;
-      // x 由 0 緩慢減少到 -200（往左偏）
-      camera.position.x = -200 * (frame / totalFrames);
-      camera.lookAt(0, 0, 0); // 保持看向球體中心
-      frame++;
-    }
-
-    tbControls.update();
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  })();
-
-  // Kick-off renderer
-  // (function animate() {
-  //   // IIFE
-  //   // Frame cycle
-  //   tbControls.update();
-  //   renderer.render(scene, camera);
-  //   requestAnimationFrame(animate);
-  // })();
+  engine.updateAllPositions(new Date());
 });
+
+function addStations() {
+  //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/weather.txt'), 0x00ffff)
+  //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/cosmos-2251-debris.txt'), 0xff0090)
+  engine
+    .loadLteFileStations(
+      getCorsFreeUrl(
+        'https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle',
+      ),
+      0xffffff,
+    )
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/science.txt'), 0xffff00)
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/stations.txt'), 0xffff00)
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/iridium-NEXT.txt'), 0x00ff00)
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/gps-ops.txt'), 0x00ff00)
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/ses.txt'), 0xffffff)
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/starlink.txt'), 0x0000ff)
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/gps-ops.txt'), 0xffffff, { orbitMinutes: 0, satelliteSize: 200 })
+    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/glo-ops.txt'), 0xff0000, { orbitMinutes: 500, satelliteSize: 500 })
+    .then((stations) => {
+      state.value.stations = stations;
+      console.log('Stations loaded:', stations);
+      //   this.processQuery(stations);
+    });
+}
+
+function getCorsFreeUrl(url) {
+  return url;
+}
 </script>
 
 <template>
-  <div id="globeViz"></div>
+  <div ref="el" id="earth" class="w-[300px] h-[300px]"></div>
 </template> -->

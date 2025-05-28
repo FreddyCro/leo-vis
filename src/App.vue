@@ -7,21 +7,21 @@ import SectionTwo from '@/components/section2.vue';
 import SectionThree from '@/components/section3.vue';
 import SectionFour from '@/components/section4.vue';
 import SectionTw from '@/components/section-tw.vue';
-// import Wording from '@/components/wording.vue';
 </script>
 
 <template>
   <div class="app">
     <leo-header />
     <main class="leo-main">
-      <section-hero />
-      <section-one />
-      <section-two />
-      <section-three />
-      <section-four />
+      <div class="bg-black text-white">
+        <section-hero />
+        <section-one />
+        <section-two />
+        <section-three />
+        <section-four />
+      </div>
       <section-tw />
     </main>
     <leo-footer />
-    <!-- <wording /> -->
   </div>
 </template>

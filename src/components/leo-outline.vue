@@ -42,11 +42,21 @@ const data = [
 </script>
 
 <template>
-  <div>
-    <!-- section name -->
-    {{ data }}
+  <div class="leo-outline"></div>
+  <h2 class="text-3xl font-bold mb-4">{{ strOutline.title }}</h2>
+  <!-- section name -->
 
-    <!-- section articles  -->
+  <!-- section articles  -->
+  <div v-for="(section, index) in data" :key="index" class="mb-8">
+    <h3 class="text-2xl font-semibold mb-2">{{ section.title }}</h3>
+    <p class="text-lg mb-4">{{ section.subTitle }}</p>
+    <ul class="list-disc pl-5">
+      <li v-for="(article, idx) in section.articles" :key="idx">
+        <a :href="article.link" class="text-blue-500 hover:underline">
+          {{ article.text }}
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
