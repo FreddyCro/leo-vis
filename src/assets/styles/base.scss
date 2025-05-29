@@ -1,0 +1,72 @@
+@use './variables';
+@use './mixins';
+
+/* layout setting */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  --z-index-dialog-open: 9999;
+  --z-index-snack-bar-open: 1100;
+  --z-index-dialog-close: -1000;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  font-family: sans-serif, 'Noto Sans TC', sans-serif;
+  font-style: normal;
+  line-height: 150%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+figure {
+  margin: 0;
+}
+
+.leo-article {
+}
+
+.leo-h1 {
+}
+
+.leo-h2 {
+}
+
+.leo-h3 {
+}
+
+.leo-h4 {
+}
+
+.leo-h5 {
+}
+
+.leo-caption {
+}
+
+.leo-section {
+  &--no-mt {
+    margin-top: 0;
+  }
+
+  &--no-mb {
+    margin-bottom: 0;
+  }
+}
+
+.leo-container {
+}

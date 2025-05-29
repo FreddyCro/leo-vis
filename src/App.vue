@@ -1,30 +1,27 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import LeoHeader from '@/components/leo-header.vue';
+import LeoFooter from '@/components/leo-footer.vue';
+import SectionHero from '@/components/section-hero.vue';
+import SectionOne from '@/components/section1.vue';
+import SectionTwo from '@/components/section2.vue';
+import SectionThree from '@/components/section3.vue';
+import SectionFour from '@/components/section4.vue';
+import SectionTw from '@/components/section-tw.vue';
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="app">
+    <leo-header />
+    <main class="leo-main">
+      <div class="bg-black text-white">
+        <section-hero />
+        <section-one />
+        <section-two />
+        <section-three />
+        <section-four />
+      </div>
+      <section-tw />
+    </main>
+    <leo-footer />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
