@@ -63,7 +63,7 @@ export const getPositionFromTle = (station, date, type = 1) => {
 
   const positionVelocity = getSolution(station, date);
 
-  const positionEci = positionVelocity.position;
+  const positionEci = positionVelocity?.position;
   if (!positionEci) return null; // Ignore
 
   if (type === 2) return toThree(positionEci);

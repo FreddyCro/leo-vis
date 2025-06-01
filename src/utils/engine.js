@@ -20,7 +20,7 @@ const defaultOptions = {
 
 const defaultStationOptions = {
   orbitMinutes: 0,
-  satelliteSize: 50,
+  satelliteSize: SatelliteSize,
 };
 
 export class Engine {
@@ -95,17 +95,21 @@ export class Engine {
     if (!pos) return;
     //const pos = { x: Math.random() * 20000 - 10000, y: Math.random() * 20000 - 10000 , z: Math.random() * 20000 - 10000, }
 
+    const apogee = this._getSatelliteApogeeHeight(station);
+
     sat.position.set(pos.x, pos.y, pos.z);
     station.mesh = sat;
+    station.mesh.apogee = apogee;
 
     this.stations.push(station);
 
     if (station.orbitMinutes > 0) this.addOrbit(station);
 
     this.earth.add(sat);
+    // this.earth.remove(sat);
   };
 
-  removeSatellite = (station) => {};
+  // removeSatellite = (station) => {};
 
   loadLteFileStations = (url, color, stationOptions) => {
     const options = { ...defaultStationOptions, ...stationOptions };
@@ -181,9 +185,7 @@ export class Engine {
 
   _addTleFileStations = (lteFileContent, color, stationOptions) => {
     const stations = parseTleFile(lteFileContent, stationOptions);
-
     const { satelliteSize } = stationOptions;
-
     stations.forEach((s) => {
       this.addSatellite(s, color, satelliteSize);
     });
@@ -245,6 +247,42 @@ export class Engine {
   _getSatellitePositionFromTle = (station, date) => {
     date = date || TargetDate;
     return getPositionFromTle(station, date, this.referenceFrame);
+  };
+
+  _getSatelliteApogeeHeight = (station) => {
+    if (!station.satrec) {
+      const { tle1, tle2 } = station;
+      if (!tle1 || !tle2) return null;
+      station.satrec = satellite.twoline2satrec(tle1, tle2);
+    }
+
+    const satrec = station.satrec;
+    const mu = 398600.4418; // 地心引力常數 (km^3/s^2)
+    const earthRadius = 6378.137; // 地球半徑 (km)
+
+    // 單位是 radians/minute
+    const meanMotion = satrec.no;
+    const e = satrec.ecco;
+
+    if (!meanMotion || !e || isNaN(meanMotion) || isNaN(e)) {
+      return null;
+    }
+
+    // mean motion: revs per day
+    const n = meanMotion * (1440 / (2 * Math.PI)); // 1440 = 分鐘/天
+    const a = Math.pow(mu / ((n * 2 * Math.PI) / 86400) ** 2, 1 / 3); // km
+    const r_apogee = a * (1 + e);
+    const apogeeHeight = r_apogee - earthRadius;
+
+    // console.log('satrec.no:', satrec.no);
+    // console.log('satrec.ecco:', satrec.ecco);
+    // console.log('apogeeHeight:', satrec.no, apogeeHeight);
+    // if station name include 'STARLINK', log the apogee height
+    // if (station.name && station.name.includes('STARLINK')) {
+    //   console.log(`Starlink ${station.name} apogee height:`, apogeeHeight);
+    // }
+
+    return apogeeHeight;
   };
 
   updateSatellitePosition = (station, date) => {
@@ -333,6 +371,19 @@ export class Engine {
     const textLoader = new THREE.TextureLoader();
 
     const group = new THREE.Group();
+
+    // TODO: remove this when THREE.Group is fixed
+    const originalRemove = group.remove;
+    group.remove = function (...objects) {
+      objects.forEach((obj) => {
+        if (this.children.includes(obj)) {
+          console.log('Removing from group:', obj);
+        } else {
+          console.warn('Object not in group:', obj);
+        }
+      });
+      return originalRemove.apply(this, objects);
+    };
 
     // Planet
     let geometry = new THREE.SphereGeometry(earthRadius, 50, 50);

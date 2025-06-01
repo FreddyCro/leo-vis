@@ -1,140 +1,130 @@
-<script setup lang="ts">
+<!-- ref: https://github.com/dsuarezv/satellite-tracker -->
+<script setup>
 import { onMounted, ref } from 'vue';
 import { Engine } from '@/utils/engine';
 
-const UseDateSlider = false;
-
-const state = ref({
-  stations: [],
-  initialDate: new Date().getTime(),
-  currentDate: new Date().getTime(),
-  referenceFrame: UseDateSlider ? 2 : 1,
-});
-
-const el = ref<HTMLElement | null>(null);
-const engine = new Engine();
-const currentGroup = ref<'active' | 'starlink'>('active');
-
-onMounted(() => {
-  engine.referenceFrame = state.value.referenceFrame;
-  engine.initialize(el.value, {
-    onStationClicked: () => {
-      console.log('Station clicked');
-    },
-  });
-
-  addStations();
-  engine.updateAllPositions(new Date());
-});
-
-function addStations() {
-  const groupMap = {
-    active: './all.txt',
-    // 'https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle',
-    starlink: './startlink.txt',
-    // 'https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle',
-  };
-
-  const url = getCorsFreeUrl(groupMap[currentGroup.value]);
-
-  // console.log('state.value:', state.value);
-  // state.value.stations.forEach((station) => {
-  //   engine.removeSatellite(station);
-  // });
-  // state.value.stations = [];
-
-  engine
-    .loadLteFileStations(
-      url,
-      currentGroup.value === 'active' ? 0xffffff : 0x0000ff,
-    )
-    .then((stations) => {
-      state.value.stations = stations;
-      // console.log('Stations loaded:', stations, groupMap[currentGroup.value]);
-      // state.value.stations = stations.filter((station) => {
-      //   const mash = station.mesh;
-      //   return currentGroup.value === 'active'
-      //     ? !mash.name.includes('STARLINK')
-      //     : mash.name.includes('STARLINK');
-      // });
-    });
-}
-
-function switchStations() {
-  currentGroup.value = currentGroup.value === 'active' ? 'starlink' : 'active';
-  addStations();
-}
-
-function getCorsFreeUrl(url: string): string {
-  return url;
-}
-</script>
-
-<template>
-  <div>
-    <button
-      @click="switchStations"
-      class="mb-2 px-4 py-1 bg-blue-600 text-white rounded"
-    >
-      Switch Stations ({{ currentGroup }})
-    </button>
-    <div ref="el" id="earth" class="w-[300px] h-[300px]"></div>
-  </div>
-</template>
-
-<!-- <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { Engine } from '@/utils/engine';
-
-const UseDateSlider = false;
+const USE_ORBIT_ANIMATE = true;
 // const DateSliderRangeInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours
 
-const state = ref({
-  stations: [],
-  initialDate: new Date().getTime(),
+const state = {
+  allChildren: [],
+  initialDate: new Date().getTime() - 24 * 60 * 60 * 1000, // 24 hours ago
   currentDate: new Date().getTime(),
-  referenceFrame: UseDateSlider ? 2 : 1,
-});
+  referenceFrame: USE_ORBIT_ANIMATE ? 2 : 1,
+};
 
-const el = ref<HTMLElement | null>(null);
+const el = ref(null);
 const engine = new Engine();
 
 onMounted(() => {
-  engine.referenceFrame = state.value.referenceFrame;
+  engine.referenceFrame = state.referenceFrame;
   engine.initialize(el.value, {
-    onStationClicked: () => {
-      console.log('Station clicked');
-    },
+    // onStationClicked: () => {
+    //   console.log('Station clicked');
+    // },
   });
 
   addStations();
-
   engine.updateAllPositions(new Date());
+
+  setInterval(() => {
+    if (USE_ORBIT_ANIMATE) {
+      state.currentDate += 1000 * 5; // Increment by 5 second
+      engine.updateAllPositions(new Date(state.currentDate));
+    } else {
+      engine.updateAllPositions(new Date());
+    }
+  }, 1000);
 });
 
 function addStations() {
-  //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/weather.txt'), 0x00ffff)
-  //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/cosmos-2251-debris.txt'), 0xff0090)
   engine
-    .loadLteFileStations(
-      getCorsFreeUrl(
-        'https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle',
-      ),
-      0xffffff,
-    )
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/science.txt'), 0xffff00)
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/stations.txt'), 0xffff00)
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/iridium-NEXT.txt'), 0x00ff00)
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/gps-ops.txt'), 0x00ff00)
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/ses.txt'), 0xffffff)
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/starlink.txt'), 0x0000ff)
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/gps-ops.txt'), 0xffffff, { orbitMinutes: 0, satelliteSize: 200 })
-    //this.engine.loadLteFileStations(getCorsFreeUrl('https://celestrak.org/NORAD/elements/glo-ops.txt'), 0xff0000, { orbitMinutes: 500, satelliteSize: 500 })
+    .loadLteFileStations(getCorsFreeUrl('./active_satellites.txt'), 0xffffff)
     .then((stations) => {
-      state.value.stations = stations;
-      console.log('Stations loaded:', stations);
-      //   this.processQuery(stations);
+      // console.log('Stations loaded:', stations);
+      state.allChildren = addNameAndLabelToChildren(stations);
+      engine.earth.children = state.allChildren;
+
+      // remove 10000 children from state.allChildren
+      // state.allChildren = state.allChildren.slice(0, 100);
+      // engine.earth.children = state.allChildren;
+      // console.log('engine.earth.children:', engine.earth.children);
+      // engine.render();
     });
+}
+
+function filterSatellites(filterName) {
+  // console.log('children:', Array.from(engine.earth.children)[2]);
+  // console.log('stations:', state.allChildren[1]);
+
+  switch (filterName) {
+    case 'APOGEE_2000':
+      engine.earth.children = state.allChildren.filter(
+        (child) =>
+          child.label.includes('APOGEE_2000') || child.label === 'EARTH',
+      );
+      break;
+    case 'STARLINK':
+      engine.earth.children = state.allChildren.filter(
+        (child) => child.label.includes('STARLINK') || child.label === 'EARTH',
+      );
+      break;
+    case 'ONEWEB_KUIPER':
+      engine.earth.children = state.allChildren.filter(
+        (child) =>
+          child.label.includes('ONEWEB_KUIPER') || child.label === 'EARTH',
+      );
+      break;
+    case 'ALL':
+      // Reset to all children
+      engine.earth.children = state.allChildren;
+      break;
+    default:
+      console.warn('Unknown filter:', filterName);
+  }
+
+  engine.render();
+}
+
+function addNameAndLabelToChildren(stations) {
+  return Array.from(engine.earth.children).map((child) => {
+    const { uuid } = child;
+    const station = stations.find((s) => s.mesh?.uuid === uuid);
+
+    if (station) {
+      child.name = station.name || '';
+      child.label = classifyStation(station);
+    }
+
+    // preserve child not a station, it's the Earth mesh
+    else {
+      child.label = 'EARTH';
+    }
+
+    return child;
+
+    // else {
+    //   console.warn('Station not found for child:', uuid);
+    // }
+  });
+}
+
+function classifyStation(station) {
+  let labels = [];
+
+  if (station.name.includes('STARLINK')) {
+    labels.push('STARLINK');
+  }
+
+  if (station.name.includes('ONEWEB') || station.name.includes('KUIPER')) {
+    labels.push('ONEWEB_KUIPER');
+  }
+
+  if (station.mesh.apogee < 2000) {
+    labels.push('APOGEE_2000');
+  }
+
+  return labels.length > 0 ? labels.join(', ') : '';
 }
 
 function getCorsFreeUrl(url) {
@@ -143,5 +133,31 @@ function getCorsFreeUrl(url) {
 </script>
 
 <template>
-  <div ref="el" id="earth" class="w-[300px] h-[300px]"></div>
-</template> -->
+  <div>
+    <button
+      class="p-3 border-solid border bg-white text-black"
+      @click="filterSatellites('APOGEE_2000')"
+    >
+      {{ 'Apogee Height < 2000' }}
+    </button>
+    <button
+      class="p-3 border-solid border bg-white text-black"
+      @click="filterSatellites('STARLINK')"
+    >
+      STARLINK
+    </button>
+    <button
+      class="p-3 border-solid border bg-white text-black"
+      @click="filterSatellites('ONEWEB_KUIPER')"
+    >
+      ONEWEB/KUIPER
+    </button>
+    <button
+      class="p-3 border-solid border bg-white text-black"
+      @click="filterSatellites('ALL')"
+    >
+      ALL
+    </button>
+    <div ref="el" id="earth" class="w-[600px] h-[600px]"></div>
+  </div>
+</template>
