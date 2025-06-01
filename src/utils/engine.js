@@ -109,8 +109,6 @@ export class Engine {
     // this.earth.remove(sat);
   };
 
-  // removeSatellite = (station) => {};
-
   loadLteFileStations = (url, color, stationOptions) => {
     const options = { ...defaultStationOptions, ...stationOptions };
 
