@@ -7,7 +7,7 @@ import * as THREE from 'three';
 onMounted(() => {
   // Gen random data
   const ARCS_N = 50;
-  const G_N = 500;
+  const G_N = 750;
 
   const arcsData = [...Array(ARCS_N).keys()].map(() => ({
     startLat: (Math.random() - 0.5) * 180,
@@ -127,7 +127,7 @@ onMounted(() => {
 
     // rotate
     Globe.rotation.y += 0.001;
-    Globe.rotation.x += 0.0005;
+    Globe.rotation.x += 0.00025;
 
     // controls.update(); // 必須呼叫以啟用 damping
     renderer.render(scene, camera);

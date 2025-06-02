@@ -13,19 +13,21 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="w-full h-screen bg-gray-800">
-    <slot />
+  <div
+    class="leo-intro w-full h-screen min-h-[var(--hero-min-h)] flex flex-col items-center justify-center"
+  >
     <!-- title -->
+    <div class="mb-8">
+      <slot />
+    </div>
 
     <!-- toc -->
-    <p>{{ str1.title }}</p>
-    <p>{{ str1.subTitle }}</p>
-    <p>{{ str2.title }}</p>
-    <p>{{ str2.subTitle }}</p>
-    <p>{{ str3.title }}</p>
-    <p>{{ str3.subTitle }}</p>
-    <p>{{ str4.title }}</p>
-    <p>{{ str4.subTitle }}</p>
+    <div class="w-full flex gap-4">
+      <p>{{ str1.title }}</p>
+      <p>{{ str2.title }}</p>
+      <p>{{ str3.title }}</p>
+      <p>{{ str4.title }}</p>
+    </div>
 
     <!-- chapter -->
     <div v-if="chapter" class="text-5xl">{{ chapter }}</div>

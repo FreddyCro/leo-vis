@@ -1,6 +1,10 @@
 @use './variables';
 @use './mixins';
 
+:root {
+  --hero-min-h: 720px;
+}
+
 /* layout setting */
 html,
 body {
