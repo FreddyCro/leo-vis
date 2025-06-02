@@ -10,8 +10,8 @@
     "build:ghpage": "vite build --mode ghpage",
     "preview": "vite preview",
     "prepare": "husky install",
-    "lint": "eslint \"**/*.{js,ts,vue}\" --fix",
-    "lint:fix": "eslint \"**/*.{js,ts,vue}\"",
+    "lint": "eslint \"**/*.{js,ts,vue}\"",
+    "lint:fix": "eslint \"**/*.{js,ts,vue}\" --fix",
     "prettier": "prettier '**/*.{js,ts,vue}' --check",
     "prettier:fix": "prettier '**/*.{js,ts,vue}' --write"
   },

@@ -7,7 +7,7 @@ import * as THREE from 'three';
 onMounted(() => {
   // Gen random data
   const ARCS_N = 50;
-  const G_N = 1000;
+  const G_N = 500;
 
   const arcsData = [...Array(ARCS_N).keys()].map(() => ({
     startLat: (Math.random() - 0.5) * 180,
@@ -26,9 +26,7 @@ onMounted(() => {
   }));
 
   const Globe = new ThreeGlobe()
-    .globeImageUrl(
-      '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg',
-    )
+    .globeImageUrl('./img/earth-night.jpg')
     .arcsData(arcsData)
     .arcColor('color')
     .arcAltitude(0.25)
@@ -118,13 +116,14 @@ onMounted(() => {
         camera.position.x = 0;
         moving = false; // 停止移動
       }
+      camera.translateZ(+3);
     }
 
     if (camera.position.z > 300) {
       camera.position.z = 300;
     }
 
-    camera.translateZ(+3);
+    // camera.translateZ(+3);
 
     // rotate
     Globe.rotation.y += 0.001;

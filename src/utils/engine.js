@@ -3,9 +3,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { earthRadius } from 'satellite.js/lib/constants';
 import * as satellite from 'satellite.js/lib/index';
 import { getPositionFromTle, parseTleFile } from './tle';
-import earthmap from '@/assets/3d/earthmap-high.jpg';
 import circle from '@/assets/3d/circle.png';
 
+const EARTH_IMG_PATH = './img/earth-night.jpg';
 const SatelliteSize = 50;
 const MinutesPerDay = 1440;
 const ixpdotp = MinutesPerDay / (2.0 * 3.141592654);
@@ -393,7 +393,7 @@ export class Engine {
       // emissive: 0x072534,
       side: THREE.DoubleSide,
       flatShading: false,
-      map: textLoader.load(earthmap, this.render),
+      map: textLoader.load(EARTH_IMG_PATH, this.render),
     });
 
     this.earthMesh = new THREE.Mesh(geometry, material);

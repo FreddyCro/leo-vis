@@ -46,7 +46,7 @@ const root = ref<HTMLElement | null>(null);
 const el = ref<HTMLElement | null>(null);
 const engine: any = new Engine();
 let timer: ReturnType<typeof setInterval> | null = null;
-let unobserve: (() => void) | null = null;
+let _unobserve: (() => void) | null = null;
 
 onMounted(() => {
   engine.referenceFrame = state.referenceFrame;
@@ -144,7 +144,7 @@ function classifyStation(station: Station): string[] {
 
 function handleRunOrbitalMotionObserver() {
   const { observe } = createIntersectionObserver();
-  unobserve = observe({
+  _unobserve = observe({
     element: root.value,
     enterCallback: () => {
       timer = setInterval(() => {

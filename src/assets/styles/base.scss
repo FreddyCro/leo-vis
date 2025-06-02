@@ -69,4 +69,20 @@ figure {
 }
 
 .leo-container {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 26px;
+  padding-right: 26px;
+
+  @include min-pad {
+    max-width: calc(530px + 57px * 2);
+    padding-left: 57px;
+    padding-right: 57px;
+  }
+
+  @include min-pc {
+    max-width: calc(620px + 110px * 2);
+    padding-left: 110px;
+    padding-right: 110px;
+  }
 }
