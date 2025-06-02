@@ -10,7 +10,10 @@
     "build:ghpage": "vite build --mode ghpage",
     "preview": "vite preview",
     "prepare": "husky install",
-    "lint": "eslint \"**/*.{js,ts,vue}\" --fix"
+    "lint": "eslint \"**/*.{js,ts,vue}\" --fix",
+    "lint:fix": "eslint \"**/*.{js,ts,vue}\"",
+    "prettier": "prettier '**/*.{js,ts,vue}' --check",
+    "prettier:fix": "prettier '**/*.{js,ts,vue}' --write"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.5",
@@ -22,12 +25,15 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.43.1",
     "@lottiefiles/dotlottie-vue": "^0.6.3",
     "@types/node": "^22.15.11",
+    "@typescript-eslint/eslint-plugin": "^8.33.0",
+    "@typescript-eslint/parser": "^8.33.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.21",
-    "eslint": "^8",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.4.0",
     "husky": "^8.0.3",

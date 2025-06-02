@@ -3,8 +3,6 @@
 import { onMounted } from 'vue';
 import ThreeGlobe from 'three-globe';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js?external=three';
 
 onMounted(() => {
   // Gen random data

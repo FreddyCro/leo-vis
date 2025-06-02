@@ -1,16 +1,16 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import earthmap from '@/assets/3d/earthmap-high.jpg';
-import circle from '@/assets/3d/circle.png';
-import { parseTleFile as parseTleFile, getPositionFromTle } from './tle';
 import { earthRadius } from 'satellite.js/lib/constants';
 import * as satellite from 'satellite.js/lib/index';
+import { getPositionFromTle, parseTleFile } from './tle';
+import earthmap from '@/assets/3d/earthmap-high.jpg';
+import circle from '@/assets/3d/circle.png';
 
 const SatelliteSize = 50;
 const MinutesPerDay = 1440;
 const ixpdotp = MinutesPerDay / (2.0 * 3.141592654);
 
-let TargetDate = new Date();
+const TargetDate = new Date();
 
 const defaultOptions = {
   backgroundColor: 0x041119,
@@ -45,7 +45,7 @@ export class Engine {
   dispose() {
     window.removeEventListener('pointerdown', this.handleMouseDown);
     window.removeEventListener('resize', this.handleWindowResize);
-    //window.cancelAnimationFrame(this.requestID);
+    // window.cancelAnimationFrame(this.requestID);
 
     this.raycaster = null;
     this.el = null;
@@ -74,7 +74,10 @@ export class Engine {
 
     let station = null;
 
-    var intersects = this.raycaster.intersectObjects(this.scene.children, true);
+    const intersects = this.raycaster.intersectObjects(
+      this.scene.children,
+      true,
+    );
     if (intersects && intersects.length > 0) {
       const picked = intersects[0].object;
       if (picked) {
@@ -89,11 +92,11 @@ export class Engine {
   // __ API _________________________________________________________________
 
   addSatellite = (station, color, size) => {
-    //const sat = this._getSatelliteMesh(color, size);
+    // const sat = this._getSatelliteMesh(color, size);
     const sat = this._getSatelliteSprite(color, size);
     const pos = this._getSatellitePositionFromTle(station);
     if (!pos) return;
-    //const pos = { x: Math.random() * 20000 - 10000, y: Math.random() * 20000 - 10000 , z: Math.random() * 20000 - 10000, }
+    // const pos = { x: Math.random() * 20000 - 10000, y: Math.random() * 20000 - 10000 , z: Math.random() * 20000 - 10000, }
 
     const apogee = this._getSatelliteApogeeHeight(station);
 
@@ -129,7 +132,7 @@ export class Engine {
     const minutes = station.orbitMinutes || MinutesPerDay / revsPerDay;
     const initialDate = new Date();
 
-    //console.log('revsPerDay', revsPerDay, 'minutes', minutes);
+    // console.log('revsPerDay', revsPerDay, 'minutes', minutes);
 
     if (!this.orbitMaterial) {
       this.orbitMaterial = new THREE.LineBasicMaterial({
@@ -139,9 +142,9 @@ export class Engine {
       });
     }
 
-    var points = [];
+    const points = [];
 
-    for (var i = 0; i <= minutes; i += intervalMinutes) {
+    for (let i = 0; i <= minutes; i += intervalMinutes) {
       const date = new Date(initialDate.getTime() + i * 60000);
 
       const pos = getPositionFromTle(station, date, this.referenceFrame);
@@ -151,7 +154,7 @@ export class Engine {
     }
 
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    var orbitCurve = new THREE.Line(geometry, this.orbitMaterial);
+    const orbitCurve = new THREE.Line(geometry, this.orbitMaterial);
     station.orbit = orbitCurve;
     station.mesh.material = this.selectedMaterial;
 
@@ -200,7 +203,7 @@ export class Engine {
     if (!this.geometry) {
       this.geometry = new THREE.BoxBufferGeometry(size, size, size);
       this.material = new THREE.MeshPhongMaterial({
-        color: color,
+        color,
         emissive: 0xff4040,
         flatShading: false,
         side: THREE.DoubleSide,
@@ -226,7 +229,7 @@ export class Engine {
     });
     this.material = new THREE.SpriteMaterial({
       map: this._satelliteSprite,
-      color: color,
+      color,
       sizeAttenuation: false,
     });
     this.lastColor = color;
@@ -262,13 +265,13 @@ export class Engine {
     const meanMotion = satrec.no;
     const e = satrec.ecco;
 
-    if (!meanMotion || !e || isNaN(meanMotion) || isNaN(e)) {
+    if (!meanMotion || !e || Number.isNaN(meanMotion) || Number.isNaN(e)) {
       return null;
     }
 
     // mean motion: revs per day
     const n = meanMotion * (1440 / (2 * Math.PI)); // 1440 = 分鐘/天
-    const a = Math.pow(mu / ((n * 2 * Math.PI) / 86400) ** 2, 1 / 3); // km
+    const a = (mu / ((n * 2 * Math.PI) / 86400) ** 2) ** (1 / 3); // km
     const r_apogee = a * (1 + e);
     const apogeeHeight = r_apogee - earthRadius;
 
@@ -332,8 +335,8 @@ export class Engine {
   };
 
   _setupCamera(width, height) {
-    var NEAR = 1e-6,
-      FAR = 1e27;
+    const NEAR = 1e-6;
+    const FAR = 1e27;
     this.camera = new THREE.PerspectiveCamera(54, width / height, NEAR, FAR);
     this.controls = new OrbitControls(this.camera, this.el);
     this.controls.enablePan = false;
@@ -345,7 +348,7 @@ export class Engine {
 
   _setupLights = () => {
     const sun = new THREE.PointLight(0xffffff, 1, 0);
-    //sun.position.set(0, 0, -149400000);
+    // sun.position.set(0, 0, -149400000);
     sun.position.set(0, 59333894, -137112541);
 
     const ambient = new THREE.AmbientLight(0x909090);
@@ -360,7 +363,7 @@ export class Engine {
 
   render = () => {
     this.renderer.render(this.scene, this.camera);
-    //this.requestID = window.requestAnimationFrame(this._animationLoop);
+    // this.requestID = window.requestAnimationFrame(this._animationLoop);
   };
 
   // __ Scene contents ______________________________________________________
@@ -384,10 +387,10 @@ export class Engine {
     };
 
     // Planet
-    let geometry = new THREE.SphereGeometry(earthRadius, 50, 50);
-    let material = new THREE.MeshPhongMaterial({
-      //color: 0x156289,
-      //emissive: 0x072534,
+    const geometry = new THREE.SphereGeometry(earthRadius, 50, 50);
+    const material = new THREE.MeshPhongMaterial({
+      // color: 0x156289,
+      // emissive: 0x072534,
       side: THREE.DoubleSide,
       flatShading: false,
       map: textLoader.load(earthmap, this.render),
@@ -412,7 +415,7 @@ export class Engine {
   };
 
   _findStationFromMesh = (threeObject) => {
-    for (var i = 0; i < this.stations.length; ++i) {
+    for (let i = 0; i < this.stations.length; ++i) {
       const s = this.stations[i];
 
       if (s.mesh === threeObject) return s;

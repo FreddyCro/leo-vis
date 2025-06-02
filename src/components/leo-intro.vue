@@ -3,6 +3,7 @@ import str1 from '@/locales/section1.json';
 import str2 from '@/locales/section2.json';
 import str3 from '@/locales/section3.json';
 import str4 from '@/locales/section4.json';
+
 interface Props {
   chapter?: string;
   current?: number;

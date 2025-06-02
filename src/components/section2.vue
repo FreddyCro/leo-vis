@@ -7,10 +7,10 @@ import str from '@/locales/section2.json';
 
 <template>
   <div>
-    <leo-intro chapter="02">
+    <LeoIntro chapter="02">
       <p>{{ str.title }}</p>
       <p>{{ str.subTitle }}</p>
-    </leo-intro>
+    </LeoIntro>
 
     <p>{{ str.p1t1 }}</p>
     <p>{{ str.p1t2 }}</p>
@@ -25,7 +25,7 @@ import str from '@/locales/section2.json';
     <p>{{ str.p5t1 }}</p>
     <p>{{ str.p5t2 }}</p>
 
-    <leo-read-more
+    <LeoReadMore
       :title="str.relatedTitle"
       :data="[
         {

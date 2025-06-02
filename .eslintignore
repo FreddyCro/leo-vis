@@ -1,0 +1,6 @@
+node_modules
+dist
+docs
+coverage
+tailwind.config.ts
+vite.config.ts

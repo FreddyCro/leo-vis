@@ -8,18 +8,18 @@ import str from '@/locales/section1.json';
 
 <template>
   <div>
-    <leo-3d-earth-satellite />
+    <Leo3dEarthSatellite />
 
-    <leo-intro chapter="01">
+    <LeoIntro chapter="01">
       <p>{{ str.title }}</p>
       <p>{{ str.subTitle }}</p>
-    </leo-intro>
+    </LeoIntro>
 
     <p>{{ str.p1t1 }}</p>
 
-    <leo-feature-grid></leo-feature-grid>
+    <LeoFeatureGrid></LeoFeatureGrid>
 
-    <leo-read-more
+    <LeoReadMore
       :title="str.relatedTitle"
       :data="[
         {

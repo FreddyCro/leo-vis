@@ -11,17 +11,17 @@ import SectionTw from '@/components/section-tw.vue';
 
 <template>
   <div class="app">
-    <leo-header />
+    <LeoHeader />
     <main class="leo-main">
       <div class="bg-black text-white">
-        <section-hero />
-        <section-one />
-        <section-two />
-        <section-three />
-        <section-four />
+        <SectionHero />
+        <SectionOne />
+        <SectionTwo />
+        <SectionThree />
+        <SectionFour />
       </div>
-      <section-tw />
+      <SectionTw />
     </main>
-    <leo-footer />
+    <LeoFooter />
   </div>
 </template>

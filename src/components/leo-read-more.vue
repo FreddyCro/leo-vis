@@ -1,8 +1,8 @@
 <script setup lang="ts">
-type Item = {
+interface Item {
   title: string;
   link: string;
-};
+}
 
 interface Props {
   title?: string;

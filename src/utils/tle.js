@@ -2,9 +2,9 @@ import * as satellite from 'satellite.js/lib/index';
 
 export const EarthRadius = 6371;
 
-const rad2Deg = 180 / 3.141592654;
+// const rad2Deg = 180 / 3.141592654;
 
-export const parseTleFile = (fileContent, stationOptions) => {
+export function parseTleFile(fileContent, stationOptions) {
   const result = [];
   const lines = fileContent.split('\n');
   let current = null;
@@ -28,7 +28,7 @@ export const parseTleFile = (fileContent, stationOptions) => {
   }
 
   return result;
-};
+}
 
 // __ Satellite locations _________________________________________________
 
@@ -43,11 +43,11 @@ export const parseTleFile = (fileContent, stationOptions) => {
 //   return { x, y, z };
 // };
 
-const toThree = (v) => {
+function toThree(v) {
   return { x: v.x, y: v.z, z: -v.y };
-};
+}
 
-const getSolution = (station, date) => {
+function getSolution(station, date) {
   if (!station.satrec) {
     const { tle1, tle2 } = station;
     if (!tle1 || !tle2) return null;
@@ -55,10 +55,10 @@ const getSolution = (station, date) => {
   }
 
   return satellite.propagate(station.satrec, date);
-};
+}
 
 // type: 1 ECEF coordinates   2: ECI coordinates
-export const getPositionFromTle = (station, date, type = 1) => {
+export function getPositionFromTle(station, date, type = 1) {
   if (!station || !date) return null;
 
   const positionVelocity = getSolution(station, date);
@@ -71,4 +71,4 @@ export const getPositionFromTle = (station, date, type = 1) => {
   const gmst = satellite.gstime(date);
   const positionEcf = satellite.eciToEcf(positionEci, gmst);
   return toThree(positionEcf);
-};
+}

@@ -8,11 +8,11 @@ import str from '@/locales/section-hero.json';
 
 <template>
   <div class="leo-hero">
-    <leo-3d-earth-hero />
-    <leo-intro>
+    <Leo3dEarthHero />
+    <LeoIntro>
       <p>{{ str.title }}</p>
       <p>{{ str.subTitle }}</p>
-    </leo-intro>
+    </LeoIntro>
     <p>{{ str.p1t1 }}</p>
     <p>{{ str.p1t2 }}</p>
     <Mock :title="true" :caption="true" />
@@ -21,7 +21,7 @@ import str from '@/locales/section-hero.json';
     <p>{{ str.p2t1 }}</p>
     <p>{{ str.p3t1 }}</p>
     <p>{{ str.p3t2 }}</p>
-    <leo-outline />
+    <LeoOutline />
   </div>
 </template>
 

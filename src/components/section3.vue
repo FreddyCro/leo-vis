@@ -7,10 +7,10 @@ import str from '@/locales/section3.json';
 
 <template>
   <div>
-    <leo-intro chapter="03">
+    <LeoIntro chapter="03">
       <p>{{ str.title }}</p>
       <p>{{ str.subTitle }}</p>
-    </leo-intro>
+    </LeoIntro>
 
     <p>{{ str.p1t1 }}</p>
     <p>{{ str.p1t2 }}</p>
@@ -31,7 +31,7 @@ import str from '@/locales/section3.json';
     <div
       class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
     >
-      <leo-3d-moon-site />
+      <Leo3dMoonSite />
     </div>
 
     <!-- moon svg content -->
@@ -42,7 +42,7 @@ import str from '@/locales/section3.json';
     </div>
     <p>{{ str.p3t1 }}</p>
 
-    <leo-read-more
+    <LeoReadMore
       :title="str.relatedTitle"
       :data="[
         {

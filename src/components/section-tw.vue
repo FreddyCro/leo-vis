@@ -8,7 +8,7 @@ import str from '@/locales/section-tw.json';
   <div>
     <p>{{ str.title }}</p>
 
-    <leo-feature-grid></leo-feature-grid>
+    <LeoFeatureGrid></LeoFeatureGrid>
   </div>
 </template>
 

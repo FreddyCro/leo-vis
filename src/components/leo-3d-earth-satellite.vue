@@ -3,23 +3,23 @@
 import { onMounted, onUnmounted, ref } from 'vue';
 import { Engine } from '@/utils/engine';
 import {
-  SATELLITE_LABEL_EARTH,
-  SATELLITE_LABEL_APOGEE,
-  SATELLITE_LABEL_STARLINK,
-  SATELLITE_LABEL_ONEWEB,
-  SATELLITE_LABEL_KUIPER,
-  SATELLITE_LABEL_ONEWEB_KUIPER,
   SATELLITE_LABEL_ALL,
+  SATELLITE_LABEL_APOGEE,
+  SATELLITE_LABEL_EARTH,
+  SATELLITE_LABEL_KUIPER,
+  SATELLITE_LABEL_ONEWEB,
+  SATELLITE_LABEL_ONEWEB_KUIPER,
+  SATELLITE_LABEL_STARLINK,
 } from '@/utils/constants';
 
-type Station = {
+interface Station {
   name: string;
   label: string;
   mesh: {
     uuid: string;
     apogee: number;
   };
-};
+}
 
 const USE_ORBIT_ANIMATE = false;
 const SATELLITE_FILE = './active_satellites.txt';
@@ -126,7 +126,7 @@ function addNameAndLabelToChildren(stations: Station[]) {
 }
 
 function classifyStation(station: Station): string[] {
-  let labels = [];
+  const labels = [];
 
   if (station.name.includes(SATELLITE_LABEL_STARLINK)) {
     labels.push(SATELLITE_LABEL_STARLINK);
@@ -173,6 +173,6 @@ function classifyStation(station: Station): string[] {
     >
       ALL
     </button>
-    <div ref="el" id="earth" class="w-[600px] h-[600px]"></div>
+    <div id="earth" ref="el" class="w-[600px] h-[600px]"></div>
   </div>
 </template>
