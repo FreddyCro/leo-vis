@@ -15,9 +15,25 @@ import str from '@/locales/section-hero.json';
     </LeoIntro>
     <p>{{ str.p1t1 }}</p>
     <p>{{ str.p1t2 }}</p>
-    <Mock :title="true" :caption="true" />
-    <Mock :title="true" :caption="true" />
-    <Mock :title="true" :caption="true" />
+    <figure>
+      <figcaption>
+        {{ str.g1Title }}
+      </figcaption>
+      <Mock />
+      <figcaption>
+        {{ str.g1Caption }}
+      </figcaption>
+    </figure>
+    <figure>
+      <!-- 23264843 -->
+      <div
+        class="flourish-embed flourish-chart"
+        data-src="visualisation/20500490"
+      ></div>
+      <!-- <figcaption>
+        {{ 'str.taichungSection4ImgCaption' }}
+      </figcaption> -->
+    </figure>
     <p>{{ str.p2t1 }}</p>
     <p>{{ str.p3t1 }}</p>
     <p>{{ str.p3t2 }}</p>

@@ -14,14 +14,48 @@ import str from '@/locales/section2.json';
 
     <p>{{ str.p1t1 }}</p>
     <p>{{ str.p1t2 }}</p>
-    <Mock :title="true" :caption="true" />
+    <figure>
+      <!-- 23266793 -->
+      <div
+        class="flourish-embed flourish-chart"
+        data-src="visualisation/20500490"
+      ></div>
+      <!-- <figcaption>
+        {{ 'str.taichungSection4ImgCaption' }}
+      </figcaption> -->
+    </figure>
     <p>{{ str.p2t1 }}</p>
-    <Mock :title="true" :caption="true" />
+    <figure>
+      <!-- 23267137 -->
+      <div
+        class="flourish-embed flourish-chart"
+        data-src="visualisation/20500490"
+      ></div>
+      <!-- <figcaption>
+        {{ 'str.taichungSection4ImgCaption' }}
+      </figcaption> -->
+    </figure>
     <p>{{ str.p3t1 }}</p>
     <p>{{ str.p3t2 }}</p>
-    <Mock :title="true" :caption="true" />
+    <figure>
+      <div
+        class="flourish-embed flourish-chart"
+        data-src="visualisation/23265551"
+      ></div>
+      <!-- <figcaption>
+        {{ 'str.taichungSection4ImgCaption' }}
+      </figcaption> -->
+    </figure>
     <p>{{ str.p4t1 }}</p>
-    <Mock :title="true" :caption="true" />
+    <figure>
+      <figcaption>
+        {{ str.g4Title }}
+      </figcaption>
+      <Mock />
+      <figcaption>
+        {{ str.g4Caption }}
+      </figcaption>
+    </figure>
     <p>{{ str.p5t1 }}</p>
     <p>{{ str.p5t2 }}</p>
 

@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 import { Engine } from '@/utils/engine';
+import createIntersectionObserver from '@/utils/intersection-observer';
 import {
   SATELLITE_LABEL_ALL,
   SATELLITE_LABEL_APOGEE,
@@ -41,9 +42,11 @@ const state: {
   referenceFrame: USE_ORBIT_ANIMATE ? 2 : 1,
 };
 
+const root = ref<HTMLElement | null>(null);
 const el = ref<HTMLElement | null>(null);
 const engine: any = new Engine();
 let timer: ReturnType<typeof setInterval> | null = null;
+let unobserve: (() => void) | null = null;
 
 onMounted(() => {
   engine.referenceFrame = state.referenceFrame;
@@ -52,15 +55,8 @@ onMounted(() => {
   addStations();
   engine.updateAllPositions(new Date());
 
-  // TODO: trigger by interaction
-  timer = setInterval(() => {
-    if (USE_ORBIT_ANIMATE) {
-      state.currentDate += ORBIT_ANIMATE_STEP_MS;
-      engine.updateAllPositions(new Date(state.currentDate));
-    } else {
-      engine.updateAllPositions(new Date());
-    }
-  }, INTERVAL_MS);
+  // obital motion
+  handleRunOrbitalMotionObserver();
 });
 
 onUnmounted(() => {
@@ -145,10 +141,35 @@ function classifyStation(station: Station): string[] {
 
   return labels;
 }
+
+function handleRunOrbitalMotionObserver() {
+  const { observe } = createIntersectionObserver();
+  unobserve = observe({
+    element: root.value,
+    enterCallback: () => {
+      timer = setInterval(() => {
+        if (USE_ORBIT_ANIMATE) {
+          state.currentDate += ORBIT_ANIMATE_STEP_MS;
+          engine.updateAllPositions(new Date(state.currentDate));
+        } else {
+          engine.updateAllPositions(new Date());
+        }
+      }, INTERVAL_MS);
+    },
+    leaveCallback: () => {
+      if (timer) clearInterval(timer);
+      timer = null;
+      engine.updateAllPositions(new Date(state.currentDate));
+    },
+    options: {
+      threshold: 0.5,
+    },
+  });
+}
 </script>
 
 <template>
-  <div>
+  <div ref="root">
     <button
       class="p-3 border-solid border bg-white text-black"
       @click="filterSatellites(SATELLITE_LABEL_APOGEE)"

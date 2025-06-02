@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  title: boolean;
-  caption: boolean;
+  title?: boolean;
+  caption?: boolean;
 }>();
 </script>
 

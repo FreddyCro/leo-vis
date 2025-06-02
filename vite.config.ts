@@ -4,12 +4,13 @@ import vue from '@vitejs/plugin-vue';
 import viteCompression from 'vite-plugin-compression';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import tailwindcss from '@tailwindcss/vite';
+import meta from './src/locales/meta.json';
 
 // https://vite.dev/config/
 export default defineConfig((mode) => {
   // loadEnv(mode, root, prefix)
   const env = loadEnv('', process.cwd());
-  const { VITE_URL } = env;
+  const { VITE_URL, VITE_MODE } = env;
   // console.log('env', env);
 
   return {
@@ -21,7 +22,18 @@ export default defineConfig((mode) => {
       createHtmlPlugin({
         minify: true,
         inject: {
-          data: { title: 'My App' },
+          data: {
+            title: meta.metaTitle,
+            description: meta.metaDesc,
+            keywords: meta.metaKeywords,
+            url: VITE_URL,
+            // url: meta.metaURL,
+            image: meta.metaImage,
+            robot:
+              VITE_MODE === 'production'
+                ? 'index, follow'
+                : 'noindex, nofollow',
+          },
         },
       }),
     ],
