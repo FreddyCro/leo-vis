@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Leo3dEarthHero from '@/components/leo-3d-earth-hero.vue';
 import LeoIntro from '@/components/leo-intro.vue';
 import LeoOutline from '@/components/leo-outline.vue';
 import Mock from '@/components/mock.vue';
@@ -12,7 +11,7 @@ import str from '@/locales/section-hero.json';
   <div class="leo-hero">
     <div class="leo-hero-globe-wrap">
       <div class="leo-hero-globe">
-        <Leo3dEarthHero />
+        <!-- <Leo3dEarthHero /> -->
       </div>
       <div class="leo-hero-intro-wrap">
         <LeoIntro>
@@ -34,14 +33,10 @@ import str from '@/locales/section-hero.json';
         </figcaption>
       </figure>
       <figure>
-        <!-- 23264843 -->
         <div
           class="flourish-embed flourish-chart"
-          data-src="visualisation/20500490"
-        ></div>
-        <!-- <figcaption>
-          {{ 'str.taichungSection4ImgCaption' }}
-        </figcaption> -->
+          data-src="visualisation/23264843"
+        />
       </figure>
       <p>{{ str.p2t1 }}</p>
       <p>{{ str.p3t1 }}</p>
@@ -61,10 +56,13 @@ import str from '@/locales/section-hero.json';
 .leo-hero-globe {
   position: sticky;
   top: 0;
+  background-image: url('./img/bg_star.jpg');
+  background-size: cover;
 }
 
 .leo-hero-intro-wrap {
   position: absolute;
   top: 0;
+  width: 100%;
 }
 </style>

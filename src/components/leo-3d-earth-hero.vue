@@ -4,6 +4,8 @@ import { onMounted } from 'vue';
 import ThreeGlobe from 'three-globe';
 import * as THREE from 'three';
 
+const TARGET_ID = 'globe-viz';
+
 onMounted(() => {
   // Gen random data
   const ARCS_N = 50;
@@ -26,7 +28,7 @@ onMounted(() => {
   }));
 
   const Globe = new ThreeGlobe()
-    .globeImageUrl('./img/earth-night.jpg')
+    .globeImageUrl('./img/earth_night.jpg')
     .arcsData(arcsData)
     .arcColor('color')
     .arcAltitude(0.25)
@@ -72,7 +74,7 @@ onMounted(() => {
   renderer.setClearColor(0x000000, 0); // 設定背景為透明
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
-  document.getElementById('globeViz').appendChild(renderer.domElement);
+  document.getElementById(TARGET_ID).appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
   scene.add(Globe);
@@ -104,6 +106,8 @@ onMounted(() => {
   let moving = true;
 
   function animate() {
+    // TODO: if root is in viewport, do, else, return
+
     requestAnimationFrame(animate);
 
     // when use OrbitControls, postiton.x will not change
@@ -166,5 +170,11 @@ function createGlowTexture() {
 </script>
 
 <template>
-  <div id="globeViz" class="bg-gray-900"></div>
+  <div :id="TARGET_ID" class="leo-hero-earth" />
 </template>
+
+<style lang="scss">
+.leo-hero-earth {
+  background-image: url('./img/bg_star.jpg');
+}
+</style>

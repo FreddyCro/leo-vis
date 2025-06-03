@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Leo3dEarthSatellite from '@/components/leo-3d-earth-satellite.vue';
 import LeoIntro from '@/components/leo-intro.vue';
 import LeoFeatureGrid from '@/components/leo-feature-grid.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
@@ -8,7 +7,7 @@ import str from '@/locales/section1.json';
 
 <template>
   <div>
-    <Leo3dEarthSatellite />
+    <!-- <Leo3dEarthSatellite /> -->
 
     <LeoIntro chapter="01">
       <p>{{ str.title }}</p>

@@ -5,7 +5,7 @@ import * as satellite from 'satellite.js/lib/index';
 import { getPositionFromTle, parseTleFile } from './tle';
 import circle from '@/assets/3d/circle.png';
 
-const EARTH_IMG_PATH = './img/earth-night.jpg';
+const EARTH_IMG_PATH = './img/earth_night.jpg';
 const SatelliteSize = 50;
 const MinutesPerDay = 1440;
 const ixpdotp = MinutesPerDay / (2.0 * 3.141592654);

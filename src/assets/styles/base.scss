@@ -3,6 +3,7 @@
 
 :root {
   --hero-min-h: 720px;
+  --white: #fff;
 }
 
 /* layout setting */
@@ -78,13 +79,13 @@ figure {
   padding-left: 26px;
   padding-right: 26px;
 
-  @include min-pad {
+  @include rwd-min(pad) {
     max-width: calc(530px + 57px * 2);
     padding-left: 57px;
     padding-right: 57px;
   }
 
-  @include min-pc {
+  @include rwd-min(pc) {
     max-width: calc(620px + 110px * 2);
     padding-left: 110px;
     padding-right: 110px;

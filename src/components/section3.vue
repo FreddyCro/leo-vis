@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Leo3dMoonSite from '@/components/leo-3d-moon-site.vue';
 import LeoIntro from '@/components/leo-intro.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import str from '@/locales/section3.json';
@@ -31,7 +30,7 @@ import str from '@/locales/section3.json';
     <div
       class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
     >
-      <Leo3dMoonSite />
+      <!-- <Leo3dMoonSite /> -->
     </div>
 
     <!-- moon svg content -->
