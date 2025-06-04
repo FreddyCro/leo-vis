@@ -8,12 +8,12 @@ import str from '@/locales/section-hero.json';
 </script>
 
 <template>
-  <div class="leo-hero">
-    <div class="leo-hero-globe-wrap">
-      <div class="leo-hero-globe">
+  <div class="l-hero">
+    <div class="l-hero-globe-wrap">
+      <div class="l-hero-globe">
         <!-- <Leo3dEarthHero /> -->
       </div>
-      <div class="leo-hero-intro-wrap">
+      <div class="l-hero-intro-wrap">
         <LeoIntro>
           <p>{{ str.title }}</p>
           <p>{{ str.subTitle }}</p>
@@ -41,26 +41,27 @@ import str from '@/locales/section-hero.json';
       <p>{{ str.p2t1 }}</p>
       <p>{{ str.p3t1 }}</p>
       <p>{{ str.p3t2 }}</p>
+
+      <LeoOutline />
     </div>
-    <LeoOutline />
   </div>
 </template>
 
 <style lang="scss">
-.leo-hero-globe-wrap {
+.l-hero-globe-wrap {
   position: relative;
   height: 200vh;
   min-height: calc(var(--hero-min-h) * 2);
 }
 
-.leo-hero-globe {
+.l-hero-globe {
   position: sticky;
   top: 0;
   background-image: url('./img/bg_star.jpg');
   background-size: cover;
 }
 
-.leo-hero-intro-wrap {
+.l-hero-intro-wrap {
   position: absolute;
   top: 0;
   width: 100%;

@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div>feature-grid</div>
+  <div>space industry</div>
 </template>
 
 <style lang="scss"></style>

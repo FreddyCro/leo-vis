@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// import Leo3dGlobeSatellite from '@/components/leo-3d-globe-satellite.vue';
-import LeoFeatureGrid from '@/components/leo-feature-grid.vue';
 import str from '@/locales/section-tw.json';
 </script>
 
@@ -8,7 +6,7 @@ import str from '@/locales/section-tw.json';
   <div>
     <p>{{ str.title }}</p>
 
-    <LeoFeatureGrid></LeoFeatureGrid>
+    <!-- feature grid -->
   </div>
 </template>
 

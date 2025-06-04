@@ -12,63 +12,69 @@ import str from '@/locales/section2.json';
       <p>{{ str.subTitle }}</p>
     </LeoIntro>
 
-    <p>{{ str.p1t1 }}</p>
-    <p>{{ str.p1t2 }}</p>
-    <figure>
-      <div
-        class="flourish-embed flourish-chart"
-        data-src="visualisation/23266793"
-      />
-    </figure>
-    <p>{{ str.p2t1 }}</p>
-    <figure>
-      <div
-        class="flourish-embed flourish-chart"
-        data-src="visualisation/23267137"
-      />
-    </figure>
-    <p>{{ str.p3t1 }}</p>
-    <p>{{ str.p3t2 }}</p>
-    <figure>
-      <div
-        class="flourish-embed flourish-chart"
-        data-src="visualisation/23265551"
-      />
-    </figure>
-    <p>{{ str.p4t1 }}</p>
-    <figure>
-      <figcaption>
-        {{ str.g4Title }}
-      </figcaption>
-      <Mock />
-      <figcaption>
-        {{ str.g4Caption }}
-      </figcaption>
-    </figure>
-    <p>{{ str.p5t1 }}</p>
-    <p>{{ str.p5t2 }}</p>
+    <div class="leo-container">
+      <p>{{ str.p1t1 }}</p>
+      <p>{{ str.p1t2 }}</p>
+      <figure>
+        <div
+          class="flourish-embed flourish-chart"
+          data-src="visualisation/23266793"
+        />
+      </figure>
+      <p>{{ str.p2t1 }}</p>
+      <figure>
+        <div
+          class="flourish-embed flourish-chart"
+          data-src="visualisation/23267137"
+        />
+      </figure>
+      <p>{{ str.p3t1 }}</p>
+      <p>{{ str.p3t2 }}</p>
+      <figure>
+        <div
+          class="flourish-embed flourish-chart"
+          data-src="visualisation/23265551"
+        />
+      </figure>
+      <p>{{ str.p4t1 }}</p>
+      <figure>
+        <figcaption>
+          {{ str.g4Title }}
+        </figcaption>
+        <Mock />
+        <figcaption>
+          {{ str.g4Caption }}
+        </figcaption>
+      </figure>
+      <p>{{ str.p5t1 }}</p>
+      <p>{{ str.p5t2 }}</p>
 
-    <LeoReadMore
-      :title="str.relatedTitle"
-      :data="[
-        {
-          title: str.related1Title,
-          link: str.related1Link,
-        },
-        {
-          title: str.related2Title,
-          link: str.related2Link,
-        },
-        {
-          title: str.related3Title,
-          link: str.related3Link,
-        },
-        {
-          title: str.related4Title,
-          link: str.related4Link,
-        },
-      ]"
-    />
+      <LeoReadMore
+        :title="str.relatedTitle"
+        :data="[
+          {
+            title: str.related1Title,
+            link: str.related1Link,
+            bg: 'https://placehold.co/480x320/gray/white',
+          },
+          {
+            title: str.related2Title,
+            link: str.related2Link,
+            bg: 'https://placehold.co/480x320/gray/white',
+          },
+          {
+            title: str.related3Title,
+            link: str.related3Link,
+            bg: 'https://placehold.co/480x320/gray/white',
+          },
+          {
+            title: str.related4Title,
+            link: str.related4Link,
+            bg: 'https://placehold.co/480x320/gray/white',
+          },
+        ]"
+      />
+    </div>
   </div>
 </template>
 
