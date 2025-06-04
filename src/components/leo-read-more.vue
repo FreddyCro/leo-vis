@@ -20,6 +20,8 @@ defineProps<Props>();
         <a :href="item.link" class="text-blue-500 hover:underline">{{
           item.title
         }}</a>
+
+        <!-- https://placehold.co/960x540/lightblue/white -->
       </li>
     </ul>
   </div>

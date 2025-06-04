@@ -1,195 +1,113 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
+import { PC_BREAKPOINTS, TABLET_BREAKPOINTS } from '@/utils/constants';
 
-const props = defineProps({
-  id: {
-    type: String,
-  },
-  classname: {
-    type: String,
-  },
-  src: {
-    type: String,
-    required: true,
-  },
-  srcset: {
-    type: Array,
-    default: () => ['mob', 'pad', 'pc'],
-  },
-  default: {
-    type: String,
-    default: 'pc',
-  },
-  ext: {
-    type: String,
-    default: 'jpg',
-  },
-  width: {
-    type: Number,
-  },
-  height: {
-    type: Number,
-  },
-  alt: {
-    type: String,
-  },
-  altby: {
-    type: String,
-  },
-  loading: {
-    type: String,
-    default: 'eager',
-    // default: 'lazy',
-  },
-  use2x: {
-    type: Boolean,
-    default: true,
-  },
-  usePrefix: {
-    type: Boolean,
-    default: true,
-  },
-  webp: {
-    type: Boolean,
-    default: false,
-  },
-});
+type SrcsetType = Array<'mob' | 'pad' | 'pc'>;
+
+interface LeoPicProps {
+  id?: string;
+  classname?: string;
+  src: string;
+  srcset?: SrcsetType;
+  default?: 'mob' | 'pad' | 'pc';
+  ext?: string;
+  width?: number;
+  height?: number;
+  alt?: string;
+  altby?: string;
+  loading?: 'eager' | 'lazy';
+  use2x?: boolean;
+  usePrefix?: boolean;
+  webp?: boolean;
+}
+
+const props = defineProps<LeoPicProps>();
 
 const { VITE_ASSETS_PATH } = import.meta.env;
 
-const parsedMedia = computed(() => {
-  if (!props.srcset) return;
-  if (props.srcset.length === 0) return;
+const DEFAULT_SRCSET: SrcsetType = ['mob', 'pad', 'pc'];
+const DEFAULT_EXT = 'jpg';
 
-  const media = [];
+const srcsetValue = computed(() => props.srcset ?? DEFAULT_SRCSET);
+const extValue = computed(() => props.ext ?? DEFAULT_EXT);
+const use2xValue = computed(() => props.use2x ?? true);
+const usePrefixValue = computed(() => props.usePrefix ?? true);
 
-  if (props.srcset.includes('pc')) {
-    media.push('(min-width: 1280px)');
-  }
+const mediaQueries = {
+  pc: `(min-width: ${PC_BREAKPOINTS}px)`,
+  pad: `(min-width: ${TABLET_BREAKPOINTS}px)`,
+  mob: '',
+};
 
-  if (props.srcset.includes('pad')) {
-    media.push('(min-width: 768px)');
-  }
+const parsedMedia = computed(() =>
+  srcsetValue.value.map((type) => mediaQueries[type]),
+);
 
-  if (props.srcset.includes('mob')) {
-    media.push('');
-  }
+function buildSrcset(
+  type: 'mob' | 'pad' | 'pc',
+  ext: string,
+  use2x: boolean,
+  usePrefix: boolean,
+) {
+  const prefix = usePrefix ? `_${type}` : '';
+  const base = `${VITE_ASSETS_PATH}${props.src}${prefix}.${ext} 1x`;
+  if (!use2x) return base;
+  const retina = `${VITE_ASSETS_PATH}${props.src}${prefix}@2x.${ext} 2x`;
+  return `${base}, ${retina}`;
+}
 
-  return media;
-});
+const parsedSrcset = computed(() =>
+  srcsetValue.value.map((type) =>
+    buildSrcset(type, extValue.value, use2xValue.value, usePrefixValue.value),
+  ),
+);
 
-const parsedSrcset = computed(() => {
-  if (!props.srcset) return;
-  if (props.srcset.length === 0) return;
-
-  return handleImage({
-    src: props.src,
-    srcset: props.srcset,
-    ext: props.ext,
-    use2x: props.use2x,
-    usePrefix: props.usePrefix,
-  });
-});
-
-const parsedWebpSrcset = computed(() => {
-  if (!props.webp) return;
-  if (!props.srcset) return;
-  if (props.srcset.length === 0) return;
-
-  return handleImage({
-    src: props.src,
-    srcset: props.srcset,
-    ext: 'webp',
-    use2x: props.use2x,
-    usePrefix: props.usePrefix,
-  });
-});
+const parsedWebpSrcset = computed(() =>
+  props.webp
+    ? srcsetValue.value.map((type) =>
+        buildSrcset(type, 'webp', use2xValue.value, usePrefixValue.value),
+      )
+    : undefined,
+);
 
 const parsedDefault = computed(() => {
-  if (props.default === 'pc')
-    return `${VITE_ASSETS_PATH}${props.src}_pc.${props.ext}`;
-  if (props.default === 'pad')
-    return `${VITE_ASSETS_PATH}${props.src}_pad.${props.ext}`;
-  if (props.default === 'mob')
-    return `${VITE_ASSETS_PATH}${props.src}_mob.${props.ext}`;
-  return `${VITE_ASSETS_PATH}${props.src}.${props.ext}`;
+  const type = props.default ?? 'pc';
+  const prefix = usePrefixValue.value ? `_${type}` : '';
+  return `${VITE_ASSETS_PATH}${props.src}${prefix}.${extValue.value}`;
 });
-
-function handleImage({ src, srcset, ext, use2x, usePrefix }) {
-  // console.log(src, srcset, ext);
-  if (!srcset) return;
-  if (srcset.length === 0) return;
-
-  const srcsetList = [];
-
-  if (srcset.includes('pc')) {
-    let pc = `${VITE_ASSETS_PATH}${src}${usePrefix ? '_pc' : ''}.${ext} 1x`;
-
-    if (use2x) {
-      pc += `, ${VITE_ASSETS_PATH}${src}${usePrefix ? '_pc' : ''}@2x.${ext} 2x`;
-    }
-
-    srcsetList.push(pc);
-  }
-
-  if (srcset.includes('pad')) {
-    let pad = `${VITE_ASSETS_PATH}${src}${usePrefix ? '_pad' : ''}.${ext} 1x`;
-
-    if (use2x) {
-      pad += `, ${VITE_ASSETS_PATH}${src}${
-        usePrefix ? '_pad' : ''
-      }@2x.${ext} 2x`;
-    }
-
-    srcsetList.push(pad);
-  }
-
-  if (srcset.includes('mob')) {
-    let mob = `${VITE_ASSETS_PATH}${src}${usePrefix ? '_mob' : ''}.${ext} 1x`;
-
-    if (use2x) {
-      mob += `, ${VITE_ASSETS_PATH}${src}${
-        usePrefix ? '_mob' : ''
-      }@2x.${ext} 2x`;
-    }
-
-    srcsetList.push(mob);
-  }
-
-  return srcsetList;
-}
 </script>
 
 <template>
-  <picture class="leo-pic">
-    <template v-for="(media, index) in parsedMedia">
+  <picture class="l-pic">
+    <template v-for="(media, index) in parsedMedia" :key="media + index">
       <source
         v-if="webp"
-        :key="`webp-${media}`"
         :media="media"
-        :srcset="parsedWebpSrcset[index]"
+        :srcset="parsedWebpSrcset?.[index]"
         type="image/webp"
       />
       <source
-        v-if="srcset.length > 0"
-        :key="`normal-${media}`"
+        v-if="srcsetValue.length > 0"
         :media="media"
         :srcset="parsedSrcset[index]"
       />
     </template>
     <img
-      class="leo-pic-img"
+      :id="id"
+      class="l-pic-img"
       :class="classname || ''"
       :src="parsedDefault"
       :alt="alt"
       :aria-labelledby="altby"
       :loading="loading"
+      :width="width"
+      :height="height"
     />
   </picture>
 </template>
 
 <style lang="scss">
-.leo-pic-img {
+.l-pic-img {
   width: 100%;
   height: auto;
   pointer-events: none;
