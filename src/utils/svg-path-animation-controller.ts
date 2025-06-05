@@ -125,12 +125,16 @@ class AnimationController {
    * Pauses the animation.
    * @returns this
    */
-  moveToNewPoint() {
+  moveToNewPoint({ duration }: { duration?: number } = {}) {
     if (!this.circleEl) return this;
     this.animateState = 'PAUSE';
     const cx = this.circleEl.getAttribute('cx') || '0';
     const cy = this.circleEl.getAttribute('cy') || '0';
     this.elements.forEach((el) => {
+      if (duration) {
+        el.style.transition = `transform ${duration}ms ease-in-out`;
+      }
+
       el.style.transform = `translate(${cx}px, ${cy}px)`;
     });
     return this;
@@ -180,7 +184,44 @@ class AnimationController {
     };
 
     requestAnimationFrame(animate);
+
+    /**
+     * Resize handler to adjust SVG viewBox and paths
+     */
+    const resizeHandler = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      this.svgEl.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      this.pathEls.forEach((path, idx) => {
+        const startX = idx === 0 ? 0 : width;
+        path.setAttribute(
+          'd',
+          `M${startX} 0 L${Math.random() * width} ${Math.random() * height}`,
+        );
+      });
+    };
+
+    window.addEventListener('resize', resizeHandler);
+
     return this;
+  }
+
+  distroy() {
+    this.animateState = 'PAUSE';
+    this.pathEls.forEach((path) => {
+      this.svgEl.removeChild(path);
+    });
+    this.pathEls = [];
+    if (this.circleEl) {
+      this.svgEl.removeChild(this.circleEl);
+      this.circleEl = null;
+    }
+    this.elements.forEach((el) => {
+      el.style.transform = '';
+      el.style.transition = '';
+    });
+
+    window.removeEventListener('resize', this.resizeHandler);
   }
 }
 

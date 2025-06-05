@@ -2,26 +2,36 @@
 import { onMounted, ref } from 'vue';
 import { AnimationController } from '@/utils/svg-path-animation-controller';
 
-const svgEl = ref<SVGSVGElement | null>(null);
-const blueEl = ref<HTMLDivElement | null>(null);
-const greenEl = ref<HTMLDivElement | null>(null);
-const circleEl = ref<SVGCircleElement | null>(null);
+interface Props {
+  elementNumber: number;
+}
 
+defineProps<Props>();
+
+const svgEl = ref<SVGSVGElement | null>(null);
+const elementEls = ref<HTMLDivElement[]>([]);
+const circleEl = ref<SVGCircleElement | null>(null);
 const DURATION = 40000;
 
 onMounted(() => {
   const animation = new AnimationController({
     svgEl: svgEl.value,
-    elements: [blueEl.value, greenEl.value],
+    elements: elementEls.value,
     circleEl: circleEl.value,
   });
 
-  animation.drawLines().run(DURATION).addCircle();
+  animation.drawLines().run(DURATION);
+
+  // TODO: stop when out of view
+
+  // animation.drawLines().run(DURATION).addCircle();
 
   // 範例：3秒後移動到新圓點
-  setTimeout(() => {
-    animation.moveToNewPoint();
-  }, 3000);
+  // setTimeout(() => {
+  //   animation.moveToNewPoint({
+  //     duration: 3000,
+  //   });
+  // }, 3000);
 });
 
 // ref:
@@ -60,7 +70,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative w-full h-screen">
+  <div class="relative w-full h-screen overflow-hidden">
     <svg
       ref="svgEl"
       class="l-svg-animate-path w-full h-full"
@@ -69,13 +79,13 @@ onMounted(() => {
       aria-hidden="true"
     />
     <div
-      ref="blueEl"
+      v-for="i in elementNumber"
+      :key="i"
+      ref="elementEls"
       class="absolute top-0 left-0 w-[100px] h-[100px] bg-blue-300"
-    ></div>
-    <div
-      ref="greenEl"
-      class="absolute top-0 left-0 w-[100px] h-[100px] bg-green-300"
-    ></div>
+    >
+      <slot :name="`element-${i}`" />
+    </div>
   </div>
 </template>
 

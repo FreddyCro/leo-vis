@@ -16,49 +16,49 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
 
 <template>
   <div
-    class="l-intro relative w-full h-screen min-h-[var(--hero-min-h)] flex flex-col justify-between"
+    class="ls-intro relative w-full h-screen min-h-[var(--hero-min-h)] flex flex-col justify-between"
   >
     <!-- presentation line -->
     <div
-      class="l-intro__present-line l-intro__present-line-1"
+      class="ls-intro__present-line ls-intro__present-line-1"
       role="presentation"
     />
     <div
-      class="l-intro__present-line l-intro__present-line-2"
+      class="ls-intro__present-line ls-intro__present-line-2"
       role="presentation"
     />
 
     <!-- title / chapter -->
     <div
-      class="l-intro__content h-full flex items-center justify-center md:grid md:grid-cols-5"
+      class="ls-intro__content h-full flex items-center justify-center md:grid md:grid-cols-5"
     >
-      <div class="l-intro__content-title md:col-span-4">
+      <div class="ls-intro__content-title md:col-span-4">
         <slot />
       </div>
-      <div v-if="chapter" class="l-intro__chapter hidden md:block">
+      <div v-if="chapter" class="ls-intro__chapter hidden md:block">
         {{ chapter }}
       </div>
     </div>
 
     <!-- toc -->
     <div
-      class="l-intro__toc-wrap relative w-full max-md:flex max-md:justify-between max-md:items-end max-md:px-7"
+      class="ls-intro__toc-wrap relative w-full max-md:flex max-md:justify-between max-md:items-end max-md:px-7"
     >
       <ul
-        class="l-intro__toc inline-grid max-md:grid-rows-4 md:grid-cols-4 gap-10"
+        class="ls-intro__toc inline-grid max-md:grid-rows-4 md:grid-cols-4 gap-10"
       >
         <li
           v-for="(item, index) in tocList"
           :key="item"
-          class="l-intro__toc-item relative"
+          class="ls-intro__toc-item relative"
         >
-          <div class="l-intro__toc-item-dot" role="presentation">
+          <div class="ls-intro__toc-item-dot" role="presentation">
             <!-- outer -->
-            <div class="l-intro__toc-item-dot-out" />
+            <div class="ls-intro__toc-item-dot-out" />
             <!-- inner -->
-            <div class="l-intro__toc-item-dot-in" />
+            <div class="ls-intro__toc-item-dot-in" />
           </div>
-          <div class="l-intro__toc-item-content">
+          <div class="ls-intro__toc-item-content">
             <span>0{{ index + 1 }}</span>
             <span>
               {{ item }}
@@ -67,7 +67,7 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
         </li>
       </ul>
 
-      <div v-if="chapter" class="l-intro__chapter lg:hidden">
+      <div v-if="chapter" class="ls-intro__chapter lg:hidden">
         {{ chapter }}
       </div>
     </div>
@@ -75,7 +75,7 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
 </template>
 
 <style lang="scss">
-.l-intro {
+.ls-intro {
   &__present-line {
     position: absolute;
     background-color: var(--white);
