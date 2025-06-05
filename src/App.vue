@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// import SvgPathAnimation from '@/components/lab/svg-path-animation.vue';
+
 import LeoHeader from '@/components/leo-header.vue';
 import LeoFooter from '@/components/leo-footer.vue';
 import SectionHero from '@/components/section-hero.vue';
@@ -11,6 +13,7 @@ import SectionTw from '@/components/section-tw.vue';
 
 <template>
   <div class="app">
+    <!-- <SvgPathAnimation /> -->
     <LeoHeader />
     <main class="leo-main">
       <div class="bg-black text-white">
