@@ -13,7 +13,7 @@ const ixpdotp = MinutesPerDay / (2.0 * 3.141592654);
 const TargetDate = new Date();
 
 const defaultOptions = {
-  backgroundColor: 0x041119,
+  // backgroundColor: 0x041119,
   defaultSatelliteColor: 0xff0000,
   onStationClicked: null,
 };
@@ -328,7 +328,9 @@ export class Engine {
       antialias: true,
     });
 
-    this.renderer.setClearColor(new THREE.Color(this.options.backgroundColor));
+    // this.renderer.setClearColor(new THREE.Color(this.options.backgroundColor));
+    // transparent background
+    this.renderer.setClearColor(0x000000, 0);
     this.renderer.setSize(width, height);
 
     this.el.appendChild(this.renderer.domElement);
@@ -340,6 +342,7 @@ export class Engine {
     this.camera = new THREE.PerspectiveCamera(54, width / height, NEAR, FAR);
     this.controls = new OrbitControls(this.camera, this.el);
     this.controls.enablePan = false;
+    this.controls.enableZoom = false;
     this.controls.addEventListener('change', () => this.render());
     this.camera.position.z = -15000;
     this.camera.position.x = 15000;

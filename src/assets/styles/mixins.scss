@@ -53,3 +53,8 @@
   text-align: $text-align;
   color: $color;
 }
+
+@mixin blur($blur: 10px) {
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}

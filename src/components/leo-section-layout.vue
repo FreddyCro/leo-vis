@@ -23,7 +23,7 @@ defineProps<Props>();
       <template v-if="isCustomIntro">
         <slot name="intro" />
       </template>
-      <div v-else class="absolute inset-0 z-20 bg-black bg-opacity-50">
+      <div v-else class="absolute inset-0 z-20">
         <slot name="intro" />
       </div>
     </div>

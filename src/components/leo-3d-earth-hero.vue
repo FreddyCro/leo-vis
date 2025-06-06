@@ -1,6 +1,6 @@
 <!-- ref: https://github.com/vasturiano/three-globe -->
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import ThreeGlobe from 'three-globe';
 import * as THREE from 'three';
 
@@ -11,10 +11,13 @@ const props = defineProps({
   },
 });
 
+const globeContainer = ref(null);
 const TARGET_ID = 'globe-viz';
 const GLOBE_TEXTURE_URL = './img/earth_night.jpg';
 const ARCS_N = 50;
 const G_N = 750;
+let Globe = null;
+let observer = null;
 
 class GlobeController {
   constructor(targetId, options = {}) {
@@ -74,7 +77,7 @@ class GlobeController {
       targetElement.appendChild(this.renderer.domElement);
     }
 
-    return this; // 返回 this 以支援鏈式調用
+    return this;
   }
 
   /**
@@ -352,14 +355,13 @@ class GlobeController {
 }
 
 onMounted(() => {
-  const globe = new GlobeController(TARGET_ID, {
+  Globe = new GlobeController(TARGET_ID, {
     arcsCount: ARCS_N,
     spotsCount: G_N,
     globeTextureUrl: GLOBE_TEXTURE_URL,
   });
 
-  globe
-    .init()
+  Globe.init()
     .setScene()
     .setCamera({
       position: [-100, 50, 200],
@@ -373,18 +375,47 @@ onMounted(() => {
   // globe.updateRotationSpeed(0.001, 0.002);
   // globe.resize();
   // globe.dispose();
+
+  window.addEventListener('resize', handleResize);
+
+  observer = new IntersectionObserver(handleIntersectionObserver, {
+    threshold: 0.1,
+  });
+
+  observer.observe(globeContainer.value);
 });
 
-// 如果需要，可以添加事件監聽器來調整大小
-// window.addEventListener('resize', () => {
-//   camera.aspect = window.innerWidth / window.innerHeight;
-//   camera.updateProjectionMatrix();
-//   renderer.setSize(window.innerWidth, window.innerHeight);
-// });
+onUnmounted(() => {
+  if (Globe) {
+    Globe.dispose();
+    Globe = null;
+  }
+  window.removeEventListener('resize', handleResize);
+  observer.disconnect();
+});
+
+function handleIntersectionObserver(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      Globe?.resetCamera();
+      Globe?.animate();
+    } else {
+      Globe?.stop();
+    }
+  });
+}
+
+function handleResize() {
+  if (!Globe) return;
+  Globe.resetCamera();
+  Globe.resize();
+}
 </script>
 
 <template>
-  <div :id="TARGET_ID" class="leo-hero-earth w-full overflow-hidden" />
+  <div
+    :id="TARGET_ID"
+    ref="globeContainer"
+    class="leo-hero-earth w-full overflow-hidden"
+  />
 </template>
-
-<style lang="scss"></style>

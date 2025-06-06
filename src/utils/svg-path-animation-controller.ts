@@ -27,6 +27,8 @@ class AnimationController {
   circleEl: SVGCircleElement | null;
   /** Animation duration */
   duration: number;
+  /** Whether to enable yoyo (back and forth) animation */
+  yoyo: boolean = false;
 
   /**
    * @param options AnimationControllerOptions
@@ -143,15 +145,19 @@ class AnimationController {
   /**
    * Start animating all elements along their respective SVG paths.
    * @param duration Animation duration in ms
+   * @param options Optional parameters
+   * @param options.yoyo Whether to enable yoyo (back and forth) animation
    * @returns this
    */
-  run(duration: number) {
+  run(duration: number, options?: { yoyo?: boolean }) {
     if (this.pathEls.length !== this.elements.length) return this;
     this.animateState = 'PLAY';
+    this.yoyo = options?.yoyo ?? false;
 
     const lengths = this.pathEls.map((path) => path.getTotalLength());
     let start: number | null = null;
     let ticking = false;
+    let direction: 1 | -1 = 1; // 1: forward, -1: backward
 
     /**
      * Animation frame callback
@@ -162,7 +168,12 @@ class AnimationController {
       ticking = true;
 
       const currentTime = timestamp - start;
-      const progress = Math.min(currentTime / duration, 1);
+      let progress = Math.min(currentTime / duration, 1);
+
+      // If yoyo, reverse progress when going backward
+      if (this.yoyo && direction === -1) {
+        progress = 1 - progress;
+      }
 
       this.pathEls.forEach((path, idx) => {
         const point = path.getPointAtLength(progress * lengths[idx]);
@@ -170,12 +181,19 @@ class AnimationController {
         el.style.transform = `translate(${point.x}px, ${point.y}px)`;
       });
 
-      if (progress >= 1) {
-        start = null;
-        setTimeout(() => {
+      if (currentTime >= duration) {
+        if (this.yoyo) {
+          direction *= -1;
+          start = timestamp;
           ticking = false;
           requestAnimationFrame(animate);
-        }, 500);
+        } else {
+          start = null;
+          setTimeout(() => {
+            ticking = false;
+            requestAnimationFrame(animate);
+          }, 500);
+        }
         return;
       }
 
@@ -185,9 +203,7 @@ class AnimationController {
 
     requestAnimationFrame(animate);
 
-    /**
-     * Resize handler to adjust SVG viewBox and paths
-     */
+    // ...existing resizeHandler code...
     const resizeHandler = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -203,8 +219,15 @@ class AnimationController {
 
     window.addEventListener('resize', resizeHandler);
 
+    // Store handler for cleanup
+    this.resizeHandler = resizeHandler;
+
     return this;
   }
+
+  // ...existing code...
+  // Add a property to store the resize handler for cleanup
+  private resizeHandler?: () => void;
 
   distroy() {
     this.animateState = 'PAUSE';
@@ -221,7 +244,10 @@ class AnimationController {
       el.style.transition = '';
     });
 
-    window.removeEventListener('resize', this.resizeHandler);
+    if (this.resizeHandler) {
+      window.removeEventListener('resize', this.resizeHandler);
+      this.resizeHandler = undefined;
+    }
   }
 }
 

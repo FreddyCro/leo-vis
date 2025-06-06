@@ -39,14 +39,16 @@ import str from '@/locales/section3.json';
           <p>{{ str.p2t1 }}</p>
           <p>{{ str.p2t2 }}</p>
           <p>{{ str.p2t3 }}</p>
+        </div>
 
-          <!-- 3d moon site -->
-          <div
-            class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
-          >
-            <Leo3dMoonSite />
-          </div>
+        <!-- 3d moon site -->
+        <div
+          class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
+        >
+          <Leo3dMoonSite />
+        </div>
 
+        <div class="leo-container">
           <!-- moon svg content -->
           <div
             class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"

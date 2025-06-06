@@ -1,6 +1,6 @@
 <!-- ref: https://github.com/dsuarezv/satellite-tracker/blob/master/App.js -->
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { Engine } from '@/utils/engine';
 import createIntersectionObserver from '@/utils/intersection-observer';
 import {
@@ -21,6 +21,13 @@ interface Station {
     apogee: number;
   };
 }
+
+const props = withDefaults(
+  defineProps<{
+    currentCategory?: string;
+  }>(),
+  { currentCategory: SATELLITE_LABEL_ALL },
+);
 
 const USE_ORBIT_ANIMATE = false;
 const SATELLITE_FILE = './active_satellites.txt';
@@ -48,6 +55,13 @@ const engine: any = new Engine();
 let timer: ReturnType<typeof setInterval> | null = null;
 let _unobserve: (() => void) | null = null;
 
+watch(
+  () => props.currentCategory,
+  (newCategory) => {
+    filterSatellites(newCategory);
+  },
+);
+
 onMounted(() => {
   engine.referenceFrame = state.referenceFrame;
   engine.initialize(el.value, {});
@@ -55,7 +69,7 @@ onMounted(() => {
   addStations();
   engine.updateAllPositions(new Date());
 
-  // obital motion
+  // orbital motion
   handleRunOrbitalMotionObserver();
 });
 
@@ -170,6 +184,12 @@ function handleRunOrbitalMotionObserver() {
 
 <template>
   <div ref="root">
+    <!-- <button
+      class="p-3 border-solid border bg-white text-black"
+      @click="filterSatellites(SATELLITE_LABEL_ALL)"
+    >
+      ALL
+    </button>
     <button
       class="p-3 border-solid border bg-white text-black"
       @click="filterSatellites(SATELLITE_LABEL_APOGEE)"
@@ -187,13 +207,7 @@ function handleRunOrbitalMotionObserver() {
       @click="filterSatellites(SATELLITE_LABEL_ONEWEB_KUIPER)"
     >
       ONEWEB/KUIPER
-    </button>
-    <button
-      class="p-3 border-solid border bg-white text-black"
-      @click="filterSatellites(SATELLITE_LABEL_ALL)"
-    >
-      ALL
-    </button>
-    <div id="earth" ref="el" class="w-[600px] h-[600px]"></div>
+    </button> -->
+    <div id="earth" ref="el" class="w-full h-[80vh] overflow-hidden"></div>
   </div>
 </template>
