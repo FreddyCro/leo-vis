@@ -8,9 +8,9 @@ import Leo3dMoonSite from '@/components/leo-3d-moon-site.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import str from '@/locales/section3.json';
 
-type MoonSiteCategory = 'soviet' | 'us' | 'cn' | 'others';
+type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
 
-const currentCategory = ref<MoonSiteCategory>('soviet');
+const currentCategory = ref<MoonSiteCategory>('all');
 
 function handleChangeCategory(
   isIntersecting: boolean,
@@ -71,7 +71,13 @@ function handleChangeCategory(
           </div>
 
           <!-- article -->
-          <div class="relative">
+          <div class="relative opacity-[0.1] pointer-events-none">
+            <!-- reset 3d moon site -->
+            <LeoScrollTrigger
+              :dev-mode="true"
+              @change="handleChangeCategory($event, 'all')"
+            />
+
             <!-- 3d moon site part soviet -->
             <LeoScrollTrigger
               :dev-mode="true"

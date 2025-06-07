@@ -1,3 +1,4 @@
+<!-- ref: https://github.com/vasturiano/three-globe/blob/master/example/custom/index.html -->
 <script setup>
 import { onMounted, onUnmounted } from 'vue';
 import ThreeGlobe from 'three-globe';
@@ -9,13 +10,14 @@ import MOON_STATION_DATA from '@/assets/json/moon-stations.json';
 const props = defineProps({
   currentCategory: {
     type: String,
-    default: 'all',
+    default: 'soviet',
   },
 });
 
 const MOON_ROOT_ID = 'moon-vis';
 const MOON_IMG_PATH = './img/moon_4k.jpg';
 let moonController = null;
+const scrollbarWidth = getScrollbarWidth();
 
 class MoonController {
   constructor(targetId, options = {}) {
@@ -33,12 +35,13 @@ class MoonController {
     this.globe = null;
     this.controls = null;
     this.animationId = null;
-    // Calculate and store a fixed camera radius for all positions
-    this.radius = new THREE.Vector3(...this.options.cameraPosition).length();
   }
 
+  /**
+   * 初始化 three-globe 月球
+   */
   init() {
-    // Convert station data
+    // 轉換站點資料
     const gData = this.options.stations.map((e) => {
       const [lat, lng] = convertMoonLatLngToGlobe(e.lat, e.lng);
       return {
@@ -96,31 +99,21 @@ class MoonController {
     return this;
   }
 
-  setCamera(option) {
+  setCamera({ position }) {
     const { width, height } = getCanvasSize();
     this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
-
-    const { position } = option || {};
-    const newPosition = position || this.options.cameraPosition;
-
-    // Always set camera at fixed radius, only direction changes
-    const dir = new THREE.Vector3(...newPosition).normalize();
-    this.camera.position.copy(dir.multiplyScalar(this.radius));
-    this.options.cameraPosition = newPosition;
-
+    this.camera.position.set(...position);
+    this.options.cameraPosition = position;
     return this;
   }
 
   setControls() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.minDistance = this.radius;
-    this.controls.maxDistance = this.radius;
+    this.controls.minDistance = 101;
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.1;
-    this.controls.enabled = false;
-    // this.controls.enableZoom = false;
-    // this.controls.enablePan = false;
-
+    this.controls.enableZoom = false;
+    this.controls.enablePan = false;
     if (this.globe && this.camera) {
       this.globe.setPointOfView(this.camera);
       this.controls.addEventListener('change', () => {
@@ -128,100 +121,64 @@ class MoonController {
       });
     }
 
+    // this.controls.addEventListener('end', () => {
+    //   console.log(
+    //     'Camera position:',
+    //     this.camera.position.x,
+    //     this.camera.position.y,
+    //     this.camera.position.z,
+    //   );
+    // });
+
     return this;
   }
 
   animate() {
-    // Helper to create positions at fixed radius
-    const makePosition = (x, y, z) => {
-      const v = new THREE.Vector3(x, y, z);
-      v.setLength(this.radius);
-      return v;
-    };
-
-    const positions = {
-      all: makePosition(...this.options.cameraPosition),
-      soviet: makePosition(
-        -184.43856924446047,
-        158.49481744586123,
-        436.87733635181746,
-      ),
-      us: makePosition(
-        -202.87283327525873,
-        -75.4358911451228,
-        450.723906450512,
-      ),
-      cn1: makePosition(
-        -357.5450654210032,
-        216.18274233623478,
-        274.63894135587424,
-      ),
-      cn2: makePosition(
-        127.95264223458179,
-        -262.11205224678906,
-        -452.68686021593976,
-      ),
-      others: makePosition(
-        148.46184703813043,
-        -263.80696143786486,
-        397.9509606357892,
-      ),
-    };
-
-    let lastCategory = props.currentCategory;
-    let cnStep = 0; // 0: not in cn, 1: moving to pos1, 2: moving to pos2
     const targetPosition = this.camera.position.clone();
-
+    let lastCategory = props.currentCategory;
     const animateLoop = () => {
       this.animationId = requestAnimationFrame(animateLoop);
 
-      // Detect category change
+      // 只有當 currentCategory 改變時才設定 targetPosition
       if (props.currentCategory !== lastCategory) {
-        if (props.currentCategory === 'cn') {
-          cnStep = 1; // Start cn two-step transition
-          targetPosition.copy(positions.cn1);
-        } else {
-          cnStep = 0;
-          if (props.currentCategory === 'all') {
-            targetPosition.copy(positions.all);
-          } else if (props.currentCategory === 'soviet') {
-            targetPosition.copy(positions.soviet);
-          } else if (props.currentCategory === 'us') {
-            targetPosition.copy(positions.us);
-          } else if (props.currentCategory === 'others') {
-            targetPosition.copy(positions.others);
-          }
+        if (props.currentCategory === 'soviet') {
+          targetPosition.set(
+            -184.43856924446047,
+            158.49481744586123,
+            436.87733635181746,
+          );
+        } else if (props.currentCategory === 'us') {
+          targetPosition.set(
+            -202.87283327525873,
+            -75.4358911451228,
+            450.723906450512,
+          );
+        } else if (props.currentCategory === 'cn') {
+          // position 1
+          targetPosition.set(
+            -380.32376745990535,
+            176.80560493683888,
+            272.20141433876256,
+          );
+
+          // position 2
+          targetPosition.set(
+            -0.00044917950101927074,
+            -499.99999999974955,
+            0.00021963099962235867,
+          );
+        } else if (props.currentCategory === 'others') {
+          targetPosition.set(
+            148.46184703813043,
+            -263.80696143786486,
+            397.9509606357892,
+          );
         }
         lastCategory = props.currentCategory;
       }
 
-      // Handle cn two-step transition
-      if (props.currentCategory === 'cn') {
-        if (cnStep === 1) {
-          // Move to position 1
-          this.moveCameraSlerp(positions.cn1, 0.06);
-          // If close enough to pos1, proceed to pos2
-          if (this.camera.position.distanceTo(positions.cn1) < 2) {
-            cnStep = 2;
-            targetPosition.copy(positions.cn2);
-          }
-        } else if (cnStep === 2) {
-          // Move to position 2
-          this.moveCameraSlerp(positions.cn2, 0.06);
-        }
-      } else {
-        // Other categories: single target
-        this.moveCameraSlerp(targetPosition, 0.06);
-      }
-
-      if (props.currentCategory === 'all') {
-        // rotate globe
-        this.globe.rotation.y += 0.001;
-        this.globe.rotation.x += 0.00025;
-      } else {
-        // Keep the globe static when focusing on a specific category
-        this.globe.rotation.set(0, 0, 0);
-      }
+      // Use slerp to smoothly move the camera along the sphere, avoiding visual scaling
+      this.moveCameraSlerp(targetPosition, 0.08);
 
       // update
       if (this.controls) this.controls.update();
@@ -230,9 +187,7 @@ class MoonController {
         this.labelRenderer.render(this.scene, this.camera);
       }
     };
-
     animateLoop();
-
     return this;
   }
 
@@ -246,8 +201,7 @@ class MoonController {
 
   resetCamera() {
     if (this.camera) {
-      const dir = new THREE.Vector3(...this.options.cameraPosition).normalize();
-      this.camera.position.copy(dir.multiplyScalar(this.radius));
+      this.camera.position.set(...this.options.cameraPosition);
       if (this.controls) this.controls.update();
     }
     return this;
@@ -282,7 +236,7 @@ class MoonController {
    */
   moveCameraSlerp(targetPosition, slerpFactor = 0.08) {
     const center = new THREE.Vector3(0, 0, 0);
-    const radius = this.radius;
+    const radius = targetPosition.length();
     const from = this.camera.position.clone().normalize();
     const to = targetPosition.clone().normalize();
     const quatFrom = new THREE.Quaternion().setFromUnitVectors(
@@ -305,10 +259,15 @@ onMounted(() => {
   moonController = new MoonController(MOON_ROOT_ID, {
     moonTextureUrl: MOON_IMG_PATH,
     stations: MOON_STATION_DATA,
-    cameraPosition: [-200, 0, 500],
+    cameraPosition: [0, 0, 500],
   });
 
-  moonController.init().setScene().setCamera().setControls().animate();
+  moonController
+    .init()
+    .setScene()
+    .setCamera({ position: [0, 0, 500] })
+    .setControls()
+    .animate();
 
   // Handle resize events
   window.addEventListener('resize', handleResize);
@@ -318,6 +277,7 @@ onUnmounted(() => {
   if (moonController) {
     moonController.dispose();
   }
+
   window.removeEventListener('resize', handleResize);
 });
 
@@ -331,9 +291,7 @@ function handleSiteVisibilityChange(el, isVisible) {
   let isCategoryMatch = false;
   const elCategory = el.dataset.category;
 
-  if (props.currentCategory === 'all') {
-    isCategoryMatch = true;
-  } else if (props.currentCategory === elCategory) {
+  if (props.currentCategory === elCategory) {
     isCategoryMatch = true;
   } else if (props.currentCategory === 'others') {
     isCategoryMatch = ['india', 'japan', 'folk'].includes(elCategory);
@@ -342,6 +300,7 @@ function handleSiteVisibilityChange(el, isVisible) {
   // Set opacity to 1 if the element is visible to the camera
   // and matches the current category, otherwise set to 0
   el.style.opacity = isVisible && isCategoryMatch ? 1 : 0;
+  // el.style.opacity = isVisible ? 1 : 0;
 }
 
 function stationMark(color = 'currentColor') {
