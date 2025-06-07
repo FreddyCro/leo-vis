@@ -25,7 +25,7 @@ class GlobeController {
     this.options = {
       arcsCount: 50,
       spotsCount: 750,
-      globeTextureUrl: './img/earth_night.jpg',
+      globeTextureUrl: '',
       colors: ['#00F4DC', '#8D41D9'],
       cameraSpeed: 0.05,
       rotationSpeed: { x: 0.00025, y: 0.001 },

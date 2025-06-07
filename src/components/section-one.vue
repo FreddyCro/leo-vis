@@ -50,7 +50,8 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 
 const currentCategory = ref<string>(SATELLITE_LABEL_ALL);
 
-function handleChangeCategory(category: string) {
+function handleChangeCategory(isIntersecting: boolean, category: string) {
+  if (!isIntersecting) return;
   currentCategory.value = category;
 }
 </script>
@@ -82,7 +83,7 @@ function handleChangeCategory(category: string) {
             <LeoScrollTrigger
               :dev-mode="true"
               scroll-height="100vh"
-              @change="() => handleChangeCategory(SATELLITE_LABEL_ALL)"
+              @change="handleChangeCategory($event, SATELLITE_LABEL_ALL)"
             >
               <div>trigger all</div>
               <div class="leo-container">
@@ -96,7 +97,7 @@ function handleChangeCategory(category: string) {
             <LeoScrollTrigger
               :dev-mode="true"
               scroll-height="100vh"
-              @change="() => handleChangeCategory(SATELLITE_LABEL_APOGEE)"
+              @change="handleChangeCategory($event, SATELLITE_LABEL_APOGEE)"
             >
               <div>trigger LEO</div>
               <div class="leo-container">
@@ -111,7 +112,7 @@ function handleChangeCategory(category: string) {
             <LeoScrollTrigger
               :dev-mode="true"
               scroll-height="100vh"
-              @change="() => handleChangeCategory(SATELLITE_LABEL_STARLINK)"
+              @change="handleChangeCategory($event, SATELLITE_LABEL_STARLINK)"
             >
               <div>trigger SpaceX</div>
               <div class="leo-container">
@@ -126,7 +127,7 @@ function handleChangeCategory(category: string) {
               :dev-mode="true"
               scroll-height="100vh"
               @change="
-                () => handleChangeCategory(SATELLITE_LABEL_ONEWEB_KUIPER)
+                handleChangeCategory($event, SATELLITE_LABEL_ONEWEB_KUIPER)
               "
             >
               <div>trigger OneWeb, Kuiper</div>
