@@ -4,6 +4,11 @@ import ThreeGlobe from 'three-globe';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js?external=three';
+import {
+  convertMoonLatLngToGlobe,
+  stationColor,
+  stationMark,
+} from '@/utils/moon-utils';
 import MOON_STATION_DATA from '@/assets/json/moon-stations.json';
 
 const props = defineProps({
@@ -84,7 +89,10 @@ class MoonController {
     if (targetElement) {
       targetElement.appendChild(this.renderer.domElement);
       targetElement.appendChild(this.labelRenderer.domElement);
+    } else {
+      console.error(`Target element with ID ${this.targetId} not found.`);
     }
+
     return this;
   }
 
@@ -327,85 +335,19 @@ function handleResize() {
   }
 }
 
+// 將分類判斷抽成工具函式
+function isCategoryMatch(current, elCategory) {
+  if (current === 'all') return true;
+  if (current === elCategory) return true;
+  if (current === 'others')
+    return ['india', 'japan', 'folk'].includes(elCategory);
+  return false;
+}
+
 function handleSiteVisibilityChange(el, isVisible) {
-  let isCategoryMatch = false;
   const elCategory = el.dataset.category;
-
-  if (props.currentCategory === 'all') {
-    isCategoryMatch = true;
-  } else if (props.currentCategory === elCategory) {
-    isCategoryMatch = true;
-  } else if (props.currentCategory === 'others') {
-    isCategoryMatch = ['india', 'japan', 'folk'].includes(elCategory);
-  }
-
-  // Set opacity to 1 if the element is visible to the camera
-  // and matches the current category, otherwise set to 0
-  el.style.opacity = isVisible && isCategoryMatch ? 1 : 0;
-}
-
-function stationMark(color = 'currentColor') {
-  return `<svg viewBox="-4 0 36 36">
-      <circle cx="12" cy="12" r="12" fill="${color}" />
-    </svg>`;
-}
-
-function stationColor(category) {
-  switch (category) {
-    case 'soviet':
-      return '#FFFB18';
-    case 'us':
-      return '#0800FF';
-    case 'cn':
-      return '#FF0037';
-    case 'india':
-      return '#FF7700';
-    case 'japan':
-      return '#B42EF2';
-    case 'folk':
-      return '#00F4DC';
-    default:
-      return '#ffffff';
-  }
-}
-
-function convertMoonLatLngToGlobe(lat, lng) {
-  // By default, rotate the lunar prime meridian to align with the Earth's prime meridian
-  // This offset can be adjusted according to the IAU lunar rotation definition (about 3~5° difference)
-  const lngOffset = -21; // Simulated value, adjust according to the difference between lunar and Earth's prime meridian
-  let adjLng = lng + lngOffset;
-
-  // Ensure longitude is within -180~180
-  if (adjLng > 180) adjLng -= 360;
-  if (adjLng < -180) adjLng += 360;
-
-  return [lat, adjLng];
-}
-
-function getScrollbarWidth() {
-  // Create a temporary div element
-  const div = document.createElement('div');
-  // Set its style to make it visible and to force a scrollbar
-  div.style.width = '100px';
-  div.style.height = '100px';
-  div.style.overflow = 'scroll';
-  // Append it to the body
-  document.body.appendChild(div);
-
-  // Get the width of the scrollbar
-  const scrollbarWidth = div.offsetWidth - div.clientWidth;
-
-  // Remove the temporary div from the body
-  document.body.removeChild(div);
-
-  return scrollbarWidth;
-}
-
-function getCanvasSize() {
-  const WIDTH_OFFSET = 5; // prevent canvas from touching the scrollbar
-  const width = window.innerWidth - getScrollbarWidth() - WIDTH_OFFSET;
-  const height = window.innerHeight;
-  return { width, height };
+  el.style.opacity =
+    isVisible && isCategoryMatch(props.currentCategory, elCategory) ? 1 : 0;
 }
 </script>
 
