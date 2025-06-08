@@ -29,13 +29,21 @@ const props = withDefaults(
   { currentCategory: SATELLITE_LABEL_ALL },
 );
 
-const USE_ORBIT_ANIMATE = false;
+const USE_ORBIT_ANIMATE = true;
 const SATELLITE_FILE = './active_satellites.txt';
 const SATELLITE_COLOR = 0xffffff; // white color for satellites
 const SATELLITE_APOGEE_THRESHOLD = 2000; // apogee threshold in km
-const INTERVAL_MS = 1000;
+const INTERVAL_MS = 50;
 const ORBIT_ANIMATE_STEP_MS = 5000; // Increment by 5 second
 // const DateSliderRangeInMilliseconds = 24 * 60 * 60 * 1000; // 24 hours
+
+const CATEGORY_ORDER_MAP: Record<string, number> = {
+  [SATELLITE_LABEL_ALL]: 1,
+  [SATELLITE_LABEL_APOGEE]: 2,
+  [SATELLITE_LABEL_STARLINK]: 3,
+  [SATELLITE_LABEL_ONEWEB]: 4,
+  [SATELLITE_LABEL_KUIPER]: 5,
+};
 
 const state: {
   allChildren: Station[];
@@ -52,8 +60,10 @@ const state: {
 const root = ref<HTMLElement | null>(null);
 const el = ref<HTMLElement | null>(null);
 const engine: any = new Engine();
-let timer: ReturnType<typeof setInterval> | null = null;
-let _unobserve: (() => void) | null = null;
+let orbitalObserver: (() => void) | null = null;
+let orbitRafId: number | null = null;
+
+const filterCache: Record<string, Station[]> = {};
 
 watch(
   () => props.currentCategory,
@@ -74,8 +84,40 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if (timer) clearInterval(timer);
+  if (orbitalObserver) {
+    orbitalObserver();
+    orbitalObserver = null;
+  }
+
+  if (orbitRafId !== null) {
+    cancelAnimationFrame(orbitRafId);
+    orbitRafId = null;
+  }
+
+  engine.dispose();
 });
+
+function buildFilterCache() {
+  const allLabels = [
+    SATELLITE_LABEL_ALL,
+    SATELLITE_LABEL_APOGEE,
+    SATELLITE_LABEL_STARLINK,
+    SATELLITE_LABEL_ONEWEB_KUIPER,
+    // 其他分類如有需要可加
+  ];
+  allLabels.forEach((label) => {
+    filterCache[label] = state.allChildren.filter((child: Station) => {
+      if (label === SATELLITE_LABEL_ALL) return true;
+
+      return (
+        child.label === SATELLITE_LABEL_EARTH ||
+        (Array.isArray(child.label)
+          ? child.label.includes(label)
+          : child.label === label)
+      );
+    });
+  });
+}
 
 function addStations() {
   engine
@@ -84,31 +126,34 @@ function addStations() {
       // console.log('Stations loaded:', stations);
       state.allChildren = addNameAndLabelToChildren(stations);
       engine.earth.children = state.allChildren;
+
+      // build cache
+      buildFilterCache();
     });
 }
 
 function filterSatellites(filterName: string) {
-  const filterMap: Record<string, (label: string) => boolean> = {
-    [SATELLITE_LABEL_APOGEE]: (label) => label.includes(SATELLITE_LABEL_APOGEE),
-    [SATELLITE_LABEL_STARLINK]: (label) =>
-      label.includes(SATELLITE_LABEL_STARLINK),
-    [SATELLITE_LABEL_ONEWEB_KUIPER]: (label) =>
-      label.includes(SATELLITE_LABEL_ONEWEB_KUIPER),
-    [SATELLITE_LABEL_ALL]: () => true,
-  };
+  // use cache
+  const children =
+    filterCache[filterName] || filterCache[SATELLITE_LABEL_ALL] || [];
+  engine.earth.children = children;
 
-  const isMatch = filterMap[filterName];
+  // highlight stations
+  engine.earth.children.forEach((child: any, i: number) => {
+    // exclude Earth mesh from highlighting
+    if (i > 0) {
+      const station = {
+        mesh: child,
+      };
+      engine.clearStationHighlight(station);
+      engine.highlightStation(
+        station,
+        getCategoryColorOrder(filterName, child.label) || 1,
+      );
+    }
+  });
 
-  if (!isMatch) {
-    console.warn('Unknown filter:', filterName);
-    return;
-  }
-
-  engine.earth.children = state.allChildren.filter(
-    (child: Station) =>
-      child.label === SATELLITE_LABEL_EARTH || isMatch(child.label),
-  );
-
+  // render
   engine.render();
 }
 
@@ -128,51 +173,77 @@ function addNameAndLabelToChildren(stations: Station[]) {
     }
 
     return child;
-
-    // else {
-    //   console.warn('Station not found for child:', uuid);
-    // }
   });
 }
 
 function classifyStation(station: Station): string[] {
-  const labels = [];
+  const labels: string[] = [];
+  const name = station.name || '';
 
-  if (station.name.includes(SATELLITE_LABEL_STARLINK)) {
+  // starlink
+  if (name.includes(SATELLITE_LABEL_STARLINK)) {
     labels.push(SATELLITE_LABEL_STARLINK);
   }
 
+  // oneweb and kuiper
   if (
-    station.name.includes(SATELLITE_LABEL_ONEWEB) ||
-    station.name.includes(SATELLITE_LABEL_KUIPER)
+    name.includes(SATELLITE_LABEL_ONEWEB) ||
+    name.includes(SATELLITE_LABEL_KUIPER)
   ) {
     labels.push(SATELLITE_LABEL_ONEWEB_KUIPER);
   }
 
-  if (station.mesh.apogee < SATELLITE_APOGEE_THRESHOLD) {
-    labels.push(SATELLITE_LABEL_APOGEE);
+  // oneweb
+  if (name.includes(SATELLITE_LABEL_ONEWEB)) {
+    labels.push(SATELLITE_LABEL_ONEWEB);
   }
 
-  return labels;
+  // kuiper
+  if (name.includes(SATELLITE_LABEL_KUIPER)) {
+    labels.push(SATELLITE_LABEL_KUIPER);
+  }
+
+  // apogee height
+  if (
+    station.mesh &&
+    typeof station.mesh.apogee === 'number' &&
+    station.mesh.apogee < SATELLITE_APOGEE_THRESHOLD
+  ) {
+    labels.push(SATELLITE_LABEL_APOGEE);
+  }
+  return labels.length > 0 ? labels : [SATELLITE_LABEL_EARTH];
 }
 
 function handleRunOrbitalMotionObserver() {
   const { observe } = createIntersectionObserver();
-  _unobserve = observe({
+
+  orbitalObserver = observe({
     element: root.value,
     enterCallback: () => {
-      timer = setInterval(() => {
+      let lastTime = performance.now();
+
+      function animate(now: number) {
+        orbitRafId = requestAnimationFrame(animate);
+
         if (USE_ORBIT_ANIMATE) {
-          state.currentDate += ORBIT_ANIMATE_STEP_MS;
-          engine.updateAllPositions(new Date(state.currentDate));
+          const elapsed = now - lastTime;
+          if (elapsed >= INTERVAL_MS) {
+            state.currentDate += ORBIT_ANIMATE_STEP_MS;
+            engine.updateAllPositions(new Date(state.currentDate));
+            lastTime = now;
+          }
         } else {
           engine.updateAllPositions(new Date());
         }
-      }, INTERVAL_MS);
+      }
+
+      orbitRafId = requestAnimationFrame(animate);
     },
     leaveCallback: () => {
-      if (timer) clearInterval(timer);
-      timer = null;
+      if (orbitRafId !== null) {
+        cancelAnimationFrame(orbitRafId);
+        orbitRafId = null;
+      }
       engine.updateAllPositions(new Date(state.currentDate));
     },
     options: {
@@ -180,34 +251,30 @@ function handleRunOrbitalMotionObserver() {
     },
   });
 }
+
+function getCategoryColorOrder(
+  filterName: string,
+  label: string | string[],
+): number {
+  const labels = Array.isArray(label) ? label : [label];
+
+  if (filterName === SATELLITE_LABEL_ONEWEB_KUIPER) {
+    if (labels.includes(SATELLITE_LABEL_ONEWEB)) {
+      return CATEGORY_ORDER_MAP[SATELLITE_LABEL_ONEWEB];
+    }
+    if (labels.includes(SATELLITE_LABEL_KUIPER)) {
+      return CATEGORY_ORDER_MAP[SATELLITE_LABEL_KUIPER];
+    }
+  } else if (labels.includes(filterName)) {
+    return CATEGORY_ORDER_MAP[filterName];
+  }
+  // Default case for other categories
+  return CATEGORY_ORDER_MAP[SATELLITE_LABEL_ALL];
+}
 </script>
 
 <template>
   <div ref="root">
-    <!-- <button
-      class="p-3 border-solid border bg-white text-black"
-      @click="filterSatellites(SATELLITE_LABEL_ALL)"
-    >
-      ALL
-    </button>
-    <button
-      class="p-3 border-solid border bg-white text-black"
-      @click="filterSatellites(SATELLITE_LABEL_APOGEE)"
-    >
-      {{ 'Apogee Height < 2000' }}
-    </button>
-    <button
-      class="p-3 border-solid border bg-white text-black"
-      @click="filterSatellites(SATELLITE_LABEL_STARLINK)"
-    >
-      STARLINK
-    </button>
-    <button
-      class="p-3 border-solid border bg-white text-black"
-      @click="filterSatellites(SATELLITE_LABEL_ONEWEB_KUIPER)"
-    >
-      ONEWEB/KUIPER
-    </button> -->
-    <div id="earth" ref="el" class="w-full h-[80vh] overflow-hidden"></div>
+    <div id="earth" ref="el" class="w-full h-[80vh] overflow-hidden" />
   </div>
 </template>

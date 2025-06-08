@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js?external=three';
 import {
   convertMoonLatLngToGlobe,
+  getCanvasSize,
   stationColor,
   stationMark,
 } from '@/utils/moon-utils';
@@ -204,10 +205,11 @@ class MoonController {
       }
 
       // Handle cn two-step transition
+      const SLERP_FACTOR = 0.12;
       if (props.currentCategory === 'cn') {
         if (cnStep === 1) {
           // Move to position 1
-          this.moveCameraSlerp(positions.cn1, 0.06);
+          this.moveCameraSlerp(positions.cn1, SLERP_FACTOR);
           // If close enough to pos1, proceed to pos2
           if (this.camera.position.distanceTo(positions.cn1) < 2) {
             cnStep = 2;
@@ -215,11 +217,11 @@ class MoonController {
           }
         } else if (cnStep === 2) {
           // Move to position 2
-          this.moveCameraSlerp(positions.cn2, 0.06);
+          this.moveCameraSlerp(positions.cn2, SLERP_FACTOR);
         }
       } else {
         // Other categories: single target
-        this.moveCameraSlerp(targetPosition, 0.06);
+        this.moveCameraSlerp(targetPosition, SLERP_FACTOR);
       }
 
       if (props.currentCategory === 'all') {

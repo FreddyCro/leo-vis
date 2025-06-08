@@ -127,11 +127,12 @@ export class Engine {
   addOrbit = (station) => {
     if (station.orbitMinutes > 0) return;
 
-    const revsPerDay = station.satrec?.no * ixpdotp;
+    const revsPerDay = station.satrec.no * ixpdotp;
     const intervalMinutes = 1;
-    const minutes =
-      station.orbitMinutes || (revsPerDay ? MinutesPerDay / revsPerDay : 0);
+    const minutes = station.orbitMinutes || MinutesPerDay / revsPerDay;
     const initialDate = new Date();
+
+    // console.log('revsPerDay', revsPerDay, 'minutes', minutes);
 
     if (!this.orbitMaterial) {
       this.orbitMaterial = new THREE.LineBasicMaterial({
@@ -145,16 +146,17 @@ export class Engine {
 
     for (let i = 0; i <= minutes; i += intervalMinutes) {
       const date = new Date(initialDate.getTime() + i * 60000);
+
       const pos = getPositionFromTle(station, date, this.referenceFrame);
       if (!pos) continue;
+
       points.push(new THREE.Vector3(pos.x, pos.y, pos.z));
     }
 
-    const filteredPoints = points;
-
-    const geometry = new THREE.BufferGeometry().setFromPoints(filteredPoints);
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);
     const orbitCurve = new THREE.Line(geometry, this.orbitMaterial);
     station.orbit = orbitCurve;
+    station.mesh.material = this.selectedMaterial;
 
     this.earth.add(orbitCurve);
     this.render();
@@ -162,27 +164,20 @@ export class Engine {
 
   removeOrbit = (station) => {
     if (!station || !station.orbit) return;
+
     this.earth.remove(station.orbit);
-    if (station.orbit.geometry) station.orbit.geometry.dispose();
+    station.orbit.geometry.dispose();
     station.orbit = null;
     station.mesh.material = this.material;
     this.render();
   };
 
-  highlightStation = (station, colorNumber) => {
-    if (station && station.mesh) {
-      station.mesh.material =
-        this.highlightedMaterials[colorNumber] || this.material;
-    }
+  highlightStation = (station) => {
+    station.mesh.material = this.highlightedMaterial;
   };
 
-  // highlightStation = (station) => {
-  //   if (station && station.mesh)
-  //     station.mesh.material = this.highlightedMaterial;
-  // };
-
   clearStationHighlight = (station) => {
-    if (station && station.mesh) station.mesh.material = this.material;
+    station.mesh.material = this.material;
   };
 
   setReferenceFrame = (type) => {
@@ -192,18 +187,19 @@ export class Engine {
   _addTleFileStations = (lteFileContent, color, stationOptions) => {
     const stations = parseTleFile(lteFileContent, stationOptions);
     const { satelliteSize } = stationOptions;
-
-    for (let i = 0; i < stations.length; i++) {
-      this.addSatellite(stations[i], color, satelliteSize);
-    }
+    stations.forEach((s) => {
+      this.addSatellite(s, color, satelliteSize);
+    });
 
     this.render();
+
     return stations;
   };
 
   _getSatelliteMesh = (color, size) => {
     color = color || this.options.defaultSatelliteColor;
     size = size || SatelliteSize;
+
     if (!this.geometry) {
       this.geometry = new THREE.BoxBufferGeometry(size, size, size);
       this.material = new THREE.MeshPhongMaterial({
@@ -213,6 +209,7 @@ export class Engine {
         side: THREE.DoubleSide,
       });
     }
+
     return new THREE.Mesh(this.geometry, this.material);
   };
 
@@ -220,31 +217,21 @@ export class Engine {
     if (this.material && this.lastColor === color) return;
 
     this._satelliteSprite = new THREE.TextureLoader().load(circle, this.render);
-
-    const HIGHLIGHT_COLORS = [
-      0xffffff, // highlight color 1
-      0xfca300, // highlight color 2
-      0x00f4dc, // highlight color 3
-      0xfffb18, // highlight color 4
-      0x8d41d9, // highlight color 5
-    ];
-
-    this.highlightedMaterials = {};
-
-    HIGHLIGHT_COLORS.forEach((color, idx) => {
-      this.highlightedMaterials[idx + 1] = new THREE.SpriteMaterial({
-        map: this._satelliteSprite,
-        color,
-        sizeAttenuation: false,
-      });
+    this.selectedMaterial = new THREE.SpriteMaterial({
+      map: this._satelliteSprite,
+      color: 0xff0000,
+      sizeAttenuation: false,
     });
-
+    this.highlightedMaterial = new THREE.SpriteMaterial({
+      map: this._satelliteSprite,
+      color: 0xfca300,
+      sizeAttenuation: false,
+    });
     this.material = new THREE.SpriteMaterial({
       map: this._satelliteSprite,
       color,
       sizeAttenuation: false,
     });
-
     this.lastColor = color;
   };
 
