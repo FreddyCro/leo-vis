@@ -7,27 +7,17 @@ import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoOutline from '@/components/leo-outline.vue';
 import str from '@/locales/section-hero.json';
+import spaceEconomics from '@/assets/json/space-economics.json';
 
 const isZoomOut = ref(false);
 const isBarChartTriggerIntersecting = ref(false);
-const BAR_CHART_DATA1 = [
-  { label: '商業太空使用', data: [330, 525, 755], backgroundColor: '#00f7ef' },
-  { label: '進行太空運用', data: [300, 635, 1035], backgroundColor: '#008b85' },
-];
-const BAR_CHART_DATA2 = [
-  {
-    label: '商業太空使用',
-    data: [630, 1160, 1790],
-    backgroundColor: '#00f7ef',
-  },
-];
-const BAR_CHART_LABELS = ['2023年', '2030年', '2035年'];
 
-const barChartData = computed(() => {
-  return isBarChartTriggerIntersecting.value
-    ? BAR_CHART_DATA2
-    : BAR_CHART_DATA1;
-});
+const barChartData = computed(() => ({
+  labels: spaceEconomics.labels,
+  datasets: isBarChartTriggerIntersecting.value
+    ? spaceEconomics.datasets2 || []
+    : spaceEconomics.datasets1 || [],
+}));
 
 function onZoomOutIntersectChange(isIntersecting: boolean) {
   isZoomOut.value = isIntersecting;
@@ -84,10 +74,7 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
 
                 <div class="bg-red-300 p-10">
                   <LeoBarChart
-                    :data="{
-                      labels: BAR_CHART_LABELS,
-                      datasets: barChartData,
-                    }"
+                    :data="barChartData"
                     :options="{
                       width: 320,
                       height: 120,

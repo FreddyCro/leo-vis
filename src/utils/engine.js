@@ -109,7 +109,6 @@ export class Engine {
     if (station.orbitMinutes > 0) this.addOrbit(station);
 
     this.earth.add(sat);
-    // this.earth.remove(sat);
   };
 
   loadLteFileStations = (url, color, stationOptions) => {
@@ -255,6 +254,24 @@ export class Engine {
 
     const result = new THREE.Sprite(this.material);
     result.scale.set(size / SpriteScaleFactor, size / SpriteScaleFactor, 1);
+
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // TODO
+    // createGlowTexture;
+    //
+    // const spriteMaterial = new THREE.SpriteMaterial({
+    //   map: this.createGlowTexture(),
+    //   color: d.color,
+    //   transparent: true,
+    //   opacity: 0.5,
+    //   depthWrite: false,
+    //   blending: THREE.AdditiveBlending,
+    // });
+    // const sprite = new THREE.Sprite(spriteMaterial);
+
     return result;
   };
 
