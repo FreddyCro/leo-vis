@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
-interface BarChartData {
-  labels: string[];
-  datasets: {
-    label: string;
-    data: number[];
-    backgroundColor: string;
-  }[];
+interface BarSegment {
+  value: number;
+  color: string;
+}
+
+interface DatasetItem {
+  label: string;
+  segments: BarSegment[];
 }
 
 interface Options {
@@ -19,7 +20,7 @@ interface Options {
 }
 
 interface Props {
-  data: BarChartData;
+  datasets: DatasetItem[];
   options?: Options;
 }
 
@@ -40,19 +41,33 @@ const DEFAULT_BAR_HEIGHT = 24;
 const DEFAULT_BAR_GAP = 18;
 const DEFAULT_LABEL_WIDTH = 48;
 const FONT_SIZE = 13;
-const LABEL_DY = 6;
 const VALUE_MIN_WIDTH = 24;
 const FONT_COLOR = '#fff';
 
-// 計算每個 bar 的總值
-const totals = computed(() =>
-  props.data.labels.map((_, i) =>
-    props.data.datasets.reduce((sum, ds) => sum + (ds.data[i] || 0), 0),
-  ),
+// 本地 reactive 狀態，控制顯示用 datasets
+const displayedDatasets = ref<DatasetItem[]>([...props.datasets]);
+
+// 監聽 props.datasets 變化，平滑過渡
+watch(
+  () => props.datasets,
+  (newVal) => {
+    // 用深拷貝確保 reactivity
+    displayedDatasets.value = newVal.map((row) => ({
+      label: row.label,
+      segments: row.segments.map((seg) => ({ ...seg })),
+    }));
+  },
+  { deep: true },
 );
 
+// 計算每 row 的總值
+const rowTotals = computed(() =>
+  displayedDatasets.value.map((row) =>
+    row.segments.reduce((sum, seg) => sum + seg.value, 0),
+  ),
+);
 // 最大總值，用於 bar 長度比例
-const maxTotal = computed(() => Math.max(...totals.value, 1));
+const maxTotal = computed(() => Math.max(...rowTotals.value, 1));
 
 // 響應式尺寸
 const containerRef = ref<HTMLDivElement | null>(null);
@@ -83,80 +98,60 @@ const chartOptions = computed(() => ({
   labelWidth: props.options.labelWidth ?? DEFAULT_LABEL_WIDTH,
 }));
 
-function getStackOffset(rowIdx: number, dsIdx: number) {
-  const { datasets } = props.data;
+function getSegmentWidth(seg: BarSegment) {
   const { width, labelWidth } = chartOptions.value;
-  let sum = 0;
-  for (let i = 0; i < dsIdx; i++) {
-    sum += datasets[i].data[rowIdx] || 0;
-  }
-  return (sum / maxTotal.value) * (width - labelWidth);
-}
-
-function getStackWidth(rowIdx: number, dsIdx: number) {
-  const { datasets } = props.data;
-  const { width, labelWidth } = chartOptions.value;
-  const value = datasets[dsIdx].data[rowIdx] || 0;
-  return (value / maxTotal.value) * (width - labelWidth);
+  return (seg.value / maxTotal.value) * (width - labelWidth);
 }
 </script>
 
 <template>
   <div ref="containerRef" class="l-barchart">
-    <svg
-      :width="chartOptions.width"
-      :height="chartOptions.height"
-      :viewBox="`0 0 ${chartOptions.width} ${chartOptions.height}`"
-      style="width: 100%; height: 100%"
+    <div
+      v-for="row in displayedDatasets"
+      :key="row.label"
+      class="bar-row"
+      :style="{
+        height: `${chartOptions.barHeight}px`,
+        marginBottom: `${chartOptions.barGap}px`,
+      }"
     >
-      <g
-        v-for="(label, rowIdx) in data.labels"
-        :key="rowIdx"
-        :transform="`translate(0, ${rowIdx * (chartOptions.barHeight + chartOptions.barGap)})`"
+      <!-- 左側 label -->
+      <div
+        class="bar-label"
+        :style="{
+          width: `${chartOptions.labelWidth}px`,
+          fontSize: `${FONT_SIZE}px`,
+          color: FONT_COLOR,
+        }"
       >
-        <!-- 左側 label -->
-        <text
-          :x="0"
-          :y="chartOptions.barHeight / 2"
-          :dy="LABEL_DY"
-          text-anchor="start"
-          :font-size="FONT_SIZE"
-          :fill="FONT_COLOR"
+        {{ row.label }}
+      </div>
+      <!-- bar (stacked segments) -->
+      <div class="bar-stack" :style="{ height: `${chartOptions.barHeight}px` }">
+        <template
+          v-for="seg in row.segments"
+          :key="`${seg.color}-${seg.value}`"
         >
-          {{ label }}
-        </text>
-        <!-- 堆疊 bar -->
-        <g>
-          <template v-for="(ds, dsIdx) in data.datasets" :key="dsIdx">
-            <rect
-              :x="chartOptions.labelWidth + getStackOffset(rowIdx, dsIdx)"
-              y="0"
-              :width="getStackWidth(rowIdx, dsIdx)"
-              :height="chartOptions.barHeight"
-              :fill="ds.backgroundColor"
-              class="bar"
-            />
-            <!-- 數值 -->
-            <text
-              v-if="getStackWidth(rowIdx, dsIdx) > VALUE_MIN_WIDTH"
-              :x="
-                chartOptions.labelWidth +
-                getStackOffset(rowIdx, dsIdx) +
-                getStackWidth(rowIdx, dsIdx) / 2
-              "
-              :y="chartOptions.barHeight / 2"
-              text-anchor="middle"
-              alignment-baseline="middle"
-              :font-size="FONT_SIZE"
-              :fill="FONT_COLOR"
-              font-weight="bold"
+          <div
+            class="bar-segment"
+            :style="{
+              width: `${getSegmentWidth(seg)}px`,
+              backgroundColor: seg.color,
+              height: `${chartOptions.barHeight}px`,
+              display: getSegmentWidth(seg) > 0 ? 'inline-block' : 'none',
+            }"
+          >
+            <span
+              v-if="getSegmentWidth(seg) > VALUE_MIN_WIDTH"
+              class="bar-value"
+              :style="{ fontSize: `${FONT_SIZE}px`, color: FONT_COLOR }"
             >
-              {{ ds.data[rowIdx] }}
-            </text>
-          </template>
-        </g>
-      </g>
-    </svg>
+              {{ seg.value }}
+            </span>
+          </div>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -165,11 +160,49 @@ function getStackWidth(rowIdx: number, dsIdx: number) {
   width: 100%;
   height: 100%;
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
-  .bar {
-    transition:
-      x 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  .bar-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+  }
+  .bar-label {
+    flex: 0 0 auto;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+  }
+  .bar-stack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1 1 0%;
+    min-width: 0;
+    position: relative;
+    height: 100%;
+    background: none;
+  }
+  .bar-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .bar-value {
+    font-weight: bold;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
   }
 }
 </style>
