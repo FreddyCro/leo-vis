@@ -107,7 +107,7 @@ class MoonController {
 
   setCamera(option) {
     const { width, height } = getCanvasSize();
-    this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
 
     const { position } = option || {};
     const newPosition = position || this.options.cameraPosition;

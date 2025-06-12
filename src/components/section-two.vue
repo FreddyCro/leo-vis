@@ -3,6 +3,7 @@ import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
+import LeoPic from '@/components/leo-pic.vue';
 import Mock from '@/components/mock.vue';
 import str from '@/locales/section2.json';
 </script>
@@ -11,11 +12,28 @@ import str from '@/locales/section2.json';
   <div>
     <LeoSectionLayout>
       <template #space>
-        <LeoSvgPathAnimation :element-number="3">
-          <template #element-1>1</template>
-          <template #element-2>2</template>
-          <template #element-3>3</template>
-        </LeoSvgPathAnimation>
+        <LeoPic
+          class="leo-section-bg"
+          src="img/newspaceera2025_pic5_1_bg"
+          :webp="false"
+          :use2x="false"
+          :width="620"
+          :height="450"
+        />
+        <div class="relative z-10">
+          <LeoSvgPathAnimation :element-number="1">
+            <template #element-1>
+              <LeoPic
+                src="img/newspaceera2025_pic5_3_bg"
+                ext="png"
+                :webp="false"
+                :use2x="false"
+                :width="620"
+                :height="450"
+              />
+            </template>
+          </LeoSvgPathAnimation>
+        </div>
       </template>
       <template #intro>
         <LeoSectionIntro chapter="02">

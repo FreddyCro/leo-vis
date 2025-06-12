@@ -23,7 +23,10 @@ defineProps<Props>();
       <template v-if="isCustomIntro">
         <slot name="intro" />
       </template>
-      <div v-else class="absolute inset-0 z-20">
+      <div
+        v-else
+        class="absolute inset-0 z-20 min-h-[568px] xs:min-h-[736px] md:min-h-[1024 px] lg:min-h-[1280px]"
+      >
         <slot name="intro" />
       </div>
     </div>
@@ -31,8 +34,14 @@ defineProps<Props>();
     <template v-if="isCustomArticle">
       <slot name="article" />
     </template>
-    <div v-else class="relative z-30 bg-black">
-      <slot name="article" />
+    <div v-else class="relative z-30">
+      <div
+        class="h-[15vh] bg-gradient-to-b from-transparent to-black"
+        role="presentation"
+      />
+      <div class="ls-layout-article-wrap bg-black">
+        <slot name="article" />
+      </div>
     </div>
   </div>
 </template>

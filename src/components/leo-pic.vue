@@ -21,7 +21,11 @@ interface LeoPicProps {
   webp?: boolean;
 }
 
-const props = defineProps<LeoPicProps>();
+const props = withDefaults(defineProps<LeoPicProps>(), {
+  use2x: true,
+  usePrefix: true,
+  webp: true,
+});
 
 const { VITE_ASSETS_PATH } = import.meta.env;
 

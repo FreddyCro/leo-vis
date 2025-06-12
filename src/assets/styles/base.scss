@@ -118,3 +118,15 @@ figure {
   // blur 10px
   @include mixins.blur(10px);
 }
+
+.leo-section-bg {
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+  }
+}

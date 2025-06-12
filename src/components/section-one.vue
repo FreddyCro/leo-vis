@@ -6,6 +6,7 @@ import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import Leo3dEarthSatellite from '@/components/leo-3d-earth-satellite.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
+import LeoPic from '@/components/leo-pic.vue';
 import str from '@/locales/section1.json';
 import {
   SATELLITE_LABEL_ALL,
@@ -60,11 +61,30 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
   <div class="ls-one">
     <LeoSectionLayout>
       <template #space>
-        <LeoSvgPathAnimation :element-number="3">
-          <template #element-1>1</template>
-          <template #element-2>2</template>
-          <template #element-3>3</template>
-        </LeoSvgPathAnimation>
+        <div class="relative w-full h-[100vh]">
+          <LeoPic
+            class="leo-section-bg"
+            src="img/newspaceera2025_pic3_1_bg"
+            :webp="false"
+            :use2x="false"
+            :width="620"
+            :height="450"
+          />
+          <div class="relative z-10">
+            <LeoSvgPathAnimation :element-number="1">
+              <template #element-1>
+                <LeoPic
+                  src="img/newspaceera2025_pic3_2_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="620"
+                  :height="450"
+                />
+              </template>
+            </LeoSvgPathAnimation>
+          </div>
+        </div>
       </template>
       <template #intro>
         <LeoSectionIntro chapter="01">
@@ -75,7 +95,7 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
       <template #article>
         <div class="leo-section leo-section--pt leo-section--no-mt">
           <div class="min-h-[400vh]">
-            <div class="sticky top-0 min-h-[100vh]">
+            <div class="sticky top-0">
               <Leo3dEarthSatellite :current-category="currentCategory" />
             </div>
 
@@ -194,4 +214,7 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.ls-one {
+}
+</style>

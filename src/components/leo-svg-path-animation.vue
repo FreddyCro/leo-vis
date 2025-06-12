@@ -37,7 +37,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative w-full h-screen overflow-hidden">
+  <div class="relative w-full h-full overflow-hidden">
     <svg
       ref="svgEl"
       class="l-svg-animate-path w-full h-full"
@@ -49,7 +49,7 @@ onMounted(() => {
       v-for="i in elementNumber"
       :key="i"
       ref="elementEls"
-      class="absolute top-0 left-0 w-[100px] h-[100px] bg-blue-300"
+      class="absolute top-0 left-0"
     >
       <slot :name="`element-${i}`" />
     </div>

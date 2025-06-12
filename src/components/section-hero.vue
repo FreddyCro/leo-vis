@@ -51,7 +51,6 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
         <div class="absolute top-[-75vh] h-screen w-full">
           <!-- hide intro, move globe to center -->
           <LeoScrollTrigger
-            :dev-mode="true"
             scroll-height="75vh"
             @change="onZoomOutIntersectChange"
           >
@@ -66,24 +65,22 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
 
         <div class="leo-container">
           <div class="min-h-[200vh]">
-            <div class="sticky top-0 min-h-[100vh] bg-blue-100">
+            <div
+              class="sticky top-0 min-h-[100vh] flex items-center justify-center"
+            >
               <figure>
                 <figcaption>
                   {{ str.g1Title }}
                 </figcaption>
 
-                <div class="bg-red-300 p-10">
-                  <LeoBarChart
-                    :data="barChartData"
-                    :options="{
-                      width: 320,
-                      height: 120,
-                      barHeight: 24,
-                      barGap: 18,
-                      labelWidth: 48,
-                    }"
-                  />
-                </div>
+                <LeoBarChart
+                  :data="barChartData"
+                  :options="{
+                    barHeight: 24,
+                    barGap: 18,
+                    labelWidth: 48,
+                  }"
+                />
 
                 <figcaption>
                   {{ str.g1Caption }}
@@ -94,6 +91,7 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
             <!-- scroll to toggle chart -->
             <LeoScrollTrigger
               :dev-mode="true"
+              scroll-height="50vh"
               @change="onBarChartIntersectChange"
             >
               bar chart trigger
@@ -101,7 +99,7 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
           </div>
 
           <div class="min-h-[250vh]">
-            <div class="sticky top-0 min-h-[100vh] bg-green-100">
+            <div class="sticky top-0 min-h-[50vh]">
               <figure>
                 <div
                   class="flourish-embed flourish-chart"

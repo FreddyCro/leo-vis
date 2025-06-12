@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { earthRadius } from 'satellite.js/lib/constants';
 import * as satellite from 'satellite.js/lib/index';
 import { getPositionFromTle, parseTleFile } from './tle';
+import { createGlowTexture } from './3d-utils';
 import circle from '@/assets/3d/circle.png';
 
 const EARTH_IMG_PATH = './img/earth_night.jpg';
@@ -232,16 +233,20 @@ export class Engine {
 
     HIGHLIGHT_COLORS.forEach((color, idx) => {
       this.highlightedMaterials[idx + 1] = new THREE.SpriteMaterial({
-        map: this._satelliteSprite,
+        map: createGlowTexture(), // this._satelliteSprite,
         color,
         sizeAttenuation: false,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
       });
     });
 
     this.material = new THREE.SpriteMaterial({
-      map: this._satelliteSprite,
+      map: createGlowTexture(), // this._satelliteSprite,
       color,
       sizeAttenuation: false,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
     });
 
     this.lastColor = color;
@@ -254,23 +259,6 @@ export class Engine {
 
     const result = new THREE.Sprite(this.material);
     result.scale.set(size / SpriteScaleFactor, size / SpriteScaleFactor, 1);
-
-    // TODO
-    // TODO
-    // TODO
-    // TODO
-    // TODO
-    // createGlowTexture;
-    //
-    // const spriteMaterial = new THREE.SpriteMaterial({
-    //   map: this.createGlowTexture(),
-    //   color: d.color,
-    //   transparent: true,
-    //   opacity: 0.5,
-    //   depthWrite: false,
-    //   blending: THREE.AdditiveBlending,
-    // });
-    // const sprite = new THREE.Sprite(spriteMaterial);
 
     return result;
   };
