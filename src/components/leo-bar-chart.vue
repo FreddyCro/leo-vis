@@ -1,208 +1,174 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
-interface BarSegment {
-  value: number;
-  color: string;
-}
-
-interface DatasetItem {
+interface Dataset {
   label: string;
-  segments: BarSegment[];
+  data: number[];
+  backgroundColor: string;
 }
 
-interface Options {
-  width: number;
-  height: number;
-  barHeight: number;
-  barGap: number;
-  labelWidth: number;
-}
+const props = defineProps<{
+  labels: string[];
+  dataset: Dataset[];
+}>();
 
-interface Props {
-  datasets: DatasetItem[];
-  options?: Options;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  options: () => ({
-    width: 320,
-    height: 120,
-    barHeight: 24,
-    barGap: 18,
-    labelWidth: 48,
-  }),
+// 計算最大值，確保所有 bar 依比例顯示
+const maxValue = computed(() => {
+  return Math.max(...props.dataset.flatMap((ds) => ds.data));
 });
 
-// 常數設定
-const DEFAULT_WIDTH = 320;
-const DEFAULT_HEIGHT = 120;
-const DEFAULT_BAR_HEIGHT = 24;
-const DEFAULT_BAR_GAP = 18;
-const DEFAULT_LABEL_WIDTH = 48;
-const FONT_SIZE = 13;
-const VALUE_MIN_WIDTH = 24;
-const FONT_COLOR = '#fff';
+// 用於觸發動畫：bar 高度/寬度
+const animatedData = ref(props.dataset.map((ds) => [...ds.data]));
 
-// 本地 reactive 狀態，控制顯示用 datasets
-const displayedDatasets = ref<DatasetItem[]>([...props.datasets]);
-
-// 監聽 props.datasets 變化，平滑過渡
 watch(
-  () => props.datasets,
-  (newVal) => {
-    // 用深拷貝確保 reactivity
-    displayedDatasets.value = newVal.map((row) => ({
-      label: row.label,
-      segments: row.segments.map((seg) => ({ ...seg })),
-    }));
+  () => props.dataset.map((ds) => ds.data),
+  (newData) => {
+    // 逐步更新 animatedData 以觸發 transition
+    animatedData.value = newData.map((arr) => [...arr]);
   },
   { deep: true },
 );
 
-// 計算每 row 的總值
-const rowTotals = computed(() =>
-  displayedDatasets.value.map((row) =>
-    row.segments.reduce((sum, seg) => sum + seg.value, 0),
-  ),
-);
-// 最大總值，用於 bar 長度比例
-const maxTotal = computed(() => Math.max(...rowTotals.value, 1));
-
-// 響應式尺寸
-const containerRef = ref<HTMLDivElement | null>(null);
-const svgWidth = ref(props.options.width ?? DEFAULT_WIDTH);
-const svgHeight = ref(props.options.height ?? DEFAULT_HEIGHT);
-
-function updateSize() {
-  if (containerRef.value) {
-    svgWidth.value = containerRef.value.clientWidth || DEFAULT_WIDTH;
-    svgHeight.value = containerRef.value.clientHeight || DEFAULT_HEIGHT;
-  }
-}
-
-onMounted(() => {
-  updateSize();
-  window.addEventListener('resize', updateSize);
-});
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateSize);
-});
-
-// 取得 options，帶入 fallback 與響應式尺寸
-const chartOptions = computed(() => ({
-  width: svgWidth.value,
-  height: svgHeight.value,
-  barHeight: props.options.barHeight ?? DEFAULT_BAR_HEIGHT,
-  barGap: props.options.barGap ?? DEFAULT_BAR_GAP,
-  labelWidth: props.options.labelWidth ?? DEFAULT_LABEL_WIDTH,
-}));
-
-function getSegmentWidth(seg: BarSegment) {
-  const { width, labelWidth } = chartOptions.value;
-  return (seg.value / maxTotal.value) * (width - labelWidth);
+function barStyle(ds: Dataset, i: number) {
+  const value = ds.data[i];
+  const percent = maxValue.value ? (value / maxValue.value) * 100 : 0;
+  return {
+    height: `${percent}%`,
+    backgroundColor: ds.backgroundColor,
+    transition: 'height 0.6s cubic-bezier(.4,2,.6,1)',
+  };
 }
 </script>
 
 <template>
-  <div ref="containerRef" class="l-barchart">
-    <div
-      v-for="row in displayedDatasets"
-      :key="row.label"
-      class="bar-row"
-      :style="{
-        height: `${chartOptions.barHeight}px`,
-        marginBottom: `${chartOptions.barGap}px`,
-      }"
-    >
-      <!-- 左側 label -->
-      <div
-        class="bar-label"
-        :style="{
-          width: `${chartOptions.labelWidth}px`,
-          fontSize: `${FONT_SIZE}px`,
-          color: FONT_COLOR,
-        }"
-      >
-        {{ row.label }}
-      </div>
-      <!-- bar (stacked segments) -->
-      <div class="bar-stack" :style="{ height: `${chartOptions.barHeight}px` }">
-        <template
-          v-for="seg in row.segments"
-          :key="`${seg.color}-${seg.value}`"
+  <div class="leo-bar-chart">
+    <div class="leo-bar-chart__bars">
+      <div class="leo-bar-chart__x-axis">
+        <div
+          v-for="(label, i) in labels"
+          :key="label"
+          class="leo-bar-chart__x-group"
         >
-          <div
-            class="bar-segment"
-            :style="{
-              width: `${getSegmentWidth(seg)}px`,
-              backgroundColor: seg.color,
-              height: `${chartOptions.barHeight}px`,
-              display: getSegmentWidth(seg) > 0 ? 'inline-block' : 'none',
-            }"
-          >
-            <span
-              v-if="getSegmentWidth(seg) > VALUE_MIN_WIDTH"
-              class="bar-value"
-              :style="{ fontSize: `${FONT_SIZE}px`, color: FONT_COLOR }"
+          <div class="leo-bar-chart__bars-group">
+            <div
+              v-for="ds in dataset"
+              :key="ds.label"
+              class="leo-bar-chart__bar-wrapper"
             >
-              {{ seg.value }}
-            </span>
+              <div
+                class="leo-bar-chart__bar"
+                :style="barStyle(ds, i)"
+                :aria-label="`${ds.label}: ${ds.data[i]}`"
+              >
+                <span class="leo-bar-chart__bar-value">{{ ds.data[i] }}</span>
+              </div>
+            </div>
           </div>
-        </template>
+          <div class="leo-bar-chart__x-label">{{ label }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="leo-bar-chart__legend">
+      <div
+        v-for="ds in dataset"
+        :key="ds.label"
+        class="leo-bar-chart__legend-item"
+      >
+        <span
+          class="leo-bar-chart__legend-color"
+          :style="{ backgroundColor: ds.backgroundColor }"
+        ></span>
+        <span class="leo-bar-chart__legend-label">{{ ds.label }}</span>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-.l-barchart {
+<style scoped>
+.leo-bar-chart {
   width: 100%;
-  height: 100%;
-  background: transparent;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: inherit;
+}
+.leo-bar-chart__bars {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-
-  .bar-row {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-width: 0;
-  }
-  .bar-label {
-    flex: 0 0 auto;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 8px;
-  }
-  .bar-stack {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex: 1 1 0%;
-    min-width: 0;
-    position: relative;
-    height: 100%;
-    background: none;
-  }
-  .bar-segment {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    min-width: 0;
-    overflow: hidden;
-  }
-  .bar-value {
-    font-weight: bold;
-    white-space: nowrap;
-    pointer-events: none;
-    user-select: none;
-  }
+  align-items: stretch;
+  min-height: 260px;
+  padding-bottom: 24px;
+}
+.leo-bar-chart__x-axis {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 220px;
+  width: 100%;
+}
+.leo-bar-chart__x-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.leo-bar-chart__bars-group {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  height: 100%;
+}
+.leo-bar-chart__bar-wrapper {
+  display: flex;
+  align-items: flex-end;
+  width: 28px;
+}
+.leo-bar-chart__bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: height 0.6s cubic-bezier(0.4, 2, 0.6, 1);
+}
+.leo-bar-chart__bar-value {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.leo-bar-chart__x-label {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+.leo-bar-chart__legend {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+.leo-bar-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+.leo-bar-chart__legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: 2px;
+  border: 1px solid #eee;
 }
 </style>

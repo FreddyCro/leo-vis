@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import LeoPic from '@/components/leo-pic.vue';
+
 interface Item {
   title: string;
   link: string;
@@ -24,12 +26,17 @@ defineProps<Props>();
       }"
     >
       <li v-for="(item, index) in data" :key="index">
-        <a :href="item.link" class="relative min- h-[124px] block">
+        <a
+          :href="item.link"
+          class="relative min-h-[124px] block rounded-lg overflow-hidden px-[25px] py-[28px]"
+        >
           <!-- bg -->
-          <img
+          <LeoPic
             :src="item.bg"
-            alt="Article Image"
-            class="absolute w-full h-full object-cover object-center pointer-events-none"
+            :use-prefix="false"
+            :webp="false"
+            :width="620"
+            :height="450"
           />
 
           <!-- text -->
@@ -37,10 +44,45 @@ defineProps<Props>();
             <h3>{{ item.title }}</h3>
             <p v-if="item.desc">{{ item.desc }}</p>
           </div>
+
+          <!-- arrow -->
+          <div class="relative flex justify-end items-center">
+            <svg
+              width="33"
+              height="29"
+              viewBox="0 0 33 29"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17 1L30.6494 14.2172L17 27.4343"
+                stroke="white"
+                stroke-width="2"
+              />
+              <path
+                d="M0.19542 13.3041H31.8046"
+                stroke="white"
+                stroke-width="2"
+              />
+            </svg>
+          </div>
         </a>
       </li>
     </ul>
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.leo-read-more {
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+  }
+}
+</style>

@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<LeoPicProps>(), {
 
 const { VITE_ASSETS_PATH } = import.meta.env;
 
-const DEFAULT_SRCSET: SrcsetType = ['mob', 'pad', 'pc'];
+const DEFAULT_SRCSET: SrcsetType = ['pc', 'pad', 'mob'];
 const DEFAULT_EXT = 'jpg';
 
 const srcsetValue = computed(() => props.srcset ?? DEFAULT_SRCSET);

@@ -6,6 +6,7 @@ import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import Leo3dMoonSite from '@/components/leo-3d-moon-site.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
+import LeoPic from '@/components/leo-pic.vue';
 import str from '@/locales/section3.json';
 
 type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
@@ -25,11 +26,23 @@ function handleChangeCategory(
   <div>
     <LeoSectionLayout>
       <template #space>
-        <LeoSvgPathAnimation :element-number="3">
-          <template #element-1>1</template>
-          <template #element-2>2</template>
-          <template #element-3>3</template>
-        </LeoSvgPathAnimation>
+        <div class="relative w-full h-[100vh]">
+          <LeoPic
+            class="leo-section-bg"
+            src="img/newspaceera2025_pic8_1_bg"
+            :webp="false"
+            :use2x="false"
+            :width="620"
+            :height="450"
+          />
+          <div class="relative z-10">
+            <LeoSvgPathAnimation :element-number="3">
+              <template #element-1>1</template>
+              <template #element-2>2</template>
+              <template #element-3>3</template>
+            </LeoSvgPathAnimation>
+          </div>
+        </div>
       </template>
       <template #intro>
         <LeoSectionIntro chapter="03">

@@ -58,7 +58,7 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 </script>
 
 <template>
-  <div class="ls-one">
+  <div class="ls-one leo-article">
     <LeoSectionLayout>
       <template #space>
         <div class="relative w-full h-[100vh]">
@@ -88,8 +88,10 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
       </template>
       <template #intro>
         <LeoSectionIntro chapter="01">
-          <p>{{ str.title }}</p>
-          <p>{{ str.subTitle }}</p>
+          <h2 class="max-w-[448px]">
+            <span class="block text-4xl md:text-6xl mb-5">{{ str.title }}</span>
+            <span class="block text-2xl">{{ str.subTitle }}</span>
+          </h2>
         </LeoSectionIntro>
       </template>
       <template #article>
@@ -101,11 +103,9 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 
             <!-- trigger all -->
             <LeoScrollTrigger
-              :dev-mode="true"
               scroll-height="100vh"
               @change="handleChangeCategory($event, SATELLITE_LABEL_ALL)"
             >
-              <div>trigger all</div>
               <div class="leo-container">
                 <div class="leo-text-box">
                   <p>{{ str.p1t1 }}</p>
@@ -115,11 +115,9 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 
             <!-- trigger LEO -->
             <LeoScrollTrigger
-              :dev-mode="true"
               scroll-height="100vh"
               @change="handleChangeCategory($event, SATELLITE_LABEL_APOGEE)"
             >
-              <div>trigger LEO</div>
               <div class="leo-container">
                 <div class="leo-text-box">
                   <p>{{ str.p2t1 }}</p>
@@ -130,11 +128,9 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 
             <!-- trigger SpaceX -->
             <LeoScrollTrigger
-              :dev-mode="true"
               scroll-height="100vh"
               @change="handleChangeCategory($event, SATELLITE_LABEL_STARLINK)"
             >
-              <div>trigger SpaceX</div>
               <div class="leo-container">
                 <div class="leo-text-box">
                   <p>{{ str.p3t1 }}</p>
@@ -144,13 +140,11 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 
             <!-- trigger OneWeb, Kuiper -->
             <LeoScrollTrigger
-              :dev-mode="true"
               scroll-height="100vh"
               @change="
                 handleChangeCategory($event, SATELLITE_LABEL_ONEWEB_KUIPER)
               "
             >
-              <div>trigger OneWeb, Kuiper</div>
               <div class="leo-container">
                 <div class="leo-text-box">
                   <p>{{ str.p4t1 }}</p>
@@ -163,6 +157,7 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
         <div class="leo-container">
           <div class="leo-section">
             <p>{{ str.p5t1 }}</p>
+            <p role="presentation"></p>
 
             <!-- feature grid -->
             <div class="ls-one-feat-grid-wrap">
@@ -170,7 +165,7 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
                 <li
                   v-for="item in FEAT_GRID_DATA"
                   :key="item.title"
-                  class="border border-white"
+                  class="border border-white px-[20px] py-[30px] rounded-lg"
                 >
                   <div class="ls-one-feat-grid-item">
                     <h3>{{ item.title }}</h3>
@@ -193,17 +188,17 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
                 {
                   title: str.related1Title,
                   link: str.related1Link,
-                  bg: 'https://placehold.co/480x320/gray/white',
+                  bg: 'img/newspaceera2025_pic4_1',
                 },
                 {
                   title: str.related2Title,
                   link: str.related2Link,
-                  bg: 'https://placehold.co/480x320/gray/white',
+                  bg: 'img/newspaceera2025_pic4_2',
                 },
                 {
                   title: str.related3Title,
                   link: str.related3Link,
-                  bg: 'https://placehold.co/480x320/gray/white',
+                  bg: 'img/newspaceera2025_pic4_3',
                 },
               ]"
             />

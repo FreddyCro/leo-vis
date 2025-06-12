@@ -51,6 +51,14 @@ figure {
 }
 
 .leo-article {
+  p {
+    font-size: 18px;
+    line-height: 36px;
+  }
+
+  p + p {
+    margin-top: 36px;
+  }
 }
 
 .leo-h1 {

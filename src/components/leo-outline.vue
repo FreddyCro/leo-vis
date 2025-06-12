@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LeoPic from '@/components/leo-pic.vue';
 import strOutline from '@/locales/outline.json';
 import str1 from '@/locales/section1.json';
 import str2 from '@/locales/section2.json';
@@ -13,17 +14,17 @@ const data = [
       {
         text: strOutline.text1_1,
         link: strOutline.link1_1,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_1',
       },
       {
         text: strOutline.text1_2,
         link: strOutline.link1_2,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_2',
       },
       {
         text: strOutline.text1_3,
         link: strOutline.link1_3,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_3',
       },
     ],
   },
@@ -34,22 +35,22 @@ const data = [
       {
         text: strOutline.text2_1,
         link: strOutline.link2_1,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_4',
       },
       {
         text: strOutline.text2_2,
         link: strOutline.link2_2,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_5',
       },
       {
         text: strOutline.text2_3,
         link: strOutline.link2_3,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_6',
       },
       {
         text: strOutline.text2_4,
         link: strOutline.link2_4,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_7',
       },
     ],
   },
@@ -60,12 +61,12 @@ const data = [
       {
         text: strOutline.text3_1,
         link: strOutline.link3_1,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_8',
       },
       {
         text: strOutline.text3_2,
         link: strOutline.link3_2,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_9',
       },
     ],
   },
@@ -76,7 +77,7 @@ const data = [
       {
         text: strOutline.text4_1,
         link: strOutline.link4_1,
-        bg: 'https://placehold.co/480x320/lightgray/white',
+        bg: 'img/newspaceera2025_pic2_10',
       },
     ],
   },
@@ -105,8 +106,14 @@ const data = [
         <li v-for="article in chapter.articles" :key="article.text">
           <a :href="article.link" class="grid grid-cols-2 gap-3">
             <!-- img -->
-            <div class="border rounded-lg overflow-hidden">
-              <img :src="article.bg" alt="Article Image" />
+            <div class="rounded-lg overflow-hidden">
+              <LeoPic
+                :src="article.bg"
+                :use-prefix="false"
+                :webp="false"
+                :width="620"
+                :height="450"
+              />
             </div>
 
             <!-- text -->

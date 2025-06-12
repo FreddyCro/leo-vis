@@ -1,23 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import Leo3dEarthHero from '@/components/leo-3d-earth-hero.vue';
-import LeoBarChart from '@/components/leo-bar-chart.vue';
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoOutline from '@/components/leo-outline.vue';
+import LeoPic from '@/components/leo-pic.vue';
 import str from '@/locales/section-hero.json';
-import spaceEconomics from '@/assets/json/space-economics.json';
 
 const isZoomOut = ref(false);
 const isBarChartTriggerIntersecting = ref(false);
-
-const barChartData = computed(() => ({
-  labels: spaceEconomics.labels,
-  datasets: isBarChartTriggerIntersecting.value
-    ? spaceEconomics.datasets2 || []
-    : spaceEconomics.datasets1 || [],
-}));
 
 function onZoomOutIntersectChange(isIntersecting: boolean) {
   isZoomOut.value = isIntersecting;
@@ -29,7 +21,7 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
 </script>
 
 <template>
-  <div class="ls-hero">
+  <div class="ls-hero leo-article">
     <LeoSectionLayout>
       <template #space>
         <Leo3dEarthHero :is-zoom-out="isZoomOut" />
@@ -42,8 +34,12 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
           }"
         >
           <LeoSectionIntro>
-            <p>{{ str.title }}</p>
-            <p>{{ str.subTitle }}</p>
+            <h1 class="max-w-[448px]">
+              <span class="block text-5xl md:text-7xl mb-5">{{
+                str.title
+              }}</span>
+              <span class="block text-3xl">{{ str.subTitle }}</span>
+            </h1>
           </LeoSectionIntro>
         </div>
       </template>
@@ -69,32 +65,41 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
               class="sticky top-0 min-h-[100vh] flex items-center justify-center"
             >
               <figure>
-                <figcaption>
+                <!-- <figcaption>
                   {{ str.g1Title }}
-                </figcaption>
+                </figcaption> -->
 
-                <LeoBarChart
-                  :data="barChartData"
-                  :options="{
-                    barHeight: 24,
-                    barGap: 18,
-                    labelWidth: 48,
-                  }"
+                <LeoPic
+                  v-if="!isBarChartTriggerIntersecting"
+                  src="img/newspaceera2025_pic1_1_chart"
+                  ext="svg"
+                  :use2x="false"
+                  :webp="false"
+                  :width="430"
+                  :height="120"
                 />
 
-                <figcaption>
+                <LeoPic
+                  v-else
+                  src="img/newspaceera2025_pic1_2_chart"
+                  ext="svg"
+                  :use2x="false"
+                  :webp="false"
+                  :width="430"
+                  :height="120"
+                />
+
+                <!-- <figcaption>
                   {{ str.g1Caption }}
-                </figcaption>
+                </figcaption> -->
               </figure>
             </div>
 
             <!-- scroll to toggle chart -->
             <LeoScrollTrigger
-              :dev-mode="true"
               scroll-height="50vh"
               @change="onBarChartIntersectChange"
             >
-              bar chart trigger
             </LeoScrollTrigger>
           </div>
 
