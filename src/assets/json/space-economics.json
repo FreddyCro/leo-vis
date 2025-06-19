@@ -1,0 +1,22 @@
+{
+  "labels": ["2023年", "2030年", "2035年"],
+  "datasets1": [
+    {
+      "label": "商業太空使用",
+      "data": [330, 525, 755],
+      "backgroundColor": "#00f7ef"
+    },
+    {
+      "label": "進行太空運用",
+      "data": [300, 635, 1035],
+      "backgroundColor": "#008b85"
+    }
+  ],
+  "datasets2": [
+    {
+      "label": "商業太空使用",
+      "data": [630, 1160, 1790],
+      "backgroundColor": "#00f7ef"
+    }
+  ]
+}

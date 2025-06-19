@@ -1,13 +1,172 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
+    <title><%= title %></title>
+
+    <!-- noindex setting -->
+    <meta name="robots" content="<%= robot %>" />
+    <meta name="googlebot" content="<%= robot %>" />
+
+    <!-- favicon & fonts -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://vip.udn.com/static/img/favicon.ico"
+    />
+
+    <!-- 專案使用的字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+TC:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- for Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= title %>" />
+    <meta property="og:url" content="<%= url %>" />
+    <meta property="og:image" content="<%= image %>" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="<%= description %>" />
+    <meta property="og:site_name" content="<%= title %>" />
+
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@udnNewMedia" />
+    <meta name="twitter:title" content="<%= title %>" />
+    <meta name="twitter:description" content="<%= description %>" />
+    <meta name="twitter:image:src" content="<%= url %><%= image %>" />
+
+    <!-- for Google -->
+    <link rel="canonical" href="<%= url %>" />
+    <meta name="application-name" content="聯合報-新媒體中心" />
+    <meta name="copyright" content="聯合報" />
+    <meta name="title" content="<%= title %>" />
+    <meta name="keywords" content="<%= keywords %>" />
+    <meta name="description" content="<%= description %>" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "author": {
+          "@type": "Organization",
+          "name": "范凌嘉、林秀姿、董谷音、潘如瑩、洪欣慈、林雨荷、許珮絨、林澔一、黃仲裕、薛羽涵、蘇韋豪、楊若榆、周融聖"
+        },
+        "url": "<%= url %>",
+        "headline": "<%= title %>",
+        "datePublished": "2025-06-30 T12:00:00+08:00",
+        "dateModified": "2025-06-30 T12:00:00+08:00",
+        "description": "<%= description %>",
+        "articleSection": "專題報導",
+        "publisher": {
+          "@type": "Organization",
+          "name": "聯合報",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://udn.com/upf/newmedia/image/nmd-logo.png"
+          },
+          "sameAs": [
+            "https://www.facebook.com/udnplus/",
+            "https://www.instagram.com/udngroup/",
+            "https://www.youtube.com/channel/UCEt9Vy6Kz4GKlePLgIJbtoA",
+            "https://twitter.com/udnNewMedia"
+          ]
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "<%= image %>"
+        },
+        "mainEntityOfPage": "<%= title %>"
+      }
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script defer>
+      // eslint-disable-next-line no-unused-expressions
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          // eslint-disable-next-line prefer-spread, prefer-rest-params
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/zh-TW/fbevents.js',
+      );
+      // eslint-disable-next-line no-undef
+      fbq('init', '321350072644130');
+      // eslint-disable-next-line no-undef
+      fbq('track', 'PageView');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        const f = d.getElementsByTagName(s)[0];
+        const j = d.createElement(s);
+        const dl = l != 'dataLayer' ? `&l=${l}` : '';
+        j.async = true;
+        j.src = `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-NLXXV9K');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- data layer init. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+    </script>
   </head>
+
   <body>
+    <!-- Facebook Pixel Code -->
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=321350072644130&ev=PageView&noscript=1"
+      />
+    </noscript>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NLXXV9K"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script
+      src="https://public.flourish.studio/resources/embed.js"
+      defer
+    ></script>
   </body>
 </html>

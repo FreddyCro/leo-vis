@@ -1,0 +1,140 @@
+@use './variables';
+@use './mixins';
+
+:root {
+  --hero-min-h: 720px;
+  --white: #fff;
+}
+
+/* layout setting */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  --z-index-dialog-open: 9999;
+  --z-index-snack-bar-open: 1100;
+  --z-index-dialog-close: -1000;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+html {
+  font-family: sans-serif, 'Noto Sans TC', sans-serif;
+  font-style: normal;
+  line-height: 150%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+figure {
+  margin: 0;
+}
+
+.event-trigger {
+  z-index: 1000;
+  width: 100%;
+  border: solid 1px red;
+
+  pointer-events: none;
+}
+
+.leo-article {
+  p {
+    font-size: 18px;
+    line-height: 36px;
+  }
+
+  p + p {
+    margin-top: 36px;
+  }
+}
+
+.leo-h1 {
+}
+
+.leo-h2 {
+}
+
+.leo-h3 {
+}
+
+.leo-h4 {
+}
+
+.leo-h5 {
+}
+
+.leo-caption {
+}
+
+.leo-section {
+  margin-top: 120px;
+  margin-bottom: 120px;
+
+  &--no-mt {
+    margin-top: 0;
+  }
+
+  &--no-mb {
+    margin-bottom: 0;
+  }
+
+  &--pt {
+    padding-top: 120px;
+  }
+
+  &--pb {
+    padding-bottom: 120px;
+  }
+}
+
+.leo-container {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 26px;
+  padding-right: 26px;
+
+  @include rwd-min(pad) {
+    max-width: calc(530px + 57px * 2);
+    padding-left: 57px;
+    padding-right: 57px;
+  }
+
+  @include rwd-min(pc) {
+    max-width: calc(620px + 110px * 2);
+    padding-left: 110px;
+    padding-right: 110px;
+  }
+}
+
+.leo-text-box {
+  padding: 40px 48px;
+  border: solid 1px #808080;
+
+  // blur 10px
+  @include mixins.blur(10px);
+}
+
+.leo-section-bg {
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+  }
+}
