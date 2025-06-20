@@ -7,6 +7,7 @@ import {
   ref,
   watch,
 } from 'vue';
+import { getScrollbarWidth } from '@/utils/get-scrollbar-width';
 
 const props = defineProps<{
   modelValue: boolean;
@@ -28,19 +29,6 @@ watch(
     if (val) emit('open');
   },
 );
-
-function getScrollbarWidth() {
-  const scrollDiv = document.createElement('div');
-  scrollDiv.style.visibility = 'hidden';
-  scrollDiv.style.overflow = 'scroll';
-  scrollDiv.style.width = '100px';
-  scrollDiv.style.position = 'absolute';
-  scrollDiv.style.top = '-9999px';
-  document.body.appendChild(scrollDiv);
-  const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-  document.body.removeChild(scrollDiv);
-  return scrollbarWidth;
-}
 
 function setBodyOverflowHidden() {
   const scrollbarWidth = getScrollbarWidth();
