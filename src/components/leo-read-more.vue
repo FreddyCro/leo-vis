@@ -33,7 +33,7 @@ defineProps<Props>();
           <!-- bg -->
           <LeoPic
             :src="item.bg"
-            :use-prefix="false"
+            :use-prefix="data.length === 1 ? true : false"
             :webp="false"
             :width="620"
             :height="450"
@@ -48,19 +48,19 @@ defineProps<Props>();
           <!-- arrow -->
           <div class="relative flex justify-end items-center">
             <svg
-              width="33"
-              height="29"
-              viewBox="0 0 33 29"
+              width="37"
+              height="30"
+              viewBox="0 0 37 30"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M17 1L30.6494 14.2172L17 27.4343"
+                d="M21 1L35.3721 14.9084L21 28.8168"
                 stroke="white"
                 stroke-width="2"
               />
               <path
-                d="M0.19542 13.3041H31.8046"
+                d="M0.753529 14.6901H35.2465"
                 stroke="white"
                 stroke-width="2"
               />

@@ -42,6 +42,15 @@ figure {
   margin: 0;
 }
 
+button,
+a {
+  cursor: pointer;
+}
+
+canvas {
+  pointer-events: none;
+}
+
 .event-trigger {
   z-index: 1000;
   width: 100%;

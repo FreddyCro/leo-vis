@@ -84,7 +84,7 @@ function handleChangeCategory(
           </div>
 
           <!-- article -->
-          <div class="relative opacity-[0.1] pointer-events-none">
+          <div class="relative w-[50%]">
             <!-- reset 3d moon site -->
             <LeoScrollTrigger
               :dev-mode="true"
@@ -98,10 +98,15 @@ function handleChangeCategory(
             >
               <div class="leo-section">
                 <p>{{ str.p3t1 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
+
+                <LeoPic
+                  src="img/newspaceera2025_pic10_1"
+                  :webp="false"
+                  :use-prefix="false"
+                  :width="430"
+                  :height="120"
                 />
+
                 <p>{{ str.p3Caption }}</p>
                 <p>{{ str.p3t2 }}</p>
               </div>
@@ -114,16 +119,26 @@ function handleChangeCategory(
             >
               <div class="leo-section">
                 <p>{{ str.p4t1 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
+
+                <LeoPic
+                  src="img/newspaceera2025_pic10_2"
+                  :webp="false"
+                  :use-prefix="false"
+                  :width="430"
+                  :height="120"
                 />
+
                 <p>{{ str.p4Caption1 }}</p>
                 <p>{{ str.p4t2 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
+
+                <LeoPic
+                  src="img/newspaceera2025_pic10_3"
+                  :webp="false"
+                  :use-prefix="false"
+                  :width="430"
+                  :height="120"
                 />
+
                 <p>{{ str.p4Caption2 }}</p>
                 <p>{{ str.p4t3 }}</p>
               </div>
@@ -135,15 +150,21 @@ function handleChangeCategory(
               @change="handleChangeCategory($event, 'cn')"
             >
               <div class="leo-section">
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
+                <LeoPic
+                  src="img/newspaceera2025_pic10_4"
+                  :webp="false"
+                  :use-prefix="false"
+                  :width="430"
+                  :height="120"
                 />
                 <p>{{ str.p5Caption1 }}</p>
                 <p>{{ str.p5t2 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
+                <LeoPic
+                  src="img/newspaceera2025_pic10_5"
+                  :webp="false"
+                  :use-prefix="false"
+                  :width="430"
+                  :height="120"
                 />
                 <p>{{ str.p5Caption2 }}</p>
               </div>
@@ -156,15 +177,21 @@ function handleChangeCategory(
             >
               <div class="leo-section">
                 <p>{{ str.p6t1 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
+                <LeoPic
+                  src="img/newspaceera2025_pic10_6"
+                  :webp="false"
+                  :use-prefix="false"
+                  :width="430"
+                  :height="120"
                 />
                 <p>{{ str.p6Caption1 }}</p>
                 <p>{{ str.p6t2 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
+                <LeoPic
+                  src="img/newspaceera2025_pic10_7"
+                  :webp="false"
+                  :use-prefix="false"
+                  :width="430"
+                  :height="120"
                 />
                 <p>{{ str.p6Caption2 }}</p>
               </div>
@@ -173,10 +200,50 @@ function handleChangeCategory(
         </div>
 
         <!-- moon svg content -->
-        <div
-          class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
-        >
-          moon svg content
+        <div class="w-[640px] h-[480px] flex items-center justify-center">
+          <LeoPic
+            src="img/newspaceera2025_pic11_1_chart"
+            ext="svg"
+            :use2x="false"
+            :webp="false"
+            :width="430"
+            :height="120"
+          />
+          <LeoPic
+            src="img/newspaceera2025_pic11_2_chart"
+            ext="svg"
+            :use2x="false"
+            :webp="false"
+            :width="430"
+            :height="120"
+          />
+
+          <h3>{{ str.moonTitle }}</h3>
+          <div>
+            <h4>{{ str.moon1t1 }}</h4>
+            <p>{{ str.moon1t2 }}</p>
+            <p>{{ str.moon1t3 }}</p>
+          </div>
+          <div>
+            <h4>{{ str.moon2t1 }}</h4>
+            <p>{{ str.moon2t2 }}</p>
+            <p>{{ str.moon2t3 }}</p>
+          </div>
+          <div>
+            <h4>{{ str.moon3t1 }}</h4>
+            <p>{{ str.moon3t2 }}</p>
+            <p>{{ str.moon3t3 }}</p>
+          </div>
+          <div>
+            <h4>{{ str.moon4t1 }}</h4>
+            <p>{{ str.moon4t2 }}</p>
+            <p>{{ str.moon4t3 }}</p>
+          </div>
+          <div>
+            <h4>{{ str.moon5t1 }}</h4>
+            <p>{{ str.moon5t2 }}</p>
+            <p>{{ str.moon5t3 }}</p>
+          </div>
         </div>
 
         <div class="leo-container">
@@ -191,12 +258,12 @@ function handleChangeCategory(
                 {
                   title: str.related1Title,
                   link: str.related1Link,
-                  bg: 'https://placehold.co/480x320/gray/white',
+                  bg: 'img/newspaceera2025_pic12_1',
                 },
                 {
                   title: str.related2Title,
                   link: str.related2Link,
-                  bg: 'https://placehold.co/480x320/gray/white',
+                  bg: 'img/newspaceera2025_pic12_2',
                 },
               ]"
             />

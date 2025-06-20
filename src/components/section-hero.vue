@@ -65,9 +65,9 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
               class="sticky top-0 min-h-[100vh] flex items-center justify-center"
             >
               <figure>
-                <!-- <figcaption>
+                <figcaption>
                   {{ str.g1Title }}
-                </figcaption> -->
+                </figcaption>
 
                 <LeoPic
                   v-if="!isBarChartTriggerIntersecting"
@@ -89,9 +89,9 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
                   :height="120"
                 />
 
-                <!-- <figcaption>
+                <figcaption>
                   {{ str.g1Caption }}
-                </figcaption> -->
+                </figcaption>
               </figure>
             </div>
 

@@ -68,7 +68,7 @@ import str from '@/locales/section4.json';
                 title: str.related1Title,
                 desc: str.related1Desc,
                 link: str.related1Link,
-                bg: 'https://placehold.co/480x320/gray/white',
+                bg: 'img/newspaceera2025_pic15',
               },
             ]"
           />

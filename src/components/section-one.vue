@@ -7,6 +7,7 @@ import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import Leo3dEarthSatellite from '@/components/leo-3d-earth-satellite.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import LeoPic from '@/components/leo-pic.vue';
+import LeoDialog from '@/components/leo-dialog.vue';
 import str from '@/locales/section1.json';
 import {
   SATELLITE_LABEL_ALL,
@@ -50,10 +51,19 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 ];
 
 const currentCategory = ref<string>(SATELLITE_LABEL_ALL);
+const showDialog = ref<boolean>(false);
 
 function handleChangeCategory(isIntersecting: boolean, category: string) {
   if (!isIntersecting) return;
   currentCategory.value = category;
+}
+
+function handleOpenDialog() {
+  showDialog.value = true;
+}
+
+function onDialogClose() {
+  showDialog.value = false;
 }
 </script>
 
@@ -176,10 +186,27 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
                 </li>
 
                 <!-- see full data -->
-                <li></li>
+                <li class="border border-white px-[20px] py-[30px] rounded-lg">
+                  <button class="w-full h-full" @click="handleOpenDialog">
+                    {{ str.feat6Title }}
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
+
+          <LeoDialog v-model="showDialog" @close="onDialogClose">
+            <div class="ls-one__dialog">
+              <LeoPic
+                src="img/supplier"
+                ext="jpg"
+                :use-prefix="false"
+                :webp="false"
+                :width="430"
+                :height="120"
+              />
+            </div>
+          </LeoDialog>
 
           <div class="leo-section">
             <LeoReadMore
@@ -211,5 +238,11 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 
 <style lang="scss">
 .ls-one {
+  &__dialog {
+    img {
+      width: 760px;
+      max-width: auto;
+    }
+  }
 }
 </style>

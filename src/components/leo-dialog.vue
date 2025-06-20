@@ -1,5 +1,12 @@
 <script lang="ts" setup>
-import { defineEmits, ref, watch } from 'vue';
+import {
+  defineEmits,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
 
 const props = defineProps<{
   modelValue: boolean;
@@ -12,6 +19,7 @@ const emit = defineEmits<{
 }>();
 
 const visible = ref(props.modelValue);
+const dialogTransition = ref(false);
 
 watch(
   () => props.modelValue,
@@ -21,22 +29,88 @@ watch(
   },
 );
 
+function getScrollbarWidth() {
+  const scrollDiv = document.createElement('div');
+  scrollDiv.style.visibility = 'hidden';
+  scrollDiv.style.overflow = 'scroll';
+  scrollDiv.style.width = '100px';
+  scrollDiv.style.position = 'absolute';
+  scrollDiv.style.top = '-9999px';
+  document.body.appendChild(scrollDiv);
+  const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+  document.body.removeChild(scrollDiv);
+  return scrollbarWidth;
+}
+
+function setBodyOverflowHidden() {
+  const scrollbarWidth = getScrollbarWidth();
+  document.body.style.overflow = 'hidden';
+  document.body.style.paddingRight = `${scrollbarWidth}px`;
+}
+
+function resetBodyOverflow() {
+  document.body.style.overflow = '';
+  document.body.style.paddingRight = '';
+}
+
+watch(
+  () => visible.value,
+  (val) => {
+    if (val) {
+      setBodyOverflowHidden();
+    } else {
+      resetBodyOverflow();
+    }
+  },
+);
+
+onMounted(() => {
+  if (visible.value) setBodyOverflowHidden();
+});
+
+onBeforeUnmount(() => {
+  resetBodyOverflow();
+});
+
+watch(
+  () => props.modelValue,
+  async (val) => {
+    if (val) {
+      visible.value = true;
+      await nextTick();
+      dialogTransition.value = true;
+      emit('open');
+    } else {
+      dialogTransition.value = false;
+      setTimeout(() => {
+        visible.value = false;
+        emit('close');
+      }, 250); // match fade duration
+    }
+  },
+  { immediate: true },
+);
+
 function handleClose() {
-  visible.value = false;
   emit('update:modelValue', false);
-  emit('close');
 }
 </script>
 
 <template>
-  <div v-if="visible" class="leo-dialog-backdrop" @click.self="handleClose">
-    <div class="leo-dialog">
-      <button class="leo-dialog__close" @click="handleClose">×</button>
-      <div class="leo-dialog__content">
-        <slot />
+  <transition
+    name="fade"
+    @before-enter="(el) => ((el as HTMLElement).style.display = 'flex')"
+    @leave="(el) => ((el as HTMLElement).style.display = 'none')"
+  >
+    <div v-if="visible" class="leo-dialog-backdrop" @click.self="handleClose">
+      <div class="leo-dialog">
+        <button class="leo-dialog__close" @click="handleClose">×</button>
+        <div class="leo-dialog__content">
+          <slot />
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style lang="scss">
@@ -52,16 +126,17 @@ function handleClose() {
 }
 
 .leo-dialog {
-  background: #fff;
-  border-radius: 8px;
+  position: relative;
   min-width: 320px;
   max-width: 90vw;
   min-height: 120px;
   max-height: 90vh;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
-  position: relative;
   display: flex;
   flex-direction: column;
+  padding-top: 32px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
 }
 
 .leo-dialog__close {
@@ -71,12 +146,23 @@ function handleClose() {
   background: none;
   border: none;
   font-size: 1.5rem;
+  color: #000;
   cursor: pointer;
 }
 
 .leo-dialog__content {
   padding: 32px 24px 24px 24px;
-  overflow: visible;
+  overflow: auto;
+  overflow-x: auto;
   flex: 1 1 auto;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
