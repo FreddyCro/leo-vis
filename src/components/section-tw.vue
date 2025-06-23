@@ -38,62 +38,171 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 </script>
 
 <template>
-  <div>
+  <div class="ls-tw leo-article text-[#404040]">
     <div class="leo-container">
-      <h3>{{ str.title1 }}</h3>
-      <p>{{ str.p1t1 }}</p>
-      <h3>{{ str.title2 }}</h3>
+      <div class="leo-section">
+        <h2 class="leo-h3 text-center font-medium">{{ str.title1 }}</h2>
+        <div class="mt-10">
+          <p>{{ str.p1t1 }}</p>
+        </div>
+      </div>
     </div>
 
     <!-- feature grid -->
-    <div class="leo-section">
-      <div class="ls-one-feat-grid-wrap">
-        <ul class="grid gap-4 sm:grid-cols-2">
-          <li
-            v-for="item in FEAT_GRID_DATA"
-            :key="item.title"
-            class="border border-white px-[20px] py-[30px] rounded-lg"
-          >
-            <div class="ls-one-feat-grid-item">
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.amount }}</p>
-              <p>{{ str.featBillion }}</p>
-              <p>{{ item.desc }}</p>
-            </div>
-          </li>
-        </ul>
+    <div class="leo-container-lg">
+      <div class="leo-section">
+        <h3 class="leo-h3 text-center font-medium">{{ str.title2 }}</h3>
+        <div class="my-5">
+          <h4 class="text-xl text-center font-medium">
+            {{ str.title2Subtitle }}
+          </h4>
+        </div>
+        <div class="ls-tw-feat-grid-wrap">
+          <ul class="grid gap-4 sm:grid-cols-2 md:grid-cols-6">
+            <li
+              v-for="(item, index) in FEAT_GRID_DATA"
+              :key="item.title"
+              class="ls-tw__feat-grid-item"
+              :class="{
+                'sm:col-span-2': index === FEAT_GRID_DATA.length - 1,
+                'md:col-span-2': [0, 1, 2].includes(index),
+                'md:col-span-3': [3, 4].includes(index),
+              }"
+            >
+              <div class="ls-tw__feat-grid-item-content px-[20px] py-[30px]">
+                <h4 class="leo-p font-bold">
+                  {{ item.title }}
+                </h4>
+                <div class="mb-5">
+                  <p class="text-[#00F4DC]">
+                    <span class="text-5xl font-bold">{{ item.amount }}</span>
+                    <span class="font-medium">{{ str.featBillion }}</span>
+                  </p>
+                </div>
+                <p>{{ item.desc }}</p>
+              </div>
+            </li>
+          </ul>
 
-        <p>{{ str.featTotal }}</p>
-        <p>{{ str.featTotalAmount }}</p>
-        <p>{{ str.featBillion }}</p>
+          <div class="flex justify-end items-center mt-3">
+            <svg
+              width="92"
+              height="23"
+              viewBox="0 0 92 23"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11H90.5"
+                stroke="url(#paint0_linear_441_1476)"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M80.4465 1L90.8931 11.4466L80.4465 21.8932"
+                stroke="#7B57D9"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_441_1476"
+                  x1="1"
+                  y1="11.5"
+                  x2="90.5"
+                  y2="11.5"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#00F4DC" />
+                  <stop offset="1" stop-color="#8D41D9" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <p class="ml-3 text-[#8D41D9]">
+              <span>
+                {{ str.featTotal }}
+              </span>
+              <span class="text-5xl font-bold">
+                {{ str.featTotalAmount }}
+              </span>
+              <span>
+                {{ str.featBillion }}
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="leo-container">
-      <p>{{ str.p2t1 }}</p>
-      <p>{{ str.p2t2 }}</p>
-      <p>{{ str.p2t3 }}</p>
-      <p>{{ str.p2t4 }}</p>
-      <p>{{ str.p2t5 }}</p>
-      <h3>{{ str.title3 }}</h3>
-      <p>{{ str.p3t1 }}</p>
+      <div class="leo-container">
+        <p>{{ str.p2t1 }}</p>
+        <p>{{ str.p2t2 }}</p>
+        <p>{{ str.p2t3 }}</p>
+        <p>{{ str.p2t4 }}</p>
+        <p>{{ str.p2t5 }}</p>
 
-      <div class="leo-section text-white">
-        <LeoReadMore
-          :title="str.relatedTitle"
-          :data="[
-            {
-              title: str.related1Title,
-              link: str.related1Link,
-              bg: 'img/newspaceera2025_pic16',
-            },
-          ]"
-        />
+        <div class="leo-section">
+          <h3 class="leo-h3">{{ str.title3 }}</h3>
+          <div class="mt-10">
+            <p>{{ str.p3t1 }}</p>
+          </div>
+        </div>
+
+        <div class="leo-section text-white">
+          <LeoReadMore
+            :title="str.relatedTitle"
+            :data="[
+              {
+                title: str.related1Title,
+                desc: str.related1Desc,
+                link: str.related1Link,
+                bg: 'img/newspaceera2025_pic16',
+              },
+            ]"
+          />
+        </div>
+        <div class="leo-section">
+          <p>{{ str.p3t2 }}</p>
+        </div>
       </div>
-
-      <p>{{ str.p3t2 }}</p>
     </div>
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.ls-tw {
+  position: relative;
+
+  &__feat-grid-item {
+    position: relative;
+    padding: 2px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(225deg, #8d41d9 0%, #00f4dc 100%);
+      transition: background-color 0.3s ease;
+    }
+  }
+
+  &__feat-grid-item-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+
+    &--gray {
+      transition: 0.25s ease-in-out;
+
+      &:hover {
+        background-color: #1b1b1b;
+        box-shadow: 0px 0px 12px 0px rgba(0, 244, 220, 1);
+      }
+    }
+  }
+}
+</style>

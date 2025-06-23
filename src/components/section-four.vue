@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
@@ -8,7 +9,7 @@ import str from '@/locales/section4.json';
 </script>
 
 <template>
-  <div>
+  <div class="ls-four leo-article">
     <LeoSectionLayout>
       <template #space>
         <div class="relative w-full h-[100vh]">
@@ -36,46 +37,104 @@ import str from '@/locales/section4.json';
         </LeoSectionIntro>
       </template>
       <template #article>
-        <div class="leo-container">
-          <p>{{ str.p1t1 }}</p>
-          <p>{{ str.p1t2 }}</p>
-          <p>{{ str.p1t3 }}</p>
-
-          <!-- trash float -->
-          <div
-            class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
-          >
-            trash float
+        <div class="leo-section leo-section--no-mt leo-section--pt">
+          <div class="leo-container">
+            <p>{{ str.p1t1 }}</p>
+            <p>{{ str.p1t2 }}</p>
+            <p>{{ str.p1t3 }}</p>
           </div>
-
-          <p>{{ str.p2t1 }}</p>
-          <p>{{ str.p2t2 }}</p>
-          <p>{{ str.p2t3 }}</p>
-
-          <figure>
-            <div
-              class="flourish-embed flourish-chart"
-              data-src="visualisation/23290332"
-            />
-          </figure>
-
-          <p>{{ str.p3t1 }}</p>
-          <p>{{ str.p3t2 }}</p>
-
-          <LeoReadMore
-            :data="[
-              {
-                title: str.related1Title,
-                desc: str.related1Desc,
-                link: str.related1Link,
-                bg: 'img/newspaceera2025_pic15',
-              },
-            ]"
-          />
         </div>
+
+        <!-- trash float -->
+        <div class="relative">
+          <LeoPic
+            src="img/newspaceera2025_pic14_bg"
+            :webp="false"
+            :use2x="false"
+            :width="430"
+            :height="120"
+          />
+
+          <div
+            class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
+          >
+            <!-- <LeoScrollTrigger @change="handleChangeCategory($event, 'all')" /> -->
+
+            <div>
+              <p>
+                <span>{{ str.p1t4 }}</span>
+                <span>{{ str.p1tBillion }}</span>
+              </p>
+              <p>{{ str.p1t5 }}</p>
+              <p class="leo-caption">{{ str.p1tCaption1 }}</p>
+              <p class="leo-caption">{{ str.p1tCaption2 }}</p>
+            </div>
+
+            <div>
+              <p>
+                <span>{{ str.p1t6 }}</span>
+                <span>{{ str.p1tBillion }}</span>
+              </p>
+              <p>{{ str.p1t7 }}</p>
+              <p class="leo-caption">{{ str.p1tCaption3 }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="leo-section leo-section--pb relative z-40">
+          <div class="leo-container">
+            <p>{{ str.p2t1 }}</p>
+            <p>{{ str.p2t2 }}</p>
+            <p>{{ str.p2t3 }}</p>
+
+            <figure>
+              <div
+                class="flourish-embed flourish-chart"
+                data-src="visualisation/23290332"
+              />
+            </figure>
+
+            <p>{{ str.p3t1 }}</p>
+            <p>{{ str.p3t2 }}</p>
+
+            <LeoReadMore
+              :data="[
+                {
+                  title: str.related1Title,
+                  desc: str.related1Desc,
+                  link: str.related1Link,
+                  bg: 'img/newspaceera2025_pic15',
+                },
+              ]"
+            />
+          </div>
+        </div>
+
+        <div class="gradient-bg" role="presentation"></div>
       </template>
     </LeoSectionLayout>
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.ls-four {
+  position: relative;
+}
+
+.gradient-bg {
+  position: absolute;
+  z-index: 30;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 700px;
+  transform: translateY(10%);
+  background: linear-gradient(
+    180deg,
+    #000000 19.86%,
+    #6d4aed 61.43%,
+    rgba(255, 255, 255, 1) 85.43%
+  );
+  pointer-events: none;
+}
+</style>

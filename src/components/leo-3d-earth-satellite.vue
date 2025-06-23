@@ -103,7 +103,6 @@ function buildFilterCache() {
     SATELLITE_LABEL_APOGEE,
     SATELLITE_LABEL_STARLINK,
     SATELLITE_LABEL_ONEWEB_KUIPER,
-    // 其他分類如有需要可加
   ];
   allLabels.forEach((label) => {
     filterCache[label] = state.allChildren.filter((child: Station) => {

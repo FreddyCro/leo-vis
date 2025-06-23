@@ -34,11 +34,13 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
           }"
         >
           <LeoSectionIntro>
-            <h1 class="max-w-[448px]">
-              <span class="block text-5xl md:text-7xl mb-5">{{
+            <h1 class="ls-hero__title-shadow max-w-[362px] sm:max-w-[448px]">
+              <span class="block text-5xl md:text-7xl mb-5 font-medium">{{
                 str.title
               }}</span>
-              <span class="block text-3xl">{{ str.subTitle }}</span>
+              <span class="block text-[28px] leading-10 font-light">{{
+                str.subTitle
+              }}</span>
             </h1>
           </LeoSectionIntro>
         </div>
@@ -50,7 +52,7 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
             scroll-height="75vh"
             @change="onZoomOutIntersectChange"
           >
-            <div class="leo-container">
+            <div class="leo-container-pc">
               <div class="leo-text-box">
                 <p>{{ str.p1t1 }}</p>
                 <p>{{ str.p1t2 }}</p>
@@ -62,21 +64,18 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
         <div class="leo-container">
           <div class="min-h-[200vh]">
             <div
-              class="sticky top-0 min-h-[100vh] flex items-center justify-center"
+              class="sticky top-0 w-full min-h-[100vh] flex flex-col justify-center"
             >
-              <figure>
-                <figcaption>
-                  {{ str.g1Title }}
-                </figcaption>
-
+              <h3 class="leo-h3 text-left">
+                {{ str.g1Title }}
+              </h3>
+              <figure class="ls-hero__chart-1 w-full">
                 <LeoPic
                   v-if="!isBarChartTriggerIntersecting"
                   src="img/newspaceera2025_pic1_1_chart"
                   ext="svg"
                   :use2x="false"
                   :webp="false"
-                  :width="430"
-                  :height="120"
                 />
 
                 <LeoPic
@@ -85,11 +84,9 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
                   ext="svg"
                   :use2x="false"
                   :webp="false"
-                  :width="430"
-                  :height="120"
                 />
 
-                <figcaption>
+                <figcaption class="leo-caption mt-2">
                   {{ str.g1Caption }}
                 </figcaption>
               </figure>
@@ -104,8 +101,8 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
           </div>
 
           <div class="min-h-[250vh]">
-            <div class="sticky top-0 min-h-[50vh]">
-              <figure>
+            <div class="sticky top-0 w-full min-h-[100vh] flex items-center">
+              <figure class="w-full">
                 <div
                   class="flourish-embed flourish-chart"
                   data-src="visualisation/23264843"
@@ -124,7 +121,9 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
           </div>
-          <div class="leo-section">
+        </div>
+        <div class="leo-section">
+          <div class="leo-container-lg">
             <LeoOutline />
           </div>
         </div>
@@ -135,6 +134,34 @@ function onBarChartIntersectChange(isIntersecting: boolean) {
 
 <style lang="scss">
 .ls-hero {
+  &__title-shadow {
+    text-shadow: 0 0 16px #fff;
+
+    /* text-shadow:
+      0 0 8px #fff,
+      0 0 16px #fff,
+      0 0 32px #fff,
+      0 0 64px #fff; */
+  }
+
+  &__chart-1 {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      width: auto;
+      height: 196px;
+
+      @include rwd-min(pc) {
+        height: 238px;
+      }
+
+      @include rwd-min(pc) {
+        height: 369px;
+      }
+    }
+  }
+
   // override the default height
   .ls-layout {
     --ls-layout-header-h: 200vh;

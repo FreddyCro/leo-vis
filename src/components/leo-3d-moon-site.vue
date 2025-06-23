@@ -226,8 +226,8 @@ class MoonController {
 
       if (props.currentCategory === 'all') {
         // rotate globe
-        this.globe.rotation.y += 0.001;
-        this.globe.rotation.x += 0.00025;
+        // this.globe.rotation.y += 0.001;
+        // this.globe.rotation.x += 0.00025;
       } else {
         // Keep the globe static when focusing on a specific category
         this.globe.rotation.set(0, 0, 0);

@@ -110,7 +110,9 @@ import str from '@/locales/section2.json';
         <div class="leo-container">
           <p>{{ str.p5t1 }}</p>
           <p>{{ str.p5t2 }}</p>
+        </div>
 
+        <div class="leo-container-lg">
           <div class="leo-section">
             <LeoReadMore
               :title="str.relatedTitle"

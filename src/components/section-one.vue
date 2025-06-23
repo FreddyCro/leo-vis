@@ -116,7 +116,7 @@ function onDialogClose() {
               scroll-height="100vh"
               @change="handleChangeCategory($event, SATELLITE_LABEL_ALL)"
             >
-              <div class="leo-container">
+              <div class="leo-container-pc">
                 <div class="leo-text-box">
                   <p>{{ str.p1t1 }}</p>
                 </div>
@@ -128,7 +128,7 @@ function onDialogClose() {
               scroll-height="100vh"
               @change="handleChangeCategory($event, SATELLITE_LABEL_APOGEE)"
             >
-              <div class="leo-container">
+              <div class="leo-container-pc">
                 <div class="leo-text-box">
                   <p>{{ str.p2t1 }}</p>
                   <p>{{ str.p2t2 }}</p>
@@ -141,7 +141,7 @@ function onDialogClose() {
               scroll-height="100vh"
               @change="handleChangeCategory($event, SATELLITE_LABEL_STARLINK)"
             >
-              <div class="leo-container">
+              <div class="leo-container-pc">
                 <div class="leo-text-box">
                   <p>{{ str.p3t1 }}</p>
                 </div>
@@ -164,34 +164,78 @@ function onDialogClose() {
           </div>
         </div>
 
-        <div class="leo-container">
-          <div class="leo-section">
+        <div class="leo-section">
+          <div class="leo-container">
             <p>{{ str.p5t1 }}</p>
             <p role="presentation"></p>
+          </div>
+        </div>
 
+        <div class="leo-section">
+          <div class="leo-container-lg">
             <!-- feature grid -->
             <div class="ls-one-feat-grid-wrap">
               <ul class="grid gap-4 sm:grid-cols-2">
                 <li
                   v-for="item in FEAT_GRID_DATA"
                   :key="item.title"
-                  class="border border-white px-[20px] py-[30px] rounded-lg"
+                  class="ls-one__feat-grid-item"
                 >
-                  <div class="ls-one-feat-grid-item">
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ str.featFactory }}</p>
-                    <p>{{ item.amount }}</p>
+                  <div
+                    class="ls-one__feat-grid-item-content px-[20px] py-[30px]"
+                  >
+                    <h4 class="leo-h4 text-center font-medium">
+                      {{ item.title }}
+                    </h4>
+                    <div class="mt-4">
+                      <p class="text-[#00F4DC] font-bold">
+                        <span>
+                          {{ str.featFactory }}
+                        </span>
+                        <span class="text-5xl">
+                          {{ item.amount }}
+                        </span>
+                      </p>
+                    </div>
                     <p>{{ item.desc }}</p>
                   </div>
                 </li>
 
                 <!-- see full data -->
-                <li class="border border-white px-[20px] py-[30px] rounded-lg">
-                  <button class="w-full h-full" @click="handleOpenDialog">
-                    {{ str.feat6Title }}
+                <li class="ls-one__feat-grid-item">
+                  <button
+                    class="ls-one__feat-grid-item-content ls-one__feat-grid-item-content--gray flex flex-col items-center justify-center leo-h4 font-medium"
+                    @click="handleOpenDialog"
+                  >
+                    <span class="mb-2 md:mb-3">
+                      {{ str.feat6Title }}
+                    </span>
+                    <svg
+                      width="37"
+                      height="34"
+                      viewBox="0 0 37 34"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20.2463 3L34.6184 16.9084L20.2463 30.8168"
+                        stroke="white"
+                        stroke-width="3"
+                      />
+                      <path
+                        d="M0.000111328 16.6901H34.4931"
+                        stroke="white"
+                        stroke-width="3"
+                      />
+                    </svg>
                   </button>
                 </li>
               </ul>
+            </div>
+
+            <!-- caption -->
+            <div class="leo-caption mt-[10px]">
+              <p>{{ str.featCaption }}</p>
             </div>
           </div>
 
@@ -207,8 +251,10 @@ function onDialogClose() {
               />
             </div>
           </LeoDialog>
+        </div>
 
-          <div class="leo-section">
+        <div class="leo-section">
+          <div class="leo-container-lg">
             <LeoReadMore
               :title="str.relatedTitle"
               :data="[
@@ -242,6 +288,37 @@ function onDialogClose() {
     img {
       width: 760px;
       max-width: auto;
+    }
+  }
+
+  &__feat-grid-item {
+    position: relative;
+    padding: 2px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(225deg, #8d41d9 0%, #00f4dc 100%);
+      transition: background-color 0.3s ease;
+    }
+  }
+
+  &__feat-grid-item-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    border-radius: 20px;
+
+    &--gray {
+      transition: 0.25s ease-in-out;
+
+      &:hover {
+        background-color: #1b1b1b;
+        box-shadow: 0px 0px 12px 0px rgba(0, 244, 220, 1);
+      }
     }
   }
 }

@@ -88,11 +88,11 @@ const data = [
   <div class="l-outline">
     <h2 class="text-3xl font-bold mb-4">{{ strOutline.title }}</h2>
 
-    <div v-for="(chapter, index) in data" :key="index" class="mb-8">
+    <div v-for="(chapter, index) in data" :key="index" class="mb-7 sm:mb-9">
       <!-- chapter title -->
-      <div class="inline-flex gap-2">
+      <div class="inline-flex items-center gap-2 mb-3 md:mb-6">
         <!-- number -->
-        <div>0{{ index + 1 }}</div>
+        <div class="text-7xl text-[#00F4DC]">0{{ index + 1 }}</div>
 
         <!-- title -->
         <div>
@@ -102,11 +102,13 @@ const data = [
       </div>
 
       <!-- chapter articles  -->
-      <ul class="flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-4">
+      <ul class="flex flex-col md:grid md:grid-cols-2 gap-2 sm:gap-4">
         <li v-for="article in chapter.articles" :key="article.text">
-          <a :href="article.link" class="grid grid-cols-2 gap-3">
+          <a :href="article.link" class="flex gap-3">
             <!-- img -->
-            <div class="rounded-lg overflow-hidden">
+            <div
+              class="relative min-h-[74px] sm:min-h-[88px] aspect-[120/74] shrink-0 rounded-lg border border-[#808080] overflow-hidden"
+            >
               <LeoPic
                 :src="article.bg"
                 :use-prefix="false"
@@ -117,9 +119,9 @@ const data = [
             </div>
 
             <!-- text -->
-            <div class="flex items-center">
+            <p class="l-outline__card-text w-full flex items-center">
               {{ article.text }}
-            </div>
+            </p>
           </a>
         </li>
       </ul>
@@ -128,6 +130,18 @@ const data = [
 </template>
 
 <style lang="scss">
-/* .l-outline {
-} */
+.l-outline {
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__card-text {
+    line-height: 1.5 !important;
+  }
+}
 </style>
