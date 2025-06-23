@@ -13,6 +13,7 @@ type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
 
 const currentCategory = ref<MoonSiteCategory>('all');
 const isMoonSvgEnter = ref(false);
+const isSatelliteEnter = ref(false);
 
 function handleChangeCategory(
   isIntersecting: boolean,
@@ -24,6 +25,10 @@ function handleChangeCategory(
 
 function handleSvgContent(isIntersecting: boolean) {
   isMoonSvgEnter.value = isIntersecting;
+}
+
+function handleSatelliteContent(isIntersecting: boolean) {
+  isSatelliteEnter.value = isIntersecting;
 }
 </script>
 
@@ -71,9 +76,14 @@ function handleSvgContent(isIntersecting: boolean) {
             <div>{{ str.p1ChartText6 }}</div>
             <p class="leo-caption">{{ str.p1ChartCaption }}</p>
           </div>
+        </div>
 
-          <!-- satellite fall down -->
-          <div class="leo-section">
+        <!-- satellite fall down -->
+        <div class="leo-section">
+          <LeoScrollTrigger
+            scroll-height="150vh"
+            @change="handleSatelliteContent"
+          >
             <div class="ls-three__fall-down relative">
               <LeoPic
                 class="ls-three__fall-down-bg"
@@ -95,13 +105,19 @@ function handleSvgContent(isIntersecting: boolean) {
                   :height="120"
                 />
 
-                <div class="ls-three__fall-down-satellite-text">
+                <div
+                  class="ls-three__fall-down-satellite-text"
+                  :class="{
+                    'ls-three__fall-down-satellite-text--fade-in':
+                      isSatelliteEnter,
+                  }"
+                >
                   {{ str.falldownTitle }}
                   {{ str.falldownDesc }}
                 </div>
               </div>
             </div>
-          </div>
+          </LeoScrollTrigger>
         </div>
 
         <div class="leo-section">
@@ -110,8 +126,8 @@ function handleSvgContent(isIntersecting: boolean) {
           </div>
         </div>
 
+        <!-- 3d moon site -->
         <div class="grid gird-cols-2 gap-4">
-          <!-- 3d moon site -->
           <div class="sticky top-0 min-h-[100vh]">
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
@@ -352,6 +368,8 @@ function handleSvgContent(isIntersecting: boolean) {
   }
 
   &__fall-down-satellite {
+    &--fade-in {
+    }
   }
 
   &__fall-down-text {

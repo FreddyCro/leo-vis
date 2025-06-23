@@ -240,16 +240,21 @@ function onDialogClose() {
           </div>
 
           <LeoDialog v-model="showDialog" @close="onDialogClose">
-            <div class="ls-one__dialog">
-              <LeoPic
-                src="img/supplier"
-                ext="jpg"
-                :use-prefix="false"
-                :webp="false"
-                :width="430"
-                :height="120"
-              />
-            </div>
+            <template #title>
+              <h4 class="leo-h4">{{ str.dialogTitle }}</h4>
+            </template>
+            <template #content>
+              <div class="ls-one__dialog">
+                <LeoPic
+                  src="img/supplier"
+                  ext="jpg"
+                  :use-prefix="false"
+                  :webp="false"
+                  :width="430"
+                  :height="120"
+                />
+              </div>
+            </template>
           </LeoDialog>
         </div>
 

@@ -11,7 +11,7 @@ defineProps<Props>();
 const svgEl = ref<SVGSVGElement | null>(null);
 const elementEls = ref<HTMLDivElement[]>([]);
 const circleEl = ref<SVGCircleElement | null>(null);
-const DURATION = 40000;
+const DURATION = 50000;
 
 onMounted(() => {
   const animation = new AnimationController({

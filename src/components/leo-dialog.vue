@@ -96,8 +96,11 @@ function handleClose() {
             <path d="M12 12L21.5 21.5" stroke="#404040" />
           </svg>
         </button>
+        <div class="leo-dialog__title">
+          <slot name="title" />
+        </div>
         <div class="leo-dialog__content">
-          <slot />
+          <slot name="content" />
         </div>
       </div>
     </div>
@@ -124,29 +127,33 @@ function handleClose() {
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  padding-top: 32px;
+  padding: 32px 24px 24px 24px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-}
 
-.leo-dialog__close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #000;
-  cursor: pointer;
-}
+  &__title {
+    color: #000;
+    margin-bottom: 16px;
+  }
 
-.leo-dialog__content {
-  padding: 32px 24px 24px 24px;
-  overflow: auto;
-  overflow-x: auto;
-  flex: 1 1 auto;
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+  }
+
+  &__content {
+    overflow: auto;
+    overflow-x: auto;
+    flex: 1 1 auto;
+  }
 }
 
 .fade-enter-active,
