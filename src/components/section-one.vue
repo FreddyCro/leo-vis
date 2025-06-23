@@ -77,7 +77,7 @@ function onDialogClose() {
             src="img/newspaceera2025_pic3_1_bg"
             :webp="false"
             :use2x="false"
-            :width="620"
+            :width="450"
             :height="450"
           />
           <div class="relative z-10">
@@ -88,7 +88,7 @@ function onDialogClose() {
                   ext="png"
                   :webp="false"
                   :use2x="false"
-                  :width="620"
+                  :width="450"
                   :height="450"
                 />
               </template>

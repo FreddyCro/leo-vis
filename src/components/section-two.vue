@@ -16,7 +16,7 @@ import str from '@/locales/section2.json';
           src="img/newspaceera2025_pic5_1_bg"
           :webp="false"
           :use2x="false"
-          :width="620"
+          :width="450"
           :height="450"
         />
         <div class="relative z-10">
@@ -27,7 +27,7 @@ import str from '@/locales/section2.json';
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="620"
+              :width="450"
               :height="450"
             />
           </div>
@@ -38,7 +38,7 @@ import str from '@/locales/section2.json';
                 ext="png"
                 :webp="false"
                 :use2x="false"
-                :width="620"
+                :width="450"
                 :height="450"
               />
             </template>

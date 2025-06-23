@@ -113,7 +113,7 @@ const data = [
                 :src="article.bg"
                 :use-prefix="false"
                 :webp="false"
-                :width="620"
+                :width="450"
                 :height="450"
               />
             </div>

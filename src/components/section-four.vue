@@ -25,7 +25,7 @@ function handleTranshFloatEnter(enter: boolean) {
             src="img/newspaceera2025_pic13_1_bg"
             :webp="false"
             :use2x="false"
-            :width="620"
+            :width="450"
             :height="450"
           />
           <div class="relative z-10">

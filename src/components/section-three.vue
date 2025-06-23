@@ -33,7 +33,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 </script>
 
 <template>
-  <div class="ls-three leo-article">
+  <div class="ls-three leo-article max-w-screen">
     <LeoSectionLayout>
       <template #space>
         <div class="relative w-full h-[100vh]">
@@ -42,7 +42,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
             src="img/newspaceera2025_pic8_1_bg"
             :webp="false"
             :use2x="false"
-            :width="620"
+            :width="450"
             :height="450"
           />
           <div class="relative z-10">
