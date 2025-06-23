@@ -285,6 +285,8 @@ function onDialogClose() {
 <style lang="scss">
 .ls-one {
   &__dialog {
+    width: max-content;
+
     img {
       width: 760px;
       max-width: auto;

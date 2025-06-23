@@ -12,6 +12,7 @@ import str from '@/locales/section3.json';
 type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
 
 const currentCategory = ref<MoonSiteCategory>('all');
+const isMoonSvgEnter = ref(false);
 
 function handleChangeCategory(
   isIntersecting: boolean,
@@ -19,6 +20,10 @@ function handleChangeCategory(
 ) {
   if (!isIntersecting) return;
   currentCategory.value = category;
+}
+
+function handleSvgContent(isIntersecting: boolean) {
+  isMoonSvgEnter.value = isIntersecting;
 }
 </script>
 
@@ -65,13 +70,35 @@ function handleChangeCategory(
             <div>{{ str.p1ChartText5 }}</div>
             <div>{{ str.p1ChartText6 }}</div>
             <p class="leo-caption">{{ str.p1ChartCaption }}</p>
+          </div>
 
-            <!-- satellite fall down -->
-            <div class="leo-section">
-              <div
-                class="h-[480px] flex items-center justify-center bg-red-200"
-              >
-                satellite fall down
+          <!-- satellite fall down -->
+          <div class="leo-section">
+            <div class="ls-three__fall-down relative">
+              <LeoPic
+                class="ls-three__fall-down-bg"
+                src="img/newspaceera2025_pic9_1_bg"
+                :use2x="false"
+                :webp="false"
+                :width="430"
+                :height="120"
+              />
+
+              <div class="ls-three__fall-down-satellite-wrap">
+                <LeoPic
+                  class="ls-three__fall-down-satellite"
+                  src="img/newspaceera2025_pic9_2"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="430"
+                  :height="120"
+                />
+
+                <div class="ls-three__fall-down-satellite-text">
+                  {{ str.falldownTitle }}
+                  {{ str.falldownDesc }}
+                </div>
               </div>
             </div>
           </div>
@@ -215,48 +242,57 @@ function handleChangeCategory(
 
         <!-- moon svg content -->
         <div class="flex items-center justify-center">
-          <LeoPic
-            src="img/newspaceera2025_pic11_1_chart"
-            ext="svg"
-            :use2x="false"
-            :webp="false"
-            :width="430"
-            :height="120"
-          />
-          <LeoPic
-            src="img/newspaceera2025_pic11_2_chart"
-            ext="svg"
-            :use2x="false"
-            :webp="false"
-            :width="430"
-            :height="120"
-          />
+          <LeoScrollTrigger @change="handleSvgContent" />
 
           <h3>{{ str.moonTitle }}</h3>
-          <div>
-            <h4>{{ str.moon1t1 }}</h4>
-            <p>{{ str.moon1t2 }}</p>
-            <p>{{ str.moon1t3 }}</p>
-          </div>
-          <div>
-            <h4>{{ str.moon2t1 }}</h4>
-            <p>{{ str.moon2t2 }}</p>
-            <p>{{ str.moon2t3 }}</p>
-          </div>
-          <div>
-            <h4>{{ str.moon3t1 }}</h4>
-            <p>{{ str.moon3t2 }}</p>
-            <p>{{ str.moon3t3 }}</p>
-          </div>
-          <div>
-            <h4>{{ str.moon4t1 }}</h4>
-            <p>{{ str.moon4t2 }}</p>
-            <p>{{ str.moon4t3 }}</p>
-          </div>
-          <div>
-            <h4>{{ str.moon5t1 }}</h4>
-            <p>{{ str.moon5t2 }}</p>
-            <p>{{ str.moon5t3 }}</p>
+          <div class="ls-three__moon-svg-wrap">
+            <div class="ls-three__moon-svg-img">
+              <LeoPic
+                v-if="isMoonSvgEnter"
+                src="img/newspaceera2025_pic11_1_chart"
+                ext="svg"
+                :use2x="false"
+                :webp="false"
+                :width="430"
+                :height="120"
+              />
+              <LeoPic
+                v-else
+                src="img/newspaceera2025_pic11_2_chart"
+                ext="svg"
+                :use2x="false"
+                :webp="false"
+                :width="430"
+                :height="120"
+              />
+            </div>
+            <div class="ls-three__moon-svg-labels">
+              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--1">
+                <h4>{{ str.moon1t1 }}</h4>
+                <p>{{ str.moon1t2 }}</p>
+                <p>{{ str.moon1t3 }}</p>
+              </div>
+              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--2">
+                <h4>{{ str.moon2t1 }}</h4>
+                <p>{{ str.moon2t2 }}</p>
+                <p>{{ str.moon2t3 }}</p>
+              </div>
+              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--3">
+                <h4>{{ str.moon3t1 }}</h4>
+                <p>{{ str.moon3t2 }}</p>
+                <p>{{ str.moon3t3 }}</p>
+              </div>
+              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--4">
+                <h4>{{ str.moon4t1 }}</h4>
+                <p>{{ str.moon4t2 }}</p>
+                <p>{{ str.moon4t3 }}</p>
+              </div>
+              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--5">
+                <h4>{{ str.moon5t1 }}</h4>
+                <p>{{ str.moon5t2 }}</p>
+                <p>{{ str.moon5t3 }}</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -295,6 +331,59 @@ function handleChangeCategory(
   &__3d-moon-site {
     @include rwd-min(md) {
       transform: translateX(-25%);
+    }
+  }
+
+  &__fall-down {
+  }
+
+  &__fall-down-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__fall-down-satellite-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__fall-down-satellite {
+  }
+
+  &__fall-down-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__moon-svg-wrap {
+    position: relative;
+  }
+
+  &__moon-svg-img {
+  }
+
+  &__moon-svg-labels {
+  }
+
+  &__moon-svg-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &--1 {
+    }
+    &--2 {
+    }
+    &--3 {
+    }
+    &--4 {
+    }
+    &--5 {
     }
   }
 

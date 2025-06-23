@@ -1,11 +1,18 @@
 <script setup lang="ts">
-// import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
+import { ref } from 'vue';
+import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import LeoPic from '@/components/leo-pic.vue';
 import str from '@/locales/section4.json';
+
+const isTrashFloatEnter = ref(false);
+
+function handleTranshFloatEnter(enter: boolean) {
+  isTrashFloatEnter.value = enter;
+}
 </script>
 
 <template>
@@ -32,8 +39,10 @@ import str from '@/locales/section4.json';
       </template>
       <template #intro>
         <LeoSectionIntro chapter="04">
-          <p>{{ str.title }}</p>
-          <p>{{ str.subTitle }}</p>
+          <h2 class="max-w-[448px]">
+            <span class="block text-4xl md:text-6xl mb-5">{{ str.title }}</span>
+            <span class="block text-2xl">{{ str.subTitle }}</span>
+          </h2>
         </LeoSectionIntro>
       </template>
       <template #article>
@@ -58,9 +67,12 @@ import str from '@/locales/section4.json';
           <div
             class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
           >
-            <!-- <LeoScrollTrigger @change="handleChangeCategory($event, 'all')" /> -->
+            <LeoScrollTrigger @change="handleTranshFloatEnter" />
 
-            <div>
+            <div
+              class="ls-four__trash-float ls-four__trash-float--1"
+              :class="{ 'ls-four__trash-float--enter': isTrashFloatEnter }"
+            >
               <p>
                 <span>{{ str.p1t4 }}</span>
                 <span>{{ str.p1tBillion }}</span>
@@ -70,7 +82,10 @@ import str from '@/locales/section4.json';
               <p class="leo-caption">{{ str.p1tCaption2 }}</p>
             </div>
 
-            <div>
+            <div
+              class="ls-four__trash-float ls-four__trash-float--2"
+              :class="{ 'ls-four__trash-float--enter': isTrashFloatEnter }"
+            >
               <p>
                 <span>{{ str.p1t6 }}</span>
                 <span>{{ str.p1tBillion }}</span>
@@ -119,6 +134,24 @@ import str from '@/locales/section4.json';
 <style lang="scss">
 .ls-four {
   position: relative;
+
+  &__trash-float {
+    opacity: 0;
+    transition: 1s 0.1s ease-in-out;
+
+    &--1 {
+      transform: translateX(-100%);
+    }
+
+    &--2 {
+      transform: translateX(100%);
+    }
+
+    &--enter {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }
 
 .gradient-bg {

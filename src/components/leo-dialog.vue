@@ -128,6 +128,7 @@ function handleClose() {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .leo-dialog__close {
