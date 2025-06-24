@@ -1,12 +1,24 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue';
 import LeoNavbar from '@/components/leo-navbar.vue';
 import LeoFooter from '@/components/leo-footer.vue';
-import SectionHero from '@/components/section-hero.vue';
-import SectionOne from '@/components/section-one.vue';
-import SectionTwo from '@/components/section-two.vue';
-import SectionThree from '@/components/section-three.vue';
-import SectionFour from '@/components/section-four.vue';
-import SectionTw from '@/components/section-tw.vue';
+import LeoHero from '@/components/section-hero.vue';
+
+const AsyncSectionOne = defineAsyncComponent(
+  () => import('@/components/section-one.vue'),
+);
+const AsyncSectionTwo = defineAsyncComponent(
+  () => import('@/components/section-two.vue'),
+);
+const AsyncSectionThree = defineAsyncComponent(
+  () => import('@/components/section-three.vue'),
+);
+const AsyncSectionFour = defineAsyncComponent(
+  () => import('@/components/section-four.vue'),
+);
+const AsyncSectionTw = defineAsyncComponent(
+  () => import('@/components/section-tw.vue'),
+);
 </script>
 
 <template>
@@ -14,13 +26,13 @@ import SectionTw from '@/components/section-tw.vue';
     <LeoNavbar />
     <main class="leo-main">
       <div class="bg-black text-white">
-        <SectionHero />
-        <SectionOne />
-        <SectionTwo />
-        <SectionThree />
-        <SectionFour />
+        <LeoHero />
+        <AsyncSectionOne />
+        <AsyncSectionTwo />
+        <AsyncSectionThree />
+        <AsyncSectionFour />
       </div>
-      <SectionTw />
+      <AsyncSectionTw />
     </main>
     <LeoFooter />
   </div>

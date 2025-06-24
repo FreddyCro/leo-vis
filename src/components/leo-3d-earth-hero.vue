@@ -70,7 +70,10 @@ class GlobeController {
     // Initialize renderer
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setClearColor(0x000000, 0);
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(
+      document.documentElement.clientWidth,
+      window.innerHeight,
+    );
     this.renderer.setPixelRatio(window.devicePixelRatio);
 
     const targetElement = document.getElementById(this.targetId);
@@ -99,7 +102,7 @@ class GlobeController {
     // new THREE.PerspectiveCamera(fov, aspect, near, far)
     this.camera = new THREE.PerspectiveCamera(
       50, // 75 is default
-      window.innerWidth / window.innerHeight,
+      document.documentElement.clientWidth / window.innerHeight,
       0.1,
       1000,
     );
@@ -318,9 +321,13 @@ class GlobeController {
 
   resize() {
     if (this.camera && this.renderer) {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.aspect =
+        document.documentElement.clientWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setSize(
+        document.documentElement.clientWidth,
+        window.innerHeight,
+      );
     }
     return this;
   }
