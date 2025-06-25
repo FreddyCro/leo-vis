@@ -21,6 +21,7 @@ const props = defineProps({
 
 const MOON_ROOT_ID = 'moon-vis';
 const MOON_IMG_PATH = './img/moon_4k.jpg';
+const MOON_POSITION_Z = 500; // Default camera Z position
 let moonController = null;
 
 class MoonController {
@@ -29,7 +30,7 @@ class MoonController {
     this.options = {
       moonTextureUrl: '',
       stations: [],
-      cameraPosition: [0, 0, 500],
+      cameraPosition: [0, 0, MOON_POSITION_Z],
       ...options,
     };
     this.scene = null;
@@ -226,8 +227,8 @@ class MoonController {
 
       if (props.currentCategory === 'all') {
         // rotate globe
-        this.globe.rotation.y += 0.001;
-        this.globe.rotation.x += 0.00025;
+        // this.globe.rotation.y += 0.001;
+        // this.globe.rotation.x += 0.00025;
       } else {
         // Keep the globe static when focusing on a specific category
         this.globe.rotation.set(0, 0, 0);
@@ -315,7 +316,7 @@ onMounted(() => {
   moonController = new MoonController(MOON_ROOT_ID, {
     moonTextureUrl: MOON_IMG_PATH,
     stations: MOON_STATION_DATA,
-    cameraPosition: [-200, 0, 500],
+    cameraPosition: [-200, 0, MOON_POSITION_Z],
   });
 
   moonController.init().setScene().setCamera().setControls().animate();

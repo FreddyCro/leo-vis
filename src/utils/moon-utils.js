@@ -57,7 +57,8 @@ function getScrollbarWidth() {
 
 function getCanvasSize() {
   const WIDTH_OFFSET = 5; // prevent canvas from touching the scrollbar
-  const width = window.innerWidth - getScrollbarWidth() - WIDTH_OFFSET;
+  const width =
+    document.documentElement.clientWidth - getScrollbarWidth() - WIDTH_OFFSET;
   const height = window.innerHeight;
   return { width, height };
 }

@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-import { defineEmits, ref, watch } from 'vue';
+import {
+  defineEmits,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
+import { getScrollbarWidth } from '@/utils/get-scrollbar-width';
 
 const props = defineProps<{
   modelValue: boolean;
@@ -12,31 +20,92 @@ const emit = defineEmits<{
 }>();
 
 const visible = ref(props.modelValue);
+const dialogTransition = ref(false);
 
 watch(
   () => props.modelValue,
-  (val) => {
-    visible.value = val;
-    if (val) emit('open');
+  async (val) => {
+    if (val) {
+      visible.value = true;
+      await nextTick();
+      dialogTransition.value = true;
+
+      // scroll down 1px from current scroll position
+      const scrollY = window.scrollY;
+      window.scrollTo(0, scrollY + 1);
+
+      setTimeout(() => {
+        setBodyOverflowHidden();
+        emit('open');
+      }, 10);
+    } else {
+      dialogTransition.value = false;
+
+      setTimeout(() => {
+        visible.value = false;
+        resetBodyOverflow();
+        emit('close');
+      }, 250); // match fade duration
+    }
   },
+  { immediate: true },
 );
 
+onMounted(() => {
+  if (visible.value) setBodyOverflowHidden();
+});
+
+onBeforeUnmount(() => {
+  resetBodyOverflow();
+});
+
+function setBodyOverflowHidden() {
+  const scrollbarWidth = getScrollbarWidth();
+  document.body.style.overflow = 'hidden';
+  document.body.style.paddingRight = `${scrollbarWidth}px`;
+}
+
+function resetBodyOverflow() {
+  document.body.style.overflow = '';
+  document.body.style.paddingRight = '';
+}
+
 function handleClose() {
-  visible.value = false;
   emit('update:modelValue', false);
-  emit('close');
 }
 </script>
 
 <template>
-  <div v-if="visible" class="leo-dialog-backdrop" @click.self="handleClose">
-    <div class="leo-dialog">
-      <button class="leo-dialog__close" @click="handleClose">×</button>
-      <div class="leo-dialog__content">
-        <slot />
+  <transition
+    name="fade"
+    @before-enter="(el) => ((el as HTMLElement).style.display = 'flex')"
+    @leave="(el) => ((el as HTMLElement).style.display = 'none')"
+  >
+    <div v-if="visible" class="leo-dialog-backdrop" @click.self="handleClose">
+      <div class="leo-dialog">
+        <button class="leo-dialog__close" @click="handleClose">
+          <svg
+            width="33"
+            height="33"
+            viewBox="0 0 33 33"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="16.5" cy="16.5" r="16" stroke="#404040" />
+            <path d="M21.5 12L12 21.5" stroke="#404040" />
+            <path d="M12 12L21.5 21.5" stroke="#404040" />
+          </svg>
+        </button>
+        <div class="leo-dialog__title">
+          <slot name="title" />
+        </div>
+        <div class="leo-dialog__content">
+          <slot name="head" />
+          <slot name="content" />
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style lang="scss">
@@ -52,31 +121,48 @@ function handleClose() {
 }
 
 .leo-dialog {
-  background: #fff;
-  border-radius: 8px;
+  position: relative;
   min-width: 320px;
   max-width: 90vw;
   min-height: 120px;
   max-height: 90vh;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
-  position: relative;
   display: flex;
   flex-direction: column;
-}
-
-.leo-dialog__close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.leo-dialog__content {
   padding: 32px 24px 24px 24px;
-  overflow: visible;
-  flex: 1 1 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+
+  &__title {
+    color: #000;
+    margin-bottom: 16px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+  }
+
+  &__content {
+    overflow: auto;
+    overflow-x: auto;
+    flex: 1 1 auto;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

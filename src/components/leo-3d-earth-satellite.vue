@@ -103,7 +103,6 @@ function buildFilterCache() {
     SATELLITE_LABEL_APOGEE,
     SATELLITE_LABEL_STARLINK,
     SATELLITE_LABEL_ONEWEB_KUIPER,
-    // 其他分類如有需要可加
   ];
   allLabels.forEach((label) => {
     filterCache[label] = state.allChildren.filter((child: Station) => {
@@ -278,7 +277,7 @@ function getCategoryColorOrder(
     <div
       id="earth"
       ref="el"
-      class="w-full h-[100vh] flex items-center overflow-hidden"
+      class="w-full h-[100vh] flex items-center overflow-hidden pointer-events-none"
     />
   </div>
 </template>

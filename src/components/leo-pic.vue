@@ -25,6 +25,7 @@ const props = withDefaults(defineProps<LeoPicProps>(), {
   use2x: true,
   usePrefix: true,
   webp: true,
+  loading: 'lazy',
 });
 
 const { VITE_ASSETS_PATH } = import.meta.env;

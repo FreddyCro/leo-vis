@@ -12,6 +12,8 @@ import str from '@/locales/section3.json';
 type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
 
 const currentCategory = ref<MoonSiteCategory>('all');
+const isMoonSvgEnter = ref(false);
+const isSatelliteEnter = ref(false);
 
 function handleChangeCategory(
   isIntersecting: boolean,
@@ -20,10 +22,18 @@ function handleChangeCategory(
   if (!isIntersecting) return;
   currentCategory.value = category;
 }
+
+function handleSvgContent(isIntersecting: boolean) {
+  isMoonSvgEnter.value = isIntersecting;
+}
+
+function handleSatelliteContent(isIntersecting: boolean) {
+  isSatelliteEnter.value = isIntersecting;
+}
 </script>
 
 <template>
-  <div>
+  <div class="ls-three leo-article max-w-screen">
     <LeoSectionLayout>
       <template #space>
         <div class="relative w-full h-[100vh]">
@@ -32,7 +42,7 @@ function handleChangeCategory(
             src="img/newspaceera2025_pic8_1_bg"
             :webp="false"
             :use2x="false"
-            :width="620"
+            :width="450"
             :height="450"
           />
           <div class="relative z-10">
@@ -46,137 +56,277 @@ function handleChangeCategory(
       </template>
       <template #intro>
         <LeoSectionIntro chapter="03">
-          <p>{{ str.title }}</p>
-          <p>{{ str.subTitle }}</p>
+          <h2 class="max-w-[448px]">
+            <span class="block text-4xl md:text-6xl mb-5">{{ str.title }}</span>
+            <span class="block text-2xl">{{ str.subTitle }}</span>
+          </h2>
         </LeoSectionIntro>
       </template>
       <template #article>
-        <div class="leo-container">
-          <div class="leo-section leo-section--pt leo-section--no-mt">
-            <p>{{ str.p1t1 }}</p>
-            <p>{{ str.p1t2 }}</p>
-            <p>{{ str.p1ChartTitle }}</p>
-            <p>{{ str.p1ChartText1 }}</p>
-            <p>{{ str.p1ChartText2 }}</p>
-            <p>{{ str.p1ChartText3 }}</p>
-            <p>{{ str.p1ChartText4 }}</p>
-            <p>{{ str.p1ChartText5 }}</p>
-            <p>{{ str.p1ChartText6 }}</p>
-            <p>{{ str.p1ChartCaption }}</p>
-
-            <!-- satellite fall down -->
-            <div
-              class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
-            >
-              satellite fall down
+        <!-- satellite fall down -->
+        <div class="leo-section leo-section--no-mt leo-section--pt">
+          <div
+            class="ls-three__fall-down relative h-[250vh] sm:h-[150vh] md:h-[125vh]"
+          >
+            <div class="leo-container relative z-10">
+              <p>{{ str.p1t1 }}</p>
+              <p>{{ str.p1t2 }}</p>
+              <div>{{ str.p1ChartTitle }}</div>
+              <div>{{ str.p1ChartText1 }}</div>
+              <div>{{ str.p1ChartText2 }}</div>
+              <div>{{ str.p1ChartText3 }}</div>
+              <div>{{ str.p1ChartText4 }}</div>
+              <div>{{ str.p1ChartText5 }}</div>
+              <div>{{ str.p1ChartText6 }}</div>
+              <p class="leo-caption">{{ str.p1ChartCaption }}</p>
             </div>
+            <LeoPic
+              class="ls-three__fall-down-bg"
+              src="img/newspaceera2025_pic9_1_bg"
+              :use2x="false"
+              :webp="false"
+              :width="430"
+              :height="120"
+            />
+            <LeoPic
+              class="ls-three__fall-down-satellite"
+              src="img/newspaceera2025_pic9_2"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="430"
+              :height="120"
+            />
+            <LeoScrollTrigger
+              scroll-height="50vh"
+              @change="handleSatelliteContent"
+            >
+              <div
+                class="ls-three__fall-down-satellite-text"
+                :class="{
+                  'ls-three__fall-down-satellite-text--fade-in':
+                    isSatelliteEnter,
+                }"
+              >
+                {{ str.falldownTitle }}
+                {{ str.falldownDesc }}
+              </div>
+            </LeoScrollTrigger>
           </div>
         </div>
 
         <div class="leo-section">
-          <p>{{ str.p2t1 }}</p>
+          <div class="leo-container">
+            <p>{{ str.p2t1 }}</p>
+          </div>
         </div>
 
+        <!-- 3d moon site -->
         <div class="grid gird-cols-2 gap-4">
-          <!-- 3d moon site -->
           <div class="sticky top-0 min-h-[100vh]">
-            <Leo3dMoonSite :current-category="currentCategory" />
+            <div class="ls-three__3d-moon-site">
+              <Leo3dMoonSite :current-category="currentCategory" />
+
+              <!-- TODO label -->
+            </div>
           </div>
 
           <!-- article -->
-          <div class="relative opacity-[0.1] pointer-events-none">
+          <div class="relative flex justify-end">
             <!-- reset 3d moon site -->
-            <LeoScrollTrigger
-              :dev-mode="true"
-              @change="handleChangeCategory($event, 'all')"
-            />
+            <div class="w-[0]">
+              <LeoScrollTrigger @change="handleChangeCategory($event, 'all')" />
+            </div>
 
-            <!-- 3d moon site part soviet -->
-            <LeoScrollTrigger
-              :dev-mode="true"
-              @change="handleChangeCategory($event, 'soviet')"
-            >
-              <div class="leo-section">
-                <p>{{ str.p3t1 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
-                />
-                <p>{{ str.p3Caption }}</p>
-                <p>{{ str.p3t2 }}</p>
-              </div>
-            </LeoScrollTrigger>
+            <div class="w-full md:w-[50%]">
+              <!-- 3d moon site part soviet -->
+              <LeoScrollTrigger
+                @change="handleChangeCategory($event, 'soviet')"
+              >
+                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                  <p>{{ str.p3t1 }}</p>
 
-            <!-- 3d moon site part us -->
-            <LeoScrollTrigger
-              :dev-mode="true"
-              @change="handleChangeCategory($event, 'us')"
-            >
-              <div class="leo-section">
-                <p>{{ str.p4t1 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
-                />
-                <p>{{ str.p4Caption1 }}</p>
-                <p>{{ str.p4t2 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
-                />
-                <p>{{ str.p4Caption2 }}</p>
-                <p>{{ str.p4t3 }}</p>
-              </div>
-            </LeoScrollTrigger>
+                  <div class="leo-section-sm">
+                    <LeoPic
+                      src="img/newspaceera2025_pic10_1"
+                      :webp="false"
+                      :use-prefix="false"
+                      :width="430"
+                      :height="120"
+                    />
+                    <p class="leo-caption">{{ str.p3Caption }}</p>
+                  </div>
+                  <p>{{ str.p3t2 }}</p>
+                </div>
+              </LeoScrollTrigger>
 
-            <!-- 3d moon site part cn -->
-            <LeoScrollTrigger
-              :dev-mode="true"
-              @change="handleChangeCategory($event, 'cn')"
-            >
-              <div class="leo-section">
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
-                />
-                <p>{{ str.p5Caption1 }}</p>
-                <p>{{ str.p5t2 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
-                />
-                <p>{{ str.p5Caption2 }}</p>
-              </div>
-            </LeoScrollTrigger>
+              <!-- 3d moon site part us -->
+              <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
+                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                  <p>{{ str.p4t1 }}</p>
 
-            <!-- 3d moon site part others -->
-            <LeoScrollTrigger
-              :dev-mode="true"
-              @change="handleChangeCategory($event, 'others')"
-            >
-              <div class="leo-section">
-                <p>{{ str.p6t1 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
-                />
-                <p>{{ str.p6Caption1 }}</p>
-                <p>{{ str.p6t2 }}</p>
-                <img
-                  src="https://placehold.co/480x320/gray/white"
-                  alt="Article Image"
-                />
-                <p>{{ str.p6Caption2 }}</p>
-              </div>
-            </LeoScrollTrigger>
+                  <div class="leo-section-sm">
+                    <LeoPic
+                      src="img/newspaceera2025_pic10_2"
+                      :webp="false"
+                      :use-prefix="false"
+                      :width="430"
+                      :height="120"
+                    />
+                    <p class="leo-caption">{{ str.p4Caption1 }}</p>
+                  </div>
+                  <p>{{ str.p4t2 }}</p>
+
+                  <div class="leo-section-sm">
+                    <LeoPic
+                      src="img/newspaceera2025_pic10_3"
+                      :webp="false"
+                      :use-prefix="false"
+                      :width="430"
+                      :height="120"
+                    />
+                    <p class="leo-caption">{{ str.p4Caption2 }}</p>
+                  </div>
+                  <p>{{ str.p4t3 }}</p>
+                </div>
+              </LeoScrollTrigger>
+
+              <!-- 3d moon site part cn -->
+              <LeoScrollTrigger @change="handleChangeCategory($event, 'cn')">
+                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                  <div class="leo-section-sm">
+                    <LeoPic
+                      src="img/newspaceera2025_pic10_4"
+                      :webp="false"
+                      :use-prefix="false"
+                      :width="430"
+                      :height="120"
+                    />
+                    <p class="leo-caption">{{ str.p5Caption1 }}</p>
+                  </div>
+                  <p>{{ str.p5t2 }}</p>
+                  <div class="leo-section-sm">
+                    <LeoPic
+                      src="img/newspaceera2025_pic10_5"
+                      :webp="false"
+                      :use-prefix="false"
+                      :width="430"
+                      :height="120"
+                    />
+                    <p class="leo-caption">{{ str.p5Caption2 }}</p>
+                  </div>
+                </div>
+              </LeoScrollTrigger>
+
+              <!-- 3d moon site part others -->
+              <LeoScrollTrigger
+                @change="handleChangeCategory($event, 'others')"
+              >
+                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                  <p>{{ str.p6t1 }}</p>
+                  <div class="leo-section-sm">
+                    <LeoPic
+                      src="img/newspaceera2025_pic10_6"
+                      :webp="false"
+                      :use-prefix="false"
+                      :width="430"
+                      :height="120"
+                    />
+                    <p class="leo-caption">{{ str.p6Caption1 }}</p>
+                  </div>
+                  <p>{{ str.p6t2 }}</p>
+                  <div class="leo-section-sm">
+                    <LeoPic
+                      src="img/newspaceera2025_pic10_7"
+                      :webp="false"
+                      :use-prefix="false"
+                      :width="430"
+                      :height="120"
+                    />
+                    <p class="leo-caption">{{ str.p6Caption2 }}</p>
+                  </div>
+                </div>
+              </LeoScrollTrigger>
+            </div>
           </div>
         </div>
 
         <!-- moon svg content -->
-        <div
-          class="w-[640px] h-[480px] flex items-center justify-center bg-red-200"
-        >
-          moon svg content
+        <div class="">
+          <LeoScrollTrigger @change="handleSvgContent">
+            <div class="ls-three__moon-svg-wrap">
+              <h3 class="ls-three__moon-svg-title">{{ str.moonTitle }}</h3>
+              <div class="ls-three__moon-svg-imgs">
+                <div
+                  class="ls-three__moon-svg-img"
+                  :class="{
+                    'ls-three__moon-svg-img--enter': !isMoonSvgEnter,
+                  }"
+                >
+                  <LeoPic
+                    src="img/newspaceera2025_pic11_1_chart"
+                    ext="svg"
+                    :use2x="false"
+                    :webp="false"
+                    :width="430"
+                    :height="120"
+                  />
+                </div>
+                <div
+                  class="ls-three__moon-svg-img"
+                  :class="{
+                    'ls-three__moon-svg-img--enter': isMoonSvgEnter,
+                  }"
+                >
+                  <LeoPic
+                    src="img/newspaceera2025_pic11_2_chart"
+                    ext="svg"
+                    :use2x="false"
+                    :webp="false"
+                    :width="430"
+                    :height="120"
+                  />
+                </div>
+              </div>
+              <div class="ls-three__moon-svg-labels">
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--1"
+                >
+                  <h4>{{ str.moon1t1 }}</h4>
+                  <p>{{ str.moon1t2 }}</p>
+                  <p>{{ str.moon1t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--2"
+                >
+                  <h4>{{ str.moon2t1 }}</h4>
+                  <p>{{ str.moon2t2 }}</p>
+                  <p>{{ str.moon2t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--3"
+                >
+                  <h4>{{ str.moon3t1 }}</h4>
+                  <p>{{ str.moon3t2 }}</p>
+                  <p>{{ str.moon3t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--4"
+                >
+                  <h4>{{ str.moon4t1 }}</h4>
+                  <p>{{ str.moon4t2 }}</p>
+                  <p>{{ str.moon4t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--5"
+                >
+                  <h4>{{ str.moon5t1 }}</h4>
+                  <p>{{ str.moon5t2 }}</p>
+                  <p>{{ str.moon5t3 }}</p>
+                </div>
+              </div>
+            </div>
+          </LeoScrollTrigger>
         </div>
 
         <div class="leo-container">
@@ -191,12 +341,12 @@ function handleChangeCategory(
                 {
                   title: str.related1Title,
                   link: str.related1Link,
-                  bg: 'https://placehold.co/480x320/gray/white',
+                  bg: 'img/newspaceera2025_pic12_1',
                 },
                 {
                   title: str.related2Title,
                   link: str.related2Link,
-                  bg: 'https://placehold.co/480x320/gray/white',
+                  bg: 'img/newspaceera2025_pic12_2',
                 },
               ]"
             />
@@ -207,4 +357,136 @@ function handleChangeCategory(
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+@use '@/assets/styles/mixins';
+
+.ls-three {
+  &__3d-moon-site {
+    @include rwd-min(md) {
+      transform: translateX(-25%);
+    }
+  }
+
+  &__fall-down {
+  }
+
+  &__fall-down-bg {
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  &__fall-down-satellite {
+    img {
+      z-index: 10;
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: auto;
+    }
+  }
+
+  &__fall-down-satellite-text {
+    position: absolute;
+    z-index: 20;
+    bottom: 20%;
+    left: 50%;
+    width: 200px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    &--fade-in {
+      opacity: 1;
+    }
+  }
+
+  &__moon-svg-wrap {
+    position: relative;
+  }
+
+  &__moon-svg-imgs {
+    position: relative;
+  }
+
+  &__moon-svg-img {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    &:first-child {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &--enter {
+      opacity: 1;
+    }
+  }
+
+  &__moon-svg-title {
+    position: absolute;
+    z-index: 10;
+    left: 25%;
+    top: 50%;
+  }
+
+  &__moon-svg-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &--1 {
+      left: 60%;
+      top: 10%;
+    }
+
+    &--2 {
+      left: 60%;
+      top: 25%;
+    }
+
+    &--3 {
+      left: 60%;
+      top: 50%;
+    }
+
+    &--4 {
+      left: 60%;
+      top: 65%;
+    }
+
+    &--5 {
+      left: 60%;
+      top: 80%;
+    }
+  }
+
+  &__moon-text-box {
+    padding: 40px 20px;
+    border: solid 1px #808080;
+
+    @include rwd-min(sm) {
+      padding: 40px;
+      width: 100%;
+      max-width: 530px;
+      margin: 500px auto;
+    }
+
+    @include rwd-max(md) {
+      @include mixins.blur(10px);
+    }
+
+    @include rwd-min(md) {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 110px;
+      border: 0;
+    }
+  }
+}
+</style>

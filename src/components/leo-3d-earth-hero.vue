@@ -16,7 +16,7 @@ const globeContainer = ref(null);
 const TARGET_ID = 'globe-viz';
 const GLOBE_TEXTURE_URL = './img/earth_night.jpg';
 const ARCS_N = 50;
-const G_N = 750;
+const G_N = 600;
 let Globe = null;
 let observer = null;
 
@@ -25,7 +25,7 @@ class GlobeController {
     this.targetId = targetId;
     this.options = {
       arcsCount: 50,
-      spotsCount: 750,
+      spotsCount: 500,
       globeTextureUrl: '',
       colors: ['#00F4DC', '#8D41D9'],
       cameraSpeed: 0.05,
@@ -70,8 +70,12 @@ class GlobeController {
     // Initialize renderer
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setClearColor(0x000000, 0);
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(
+      document.documentElement.clientWidth,
+      window.innerHeight,
+    );
+    // 4. renderer.setPixelRatio 上限 2，避免高 DPI 裝置過度消耗
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const targetElement = document.getElementById(this.targetId);
     if (targetElement) {
@@ -99,7 +103,7 @@ class GlobeController {
     // new THREE.PerspectiveCamera(fov, aspect, near, far)
     this.camera = new THREE.PerspectiveCamera(
       50, // 75 is default
-      window.innerWidth / window.innerHeight,
+      document.documentElement.clientWidth / window.innerHeight,
       0.1,
       1000,
     );
@@ -219,6 +223,7 @@ class GlobeController {
     };
 
     animateLoop();
+
     return this;
   }
 
@@ -254,25 +259,32 @@ class GlobeController {
     }));
   }
 
+  // 1. SphereGeometry 與 glowTexture 共用，減少物件數量
+  static sharedSphereGeometry = new THREE.SphereGeometry(1, 8, 8); // 單一 geometry，半徑用 scale 控制
+  static sharedGlowTexture = createGlowTexture();
+  static sharedSpriteMaterial = new THREE.SpriteMaterial({
+    map: GlobeController.sharedGlowTexture,
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.5,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+
   /**
    * Create custom 3D object with glow effect
    */
   createCustomObject(d) {
-    // Create main mesh
+    // 共用 geometry，半徑用 scale 控制
     const mesh = new THREE.Mesh(
-      new THREE.SphereGeometry(d.radius),
+      GlobeController.sharedSphereGeometry,
       new THREE.MeshLambertMaterial({ color: d.color }),
     );
+    mesh.scale.set(d.radius, d.radius, d.radius);
 
-    // Create glow sprite
-    const spriteMaterial = new THREE.SpriteMaterial({
-      map: this.createGlowTexture(),
-      color: d.color,
-      transparent: true,
-      opacity: 0.5,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
+    // 共用 glow texture/material，顏色用 SpriteMaterial color 設定
+    const spriteMaterial = GlobeController.sharedSpriteMaterial.clone();
+    spriteMaterial.color = new THREE.Color(d.color);
     const sprite = new THREE.Sprite(spriteMaterial);
     sprite.scale.set(d.radius * 6, d.radius * 6, 1);
 
@@ -280,15 +292,7 @@ class GlobeController {
     const group = new THREE.Group();
     group.add(mesh);
     group.add(sprite);
-
     return group;
-  }
-
-  /**
-   * Create glow texture for sprites
-   */
-  createGlowTexture() {
-    return createGlowTexture();
   }
 
   /**
@@ -318,9 +322,13 @@ class GlobeController {
 
   resize() {
     if (this.camera && this.renderer) {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.aspect =
+        document.documentElement.clientWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setSize(
+        document.documentElement.clientWidth,
+        window.innerHeight,
+      );
     }
     return this;
   }

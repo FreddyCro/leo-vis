@@ -68,7 +68,7 @@ class AnimationController {
    */
   drawLines() {
     const svg = this.svgEl;
-    const width = window.innerWidth;
+    const width = document.documentElement.clientWidth;
     const height = window.innerHeight;
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 

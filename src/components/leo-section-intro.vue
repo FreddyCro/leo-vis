@@ -6,7 +6,6 @@ import str4 from '@/locales/section4.json';
 
 interface Props {
   chapter?: string;
-  current?: number;
 }
 
 defineProps<Props>();
@@ -53,6 +52,7 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
           v-for="(item, index) in tocList"
           :key="item"
           class="ls-intro__toc-item relative"
+          :class="{ 'ls-intro__toc-item--active': chapter === `0${index + 1}` }"
         >
           <div class="ls-intro__toc-item-dot" role="presentation">
             <!-- outer -->
@@ -61,9 +61,9 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
             <div class="ls-intro__toc-item-dot-in" />
           </div>
           <div class="ls-intro__toc-item-content">
-            <span class="ls-intro__toc-item-content-number"
-              >0{{ index + 1 }}</span
-            >
+            <span class="ls-intro__toc-item-content-number">
+              0{{ index + 1 }}
+            </span>
             <span>
               {{ item }}
             </span>
@@ -71,7 +71,7 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
         </li>
       </ul>
 
-      <div v-if="chapter" class="ls-intro__chapter lg:hidden">
+      <div v-if="chapter" class="ls-intro__chapter md:hidden">
         {{ chapter }}
       </div>
     </div>
@@ -128,7 +128,8 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
     font-size: 20px;
     line-height: 36px;
 
-    &:hover {
+    &:hover,
+    &--active {
       .ls-intro__toc-item-dot {
         transform: translateY(-50%) scale(2);
       }
@@ -136,6 +137,8 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
   }
 
   &__toc-item-content {
+    display: flex;
+    align-items: center;
     margin-left: 27px;
 
     @include rwd-min(md) {
@@ -145,7 +148,9 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
   }
 
   &__toc-item-content-number {
+    /* font-family: Noto Sans Telugu UI; */
     font-size: 28px;
+    margin-right: 2px;
   }
 
   &__toc-item-dot {
