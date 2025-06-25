@@ -24,7 +24,7 @@ function handleChangeCategory(
 }
 
 function handleSvgContent(isIntersecting: boolean) {
-  isMoonSvgEnter.value = isIntersecting;
+  isMoonSvgEnter.value = !isIntersecting;
 }
 
 function handleSatelliteContent(isIntersecting: boolean) {
@@ -63,61 +63,54 @@ function handleSatelliteContent(isIntersecting: boolean) {
         </LeoSectionIntro>
       </template>
       <template #article>
-        <div class="leo-container">
-          <div class="leo-section leo-section--pt leo-section--no-mt">
-            <p>{{ str.p1t1 }}</p>
-            <p>{{ str.p1t2 }}</p>
-            <div>{{ str.p1ChartTitle }}</div>
-            <div>{{ str.p1ChartText1 }}</div>
-            <div>{{ str.p1ChartText2 }}</div>
-            <div>{{ str.p1ChartText3 }}</div>
-            <div>{{ str.p1ChartText4 }}</div>
-            <div>{{ str.p1ChartText5 }}</div>
-            <div>{{ str.p1ChartText6 }}</div>
-            <p class="leo-caption">{{ str.p1ChartCaption }}</p>
-          </div>
-        </div>
-
         <!-- satellite fall down -->
-        <div class="leo-section">
-          <LeoScrollTrigger
-            scroll-height="150vh"
-            @change="handleSatelliteContent"
-          >
-            <div class="ls-three__fall-down relative">
-              <LeoPic
-                class="ls-three__fall-down-bg"
-                src="img/newspaceera2025_pic9_1_bg"
-                :use2x="false"
-                :webp="false"
-                :width="430"
-                :height="120"
-              />
-
-              <div class="ls-three__fall-down-satellite-wrap">
-                <LeoPic
-                  class="ls-three__fall-down-satellite"
-                  src="img/newspaceera2025_pic9_2"
-                  ext="png"
-                  :webp="false"
-                  :use2x="false"
-                  :width="430"
-                  :height="120"
-                />
-
-                <div
-                  class="ls-three__fall-down-satellite-text"
-                  :class="{
-                    'ls-three__fall-down-satellite-text--fade-in':
-                      isSatelliteEnter,
-                  }"
-                >
-                  {{ str.falldownTitle }}
-                  {{ str.falldownDesc }}
-                </div>
-              </div>
+        <div class="leo-section leo-section--no-mt leo-section--pt">
+          <div class="ls-three__fall-down relative h-[150vh]">
+            <div class="leo-container relative z-10">
+              <p>{{ str.p1t1 }}</p>
+              <p>{{ str.p1t2 }}</p>
+              <div>{{ str.p1ChartTitle }}</div>
+              <div>{{ str.p1ChartText1 }}</div>
+              <div>{{ str.p1ChartText2 }}</div>
+              <div>{{ str.p1ChartText3 }}</div>
+              <div>{{ str.p1ChartText4 }}</div>
+              <div>{{ str.p1ChartText5 }}</div>
+              <div>{{ str.p1ChartText6 }}</div>
+              <p class="leo-caption">{{ str.p1ChartCaption }}</p>
             </div>
-          </LeoScrollTrigger>
+            <LeoPic
+              class="ls-three__fall-down-bg"
+              src="img/newspaceera2025_pic9_1_bg"
+              :use2x="false"
+              :webp="false"
+              :width="430"
+              :height="120"
+            />
+            <LeoPic
+              class="ls-three__fall-down-satellite"
+              src="img/newspaceera2025_pic9_2"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="430"
+              :height="120"
+            />
+            <LeoScrollTrigger
+              scroll-height="50vh"
+              @change="handleSatelliteContent"
+            >
+              <div
+                class="ls-three__fall-down-satellite-text"
+                :class="{
+                  'ls-three__fall-down-satellite-text--fade-in':
+                    isSatelliteEnter,
+                }"
+              >
+                {{ str.falldownTitle }}
+                {{ str.falldownDesc }}
+              </div>
+            </LeoScrollTrigger>
+          </div>
         </div>
 
         <div class="leo-section">
@@ -257,59 +250,69 @@ function handleSatelliteContent(isIntersecting: boolean) {
         </div>
 
         <!-- moon svg content -->
-        <div class="flex items-center justify-center">
-          <LeoScrollTrigger @change="handleSvgContent" />
-
-          <h3>{{ str.moonTitle }}</h3>
-          <div class="ls-three__moon-svg-wrap">
-            <div class="ls-three__moon-svg-img">
-              <LeoPic
-                v-if="isMoonSvgEnter"
-                src="img/newspaceera2025_pic11_1_chart"
-                ext="svg"
-                :use2x="false"
-                :webp="false"
-                :width="430"
-                :height="120"
-              />
-              <LeoPic
-                v-else
-                src="img/newspaceera2025_pic11_2_chart"
-                ext="svg"
-                :use2x="false"
-                :webp="false"
-                :width="430"
-                :height="120"
-              />
+        <div class="">
+          <LeoScrollTrigger @change="handleSvgContent">
+            <div class="ls-three__moon-svg-wrap">
+              <h3 class="ls-three__moon-svg-title">{{ str.moonTitle }}</h3>
+              <div class="ls-three__moon-svg-img">
+                <LeoPic
+                  v-if="isMoonSvgEnter"
+                  src="img/newspaceera2025_pic11_1_chart"
+                  ext="svg"
+                  :use2x="false"
+                  :webp="false"
+                  :width="430"
+                  :height="120"
+                />
+                <LeoPic
+                  v-else
+                  src="img/newspaceera2025_pic11_2_chart"
+                  ext="svg"
+                  :use2x="false"
+                  :webp="false"
+                  :width="430"
+                  :height="120"
+                />
+              </div>
+              <div class="ls-three__moon-svg-labels">
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--1"
+                >
+                  <h4>{{ str.moon1t1 }}</h4>
+                  <p>{{ str.moon1t2 }}</p>
+                  <p>{{ str.moon1t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--2"
+                >
+                  <h4>{{ str.moon2t1 }}</h4>
+                  <p>{{ str.moon2t2 }}</p>
+                  <p>{{ str.moon2t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--3"
+                >
+                  <h4>{{ str.moon3t1 }}</h4>
+                  <p>{{ str.moon3t2 }}</p>
+                  <p>{{ str.moon3t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--4"
+                >
+                  <h4>{{ str.moon4t1 }}</h4>
+                  <p>{{ str.moon4t2 }}</p>
+                  <p>{{ str.moon4t3 }}</p>
+                </div>
+                <div
+                  class="ls-three__moon-svg-label ls-three__moon-svg-label--5"
+                >
+                  <h4>{{ str.moon5t1 }}</h4>
+                  <p>{{ str.moon5t2 }}</p>
+                  <p>{{ str.moon5t3 }}</p>
+                </div>
+              </div>
             </div>
-            <div class="ls-three__moon-svg-labels">
-              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--1">
-                <h4>{{ str.moon1t1 }}</h4>
-                <p>{{ str.moon1t2 }}</p>
-                <p>{{ str.moon1t3 }}</p>
-              </div>
-              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--2">
-                <h4>{{ str.moon2t1 }}</h4>
-                <p>{{ str.moon2t2 }}</p>
-                <p>{{ str.moon2t3 }}</p>
-              </div>
-              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--3">
-                <h4>{{ str.moon3t1 }}</h4>
-                <p>{{ str.moon3t2 }}</p>
-                <p>{{ str.moon3t3 }}</p>
-              </div>
-              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--4">
-                <h4>{{ str.moon4t1 }}</h4>
-                <p>{{ str.moon4t2 }}</p>
-                <p>{{ str.moon4t3 }}</p>
-              </div>
-              <div class="ls-three__moon-svg-label ls-three__moon-svg-label--5">
-                <h4>{{ str.moon5t1 }}</h4>
-                <p>{{ str.moon5t2 }}</p>
-                <p>{{ str.moon5t3 }}</p>
-              </div>
-            </div>
-          </div>
+          </LeoScrollTrigger>
         </div>
 
         <div class="leo-container">
@@ -354,32 +357,46 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__fall-down-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  &__fall-down-satellite-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  &__fall-down-satellite {
-    &--fade-in {
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
     }
   }
 
-  &__fall-down-text {
+  &__fall-down-satellite {
+    img {
+      z-index: 10;
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: auto;
+    }
+  }
+
+  &__fall-down-satellite-text {
     position: absolute;
-    top: 0;
-    left: 0;
+    z-index: 20;
+    bottom: 20%;
+    left: 50%;
+    width: 200px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    &--fade-in {
+      opacity: 1;
+    }
   }
 
   &__moon-svg-wrap {
     position: relative;
+  }
+
+  &__moon-svg-title {
+    position: absolute;
+    left: 0%;
+    top: 0%;
   }
 
   &__moon-svg-img {
