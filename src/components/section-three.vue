@@ -24,7 +24,7 @@ function handleChangeCategory(
 }
 
 function handleSvgContent(isIntersecting: boolean) {
-  isMoonSvgEnter.value = !isIntersecting;
+  isMoonSvgEnter.value = isIntersecting;
 }
 
 function handleSatelliteContent(isIntersecting: boolean) {
@@ -65,7 +65,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
       <template #article>
         <!-- satellite fall down -->
         <div class="leo-section leo-section--no-mt leo-section--pt">
-          <div class="ls-three__fall-down relative h-[150vh]">
+          <div
+            class="ls-three__fall-down relative h-[250vh] sm:h-[150vh] md:h-[125vh]"
+          >
             <div class="leo-container relative z-10">
               <p>{{ str.p1t1 }}</p>
               <p>{{ str.p1t2 }}</p>
@@ -254,25 +256,37 @@ function handleSatelliteContent(isIntersecting: boolean) {
           <LeoScrollTrigger @change="handleSvgContent">
             <div class="ls-three__moon-svg-wrap">
               <h3 class="ls-three__moon-svg-title">{{ str.moonTitle }}</h3>
-              <div class="ls-three__moon-svg-img">
-                <LeoPic
-                  v-if="isMoonSvgEnter"
-                  src="img/newspaceera2025_pic11_1_chart"
-                  ext="svg"
-                  :use2x="false"
-                  :webp="false"
-                  :width="430"
-                  :height="120"
-                />
-                <LeoPic
-                  v-else
-                  src="img/newspaceera2025_pic11_2_chart"
-                  ext="svg"
-                  :use2x="false"
-                  :webp="false"
-                  :width="430"
-                  :height="120"
-                />
+              <div class="ls-three__moon-svg-imgs">
+                <div
+                  class="ls-three__moon-svg-img"
+                  :class="{
+                    'ls-three__moon-svg-img--enter': !isMoonSvgEnter,
+                  }"
+                >
+                  <LeoPic
+                    src="img/newspaceera2025_pic11_1_chart"
+                    ext="svg"
+                    :use2x="false"
+                    :webp="false"
+                    :width="430"
+                    :height="120"
+                  />
+                </div>
+                <div
+                  class="ls-three__moon-svg-img"
+                  :class="{
+                    'ls-three__moon-svg-img--enter': isMoonSvgEnter,
+                  }"
+                >
+                  <LeoPic
+                    src="img/newspaceera2025_pic11_2_chart"
+                    ext="svg"
+                    :use2x="false"
+                    :webp="false"
+                    :width="430"
+                    :height="120"
+                  />
+                </div>
               </div>
               <div class="ls-three__moon-svg-labels">
                 <div
@@ -393,16 +407,32 @@ function handleSatelliteContent(isIntersecting: boolean) {
     position: relative;
   }
 
-  &__moon-svg-title {
-    position: absolute;
-    left: 0%;
-    top: 0%;
+  &__moon-svg-imgs {
+    position: relative;
   }
 
   &__moon-svg-img {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    &:first-child {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &--enter {
+      opacity: 1;
+    }
   }
 
-  &__moon-svg-labels {
+  &__moon-svg-title {
+    position: absolute;
+    z-index: 10;
+    left: 25%;
+    top: 50%;
   }
 
   &__moon-svg-label {
@@ -411,14 +441,28 @@ function handleSatelliteContent(isIntersecting: boolean) {
     left: 0;
 
     &--1 {
+      left: 60%;
+      top: 10%;
     }
+
     &--2 {
+      left: 60%;
+      top: 25%;
     }
+
     &--3 {
+      left: 60%;
+      top: 50%;
     }
+
     &--4 {
+      left: 60%;
+      top: 65%;
     }
+
     &--5 {
+      left: 60%;
+      top: 80%;
     }
   }
 
