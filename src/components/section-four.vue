@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
@@ -55,7 +54,7 @@ function handleTranshFloatEnter(enter: boolean) {
         </div>
 
         <!-- trash float -->
-        <div class="relative">
+        <!-- <div class="relative">
           <LeoPic
             src="img/newspaceera2025_pic14_bg"
             :webp="false"
@@ -94,7 +93,7 @@ function handleTranshFloatEnter(enter: boolean) {
               <p class="leo-caption">{{ str.p1tCaption3 }}</p>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="leo-section leo-section--pb relative z-40">
           <div class="leo-container">

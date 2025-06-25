@@ -100,6 +100,7 @@ function handleClose() {
           <slot name="title" />
         </div>
         <div class="leo-dialog__content">
+          <slot name="head" />
           <slot name="content" />
         </div>
       </div>

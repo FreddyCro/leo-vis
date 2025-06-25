@@ -21,7 +21,7 @@ const props = defineProps({
 
 const MOON_ROOT_ID = 'moon-vis';
 const MOON_IMG_PATH = './img/moon_4k.jpg';
-const MOON_POSITION_Z = 700; // Default camera Z position
+const MOON_POSITION_Z = 500; // Default camera Z position
 let moonController = null;
 
 class MoonController {
@@ -361,7 +361,7 @@ function handleSiteVisibilityChange(el, isVisible) {
 <style lang="scss">
 .leo-moon-site {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 }
 </style>

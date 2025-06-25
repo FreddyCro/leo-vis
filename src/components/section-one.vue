@@ -204,7 +204,7 @@ function onDialogClose() {
                 <!-- see full data -->
                 <li class="ls-one__feat-grid-item">
                   <button
-                    class="ls-one__feat-grid-item-content ls-one__feat-grid-item-content--gray flex flex-col items-center justify-center leo-h4 font-medium"
+                    class="ls-one__feat-grid-item-content ls-one__feat-grid-item-content--gray flex flex-col items-center justify-center px-[20px] py-[30px] leo-h4 font-medium"
                     @click="handleOpenDialog"
                   >
                     <span class="mb-2 md:mb-3">
@@ -244,7 +244,17 @@ function onDialogClose() {
               <h4 class="leo-h4">{{ str.dialogTitle }}</h4>
             </template>
             <template #content>
-              <div class="ls-one__dialog">
+              <div class="ls-one__dialog relative">
+                <div class="sticky top-0 left-0 w-full">
+                  <LeoPic
+                    src="img/supplier_head"
+                    ext="jpg"
+                    :use-prefix="false"
+                    :webp="false"
+                    :width="430"
+                    :height="120"
+                  />
+                </div>
                 <LeoPic
                   src="img/supplier"
                   ext="jpg"
