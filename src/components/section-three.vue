@@ -126,8 +126,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
                   <!-- text -->
                   <div>
-                    {{ str.falldownTitle }}
-                    {{ str.falldownDesc }}
+                    <div class="leading-[600] text-2xl">
+                      {{ str.falldownTitle }}
+                    </div>
+                    <div>{{ str.falldownDesc }}</div>
                   </div>
                 </div>
               </div>
@@ -648,6 +650,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pc + 70%;
       }
     }
+  }
+
+  &__moon-svg-label-title {
+    font-wight: 600;
   }
 
   &__moon-text-box {
