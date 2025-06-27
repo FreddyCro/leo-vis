@@ -11,38 +11,40 @@ import str from '@/locales/section2.json';
   <div class="ls-two leo-article">
     <LeoSectionLayout>
       <template #space>
-        <LeoPic
-          class="leo-section-bg"
-          src="img/newspaceera2025_pic5_1_bg"
-          :webp="false"
-          :use2x="false"
-          :width="450"
-          :height="450"
-        />
-        <div class="relative z-10">
-          <div class="absolute inset-0">
-            <LeoPic
-              class="ls-two__moon"
-              src="img/newspaceera2025_pic5_2_bg"
-              ext="png"
-              :webp="false"
-              :use2x="false"
-              :width="450"
-              :height="450"
-            />
-          </div>
-          <LeoSvgPathAnimation :element-number="1">
-            <template #element-1>
+        <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
+          <LeoPic
+            class="leo-section-bg"
+            src="img/newspaceera2025_pic5_1_bg"
+            :webp="false"
+            :use2x="false"
+            :width="450"
+            :height="450"
+          />
+          <div class="relative z-10">
+            <div class="absolute inset-0">
               <LeoPic
-                src="img/newspaceera2025_pic5_3_bg"
+                class="ls-two__moon"
+                src="img/newspaceera2025_pic5_2_bg"
                 ext="png"
                 :webp="false"
                 :use2x="false"
                 :width="450"
                 :height="450"
               />
-            </template>
-          </LeoSvgPathAnimation>
+            </div>
+            <LeoSvgPathAnimation :element-number="1">
+              <template #element-1>
+                <LeoPic
+                  src="img/newspaceera2025_pic5_3_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="450"
+                  :height="450"
+                />
+              </template>
+            </LeoSvgPathAnimation>
+          </div>
         </div>
       </template>
       <template #intro>

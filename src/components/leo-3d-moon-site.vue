@@ -362,6 +362,6 @@ function handleSiteVisibilityChange(el, isVisible) {
 .leo-moon-site {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: var(--init-screen-height);
 }
 </style>

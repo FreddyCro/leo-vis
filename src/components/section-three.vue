@@ -11,7 +11,7 @@ import str from '@/locales/section3.json';
 
 type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
 
-const currentCategory = ref<MoonSiteCategory>('all');
+const currentCategory = ref<MoonSiteCategory>('soviet');
 const isMoonSvgEnter = ref(false);
 const isSatelliteEnter = ref(false);
 
@@ -33,10 +33,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
 </script>
 
 <template>
-  <div class="ls-three leo-article max-w-screen">
+  <div class="ls-three leo-article">
     <LeoSectionLayout>
       <template #space>
-        <div class="relative w-full h-[100vh]">
+        <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
           <LeoPic
             class="leo-section-bg"
             src="img/newspaceera2025_pic8_1_bg"
@@ -46,10 +46,17 @@ function handleSatelliteContent(isIntersecting: boolean) {
             :height="450"
           />
           <div class="relative z-10">
-            <LeoSvgPathAnimation :element-number="3">
-              <template #element-1>1</template>
-              <template #element-2>2</template>
-              <template #element-3>3</template>
+            <LeoSvgPathAnimation :element-number="1">
+              <template #element-1>
+                <LeoPic
+                  src="img/newspaceera2025_pic8_2_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="450"
+                  :height="450"
+                />
+              </template>
             </LeoSvgPathAnimation>
           </div>
         </div>
@@ -66,7 +73,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <!-- satellite fall down -->
         <div class="leo-section leo-section--no-mt leo-section--pt">
           <div
-            class="ls-three__fall-down relative h-[250vh] sm:h-[150vh] md:h-[125vh]"
+            class="ls-three__fall-down relative h-[calc(var(--init-screen-height)*1.45)] sm:h-[calc(var(--init-screen-height)*1.35)] md:h-[calc(var(--init-screen-height)*1.25)] overflow-hidden"
           >
             <div class="leo-container relative z-10">
               <p>{{ str.p1t1 }}</p>
@@ -88,28 +95,43 @@ function handleSatelliteContent(isIntersecting: boolean) {
               :width="430"
               :height="120"
             />
-            <LeoPic
-              class="ls-three__fall-down-satellite"
-              src="img/newspaceera2025_pic9_2"
-              ext="png"
-              :webp="false"
-              :use2x="false"
-              :width="430"
-              :height="120"
-            />
             <LeoScrollTrigger
               scroll-height="50vh"
               @change="handleSatelliteContent"
             >
-              <div
-                class="ls-three__fall-down-satellite-text"
-                :class="{
-                  'ls-three__fall-down-satellite-text--fade-in':
-                    isSatelliteEnter,
-                }"
-              >
-                {{ str.falldownTitle }}
-                {{ str.falldownDesc }}
+              <div class="ls-three__fall-down-satellite">
+                <LeoPic
+                  src="img/newspaceera2025_pic9_2"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="430"
+                  :height="120"
+                />
+                <div
+                  class="ls-three__fall-down-satellite-text"
+                  :class="{
+                    'ls-three__fall-down-satellite-text--fade-in':
+                      isSatelliteEnter,
+                  }"
+                >
+                  <!-- indicator -->
+                  <div
+                    class="ls-three__fall-down-indicator-wrap"
+                    role="presentation"
+                  >
+                    <div class="ls-three__fall-down-indicator-dot"></div>
+                    <div class="ls-three__fall-down-indicator-line"></div>
+                  </div>
+
+                  <!-- text -->
+                  <div>
+                    <div class="text-2xl">
+                      {{ str.falldownTitle }}
+                    </div>
+                    <div>{{ str.falldownDesc }}</div>
+                  </div>
+                </div>
               </div>
             </LeoScrollTrigger>
           </div>
@@ -123,7 +145,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
         <!-- 3d moon site -->
         <div class="grid gird-cols-2 gap-4">
-          <div class="sticky top-0 min-h-[100vh]">
+          <div class="sticky top-0 min-h-[calc(var(--init-screen-height)*1)]">
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
 
@@ -134,16 +156,20 @@ function handleSatelliteContent(isIntersecting: boolean) {
           <!-- article -->
           <div class="relative flex justify-end">
             <!-- reset 3d moon site -->
-            <div class="w-[0]">
-              <LeoScrollTrigger @change="handleChangeCategory($event, 'all')" />
-            </div>
+            <!-- <div class="w-[0]">
+              <LeoScrollTrigger
+                @change="handleChangeCategory($event, 'all')"
+              />
+            </div> -->
 
             <div class="w-full md:w-[50%]">
               <!-- 3d moon site part soviet -->
               <LeoScrollTrigger
                 @change="handleChangeCategory($event, 'soviet')"
               >
-                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                <div
+                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                >
                   <p>{{ str.p3t1 }}</p>
 
                   <div class="leo-section-sm">
@@ -162,7 +188,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
               <!-- 3d moon site part us -->
               <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
-                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                <div
+                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                >
                   <p>{{ str.p4t1 }}</p>
 
                   <div class="leo-section-sm">
@@ -193,7 +221,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
               <!-- 3d moon site part cn -->
               <LeoScrollTrigger @change="handleChangeCategory($event, 'cn')">
-                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                <div
+                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                >
                   <div class="leo-section-sm">
                     <LeoPic
                       src="img/newspaceera2025_pic10_4"
@@ -222,7 +252,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
               <LeoScrollTrigger
                 @change="handleChangeCategory($event, 'others')"
               >
-                <div class="ls-three__moon-text-box min-h-[100vh] my-[500px]">
+                <div
+                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                >
                   <p>{{ str.p6t1 }}</p>
                   <div class="leo-section-sm">
                     <LeoPic
@@ -252,10 +284,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
         </div>
 
         <!-- moon svg content -->
-        <div class="">
+        <div class="overflow-hidden">
           <LeoScrollTrigger @change="handleSvgContent">
             <div class="ls-three__moon-svg-wrap">
-              <h3 class="ls-three__moon-svg-title">{{ str.moonTitle }}</h3>
+              <h3 class="ls-three__moon-svg-title leo-h3 text-center">
+                {{ str.moonTitle }}
+              </h3>
               <div class="ls-three__moon-svg-imgs">
                 <div
                   class="ls-three__moon-svg-img"
@@ -287,42 +321,67 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     :height="120"
                   />
                 </div>
-              </div>
-              <div class="ls-three__moon-svg-labels">
-                <div
-                  class="ls-three__moon-svg-label ls-three__moon-svg-label--1"
-                >
-                  <h4>{{ str.moon1t1 }}</h4>
-                  <p>{{ str.moon1t2 }}</p>
-                  <p>{{ str.moon1t3 }}</p>
-                </div>
-                <div
-                  class="ls-three__moon-svg-label ls-three__moon-svg-label--2"
-                >
-                  <h4>{{ str.moon2t1 }}</h4>
-                  <p>{{ str.moon2t2 }}</p>
-                  <p>{{ str.moon2t3 }}</p>
-                </div>
-                <div
-                  class="ls-three__moon-svg-label ls-three__moon-svg-label--3"
-                >
-                  <h4>{{ str.moon3t1 }}</h4>
-                  <p>{{ str.moon3t2 }}</p>
-                  <p>{{ str.moon3t3 }}</p>
-                </div>
-                <div
-                  class="ls-three__moon-svg-label ls-three__moon-svg-label--4"
-                >
-                  <h4>{{ str.moon4t1 }}</h4>
-                  <p>{{ str.moon4t2 }}</p>
-                  <p>{{ str.moon4t3 }}</p>
-                </div>
-                <div
-                  class="ls-three__moon-svg-label ls-three__moon-svg-label--5"
-                >
-                  <h4>{{ str.moon5t1 }}</h4>
-                  <p>{{ str.moon5t2 }}</p>
-                  <p>{{ str.moon5t3 }}</p>
+                <div class="ls-three__moon-svg-labels">
+                  <div
+                    class="ls-three__moon-svg-label ls-three__moon-svg-label--1"
+                    :class="{
+                      'ls-three__moon-svg-label--enter': isMoonSvgEnter,
+                    }"
+                  >
+                    <h4 class="ls-three__moon-svg-label-title">
+                      {{ str.moon1t1 }}
+                    </h4>
+                    <div>{{ str.moon1t2 }}</div>
+                    <div>{{ str.moon1t3 }}</div>
+                  </div>
+                  <div
+                    class="ls-three__moon-svg-label ls-three__moon-svg-label--2"
+                    :class="{
+                      'ls-three__moon-svg-label--enter': isMoonSvgEnter,
+                    }"
+                  >
+                    <h4 class="ls-three__moon-svg-label-title">
+                      {{ str.moon2t1 }}
+                    </h4>
+                    <div>{{ str.moon2t2 }}</div>
+                    <div>{{ str.moon2t3 }}</div>
+                  </div>
+                  <div
+                    class="ls-three__moon-svg-label ls-three__moon-svg-label--3"
+                    :class="{
+                      'ls-three__moon-svg-label--enter': isMoonSvgEnter,
+                    }"
+                  >
+                    <h4 class="ls-three__moon-svg-label-title">
+                      {{ str.moon3t1 }}
+                    </h4>
+                    <div>{{ str.moon3t2 }}</div>
+                    <div>{{ str.moon3t3 }}</div>
+                  </div>
+                  <div
+                    class="ls-three__moon-svg-label ls-three__moon-svg-label--4"
+                    :class="{
+                      'ls-three__moon-svg-label--enter': isMoonSvgEnter,
+                    }"
+                  >
+                    <h4 class="ls-three__moon-svg-label-title">
+                      {{ str.moon4t1 }}
+                    </h4>
+                    <div>{{ str.moon4t2 }}</div>
+                    <div>{{ str.moon4t3 }}</div>
+                  </div>
+                  <div
+                    class="ls-three__moon-svg-label ls-three__moon-svg-label--5"
+                    :class="{
+                      'ls-three__moon-svg-label--enter': isMoonSvgEnter,
+                    }"
+                  >
+                    <h4 class="ls-three__moon-svg-label-title">
+                      {{ str.moon5t1 }}
+                    </h4>
+                    <div>{{ str.moon5t2 }}</div>
+                    <div>{{ str.moon5t3 }}</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -367,9 +426,6 @@ function handleSatelliteContent(isIntersecting: boolean) {
     }
   }
 
-  &__fall-down {
-  }
-
   &__fall-down-bg {
     img {
       position: absolute;
@@ -380,27 +436,80 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__fall-down-satellite {
-    img {
-      z-index: 10;
-      position: absolute;
-      bottom: 0;
+    z-index: 10;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: auto;
+
+    @include rwd-min(pad) {
       left: 10%;
-      width: auto;
+      bottom: 0;
+    }
+
+    @include rwd-min(pc) {
+      bottom: 5.5%;
     }
   }
 
   &__fall-down-satellite-text {
     position: absolute;
     z-index: 20;
-    bottom: 20%;
-    left: 50%;
-    width: 200px;
+    bottom: 45%;
+    left: 78%;
+    width: calc(100vw - 200px);
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+
+    @include rwd-min(pad) {
+      bottom: 60%;
+      left: 79%;
+      width: 200px;
+    }
+
+    @include rwd-min(pc) {
+      bottom: 70.5%;
+      left: 72%;
+    }
 
     &--fade-in {
       opacity: 1;
     }
+  }
+
+  &__fall-down-indicator-wrap {
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+    width: 70px;
+    height: 100%;
+    transform: translateX(-100%);
+
+    /* @include rwd-min(pad) {
+      width: 100%;
+    } */
+  }
+
+  &__fall-down-indicator-dot {
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 9px;
+    height: 9px;
+    background-color: #00f4dc;
+    border-radius: 50%;
+    transform: none;
+  }
+
+  &__fall-down-indicator-line {
+    position: absolute;
+    left: 0%;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    max-width: 100px;
+    background-color: #00f4dc;
+    transform: none;
   }
 
   &__moon-svg-wrap {
@@ -429,41 +538,122 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__moon-svg-title {
-    position: absolute;
-    z-index: 10;
-    left: 25%;
-    top: 50%;
+    @include rwd-min(lg) {
+      position: absolute;
+      z-index: 10;
+      left: 25%;
+      top: 50%;
+    }
   }
 
   &__moon-svg-label {
+    $base-x-mob: 30%;
+    $base-y-mob: 15%;
+    $base-width-mob: 60%;
+    $base-x-pad: 30%;
+    $base-y-pad: 15%;
+    $base-width-pad: 60%;
+    $base-x-pc: 52%;
+    $base-y-pc: 10%;
+    $base-width-pc: 343px;
+
     position: absolute;
     top: 0;
     left: 0;
+    width: $base-width-mob;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    @include rwd-min(pad) {
+      width: $base-width-pad;
+    }
+
+    @include rwd-min(pc) {
+      width: $base-width-pc;
+    }
+
+    &--enter {
+      opacity: 1;
+    }
 
     &--1 {
-      left: 60%;
-      top: 10%;
+      left: $base-x-mob;
+      top: $base-y-mob;
+
+      @include rwd-min(pad) {
+        left: $base-x-pad;
+        top: $base-y-pad;
+      }
+
+      @include rwd-min(lg) {
+        left: $base-x-pc;
+        top: $base-y-pc;
+      }
     }
 
     &--2 {
-      left: 60%;
-      top: 25%;
+      left: $base-x-mob + 6%;
+      top: $base-y-mob + 16%;
+
+      @include rwd-min(pad) {
+        left: $base-x-pad + 7%;
+        top: $base-y-pad + 16%;
+      }
+
+      @include rwd-min(lg) {
+        left: $base-x-pc + 6%;
+        top: $base-y-pc + 16%;
+      }
     }
 
     &--3 {
-      left: 60%;
-      top: 50%;
+      left: $base-x-mob + 8%;
+      top: $base-y-mob + 32%;
+
+      @include rwd-min(pad) {
+        left: $base-x-pad + 9%;
+        top: $base-y-pad + 30%;
+      }
+
+      @include rwd-min(lg) {
+        left: $base-x-pc + 9%;
+        top: $base-y-pc + 34%;
+      }
     }
 
     &--4 {
-      left: 60%;
-      top: 65%;
+      left: $base-x-mob + 6%;
+      top: $base-y-mob + 49%;
+
+      @include rwd-min(pad) {
+        left: $base-x-pad + 7%;
+        top: $base-y-pad + 45%;
+      }
+
+      @include rwd-min(lg) {
+        left: $base-x-pc + 6%;
+        top: $base-y-pc + 52%;
+      }
     }
 
     &--5 {
-      left: 60%;
-      top: 80%;
+      left: $base-x-mob;
+      top: $base-y-mob + 64%;
+
+      @include rwd-min(pad) {
+        left: $base-x-pad;
+        top: $base-y-pad + 59%;
+      }
+
+      @include rwd-min(lg) {
+        left: $base-x-pc;
+        top: $base-y-pc + 70%;
+      }
     }
+  }
+
+  &__moon-svg-label-title {
+    font-wight: 600;
   }
 
   &__moon-text-box {

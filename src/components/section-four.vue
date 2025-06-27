@@ -19,7 +19,7 @@ function handleTranshFloatEnter(enter: boolean) {
   <div class="ls-four leo-article">
     <LeoSectionLayout>
       <template #space>
-        <div class="relative w-full h-[100vh]">
+        <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
           <LeoPic
             class="leo-section-bg"
             src="img/newspaceera2025_pic13_1_bg"
@@ -29,10 +29,27 @@ function handleTranshFloatEnter(enter: boolean) {
             :height="450"
           />
           <div class="relative z-10">
-            <LeoSvgPathAnimation :element-number="3">
-              <template #element-1>1</template>
-              <template #element-2>2</template>
-              <template #element-3>3</template>
+            <LeoSvgPathAnimation :element-number="2">
+              <template #element-1>
+                <LeoPic
+                  src="img/newspaceera2025_pic13_2_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="450"
+                  :height="450"
+                />
+              </template>
+              <template #element-2>
+                <LeoPic
+                  src="img/newspaceera2025_pic13_3_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="450"
+                  :height="450"
+                />
+              </template>
             </LeoSvgPathAnimation>
           </div>
         </div>
@@ -46,7 +63,9 @@ function handleTranshFloatEnter(enter: boolean) {
         </LeoSectionIntro>
       </template>
       <template #article>
-        <div class="leo-section leo-section--no-mt leo-section--pt">
+        <div
+          class="leo-section leo-section--no-mt leo-section--pt relative z-10"
+        >
           <div class="leo-container">
             <p>{{ str.p1t1 }}</p>
             <p>{{ str.p1t2 }}</p>
@@ -55,44 +74,69 @@ function handleTranshFloatEnter(enter: boolean) {
         </div>
 
         <!-- trash float -->
-        <div class="ls-four__trash relative overflow-hidden">
-          <LeoPic
-            src="img/newspaceera2025_pic14_bg"
-            :webp="false"
-            :use2x="false"
-            :width="430"
-            :height="120"
-          />
+        <div
+          class="ls-four__trash relative h-[calc(var(--init-screen-height)*1)] overflow-hidden"
+        >
+          <div
+            class="ls-four__trash-bg absolute bottom-0 left-[50%] w-full flex translate-x-[-50%]"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic14_bg"
+              :webp="false"
+              :use2x="false"
+              :width="430"
+              :height="120"
+            />
+          </div>
 
           <div
-            class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
+            class="absolute top-0 left-0 w-full h-full flex items-center justify-center overflow-hidden"
           >
-            <LeoScrollTrigger @change="handleTranshFloatEnter" />
-
-            <div
-              class="ls-four__trash-float ls-four__trash-float--1"
-              :class="{ 'ls-four__trash-float--enter': isTrashFloatEnter }"
+            <LeoScrollTrigger
+              class="w-full max-w-[800px] px-[26px]"
+              @change="handleTranshFloatEnter"
             >
-              <p>
-                <span>{{ str.p1t4 }}</span>
-                <span>{{ str.p1tBillion }}</span>
-              </p>
-              <p>{{ str.p1t5 }}</p>
-              <p class="leo-caption">{{ str.p1tCaption1 }}</p>
-              <p class="leo-caption">{{ str.p1tCaption2 }}</p>
-            </div>
+              <div
+                class="ls-four__trash-float ls-four__trash-float--1"
+                :class="{ 'ls-four__trash-float--enter': isTrashFloatEnter }"
+              >
+                <div class="w-full max-w-[475px]">
+                  <div>
+                    <span class="text-[80px] sm:text-[100px] leading-[100px]">{{
+                      str.p1t4
+                    }}</span>
+                    <span class="text-[24px] leading-[36px]">{{
+                      str.p1tBillion
+                    }}</span>
+                  </div>
+                  <div class="mb-2 text-[24px] leading-[36px]">
+                    {{ str.p1t5 }}
+                  </div>
+                  <p class="leo-caption">{{ str.p1tCaption1 }}</p>
+                  <p class="leo-caption">{{ str.p1tCaption2 }}</p>
+                </div>
+              </div>
 
-            <div
-              class="ls-four__trash-float ls-four__trash-float--2"
-              :class="{ 'ls-four__trash-float--enter': isTrashFloatEnter }"
-            >
-              <p>
-                <span>{{ str.p1t6 }}</span>
-                <span>{{ str.p1tBillion }}</span>
-              </p>
-              <p>{{ str.p1t7 }}</p>
-              <p class="leo-caption">{{ str.p1tCaption3 }}</p>
-            </div>
+              <div
+                class="ls-four__trash-float ls-four__trash-float--2 flex justify-end"
+                :class="{ 'ls-four__trash-float--enter': isTrashFloatEnter }"
+              >
+                <div class="w-full max-w-[475px]">
+                  <div>
+                    <span class="text-[80px] sm:text-[100px] leading-[100px]">{{
+                      str.p1t6
+                    }}</span>
+                    <span class="text-[24px] leading-[36px]">{{
+                      str.p1tBillion
+                    }}</span>
+                  </div>
+                  <div class="mb-2 text-[24px] leading-[36px]">
+                    {{ str.p1t7 }}
+                  </div>
+                  <p class="leo-caption">{{ str.p1tCaption3 }}</p>
+                </div>
+              </div>
+            </LeoScrollTrigger>
           </div>
         </div>
 
@@ -135,16 +179,28 @@ function handleTranshFloatEnter(enter: boolean) {
 .ls-four {
   position: relative;
 
+  &__trash-bg {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom center;
+    }
+  }
+
   &__trash-float {
+    width: 100%;
     opacity: 0;
-    transition: 1s 0.1s ease-in-out;
 
     &--1 {
+      margin-bottom: 50px;
       transform: translateX(-100%);
+      transition: 1s ease-in-out;
     }
 
     &--2 {
       transform: translateX(100%);
+      transition: 1s ease-in-out;
     }
 
     &--enter {
