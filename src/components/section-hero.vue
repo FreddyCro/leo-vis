@@ -57,7 +57,9 @@ function onZoomOutIntersectChange(isIntersecting: boolean) {
         </div>
 
         <div class="leo-container">
-          <div class="min-h-[100vh] flex flex-col justify-center">
+          <div
+            class="min-h-[calc(var(--init-screen-height)*1)] flex flex-col justify-center"
+          >
             <h3 class="leo-h3 text-left">
               {{ str.g1Title }}
             </h3>
@@ -75,8 +77,10 @@ function onZoomOutIntersectChange(isIntersecting: boolean) {
             </figure>
           </div>
 
-          <div class="min-h-[250vh]">
-            <div class="sticky top-0 w-full min-h-[100vh] flex items-center">
+          <div class="min-h-[calc(var(--init-screen-height)*2.5)]">
+            <div
+              class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+            >
               <figure class="w-full">
                 <div
                   class="flourish-embed flourish-chart"
@@ -115,7 +119,7 @@ function onZoomOutIntersectChange(isIntersecting: boolean) {
 
   // override the default height
   .ls-layout {
-    --ls-layout-header-h: 200vh;
+    --ls-layout-header-h: calc(var(--init-screen-height) * 2);
   }
 }
 </style>

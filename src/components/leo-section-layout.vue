@@ -34,9 +34,12 @@ defineProps<Props>();
     <template v-if="isCustomArticle">
       <slot name="article" />
     </template>
-    <div v-else class="relative z-30 bg-black">
+    <div
+      v-else
+      class="relative z-30 mt-[calc(var(--init-screen-height)*0.14)] bg-black"
+    >
       <div
-        class="h-[15vh] bg-gradient-to-b from-transparent to-black"
+        class="h-[calc(var(--init-screen-height)*0.15)] -translate-y-[calc(var(--init-screen-height)*0.14)] bg-gradient-to-b from-transparent to-black"
         role="presentation"
       />
       <div class="ls-layout-article-wrap">
@@ -48,6 +51,6 @@ defineProps<Props>();
 
 <style lang="scss">
 .ls-layout {
-  --ls-layout-header-h: 100vh;
+  --ls-layout-header-h: var(--init-screen-height);
 }
 </style>

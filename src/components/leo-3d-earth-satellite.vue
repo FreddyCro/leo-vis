@@ -277,7 +277,7 @@ function getCategoryColorOrder(
     <div
       id="earth"
       ref="el"
-      class="w-full h-[100vh] flex items-center overflow-hidden pointer-events-none"
+      class="w-full h-[calc(var(--init-screen-height)*1)] flex items-center overflow-hidden pointer-events-none"
     />
   </div>
 </template>

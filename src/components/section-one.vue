@@ -71,7 +71,7 @@ function onDialogClose() {
   <div class="ls-one leo-article">
     <LeoSectionLayout>
       <template #space>
-        <div class="relative w-full h-[100vh]">
+        <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
           <LeoPic
             class="leo-section-bg"
             src="img/newspaceera2025_pic3_1_bg"
@@ -106,7 +106,7 @@ function onDialogClose() {
       </template>
       <template #article>
         <div class="leo-section leo-section--pt leo-section--no-mt">
-          <div class="min-h-[400vh]">
+          <div class="min-h-[calc(var(--init-screen-height)*4)]">
             <div class="sticky top-0">
               <Leo3dEarthSatellite :current-category="currentCategory" />
             </div>
