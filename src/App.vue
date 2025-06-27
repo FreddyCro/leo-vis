@@ -20,7 +20,8 @@ const AsyncSectionTw = defineAsyncComponent(
   () => import('@/components/section-tw.vue'),
 );
 
-const root = ref();
+const root = ref<HTMLElement | null>(null);
+const initScreenHeight = window.innerHeight;
 
 onMounted(() => {
   setInitScreenHeight();
@@ -32,11 +33,11 @@ onUnmounted(() => {
 });
 
 function setInitScreenHeight() {
-  root.value.style.setProperty(
+  root.value?.style.setProperty(
     '--init-screen-height',
     window.matchMedia('(min-width: 1024px)').matches
       ? '100vh'
-      : `${window.innerHeight}px`,
+      : `${initScreenHeight}px`,
   );
 }
 </script>
