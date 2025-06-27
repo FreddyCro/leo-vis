@@ -134,37 +134,36 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
           </div>
         </div>
       </div>
+    </div>
+    <div class="leo-container">
+      <p>{{ str.p2t1 }}</p>
+      <p>{{ str.p2t2 }}</p>
+      <p>{{ str.p2t3 }}</p>
+      <p>{{ str.p2t4 }}</p>
+      <p>{{ str.p2t5 }}</p>
 
-      <div class="leo-container">
-        <p>{{ str.p2t1 }}</p>
-        <p>{{ str.p2t2 }}</p>
-        <p>{{ str.p2t3 }}</p>
-        <p>{{ str.p2t4 }}</p>
-        <p>{{ str.p2t5 }}</p>
+      <div class="leo-section">
+        <h3 class="leo-h3">{{ str.title3 }}</h3>
+        <div class="mt-10">
+          <p>{{ str.p3t1 }}</p>
+        </div>
+      </div>
 
-        <div class="leo-section">
-          <h3 class="leo-h3">{{ str.title3 }}</h3>
-          <div class="mt-10">
-            <p>{{ str.p3t1 }}</p>
-          </div>
-        </div>
-
-        <div class="leo-section text-white">
-          <LeoReadMore
-            :title="str.relatedTitle"
-            :data="[
-              {
-                title: str.related1Title,
-                desc: str.related1Desc,
-                link: str.related1Link,
-                bg: 'img/newspaceera2025_pic16',
-              },
-            ]"
-          />
-        </div>
-        <div class="leo-section">
-          <p>{{ str.p3t2 }}</p>
-        </div>
+      <div class="leo-section text-white">
+        <LeoReadMore
+          :title="str.relatedTitle"
+          :data="[
+            {
+              title: str.related1Title,
+              desc: str.related1Desc,
+              link: str.related1Link,
+              bg: 'img/newspaceera2025_pic16',
+            },
+          ]"
+        />
+      </div>
+      <div class="leo-section">
+        <p>{{ str.p3t2 }}</p>
       </div>
     </div>
   </div>

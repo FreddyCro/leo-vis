@@ -11,7 +11,7 @@ import str from '@/locales/section3.json';
 
 type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
 
-const currentCategory = ref<MoonSiteCategory>('all');
+const currentCategory = ref<MoonSiteCategory>('soviet');
 const isMoonSvgEnter = ref(false);
 const isSatelliteEnter = ref(false);
 
@@ -33,7 +33,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 </script>
 
 <template>
-  <div class="ls-three leo-article max-w-screen">
+  <div class="ls-three leo-article">
     <LeoSectionLayout>
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
@@ -66,7 +66,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <!-- satellite fall down -->
         <div class="leo-section leo-section--no-mt leo-section--pt">
           <div
-            class="ls-three__fall-down relative h-[calc(var(--init-screen-height)*2.5)] sm:h-[calc(var(--init-screen-height)*1.5)] md:h-[calc(var(--init-screen-height)*1.25)]"
+            class="ls-three__fall-down relative h-[calc(var(--init-screen-height)*1.45)] sm:h-[calc(var(--init-screen-height)*1.35)] md:h-[calc(var(--init-screen-height)*1.25)] overflow-hidden"
           >
             <div class="leo-container relative z-10">
               <p>{{ str.p1t1 }}</p>
@@ -88,28 +88,41 @@ function handleSatelliteContent(isIntersecting: boolean) {
               :width="430"
               :height="120"
             />
-            <LeoPic
-              class="ls-three__fall-down-satellite"
-              src="img/newspaceera2025_pic9_2"
-              ext="png"
-              :webp="false"
-              :use2x="false"
-              :width="430"
-              :height="120"
-            />
             <LeoScrollTrigger
               scroll-height="50vh"
               @change="handleSatelliteContent"
             >
-              <div
-                class="ls-three__fall-down-satellite-text"
-                :class="{
-                  'ls-three__fall-down-satellite-text--fade-in':
-                    isSatelliteEnter,
-                }"
-              >
-                {{ str.falldownTitle }}
-                {{ str.falldownDesc }}
+              <div class="ls-three__fall-down-satellite">
+                <LeoPic
+                  src="img/newspaceera2025_pic9_2"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="430"
+                  :height="120"
+                />
+                <div
+                  class="ls-three__fall-down-satellite-text"
+                  :class="{
+                    'ls-three__fall-down-satellite-text--fade-in':
+                      isSatelliteEnter,
+                  }"
+                >
+                  <!-- indicator -->
+                  <div
+                    class="ls-three__fall-down-indicator-wrap"
+                    role="presentation"
+                  >
+                    <div class="ls-three__fall-down-indicator-dot"></div>
+                    <div class="ls-three__fall-down-indicator-line"></div>
+                  </div>
+
+                  <!-- text -->
+                  <div>
+                    {{ str.falldownTitle }}
+                    {{ str.falldownDesc }}
+                  </div>
+                </div>
               </div>
             </LeoScrollTrigger>
           </div>
@@ -134,9 +147,11 @@ function handleSatelliteContent(isIntersecting: boolean) {
           <!-- article -->
           <div class="relative flex justify-end">
             <!-- reset 3d moon site -->
-            <div class="w-[0]">
-              <LeoScrollTrigger @change="handleChangeCategory($event, 'all')" />
-            </div>
+            <!-- <div class="w-[0]">
+              <LeoScrollTrigger
+                @change="handleChangeCategory($event, 'all')"
+              />
+            </div> -->
 
             <div class="w-full md:w-[50%]">
               <!-- 3d moon site part soviet -->
@@ -402,9 +417,6 @@ function handleSatelliteContent(isIntersecting: boolean) {
     }
   }
 
-  &__fall-down {
-  }
-
   &__fall-down-bg {
     img {
       position: absolute;
@@ -415,27 +427,80 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__fall-down-satellite {
-    img {
-      z-index: 10;
-      position: absolute;
-      bottom: 0;
+    z-index: 10;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: auto;
+
+    @include rwd-min(pad) {
       left: 10%;
-      width: auto;
+      bottom: 0;
+    }
+
+    @include rwd-min(pc) {
+      bottom: 5.5%;
     }
   }
 
   &__fall-down-satellite-text {
     position: absolute;
     z-index: 20;
-    bottom: 20%;
-    left: 50%;
-    width: 200px;
+    bottom: 45%;
+    left: 78%;
+    width: calc(100vw - 200px);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+
+    @include rwd-min(pad) {
+      bottom: 60%;
+      left: 79%;
+      width: 200px;
+    }
+
+    @include rwd-min(pc) {
+      bottom: 70.5%;
+      left: 72%;
+    }
 
     &--fade-in {
       opacity: 1;
     }
+  }
+
+  &__fall-down-indicator-wrap {
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+    width: 70px;
+    height: 100%;
+    transform: translateX(-100%);
+
+    @include rwd-min(pad) {
+      width: 100%;
+    }
+  }
+
+  &__fall-down-indicator-dot {
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 9px;
+    height: 9px;
+    background-color: #00f4dc;
+    border-radius: 50%;
+    transform: none;
+  }
+
+  &__fall-down-indicator-line {
+    position: absolute;
+    left: 0%;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    max-width: 100px;
+    background-color: #00f4dc;
+    transform: none;
   }
 
   &__moon-svg-wrap {

@@ -58,23 +58,26 @@ function onZoomOutIntersectChange(isIntersecting: boolean) {
 
         <div class="leo-container">
           <div
-            class="min-h-[calc(var(--init-screen-height)*1)] flex flex-col justify-center"
+            class="min-h-[calc(var(--init-screen-height)*1)] flex flex-col justify-center items-center"
           >
             <h3 class="leo-h3 text-left">
               {{ str.g1Title }}
             </h3>
-            <figure class="w-full">
-              <LeoPic
-                src="img/newspaceera2025_pic1_1_chart"
-                ext="svg"
-                :use2x="false"
-                :webp="false"
-              />
-
-              <figcaption class="leo-caption mt-2">
-                {{ str.g1Caption }}
-              </figcaption>
-            </figure>
+            <div>
+              <figure class="w-full ls-hero__chart">
+                <LeoPic
+                  src="img/newspaceera2025_pic1_1_chart"
+                  ext="svg"
+                  :use2x="false"
+                  :webp="false"
+                />
+              </figure>
+              <div class="mt-4">
+                <p class="leo-caption">
+                  {{ str.g1Caption }}
+                </p>
+              </div>
+            </div>
           </div>
 
           <div class="min-h-[calc(var(--init-screen-height)*2.5)]">
@@ -120,6 +123,15 @@ function onZoomOutIntersectChange(isIntersecting: boolean) {
   // override the default height
   .ls-layout {
     --ls-layout-header-h: calc(var(--init-screen-height) * 2);
+  }
+
+  &__chart {
+    img {
+      @include rwd-max(sm) {
+        width: 100%;
+        max-width: 362px;
+      }
+    }
   }
 }
 </style>
