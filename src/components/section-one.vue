@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
-import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
+
+// import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import Leo3dEarthSatellite from '@/components/leo-3d-earth-satellite.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import LeoPic from '@/components/leo-pic.vue';
@@ -52,6 +53,11 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 
 const currentCategory = ref<string>(SATELLITE_LABEL_ALL);
 const showDialog = ref<boolean>(false);
+const isSpaceEnter = ref<boolean>(false);
+
+function handleChangeSpace(isIntersecting: boolean) {
+  isSpaceEnter.value = isIntersecting;
+}
 
 function handleChangeCategory(isIntersecting: boolean, category: string) {
   if (!isIntersecting) return;
@@ -69,10 +75,41 @@ function onDialogClose() {
 
 <template>
   <div class="ls-one leo-article">
-    <LeoSectionLayout>
+    <LeoSectionLayout @change-space="handleChangeSpace">
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
-          <LeoPic
+          <div
+            class="ls-one__space-pic-1"
+            :class="{
+              'ls-one__space-pic-1--enter': isSpaceEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic3_1_bg"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
+          </div>
+
+          <div
+            class="ls-one__space-pic-2"
+            :class="{
+              'ls-one__space-pic-2--enter': isSpaceEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic3_2_bg"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
+          </div>
+
+          <!-- <LeoPic
             class="leo-section-bg"
             src="img/newspaceera2025_pic3_1_bg"
             :webp="false"
@@ -93,7 +130,7 @@ function onDialogClose() {
                 />
               </template>
             </LeoSvgPathAnimation>
-          </div>
+          </div> -->
         </div>
       </template>
       <template #intro>
@@ -299,6 +336,45 @@ function onDialogClose() {
 
 <style lang="scss">
 .ls-one {
+  &__space-pic-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(15deg);
+    transition: transform 1s ease;
+
+    &--enter {
+      /* rotate 15deg => 0 */
+      transform: rotate(0deg);
+      transition: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right;
+    }
+  }
+
+  &__space-pic-2 {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateX(10%);
+    transition: transform 5s ease;
+
+    &--enter {
+      /* fly from left 10% to left 90% */
+      transform: translateX(50%);
+      transition: 0;
+    }
+
+    img {
+      width: auto;
+    }
+  }
+
   &__dialog {
     width: max-content;
 

@@ -46,10 +46,17 @@ function handleSatelliteContent(isIntersecting: boolean) {
             :height="450"
           />
           <div class="relative z-10">
-            <LeoSvgPathAnimation :element-number="3">
-              <template #element-1>1</template>
-              <template #element-2>2</template>
-              <template #element-3>3</template>
+            <LeoSvgPathAnimation :element-number="1">
+              <template #element-1>
+                <LeoPic
+                  src="img/newspaceera2025_pic8_2_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="450"
+                  :height="450"
+                />
+              </template>
             </LeoSvgPathAnimation>
           </div>
         </div>

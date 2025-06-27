@@ -29,10 +29,27 @@ function handleTranshFloatEnter(enter: boolean) {
             :height="450"
           />
           <div class="relative z-10">
-            <LeoSvgPathAnimation :element-number="3">
-              <template #element-1>1</template>
-              <template #element-2>2</template>
-              <template #element-3>3</template>
+            <LeoSvgPathAnimation :element-number="2">
+              <template #element-1>
+                <LeoPic
+                  src="img/newspaceera2025_pic13_2_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="450"
+                  :height="450"
+                />
+              </template>
+              <template #element-2>
+                <LeoPic
+                  src="img/newspaceera2025_pic13_3_bg"
+                  ext="png"
+                  :webp="false"
+                  :use2x="false"
+                  :width="450"
+                  :height="450"
+                />
+              </template>
             </LeoSvgPathAnimation>
           </div>
         </div>
@@ -58,10 +75,10 @@ function handleTranshFloatEnter(enter: boolean) {
 
         <!-- trash float -->
         <div
-          class="ls-four__trash relative h-[calc(var(--init-screen-height)*1)]"
+          class="ls-four__trash relative h-[calc(var(--init-screen-height)*1)] overflow-hidden"
         >
           <div
-            class="absolute bottom-0 left-[50%] w-full flex translate-x-[-50%]"
+            class="ls-four__trash-bg absolute bottom-0 left-[50%] w-full flex translate-x-[-50%]"
           >
             <LeoPic
               src="img/newspaceera2025_pic14_bg"
@@ -161,6 +178,15 @@ function handleTranshFloatEnter(enter: boolean) {
 <style lang="scss">
 .ls-four {
   position: relative;
+
+  &__trash-bg {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom center;
+    }
+  }
 
   &__trash-float {
     width: 100%;
