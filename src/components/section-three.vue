@@ -126,7 +126,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
                   <!-- text -->
                   <div>
-                    <div class="leading-[600] text-2xl">
+                    <div class="text-2xl">
                       {{ str.falldownTitle }}
                     </div>
                     <div>{{ str.falldownDesc }}</div>
@@ -485,9 +485,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
     height: 100%;
     transform: translateX(-100%);
 
-    @include rwd-min(pad) {
+    /* @include rwd-min(pad) {
       width: 100%;
-    }
+    } */
   }
 
   &__fall-down-indicator-dot {
