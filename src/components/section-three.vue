@@ -109,24 +109,34 @@ function handleSatelliteContent(isIntersecting: boolean) {
               <p></p>
               <div>{{ str.p1ChartTitle }}</div>
               <ul>
-                <li class="flex items-center gap-2">
-                  <span class="rounded-full w-[18px] h-[18px] block bg-white" />
+                <li class="flex gap-2">
+                  <span
+                    class="rounded-full w-[18px] h-[18px] block shrink-0 mt-2 bg-white"
+                  />
                   <span>{{ str.p1ChartText1 }}</span>
                 </li>
-                <li class="flex items-center gap-2">
-                  <span class="rounded-full w-[18px] h-[18px] block bg-white" />
+                <li class="flex gap-2">
+                  <span
+                    class="rounded-full w-[18px] h-[18px] block shrink-0 mt-2 bg-white"
+                  />
                   <span>{{ str.p1ChartText2 }}</span>
                 </li>
-                <li class="flex items-center gap-2">
-                  <span class="rounded-full w-[18px] h-[18px] block bg-white" />
+                <li class="flex gap-2">
+                  <span
+                    class="rounded-full w-[18px] h-[18px] block shrink-0 mt-2 bg-white"
+                  />
                   <span>{{ str.p1ChartText3 }}</span>
                 </li>
-                <li class="flex items-center gap-2">
-                  <span class="rounded-full w-[18px] h-[18px] block bg-white" />
+                <li class="flex gap-2">
+                  <span
+                    class="rounded-full w-[18px] h-[18px] block shrink-0 mt-2 bg-white"
+                  />
                   <span>{{ str.p1ChartText4 }}</span>
                 </li>
-                <li class="flex items-center gap-2">
-                  <span class="rounded-full w-[18px] h-[18px] block bg-white" />
+                <li class="flex gap-2">
+                  <span
+                    class="rounded-full w-[18px] h-[18px] block shrink-0 mt-2 bg-white"
+                  />
                   <span>{{ str.p1ChartText5 }}</span>
                 </li>
               </ul>
@@ -185,7 +195,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
                   <!-- location pin -->
                   <div
-                    class="absolute left-[50%] bottom-0 flex items-center gap-2 mt-2 text-[#8D41D9] leading-bold"
+                    class="absolute left-[50%] bottom-0 flex items-center gap-2 mt-2 text-[#8D41D9] leading-bold whitespace-nowrap"
                   >
                     <svg
                       width="13"
@@ -214,8 +224,11 @@ function handleSatelliteContent(isIntersecting: boolean) {
         </div>
 
         <!-- 3d moon site -->
-        <div class="grid gird-cols-2 gap-4">
-          <div class="sticky top-0 min-h-[calc(var(--init-screen-height)*1)]">
+        <div class="grid">
+          <!-- moon -->
+          <div
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)]"
+          >
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
 
@@ -250,122 +263,124 @@ function handleSatelliteContent(isIntersecting: boolean) {
             </div> -->
 
             <div class="w-full md:w-[50%]">
-              <!-- 3d moon site part soviet -->
-              <LeoScrollTrigger
-                @change="handleChangeCategory($event, 'soviet')"
-              >
-                <div
-                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+              <div class="md:max-w-[800px]">
+                <!-- 3d moon site part soviet -->
+                <LeoScrollTrigger
+                  @change="handleChangeCategory($event, 'soviet')"
                 >
-                  <p>{{ str.p3t1 }}</p>
+                  <div
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                  >
+                    <p>{{ str.p3t1 }}</p>
 
-                  <div class="leo-section-sm">
-                    <LeoPic
-                      src="img/newspaceera2025_pic10_1"
-                      :webp="false"
-                      :use-prefix="false"
-                      :width="430"
-                      :height="120"
-                    />
-                    <p class="leo-caption">{{ str.p3Caption }}</p>
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_1"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p3Caption }}</p>
+                    </div>
+                    <p>{{ str.p3t2 }}</p>
                   </div>
-                  <p>{{ str.p3t2 }}</p>
-                </div>
-              </LeoScrollTrigger>
+                </LeoScrollTrigger>
 
-              <!-- 3d moon site part us -->
-              <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
-                <div
-                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                <!-- 3d moon site part us -->
+                <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
+                  <div
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                  >
+                    <p>{{ str.p4t1 }}</p>
+
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_2"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p4Caption1 }}</p>
+                    </div>
+                    <p>{{ str.p4t2 }}</p>
+
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_3"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p4Caption2 }}</p>
+                    </div>
+                    <p>{{ str.p4t3 }}</p>
+                  </div>
+                </LeoScrollTrigger>
+
+                <!-- 3d moon site part cn -->
+                <LeoScrollTrigger @change="handleChangeCategory($event, 'cn')">
+                  <div
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                  >
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_4"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p5Caption1 }}</p>
+                    </div>
+                    <p>{{ str.p5t2 }}</p>
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_5"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p5Caption2 }}</p>
+                    </div>
+                  </div>
+                </LeoScrollTrigger>
+
+                <!-- 3d moon site part others -->
+                <LeoScrollTrigger
+                  @change="handleChangeCategory($event, 'others')"
                 >
-                  <p>{{ str.p4t1 }}</p>
-
-                  <div class="leo-section-sm">
-                    <LeoPic
-                      src="img/newspaceera2025_pic10_2"
-                      :webp="false"
-                      :use-prefix="false"
-                      :width="430"
-                      :height="120"
-                    />
-                    <p class="leo-caption">{{ str.p4Caption1 }}</p>
+                  <div
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                  >
+                    <p>{{ str.p6t1 }}</p>
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_6"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p6Caption1 }}</p>
+                    </div>
+                    <p>{{ str.p6t2 }}</p>
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_7"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p6Caption2 }}</p>
+                    </div>
                   </div>
-                  <p>{{ str.p4t2 }}</p>
-
-                  <div class="leo-section-sm">
-                    <LeoPic
-                      src="img/newspaceera2025_pic10_3"
-                      :webp="false"
-                      :use-prefix="false"
-                      :width="430"
-                      :height="120"
-                    />
-                    <p class="leo-caption">{{ str.p4Caption2 }}</p>
-                  </div>
-                  <p>{{ str.p4t3 }}</p>
-                </div>
-              </LeoScrollTrigger>
-
-              <!-- 3d moon site part cn -->
-              <LeoScrollTrigger @change="handleChangeCategory($event, 'cn')">
-                <div
-                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
-                >
-                  <div class="leo-section-sm">
-                    <LeoPic
-                      src="img/newspaceera2025_pic10_4"
-                      :webp="false"
-                      :use-prefix="false"
-                      :width="430"
-                      :height="120"
-                    />
-                    <p class="leo-caption">{{ str.p5Caption1 }}</p>
-                  </div>
-                  <p>{{ str.p5t2 }}</p>
-                  <div class="leo-section-sm">
-                    <LeoPic
-                      src="img/newspaceera2025_pic10_5"
-                      :webp="false"
-                      :use-prefix="false"
-                      :width="430"
-                      :height="120"
-                    />
-                    <p class="leo-caption">{{ str.p5Caption2 }}</p>
-                  </div>
-                </div>
-              </LeoScrollTrigger>
-
-              <!-- 3d moon site part others -->
-              <LeoScrollTrigger
-                @change="handleChangeCategory($event, 'others')"
-              >
-                <div
-                  class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
-                >
-                  <p>{{ str.p6t1 }}</p>
-                  <div class="leo-section-sm">
-                    <LeoPic
-                      src="img/newspaceera2025_pic10_6"
-                      :webp="false"
-                      :use-prefix="false"
-                      :width="430"
-                      :height="120"
-                    />
-                    <p class="leo-caption">{{ str.p6Caption1 }}</p>
-                  </div>
-                  <p>{{ str.p6t2 }}</p>
-                  <div class="leo-section-sm">
-                    <LeoPic
-                      src="img/newspaceera2025_pic10_7"
-                      :webp="false"
-                      :use-prefix="false"
-                      :width="430"
-                      :height="120"
-                    />
-                    <p class="leo-caption">{{ str.p6Caption2 }}</p>
-                  </div>
-                </div>
-              </LeoScrollTrigger>
+                </LeoScrollTrigger>
+              </div>
             </div>
           </div>
         </div>
@@ -564,7 +579,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
     position: relative;
 
     @include rwd-min(md) {
-      transform: translateX(-25%);
+      transform: translateX(-20%);
     }
   }
 

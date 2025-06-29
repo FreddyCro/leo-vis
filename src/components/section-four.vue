@@ -73,6 +73,7 @@ function handleTranshFloatEnter(enter: boolean) {
           >
             <LeoPic
               src="img/newspaceera2025_pic13_3_bg"
+              :srcset="['pc']"
               ext="png"
               :webp="false"
               :use2x="false"
@@ -239,9 +240,14 @@ function handleTranshFloatEnter(enter: boolean) {
 
   &__space-pic-2 {
     position: absolute;
-    top: -30%;
-    left: 50%;
+    top: 0%;
+    left: 0%;
     transform: translate(-50%, 0);
+
+    @include rwd-min(md) {
+      top: -30%;
+      left: 50%;
+    }
 
     &--enter {
       transition: 3.5s ease;
