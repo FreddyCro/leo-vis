@@ -3,12 +3,21 @@ import { ref } from 'vue';
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
-import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import LeoPic from '@/components/leo-pic.vue';
 import str from '@/locales/section4.json';
 
+const isSpaceEnter = ref<boolean>(false);
+const isArticleEnter = ref<boolean>(false);
 const isTrashFloatEnter = ref(false);
+
+function handleChangeSpace(isIntersecting: boolean) {
+  isSpaceEnter.value = isIntersecting;
+}
+
+function handleChangeArticle(isIntersecting: boolean) {
+  isArticleEnter.value = isIntersecting;
+}
 
 function handleTranshFloatEnter(enter: boolean) {
   isTrashFloatEnter.value = enter;
@@ -17,40 +26,59 @@ function handleTranshFloatEnter(enter: boolean) {
 
 <template>
   <div id="debris" class="ls-four leo-article">
-    <LeoSectionLayout>
+    <LeoSectionLayout
+      @change-space="handleChangeSpace"
+      @change-article="handleChangeArticle"
+    >
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
-          <LeoPic
-            class="leo-section-bg"
-            src="img/newspaceera2025_pic13_1_bg"
-            :webp="false"
-            :use2x="false"
-            :width="450"
-            :height="450"
-          />
-          <div class="relative z-10">
-            <LeoSvgPathAnimation :element-number="2">
-              <template #element-1>
-                <LeoPic
-                  src="img/newspaceera2025_pic13_2_bg"
-                  ext="png"
-                  :webp="false"
-                  :use2x="false"
-                  :width="450"
-                  :height="450"
-                />
-              </template>
-              <template #element-2>
-                <LeoPic
-                  src="img/newspaceera2025_pic13_3_bg"
-                  ext="png"
-                  :webp="false"
-                  :use2x="false"
-                  :width="450"
-                  :height="450"
-                />
-              </template>
-            </LeoSvgPathAnimation>
+          <div
+            class="ls-four__space-pic-1"
+            :class="{
+              'ls-four__space-pic-1--enter': isSpaceEnter,
+              'ls-four__space-pic-1--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              class="leo-section-bg"
+              src="img/newspaceera2025_pic13_1_bg"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
+          </div>
+          <div
+            class="ls-four__space-pic-2"
+            :class="{
+              'ls-four__space-pic-2--enter': isSpaceEnter,
+              'ls-four__space-pic-2--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic13_2_bg"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
+          </div>
+          <div
+            class="ls-four__space-pic-3"
+            :class="{
+              'ls-four__space-pic-3--enter': isSpaceEnter,
+              'ls-four__space-pic-3--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic13_3_bg"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
           </div>
         </div>
       </template>
@@ -178,6 +206,78 @@ function handleTranshFloatEnter(enter: boolean) {
 <style lang="scss">
 .ls-four {
   position: relative;
+
+  &__space-pic-1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.15) rotate(5deg);
+
+    &--enter {
+      /* rotate 15deg => 0 */
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease;
+    }
+
+    &--under {
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right;
+    }
+  }
+
+  &__space-pic-2 {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    &--enter {
+      transition: 3.5s ease;
+      transform: translate(0%, 100%);
+    }
+
+    &--under {
+      transition: 3.5s ease;
+      transform: translate(50%, 200%);
+    }
+
+    img {
+      width: auto;
+    }
+  }
+
+  &__space-pic-3 {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    transform: translate(-50%, 0);
+
+    &--enter {
+      transition: 3.5s ease;
+      transform: translate(75%, -50%);
+    }
+
+    &--under {
+      transition: 3.5s ease;
+      transform: translate(150%, -100%);
+    }
+
+    img {
+      width: auto;
+    }
+  }
 
   &__trash-bg {
     img {

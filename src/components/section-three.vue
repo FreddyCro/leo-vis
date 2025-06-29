@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
-import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import Leo3dMoonSite from '@/components/leo-3d-moon-site.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import LeoPic from '@/components/leo-pic.vue';
@@ -14,6 +13,8 @@ type MoonSiteCategory = 'all' | 'soviet' | 'us' | 'cn' | 'others';
 const currentCategory = ref<MoonSiteCategory>('soviet');
 const isMoonSvgEnter = ref(false);
 const isSatelliteEnter = ref(false);
+const isSpaceEnter = ref<boolean>(false);
+const isArticleEnter = ref<boolean>(false);
 const labels = {
   soviet: { text: str.moonLabelSoviet, color: '#FFFB18' },
   us: { text: str.moonLabelUSA, color: '#0800FF' },
@@ -22,6 +23,14 @@ const labels = {
   japan: { text: str.moonLabelJapan, color: '#B42EF1' },
   private: { text: str.moonLabelPrivate, color: '#00F4DC' },
 };
+
+function handleChangeSpace(isIntersecting: boolean) {
+  isSpaceEnter.value = isIntersecting;
+}
+
+function handleChangeArticle(isIntersecting: boolean) {
+  isArticleEnter.value = isIntersecting;
+}
 
 function handleChangeCategory(
   isIntersecting: boolean,
@@ -42,30 +51,42 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
 <template>
   <div id="moon" class="ls-three leo-article">
-    <LeoSectionLayout>
+    <LeoSectionLayout
+      @change-space="handleChangeSpace"
+      @change-article="handleChangeArticle"
+    >
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
-          <LeoPic
-            class="leo-section-bg"
-            src="img/newspaceera2025_pic8_1_bg"
-            :webp="false"
-            :use2x="false"
-            :width="450"
-            :height="450"
-          />
-          <div class="relative z-10">
-            <LeoSvgPathAnimation :element-number="1">
-              <template #element-1>
-                <LeoPic
-                  src="img/newspaceera2025_pic8_2_bg"
-                  ext="png"
-                  :webp="false"
-                  :use2x="false"
-                  :width="450"
-                  :height="450"
-                />
-              </template>
-            </LeoSvgPathAnimation>
+          <div
+            class="ls-three__space-pic-1"
+            :class="{
+              'ls-three__space-pic-1--enter': isSpaceEnter,
+              'ls-three__space-pic-1--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic8_1_bg"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
+          </div>
+          <div
+            class="ls-three__space-pic-2"
+            :class="{
+              'ls-three__space-pic-2--enter': isSpaceEnter,
+              'ls-three__space-pic-2--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic8_2_bg"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
           </div>
         </div>
       </template>
@@ -488,6 +509,57 @@ function handleSatelliteContent(isIntersecting: boolean) {
 @use '@/assets/styles/mixins';
 
 .ls-three {
+  &__space-pic-1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.15) rotate(-5deg);
+
+    &--enter {
+      /* rotate 15deg => 0 */
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+      transition: 2s ease;
+    }
+
+    &--under {
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right;
+    }
+  }
+
+  &__space-pic-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, 0);
+
+    &--enter {
+      transition: 3.5s ease;
+      transform: translate(100%, 25%);
+    }
+
+    &--under {
+      transition: 3.5s ease;
+      transform: translate(150%, 100%);
+    }
+
+    img {
+      width: auto;
+    }
+  }
+
   &__3d-moon-site {
     position: relative;
 

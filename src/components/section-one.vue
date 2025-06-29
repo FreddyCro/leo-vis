@@ -54,9 +54,14 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 const currentCategory = ref<string>(SATELLITE_LABEL_ALL);
 const showDialog = ref<boolean>(false);
 const isSpaceEnter = ref<boolean>(false);
+const isArticleEnter = ref<boolean>(false);
 
 function handleChangeSpace(isIntersecting: boolean) {
   isSpaceEnter.value = isIntersecting;
+}
+
+function handleChangeArticle(isIntersecting: boolean) {
+  isArticleEnter.value = isIntersecting;
 }
 
 function handleChangeCategory(isIntersecting: boolean, category: string) {
@@ -75,14 +80,17 @@ function onDialogClose() {
 
 <template>
   <div id="economic" class="ls-one leo-article">
-    <LeoSectionLayout @change-space="handleChangeSpace">
+    <LeoSectionLayout
+      @change-space="handleChangeSpace"
+      @change-article="handleChangeArticle"
+    >
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
           <div
             class="ls-one__space-pic-1"
             :class="{
               'ls-one__space-pic-1--enter': isSpaceEnter,
-              'ls-one__space-pic-1--under': false,
+              'ls-one__space-pic-1--under': isArticleEnter,
             }"
           >
             <LeoPic
@@ -98,7 +106,7 @@ function onDialogClose() {
             class="ls-one__space-pic-2"
             :class="{
               'ls-one__space-pic-2--enter': isSpaceEnter,
-              'ls-one__space-pic-2--under': false,
+              'ls-one__space-pic-2--under': isArticleEnter,
             }"
           >
             <LeoPic
@@ -110,29 +118,6 @@ function onDialogClose() {
               :height="450"
             />
           </div>
-
-          <!-- <LeoPic
-            class="leo-section-bg"
-            src="img/newspaceera2025_pic3_1_bg"
-            :webp="false"
-            :use2x="false"
-            :width="450"
-            :height="450"
-          />
-          <div class="relative z-10">
-            <LeoSvgPathAnimation :element-number="1">
-              <template #element-1>
-                <LeoPic
-                  src="img/newspaceera2025_pic3_2_bg"
-                  ext="png"
-                  :webp="false"
-                  :use2x="false"
-                  :width="450"
-                  :height="450"
-                />
-              </template>
-            </LeoSvgPathAnimation>
-          </div> -->
         </div>
       </template>
       <template #intro>
@@ -347,17 +332,21 @@ function onDialogClose() {
     top: 0;
     right: 0;
     width: 100%;
+    height: 100%;
     opacity: 0;
     transform: scale(1.15) rotate(5deg);
-    transition: 2s ease;
 
     &--enter {
       /* rotate 15deg => 0 */
       transform: rotate(0deg);
       opacity: 1;
+      transition: 2s ease-in-out;
     }
 
     &--under {
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease-in-out;
     }
 
     img {
@@ -373,16 +362,31 @@ function onDialogClose() {
     top: 10%;
     left: 10%;
     opacity: 0;
-    transform: translateX(10%);
-    transition: 3.5s ease;
+    transform: translate(-30%, -10%) rotate(10deg);
+
+    @include rwd-min(md) {
+      transform: translate(50%, -10%) rotate(10deg);
+    }
 
     &--enter {
       /* fly from left 10% to left 90% */
-      transform: translateX(50%);
+      transform: translate(30%, -10%) rotate(0deg);
       opacity: 1;
+      transition: 3.5s ease-in-out;
+
+      @include rwd-min(md) {
+        transform: translate(60%, -0%) rotate(0deg);
+      }
     }
 
     &--under {
+      transform: translate(0%, -100%) rotate(0deg);
+      opacity: 1;
+      transition: 3s ease-in-out;
+
+      @include rwd-min(md) {
+        transform: translate(-20%, -30%) rotate(0deg);
+      }
     }
 
     img {
@@ -409,7 +413,7 @@ function onDialogClose() {
       inset: 0;
       border-radius: 20px;
       background: linear-gradient(225deg, #8d41d9 0%, #00f4dc 100%);
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease-in-out;
     }
   }
 
@@ -421,7 +425,7 @@ function onDialogClose() {
     border-radius: 20px;
 
     &--gray {
-      transition: 0.25s ease-in-out;
+      transition: 0.25s ease-in-out-in-out;
 
       &:hover {
         background-color: #1b1b1b;

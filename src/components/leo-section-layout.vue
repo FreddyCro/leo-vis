@@ -11,11 +11,17 @@ defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'changeSpace', isIntersecting: boolean): void;
+  (e: 'changeArticle', isIntersecting: boolean): void;
 }>();
 
 function handleChangeSpace(isIntersecting: boolean) {
   // emit changeSpace event
   emit('changeSpace', isIntersecting);
+}
+
+function handleChangeArticle(isIntersecting: boolean) {
+  // emit changeArticle event
+  emit('changeArticle', isIntersecting);
 }
 </script>
 
@@ -48,21 +54,23 @@ function handleChangeSpace(isIntersecting: boolean) {
       </div>
     </div>
 
-    <template v-if="isCustomArticle">
-      <slot name="article" />
-    </template>
-    <div
-      v-else
-      class="relative z-30 mt-[calc(var(--init-screen-height)*0.8)] bg-black"
-    >
-      <div
-        class="h-[calc(var(--init-screen-height)*0.15)] -translate-y-[calc(var(--init-screen-height)*0.14)] bg-gradient-to-b from-transparent to-black pointer-events-none"
-        role="presentation"
-      />
-      <div class="ls-layout-article-wrap">
+    <LeoScrollTrigger :threshold="0" @change="handleChangeArticle">
+      <template v-if="isCustomArticle">
         <slot name="article" />
+      </template>
+      <div
+        v-else
+        class="relative z-30 mt-[calc(var(--init-screen-height)*0.8)] bg-black"
+      >
+        <div
+          class="h-[calc(var(--init-screen-height)*0.15)] -translate-y-[calc(var(--init-screen-height)*0.14)] bg-gradient-to-b from-transparent to-black pointer-events-none"
+          role="presentation"
+        />
+        <div class="ls-layout-article-wrap">
+          <slot name="article" />
+        </div>
       </div>
-    </div>
+    </LeoScrollTrigger>
   </div>
 </template>
 

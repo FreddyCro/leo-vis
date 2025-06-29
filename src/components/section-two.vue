@@ -1,49 +1,79 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
-import LeoSvgPathAnimation from '@/components/leo-svg-path-animation.vue';
 import LeoReadMore from '@/components/leo-read-more.vue';
 import LeoPic from '@/components/leo-pic.vue';
 import str from '@/locales/section2.json';
+
+const isSpaceEnter = ref<boolean>(false);
+const isArticleEnter = ref<boolean>(false);
+
+function handleChangeSpace(isIntersecting: boolean) {
+  isSpaceEnter.value = isIntersecting;
+}
+
+function handleChangeArticle(isIntersecting: boolean) {
+  isArticleEnter.value = isIntersecting;
+}
 </script>
 
 <template>
   <div id="security" class="ls-two leo-article">
-    <LeoSectionLayout>
+    <LeoSectionLayout
+      @change-space="handleChangeSpace"
+      @change-article="handleChangeArticle"
+    >
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
-          <LeoPic
-            class="leo-section-bg"
-            src="img/newspaceera2025_pic5_1_bg"
-            :webp="false"
-            :use2x="false"
-            :width="450"
-            :height="450"
-          />
-          <div class="relative z-10">
-            <div class="absolute inset-0">
-              <LeoPic
-                class="ls-two__moon"
-                src="img/newspaceera2025_pic5_2_bg"
-                ext="png"
-                :webp="false"
-                :use2x="false"
-                :width="450"
-                :height="450"
-              />
-            </div>
-            <LeoSvgPathAnimation :element-number="1">
-              <template #element-1>
-                <LeoPic
-                  src="img/newspaceera2025_pic5_3_bg"
-                  ext="png"
-                  :webp="false"
-                  :use2x="false"
-                  :width="450"
-                  :height="450"
-                />
-              </template>
-            </LeoSvgPathAnimation>
+          <div
+            class="ls-two__space-pic-1"
+            :class="{
+              'ls-two__space-pic-1--enter': isSpaceEnter,
+              'ls-two__space-pic-1--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic5_1_bg"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
+          </div>
+
+          <div
+            class="ls-two__space-pic-2"
+            :class="{
+              'ls-two__space-pic-2--enter': isSpaceEnter,
+              'ls-two__space-pic-2--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic5_2_bg"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
+          </div>
+
+          <div
+            class="ls-two__space-pic-3"
+            :class="{
+              'ls-two__space-pic-3--enter': isSpaceEnter,
+              'ls-two__space-pic-3--under': isArticleEnter,
+            }"
+          >
+            <LeoPic
+              src="img/newspaceera2025_pic5_3_bg"
+              ext="png"
+              :webp="false"
+              :use2x="false"
+              :width="450"
+              :height="450"
+            />
           </div>
         </div>
       </template>
@@ -150,6 +180,101 @@ import str from '@/locales/section2.json';
 
 <style lang="scss">
 .ls-two {
+  &__space-pic-1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.15) rotate(-5deg);
+
+    &--enter {
+      /* rotate 15deg => 0 */
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease-in-out;
+    }
+
+    &--under {
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease-in-out;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right;
+    }
+  }
+
+  &__space-pic-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: rotate(5deg);
+
+    &--enter {
+      /* rotate 15deg => 0 */
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease-in-out;
+    }
+
+    &--under {
+      transform: rotate(0deg);
+      opacity: 1;
+      transition: 2s ease-in-out;
+    }
+
+    img {
+      width: auto;
+    }
+  }
+
+  &__space-pic-3 {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    opacity: 0;
+    transform: translate(0%, 0%) rotate(20deg);
+
+    @include rwd-min(md) {
+      transform: translate(0%, 0%) rotate(20deg);
+    }
+
+    &--enter {
+      /* rotate 15deg => 0 */
+      transform: translate(0%, 0%) rotate(0);
+      opacity: 1;
+      transition: 3.5s ease-in-out;
+
+      @include rwd-min(md) {
+        transform: translate(10%, 5%) rotate(0deg);
+      }
+    }
+
+    &--under {
+      transform: translate(50%, 50%) rotate(0deg);
+      opacity: 1;
+      transition: 3.5s ease-in-out;
+
+      @include rwd-min(md) {
+        transform: translate(50%, 50%) rotate(0deg);
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right;
+    }
+  }
+
   &__moon {
     img {
       width: auto;
