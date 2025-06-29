@@ -53,10 +53,10 @@ function handleChangeSpace(isIntersecting: boolean) {
     </template>
     <div
       v-else
-      class="relative z-30 mt-[calc(var(--init-screen-height)*0.14)] bg-black"
+      class="relative z-30 mt-[calc(var(--init-screen-height)*0.8)] bg-black"
     >
       <div
-        class="h-[calc(var(--init-screen-height)*0.15)] -translate-y-[calc(var(--init-screen-height)*0.14)] bg-gradient-to-b from-transparent to-black"
+        class="h-[calc(var(--init-screen-height)*0.15)] -translate-y-[calc(var(--init-screen-height)*0.14)] bg-gradient-to-b from-transparent to-black pointer-events-none"
         role="presentation"
       />
       <div class="ls-layout-article-wrap">

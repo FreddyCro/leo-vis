@@ -8,7 +8,7 @@ import str from '@/locales/section2.json';
 </script>
 
 <template>
-  <div class="ls-two leo-article">
+  <div id="security" class="ls-two leo-article">
     <LeoSectionLayout>
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">

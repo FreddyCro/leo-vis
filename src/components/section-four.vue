@@ -16,7 +16,7 @@ function handleTranshFloatEnter(enter: boolean) {
 </script>
 
 <template>
-  <div class="ls-four leo-article">
+  <div id="debris" class="ls-four leo-article">
     <LeoSectionLayout>
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">

@@ -74,7 +74,7 @@ function onDialogClose() {
 </script>
 
 <template>
-  <div class="ls-one leo-article">
+  <div id="economic" class="ls-one leo-article">
     <LeoSectionLayout @change-space="handleChangeSpace">
       <template #space>
         <div class="relative w-full h-[calc(var(--init-screen-height)*1)]">
@@ -82,6 +82,7 @@ function onDialogClose() {
             class="ls-one__space-pic-1"
             :class="{
               'ls-one__space-pic-1--enter': isSpaceEnter,
+              'ls-one__space-pic-1--under': false,
             }"
           >
             <LeoPic
@@ -97,6 +98,7 @@ function onDialogClose() {
             class="ls-one__space-pic-2"
             :class="{
               'ls-one__space-pic-2--enter': isSpaceEnter,
+              'ls-one__space-pic-2--under': false,
             }"
           >
             <LeoPic
@@ -150,24 +152,26 @@ function onDialogClose() {
 
             <!-- trigger all -->
             <LeoScrollTrigger
-              scroll-height="100vh"
+              class="my-[calc(var(--init-screen-height)*0.6)]"
+              scroll-height="calc(var(--init-screen-height)*1)"
               @change="handleChangeCategory($event, SATELLITE_LABEL_ALL)"
             >
               <div class="leo-container-pc">
                 <div class="leo-text-box">
-                  <p>{{ str.p1t1 }}</p>
+                  <p v-html="str.p1t1" />
                 </div>
               </div>
             </LeoScrollTrigger>
 
             <!-- trigger LEO -->
             <LeoScrollTrigger
-              scroll-height="100vh"
+              class="my-[calc(var(--init-screen-height)*0.6)]"
+              scroll-height="calc(var(--init-screen-height)*1)"
               @change="handleChangeCategory($event, SATELLITE_LABEL_APOGEE)"
             >
               <div class="leo-container-pc">
                 <div class="leo-text-box">
-                  <p>{{ str.p2t1 }}</p>
+                  <p v-html="str.p2t1" />
                   <p>{{ str.p2t2 }}</p>
                 </div>
               </div>
@@ -175,26 +179,28 @@ function onDialogClose() {
 
             <!-- trigger SpaceX -->
             <LeoScrollTrigger
-              scroll-height="100vh"
+              class="my-[calc(var(--init-screen-height)*0.6)]"
+              scroll-height="calc(var(--init-screen-height)*1)"
               @change="handleChangeCategory($event, SATELLITE_LABEL_STARLINK)"
             >
               <div class="leo-container-pc">
                 <div class="leo-text-box">
-                  <p>{{ str.p3t1 }}</p>
+                  <p v-html="str.p3t1" />
                 </div>
               </div>
             </LeoScrollTrigger>
 
             <!-- trigger OneWeb, Kuiper -->
             <LeoScrollTrigger
-              scroll-height="100vh"
+              class="my-[calc(var(--init-screen-height)*0.6)]"
+              scroll-height="calc(var(--init-screen-height)*1)"
               @change="
                 handleChangeCategory($event, SATELLITE_LABEL_ONEWEB_KUIPER)
               "
             >
-              <div class="leo-container">
+              <div class="leo-container-pc">
                 <div class="leo-text-box">
-                  <p>{{ str.p4t1 }}</p>
+                  <p v-html="str.p4t1" />
                 </div>
               </div>
             </LeoScrollTrigger>
@@ -339,14 +345,19 @@ function onDialogClose() {
   &__space-pic-1 {
     position: absolute;
     top: 0;
-    left: 0;
-    transform: rotate(15deg);
-    transition: transform 1s ease;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    transform: scale(1.15) rotate(5deg);
+    transition: 2s ease;
 
     &--enter {
       /* rotate 15deg => 0 */
       transform: rotate(0deg);
-      transition: 0;
+      opacity: 1;
+    }
+
+    &--under {
     }
 
     img {
@@ -359,15 +370,19 @@ function onDialogClose() {
 
   &__space-pic-2 {
     position: absolute;
-    top: 50%;
+    top: 10%;
     left: 10%;
+    opacity: 0;
     transform: translateX(10%);
-    transition: transform 5s ease;
+    transition: 3.5s ease;
 
     &--enter {
       /* fly from left 10% to left 90% */
       transform: translateX(50%);
-      transition: 0;
+      opacity: 1;
+    }
+
+    &--under {
     }
 
     img {

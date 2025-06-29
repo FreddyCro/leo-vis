@@ -10,7 +10,12 @@ interface Props {
 
 defineProps<Props>();
 
-const tocList = [str1.title, str2.title, str3.title, str4.title];
+const tocList = [
+  { text: str1.title, link: '#economic' },
+  { text: str2.title, link: '#security' },
+  { text: str3.title, link: '#moon' },
+  { text: str4.title, link: '#debris' },
+];
 </script>
 
 <template>
@@ -32,7 +37,7 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
       class="ls-intro__content h-full flex items-center justify-center md:grid md:grid-cols-5"
     >
       <div
-        class="ls-intro__content-title md:col-span-4 text-center md:text-left md:pl-[107px]"
+        class="ls-intro__content-title md:col-span-4 text-center md:text-left md:pl-[107px] 3xl:pl-[300px]"
       >
         <slot />
       </div>
@@ -50,24 +55,26 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
       >
         <li
           v-for="(item, index) in tocList"
-          :key="item"
+          :key="item.link"
           class="ls-intro__toc-item relative"
           :class="{ 'ls-intro__toc-item--active': chapter === `0${index + 1}` }"
         >
-          <div class="ls-intro__toc-item-dot" role="presentation">
-            <!-- outer -->
-            <div class="ls-intro__toc-item-dot-out" />
-            <!-- inner -->
-            <div class="ls-intro__toc-item-dot-in" />
-          </div>
-          <div class="ls-intro__toc-item-content">
-            <span class="ls-intro__toc-item-content-number">
-              0{{ index + 1 }}
-            </span>
-            <span>
-              {{ item }}
-            </span>
-          </div>
+          <a :href="item.link">
+            <div class="ls-intro__toc-item-dot" role="presentation">
+              <!-- outer -->
+              <div class="ls-intro__toc-item-dot-out" />
+              <!-- inner -->
+              <div class="ls-intro__toc-item-dot-in" />
+            </div>
+            <div class="ls-intro__toc-item-content">
+              <span class="ls-intro__toc-item-content-number">
+                0{{ index + 1 }}
+              </span>
+              <span>
+                {{ item.text }}
+              </span>
+            </div>
+          </a>
         </li>
       </ul>
 
@@ -121,6 +128,10 @@ const tocList = [str1.title, str2.title, str3.title, str4.title];
       padding-bottom: 66px;
       padding-left: 107px;
       border-top: 1px solid var(--white);
+    }
+
+    @include rwd-min(3xl) {
+      padding-left: 300px;
     }
   }
 

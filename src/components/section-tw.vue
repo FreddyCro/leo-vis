@@ -38,7 +38,7 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 </script>
 
 <template>
-  <div class="ls-tw leo-article text-[#404040]">
+  <div id="taiwan" class="ls-tw leo-article text-[#404040]">
     <div class="leo-container">
       <div class="leo-section">
         <h2 class="leo-h3 text-center font-medium">{{ str.title1 }}</h2>

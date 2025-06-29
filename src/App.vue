@@ -58,3 +58,10 @@ function setInitScreenHeight() {
     <LeoFooter />
   </div>
 </template>
+
+<style lang="scss">
+.app {
+  max-width: 2560px;
+  margin: 0 auto;
+}
+</style>

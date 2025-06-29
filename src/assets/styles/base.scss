@@ -71,12 +71,6 @@ canvas {
   }
 }
 
-.leo-h1 {
-}
-
-.leo-h2 {
-}
-
 .leo-h3 {
   font-size: 22px;
   line-height: 30px;
@@ -102,7 +96,14 @@ canvas {
   }
 }
 
+.leo-h1,
+.leo-h2,
+.leo-h3,
+.leo-h4,
 .leo-h5 {
+  &--no-mb {
+    margin-bottom: 0;
+  }
 }
 
 p.leo-caption {
