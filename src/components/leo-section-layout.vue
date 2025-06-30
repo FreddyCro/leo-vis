@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
+import LeoPic from '@/components/leo-pic.vue';
 
 interface Props {
   isCustomSpace?: boolean;
@@ -34,8 +35,16 @@ function handleChangeArticle(isIntersecting: boolean) {
     />
 
     <div
-      class="sticky top-0 h-[var(--ls-layout-header-h)] bg-[url('./img/bg_star.jpg')] bg-cover bg-center overflow-hidden"
+      class="sticky top-0 h-[var(--ls-layout-header-h)] overflow-hidden relative"
     >
+      <LeoPic
+        classname="absolute inset-0 w-full h-full object-cover"
+        src="bg_star"
+        :use2x="false"
+        :webp="false"
+        loading="eager"
+      />
+
       <template v-if="isCustomSpace">
         <slot name="space" />
       </template>
