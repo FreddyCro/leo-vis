@@ -4,9 +4,22 @@ import {
   NmdHeader,
   NmdHeaderShare,
   NmdMenu,
+  NmdMenuItem,
   NmdProgressbar,
 } from '@udn-digital-center/common-components';
 import { shareURL_fb, shareURL_line, shareURL_twitter } from '@/utils/share';
+import str from '@/locales/common.json';
+
+const menu = [
+  {
+    title: str.navbarMenu1Text,
+    link: str.navbarMenu1Link,
+  },
+  {
+    title: str.navbarMenu2Text,
+    link: str.navbarMenu2Link,
+  },
+];
 </script>
 
 <template>
@@ -21,21 +34,9 @@ import { shareURL_fb, shareURL_line, shareURL_twitter } from '@/utils/share';
       <NmdHamburger />
     </NmdHeader>
     <NmdMenu>
-      <!-- <NmdMenuItem
-        v-for="(item, index) in [
-          '#Kaohsiung',
-          '#problems',
-          '#Taichung',
-          '#Tainan',
-          '#solutions',
-          strHeader.menuItem6Link,
-        ]"
-        :key="item"
-        :is-current="false"
-        :to="item"
-      >
-        {{ strHeader[`menuItem${index + 1}Title`] }}
-      </NmdMenuItem> -->
+      <NmdMenuItem v-for="(item, index) in menu" :key="index" :to="item.link">
+        {{ item.title }}
+      </NmdMenuItem>
     </NmdMenu>
   </div>
 </template>

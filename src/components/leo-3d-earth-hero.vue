@@ -12,6 +12,7 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['onReady']);
 const globeContainer = ref(null);
 const TARGET_ID = 'globe-viz';
 const GLOBE_TEXTURE_URL = './img/earth_night.jpg';
@@ -223,6 +224,9 @@ class GlobeController {
     };
 
     animateLoop();
+
+    // emit
+    emit('onReady');
 
     return this;
   }

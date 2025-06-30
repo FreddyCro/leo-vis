@@ -254,7 +254,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
           </div>
 
           <!-- article -->
-          <div class="relative flex justify-end">
+          <div
+            class="relative flex justify-end mt-[calc(var(--init-screen-height)*-0.8)]"
+          >
             <!-- reset 3d moon site -->
             <!-- <div class="w-[0]">
               <LeoScrollTrigger
@@ -269,7 +271,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'soviet')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[500px] mx-auto"
                   >
                     <p>{{ str.p3t1 }}</p>
 
@@ -290,7 +292,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                 <!-- 3d moon site part us -->
                 <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
                   >
                     <p>{{ str.p4t1 }}</p>
 
@@ -323,7 +325,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                 <!-- 3d moon site part cn -->
                 <LeoScrollTrigger @change="handleChangeCategory($event, 'cn')">
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
                   >
                     <div class="leo-section-sm">
                       <LeoPic
@@ -354,7 +356,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'others')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px]"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[800px] mx-auto"
                   >
                     <p>{{ str.p6t1 }}</p>
                     <div class="leo-section-sm">
@@ -701,8 +703,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__moon-svg-img {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    opacity: 0.3;
 
     &:first-child {
       position: absolute;
@@ -710,10 +711,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
       top: 0;
       width: 100%;
       height: 100%;
+      opacity: 0;
     }
 
     &--enter {
       opacity: 1;
+      transition: opacity 1s 0.1s ease-in-out;
     }
   }
 
@@ -743,8 +746,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
     top: 0;
     left: 0;
     width: $base-width-mob;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    opacity: 0.3;
 
     @include rwd-min(pad) {
       width: $base-width-pad;
@@ -756,6 +758,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
     &--enter {
       opacity: 1;
+      transition: opacity 1s 0.3s ease-in-out;
     }
 
     &--1 {
@@ -764,7 +767,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
       @include rwd-min(pad) {
         left: $base-x-pad;
-        top: $base-y-pad;
+        top: $base-y-pad + 1%;
       }
 
       @include rwd-min(lg) {
@@ -846,7 +849,6 @@ function handleSatelliteContent(isIntersecting: boolean) {
       padding: 40px;
       width: 100%;
       max-width: 530px;
-      margin: 500px auto;
     }
 
     @include rwd-max(md) {

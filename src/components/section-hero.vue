@@ -6,20 +6,35 @@ import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoOutline from '@/components/leo-outline.vue';
 import LeoPic from '@/components/leo-pic.vue';
+import LeoLoading from '@/components/leo-loading.vue';
 import str from '@/locales/section-hero.json';
 
+const isEarthReady = ref(false);
 const isZoomOut = ref(false);
 
 function onZoomOutIntersectChange(isIntersecting: boolean) {
   isZoomOut.value = isIntersecting;
 }
+
+function onEarthReady() {
+  isEarthReady.value = true;
+}
 </script>
 
 <template>
   <div class="ls-hero leo-article">
+    <div
+      class="relative z-10 transition-all duration-1000 ease-in-out"
+      :class="{
+        'opacity-0 pointer-events-none': isEarthReady,
+        'opacity-100': !isEarthReady,
+      }"
+    >
+      <LeoLoading />
+    </div>
     <LeoSectionLayout>
       <template #space>
-        <Leo3dEarthHero :is-zoom-out="isZoomOut" />
+        <Leo3dEarthHero :is-zoom-out="isZoomOut" @on-ready="onEarthReady" />
       </template>
       <template #intro>
         <div

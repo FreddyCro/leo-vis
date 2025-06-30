@@ -336,7 +336,6 @@ onUnmounted(() => {
 
 function handleResize() {
   if (moonController) {
-    console.log('Resizing moon controller...');
     moonController.resize();
   }
 }
