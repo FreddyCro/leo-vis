@@ -234,7 +234,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
               <!-- label -->
               <div
-                class="absolute left-0 md:left-[50%] bottom-[16%] flex gap-2 translate-x-[-50%]"
+                class="absolute left-0 left-[50%] bottom-[16%] flex gap-2 translate-x-[-50%] whitespace-nowrap"
               >
                 <div
                   v-for="country in labels"
