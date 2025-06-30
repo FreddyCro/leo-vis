@@ -21,7 +21,9 @@ const props = defineProps({
 
 const MOON_ROOT_ID = 'moon-vis';
 const MOON_IMG_PATH = './img/moon_4k.jpg';
-const MOON_POSITION_Z = 500; // Default camera Z position
+// Default camera Z position
+const MOON_POSITION_Z = 700;
+// const MOON_POSITION_Z = 700; // mob
 let moonController = null;
 
 class MoonController {

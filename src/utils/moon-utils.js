@@ -56,10 +56,12 @@ function getScrollbarWidth() {
 }
 
 function getCanvasSize() {
-  const WIDTH_OFFSET = 5; // prevent canvas from touching the scrollbar
+  const WIDTH_OFFSET = 2; // prevent canvas from touching the scrollbar
   const width =
     document.documentElement.clientWidth - getScrollbarWidth() - WIDTH_OFFSET;
-  const height = window.innerHeight;
+  // const height = window.innerHeight;
+  const height =
+    document.querySelector('.leo-moon-site').clientHeight || window.innerHeight;
   return { width, height };
 }
 

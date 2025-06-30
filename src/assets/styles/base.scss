@@ -71,12 +71,6 @@ canvas {
   }
 }
 
-.leo-h1 {
-}
-
-.leo-h2 {
-}
-
 .leo-h3 {
   font-size: 22px;
   line-height: 30px;
@@ -102,7 +96,14 @@ canvas {
   }
 }
 
+.leo-h1,
+.leo-h2,
+.leo-h3,
+.leo-h4,
 .leo-h5 {
+  &--no-mb {
+    margin-bottom: 0;
+  }
 }
 
 p.leo-caption {
@@ -206,16 +207,4 @@ p.leo-caption {
 
   // blur 10px
   @include mixins.blur(10px);
-}
-
-.leo-section-bg {
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: right center;
-  }
 }

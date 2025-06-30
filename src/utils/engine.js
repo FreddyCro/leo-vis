@@ -363,7 +363,11 @@ export class Engine {
     // this.controls.enableZoom = false;
     this.controls.enabled = false;
     this.controls.addEventListener('change', () => this.render());
-    this.camera.position.z = -15000;
+    // this.camera.position.z = -35000; // mob
+    // this.camera.position.z = -15000 // pc;
+    this.camera.position.z = window.matchMedia('(max-width: 768px)').matches
+      ? -35000
+      : -15000;
     this.camera.position.x = 15000;
     this.camera.lookAt(0, 0, 0);
   }

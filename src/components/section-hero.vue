@@ -6,20 +6,40 @@ import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
 import LeoOutline from '@/components/leo-outline.vue';
 import LeoPic from '@/components/leo-pic.vue';
+import LeoLoading from '@/components/leo-loading.vue';
 import str from '@/locales/section-hero.json';
 
+const isEarthReady = ref(false);
 const isZoomOut = ref(false);
+const isFlourishChartIntersecting = ref(false);
 
 function onZoomOutIntersectChange(isIntersecting: boolean) {
   isZoomOut.value = isIntersecting;
+}
+
+function onFlourishChartIntersectChange(isIntersecting: boolean) {
+  isFlourishChartIntersecting.value = isIntersecting;
+}
+
+function onEarthReady() {
+  isEarthReady.value = true;
 }
 </script>
 
 <template>
   <div class="ls-hero leo-article">
+    <div
+      class="relative z-10 transition-all duration-1000 ease-in-out"
+      :class="{
+        'opacity-0 pointer-events-none': isEarthReady,
+        'opacity-100': !isEarthReady,
+      }"
+    >
+      <LeoLoading />
+    </div>
     <LeoSectionLayout>
       <template #space>
-        <Leo3dEarthHero :is-zoom-out="isZoomOut" />
+        <Leo3dEarthHero :is-zoom-out="isZoomOut" @on-ready="onEarthReady" />
       </template>
       <template #intro>
         <div
@@ -80,11 +100,14 @@ function onZoomOutIntersectChange(isIntersecting: boolean) {
             </div>
           </div>
 
-          <div class="min-h-[calc(var(--init-screen-height)*2.5)]">
+          <div class="min-h-[calc(var(--init-screen-height)*2)]">
             <div
               class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
             >
-              <figure class="w-full">
+              <figure
+                class="w-full transition-all duration-500 ease-in-out"
+                :class="{ 'opacity-0': !isFlourishChartIntersecting }"
+              >
                 <div
                   class="flourish-embed flourish-chart"
                   data-src="visualisation/23264843"
@@ -92,10 +115,16 @@ function onZoomOutIntersectChange(isIntersecting: boolean) {
               </figure>
             </div>
 
-            <!-- scroll over chart -->
-            <div class="relative z-10 leo-text-box">
-              <p>{{ str.p2t1 }}</p>
-            </div>
+            <LeoScrollTrigger
+              class="mt-[calc(var(--init-screen-height)*-0.35)] md:mt-[calc(var(--init-screen-height)*-0.15)]"
+              scroll-height="calc(var(--init-screen-height) * 1)"
+              @change="onFlourishChartIntersectChange"
+            >
+              <!-- scroll over chart -->
+              <div class="relative z-10 leo-text-box">
+                <p>{{ str.p2t1 }}</p>
+              </div>
+            </LeoScrollTrigger>
           </div>
 
           <!-- rest article -->

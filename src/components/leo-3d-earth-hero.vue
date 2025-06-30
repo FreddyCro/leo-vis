@@ -12,6 +12,7 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['onReady']);
 const globeContainer = ref(null);
 const TARGET_ID = 'globe-viz';
 const GLOBE_TEXTURE_URL = './img/earth_night.jpg';
@@ -224,6 +225,9 @@ class GlobeController {
 
     animateLoop();
 
+    // emit
+    emit('onReady');
+
     return this;
   }
 
@@ -367,7 +371,7 @@ onMounted(() => {
   window.addEventListener('resize', handleResize);
 
   observer = new IntersectionObserver(handleIntersectionObserver, {
-    threshold: 0.1,
+    threshold: 0,
   });
 
   observer.observe(globeContainer.value);
