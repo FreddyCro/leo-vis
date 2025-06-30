@@ -7,7 +7,8 @@ import { createGlowTexture } from './3d-utils';
 import circle from '@/assets/3d/circle.png';
 
 const EARTH_IMG_PATH = './img/earth_night.jpg';
-const SatelliteSize = 50;
+const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+const SatelliteSize = isDesktop ? 50 : 15;
 const MinutesPerDay = 1440;
 const ixpdotp = MinutesPerDay / (2.0 * 3.141592654);
 
@@ -40,11 +41,9 @@ export class Engine {
     this.render();
 
     window.addEventListener('resize', this.handleWindowResize);
-    window.addEventListener('pointerdown', this.handleMouseDown);
   }
 
   dispose() {
-    window.removeEventListener('pointerdown', this.handleMouseDown);
     window.removeEventListener('resize', this.handleWindowResize);
     // window.cancelAnimationFrame(this.requestID);
 
@@ -63,31 +62,6 @@ export class Engine {
     this.camera.updateProjectionMatrix();
 
     this.render();
-  };
-
-  handleMouseDown = (e) => {
-    const mouse = new THREE.Vector2(
-      (e.clientX / this.el.clientWidth) * 2 - 1,
-      -(e.clientY / this.el.clientHeight) * 2 + 1,
-    );
-
-    this.raycaster.setFromCamera(mouse, this.camera);
-
-    let station = null;
-
-    const intersects = this.raycaster.intersectObjects(
-      this.scene.children,
-      true,
-    );
-    if (intersects && intersects.length > 0) {
-      const picked = intersects[0].object;
-      if (picked) {
-        station = this._findStationFromMesh(picked);
-      }
-    }
-
-    const cb = this.options.onStationClicked;
-    if (cb) cb(station);
   };
 
   // __ API _________________________________________________________________
@@ -233,20 +207,20 @@ export class Engine {
 
     HIGHLIGHT_COLORS.forEach((color, idx) => {
       this.highlightedMaterials[idx + 1] = new THREE.SpriteMaterial({
-        map: createGlowTexture(), // this._satelliteSprite,
+        map: isDesktop ? createGlowTexture() : this._satelliteSprite,
         color,
         sizeAttenuation: false,
         depthWrite: false,
-        blending: THREE.AdditiveBlending,
+        blending: isDesktop ? THREE.AdditiveBlending : THREE.NormalBlending,
       });
     });
 
     this.material = new THREE.SpriteMaterial({
-      map: createGlowTexture(), // this._satelliteSprite,
+      map: isDesktop ? createGlowTexture() : this._satelliteSprite,
       color,
       sizeAttenuation: false,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: isDesktop ? THREE.AdditiveBlending : THREE.NormalBlending,
     });
 
     this.lastColor = color;
