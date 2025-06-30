@@ -179,7 +179,7 @@ export class Engine {
     color = color || this.options.defaultSatelliteColor;
     size = size || SatelliteSize;
     if (!this.geometry) {
-      this.geometry = new THREE.BoxBufferGeometry(size, size, size);
+      this.geometry = new THREE.BoxGeometry(size, size, size);
       this.material = new THREE.MeshPhongMaterial({
         color,
         emissive: 0xff4040,
