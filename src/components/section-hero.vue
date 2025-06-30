@@ -11,9 +11,14 @@ import str from '@/locales/section-hero.json';
 
 const isEarthReady = ref(false);
 const isZoomOut = ref(false);
+const isFlourishChartIntersecting = ref(false);
 
 function onZoomOutIntersectChange(isIntersecting: boolean) {
   isZoomOut.value = isIntersecting;
+}
+
+function onFlourishChartIntersectChange(isIntersecting: boolean) {
+  isFlourishChartIntersecting.value = isIntersecting;
 }
 
 function onEarthReady() {
@@ -95,11 +100,14 @@ function onEarthReady() {
             </div>
           </div>
 
-          <div class="min-h-[calc(var(--init-screen-height)*2.5)]">
+          <div class="min-h-[calc(var(--init-screen-height)*2)]">
             <div
               class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
             >
-              <figure class="w-full">
+              <figure
+                class="w-full transition-all duration-500 ease-in-out"
+                :class="{ 'opacity-0': !isFlourishChartIntersecting }"
+              >
                 <div
                   class="flourish-embed flourish-chart"
                   data-src="visualisation/23264843"
@@ -107,10 +115,16 @@ function onEarthReady() {
               </figure>
             </div>
 
-            <!-- scroll over chart -->
-            <div class="relative z-10 leo-text-box">
-              <p>{{ str.p2t1 }}</p>
-            </div>
+            <LeoScrollTrigger
+              class="mt-[calc(var(--init-screen-height)*-0.35)] md:mt-[calc(var(--init-screen-height)*-0.15)]"
+              scroll-height="calc(var(--init-screen-height) * 1)"
+              @change="onFlourishChartIntersectChange"
+            >
+              <!-- scroll over chart -->
+              <div class="relative z-10 leo-text-box">
+                <p>{{ str.p2t1 }}</p>
+              </div>
+            </LeoScrollTrigger>
           </div>
 
           <!-- rest article -->

@@ -40,6 +40,7 @@ function handleChangeArticle(isIntersecting: boolean) {
       <LeoPic
         classname="absolute inset-0 w-full h-full object-cover"
         src="img/bg_star"
+        :use-prefix="false"
         :use2x="false"
         :webp="false"
         loading="eager"
