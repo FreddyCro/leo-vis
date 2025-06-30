@@ -34,9 +34,7 @@ function handleChangeArticle(isIntersecting: boolean) {
       @change="handleChangeSpace"
     />
 
-    <div
-      class="sticky top-0 h-[var(--ls-layout-header-h)] overflow-hidden relative"
-    >
+    <div class="sticky top-0 h-[var(--ls-layout-header-h)] overflow-hidden">
       <LeoPic
         classname="absolute inset-0 w-full h-full object-cover"
         src="img/bg_star"

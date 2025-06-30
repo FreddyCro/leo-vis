@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sendGA } from '../utils/ga';
 import str1 from '@/locales/section1.json';
 import str2 from '@/locales/section2.json';
 import str3 from '@/locales/section3.json';
@@ -16,6 +17,27 @@ const tocList = [
   { text: str3.title, link: '#moon' },
   { text: str4.title, link: '#debris' },
 ];
+
+function onClick(item: { text: string; link: string }) {
+  // 根據連結的 hash 值決定要發送的 term 值
+  const termMap: Record<string, string> = {
+    '#economic': 'economic',
+    '#security': 'security',
+    '#moon': 'moon',
+    '#debris': 'debris',
+  };
+
+  const term = termMap[item.link];
+
+  if (term) {
+    sendGA({
+      hitType: 'event',
+      eventAction: 'click_anchor',
+      eventCategory: 'navigation',
+      term,
+    });
+  }
+}
 </script>
 
 <template>
@@ -59,7 +81,7 @@ const tocList = [
           class="ls-intro__toc-item relative"
           :class="{ 'ls-intro__toc-item--active': chapter === `0${index + 1}` }"
         >
-          <a :href="item.link">
+          <a :href="item.link" @click="onClick(item)">
             <div class="ls-intro__toc-item-dot" role="presentation">
               <!-- outer -->
               <div class="ls-intro__toc-item-dot-out" />

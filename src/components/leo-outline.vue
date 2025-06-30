@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sendGA } from '../utils/ga';
 import LeoPic from '@/components/leo-pic.vue';
 import strOutline from '@/locales/outline.json';
 import str1 from '@/locales/section1.json';
@@ -82,6 +83,15 @@ const data = [
     ],
   },
 ];
+
+function onClick(item: { text: string; link: string; bg: string }) {
+  sendGA({
+    hitType: 'event',
+    eventAction: 'click_series',
+    eventCategory: 'content',
+    term: item.text,
+  });
+}
 </script>
 
 <template>
@@ -104,7 +114,7 @@ const data = [
       <!-- chapter articles  -->
       <ul class="flex flex-col md:grid md:grid-cols-2 gap-2 sm:gap-4">
         <li v-for="article in chapter.articles" :key="article.text">
-          <a :href="article.link" class="flex gap-3">
+          <a :href="article.link" class="flex gap-3" @click="onClick(article)">
             <!-- img -->
             <div
               class="relative min-h-[74px] sm:min-h-[88px] aspect-[120/74] shrink-0 rounded-lg border border-[#808080] overflow-hidden"
