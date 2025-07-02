@@ -20,7 +20,7 @@ const labels = {
   us: { text: str.moonLabelUSA, color: '#0800FF' },
   cn: { text: str.moonLabelChina, color: '#FF0037' },
   india: { text: str.moonLabelIndia, color: '#FF7700' },
-  japan: { text: str.moonLabelJapan, color: '#B42EF1' },
+  japan: { text: str.moonLabelJapan, color: '#D069FF' },
   private: { text: str.moonLabelPrivate, color: '#00F4DC' },
 };
 
