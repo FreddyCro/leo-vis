@@ -129,11 +129,12 @@ function onClick(item: { text: string; link: string }) {
   }
 
   &__present-line-2 {
-    bottom: 67px;
+    top: calc(100vh - 67px);
     width: 100%;
     height: 1px;
 
     @include rwd-min(sm) {
+      top: auto;
       bottom: 126px;
     }
 
