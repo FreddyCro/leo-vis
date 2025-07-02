@@ -186,6 +186,7 @@ function handleTranshFloatEnter(enter: boolean) {
             <p>{{ str.p3t2 }}</p>
 
             <LeoReadMore
+              chapter="ch1"
               :data="[
                 {
                   title: str.related1Title,

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sendGA } from '../utils/ga';
 import LeoPic from '@/components/leo-pic.vue';
 
 interface Item {
@@ -9,11 +10,23 @@ interface Item {
 }
 
 interface Props {
+  chapter?: string;
   title?: string;
   data: Item[];
 }
 
 defineProps<Props>();
+
+function onClick(item: Item) {
+  // 發送 GA 事件：click_news with term = ch2
+  sendGA({
+    hitType: 'event',
+    eventAction: 'click_news',
+    eventCategory: 'news',
+    term: 'ch2',
+    eventLabel: item.title,
+  });
+}
 </script>
 
 <template>
@@ -37,6 +50,7 @@ defineProps<Props>();
               'min-h-[376px] px-[16px] py-[35px] sm:min-h-[492px] px-[21px] py-[46px] md:min-h-[0] md:px-[50px] md:py-[42px]':
                 item.desc,
             }"
+            @click="onClick(item)"
           >
             <div>
               <!-- bg -->

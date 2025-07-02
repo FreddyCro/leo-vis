@@ -229,6 +229,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
           <div
             class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)]"
           >
+            <!-- TODO : add star_bg.jpg -->
+
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
 
@@ -501,6 +503,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
           <div class="leo-section leo-section--no-mb leo-section--pb">
             <LeoReadMore
+              chapter="ch3"
               :title="str.relatedTitle"
               :data="[
                 {

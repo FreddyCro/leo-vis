@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { sendGA } from '../utils/ga';
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
@@ -71,6 +72,14 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 
 function handleOpenDialog() {
   showDialog.value = true;
+
+  // 發送 GA 事件：click_btn with term = supplychains
+  sendGA({
+    hitType: 'event',
+    eventAction: 'click_btn',
+    eventCategory: 'interaction',
+    term: 'supplychains',
+  });
 }
 
 function onDialogClose() {
@@ -299,6 +308,7 @@ function onDialogClose() {
         <div class="leo-section">
           <div class="leo-container-lg">
             <LeoReadMore
+              chapter="ch1"
               :title="str.relatedTitle"
               :data="[
                 {

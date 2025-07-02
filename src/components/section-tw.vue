@@ -151,6 +151,7 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 
       <div class="leo-section text-white">
         <LeoReadMore
+          chapter="tw"
           :title="str.relatedTitle"
           :data="[
             {

@@ -147,6 +147,7 @@ function handleChangeArticle(isIntersecting: boolean) {
         <div class="leo-container-lg">
           <div class="leo-section">
             <LeoReadMore
+              chapter="ch2"
               :title="str.relatedTitle"
               :data="[
                 {

@@ -9,7 +9,7 @@ interface Props {
   chapter?: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const tocList = [
   { text: str1.title, link: '#economic' },
@@ -27,7 +27,9 @@ function onClick(item: { text: string; link: string }) {
     '#debris': 'debris',
   };
 
-  const term = termMap[item.link];
+  const term = props.chapter
+    ? `ch${props.chapter}_${termMap[item.link]}`
+    : termMap[item.link];
 
   if (term) {
     sendGA({
