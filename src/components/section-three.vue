@@ -306,8 +306,41 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   </div>
                 </LeoScrollTrigger>
 
-                <!-- 3d moon site part cn -->
-                <LeoScrollTrigger @change="handleChangeCategory($event, 'cn')">
+                <!-- 3d moon site part cn-2 -->
+                <LeoScrollTrigger
+                  @change="handleChangeCategory($event, 'cn-1')"
+                >
+                  <div
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                  >
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_4"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p5Caption1 }}</p>
+                    </div>
+                    <p>{{ str.p5t2 }}</p>
+                    <div class="leo-section-sm">
+                      <LeoPic
+                        src="img/newspaceera2025_pic10_5"
+                        :webp="false"
+                        :use-prefix="false"
+                        :width="430"
+                        :height="120"
+                      />
+                      <p class="leo-caption">{{ str.p5Caption2 }}</p>
+                    </div>
+                  </div>
+                </LeoScrollTrigger>
+
+                <!-- 3d moon site part cn-1 -->
+                <LeoScrollTrigger
+                  @change="handleChangeCategory($event, 'cn-2')"
+                >
                   <div
                     class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
                   >
