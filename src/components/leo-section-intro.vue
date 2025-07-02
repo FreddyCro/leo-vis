@@ -114,6 +114,7 @@ function onClick(item: { text: string; link: string }) {
   &__present-line {
     position: absolute;
     background-color: var(--white);
+    opacity: 0.5;
   }
 
   &__present-line-1 {

@@ -72,22 +72,6 @@ function handleSatelliteContent(isIntersecting: boolean) {
               :height="450"
             />
           </div>
-          <div
-            class="ls-three__space-pic-2"
-            :class="{
-              'ls-three__space-pic-2--enter': isSpaceEnter,
-              'ls-three__space-pic-2--under': isArticleEnter,
-            }"
-          >
-            <LeoPic
-              src="img/newspaceera2025_pic8_2_bg"
-              ext="png"
-              :webp="false"
-              :use2x="false"
-              :width="450"
-              :height="450"
-            />
-          </div>
         </div>
       </template>
       <template #intro>
@@ -229,9 +213,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
           <div
             class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('./img/bg_star.jpg')] bg-repeat"
           >
-            <!-- TODO : add star_bg.jpg -->
-
-            <div class="ls-three__3d-moon-site bg-[url('./img/bg_star.jpg')">
+            <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
 
               <!-- label -->

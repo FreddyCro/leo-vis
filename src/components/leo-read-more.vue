@@ -50,6 +50,7 @@ function onClick(item: Item) {
               'min-h-[376px] px-[16px] py-[35px] sm:min-h-[492px] px-[21px] py-[46px] md:min-h-[0] md:px-[50px] md:py-[42px]':
                 item.desc,
             }"
+            target="_blank"
             @click="onClick(item)"
           >
             <div>
