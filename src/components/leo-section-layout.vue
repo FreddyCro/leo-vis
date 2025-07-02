@@ -39,7 +39,7 @@ function handleChangeArticle(isIntersecting: boolean) {
     <div
       class="sticky top-0 h-[var(--ls-layout-header-h)] overflow-hidden"
       :class="{
-        [`bg-[url('./img/bg_star.jpg')`]: useSpaceBg,
+        [`bg-[url(./img/bg_star.jpg)`]: useSpaceBg,
         'bg-repeat': useSpaceBg,
       }"
     >

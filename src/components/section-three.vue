@@ -231,7 +231,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
           >
             <!-- TODO : add star_bg.jpg -->
 
-            <div class="ls-three__3d-moon-site">
+            <div class="ls-three__3d-moon-site bg-[url('./img/bg_star.jpg')">
               <Leo3dMoonSite :current-category="currentCategory" />
 
               <!-- label -->

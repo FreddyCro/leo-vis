@@ -37,7 +37,7 @@ function onEarthReady() {
     >
       <LeoLoading />
     </div>
-    <LeoSectionLayout>
+    <LeoSectionLayout :use-space-bg="true">
       <template #space>
         <Leo3dEarthHero :is-zoom-out="isZoomOut" @on-ready="onEarthReady" />
       </template>
