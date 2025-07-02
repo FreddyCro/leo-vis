@@ -40,7 +40,6 @@ class GlobeController {
     this.camera = null;
     this.renderer = null;
     this.globe = null;
-    this.moving = true;
     this.animationId = null;
   }
 
@@ -142,13 +141,12 @@ class GlobeController {
 
       // Camera movement animation
       // Zoom out
-      if (props.isZoomOut && this.moving) {
+      if (props.isZoomOut) {
         // x
         this.camera.position.x +=
           (0 - this.camera.position.x) * this.options.cameraSpeed;
         if (Math.abs(this.camera.position.x) < 0.1) {
           this.camera.position.x = 0;
-          this.moving = false;
         }
 
         // y
@@ -158,19 +156,12 @@ class GlobeController {
           this.camera.position.y = 0;
         }
 
-        // if (
-        //   Math.abs(this.camera.position.x) < 0.1 &&
-        //   Math.abs(this.camera.position.y) < 0.1
-        // ) {
-        //   this.moving = false;
-        // }
-
         // z
         this.camera.translateZ(this.options.zoomSpeed);
       }
 
       // Zoom in
-      else if (!props.isZoomOut && this.moving) {
+      else if (!props.isZoomOut) {
         const [x, y, z] = this.options.cameraPosition;
 
         // x
@@ -202,7 +193,6 @@ class GlobeController {
           Math.abs(this.camera.position.z - z) < 0.1
         ) {
           this.camera.position.set(x, y, z); // snap 精確
-          // this.moving = false;
         }
       }
 
@@ -313,7 +303,6 @@ class GlobeController {
   resetCamera() {
     if (this.camera) {
       this.camera.position.set(...this.options.cameraPosition);
-      this.moving = true;
     }
     return this;
   }
