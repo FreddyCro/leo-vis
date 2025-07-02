@@ -14,7 +14,6 @@ const isZoomOut = ref(false);
 const isFlourishChartIntersecting = ref(false);
 
 function onZoomOutIntersectChange(isIntersecting: boolean) {
-  console.log('Zoom out intersect change:', isIntersecting);
   // When the zoom out section is intersecting, we want to zoom out the globe
   isZoomOut.value = isIntersecting;
 }
@@ -66,7 +65,7 @@ function onEarthReady() {
         <div class="h-screen w-full mt-[calc(var(--init-screen-height)*-0.2)]">
           <!-- hide intro, move globe to center -->
           <LeoScrollTrigger
-            threshold="0"
+            :threshold="0"
             scroll-height="calc(var(--init-screen-height)*0.8)"
             @change="onZoomOutIntersectChange"
           >
