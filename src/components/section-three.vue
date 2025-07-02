@@ -227,7 +227,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <div class="grid">
           <!-- moon -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)]"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('./img/bg_star.jpg')] bg-repeat"
           >
             <!-- TODO : add star_bg.jpg -->
 
