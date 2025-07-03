@@ -267,7 +267,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p3Caption }}</p>
+                      <p class="leo-caption leo-caption--white">
+                        {{ str.p3Caption }}
+                      </p>
                     </div>
                     <p>{{ str.p3t2 }}</p>
                   </div>
@@ -288,7 +290,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p4Caption1 }}</p>
+                      <p class="leo-caption leo-caption--white">
+                        {{ str.p4Caption1 }}
+                      </p>
                     </div>
                     <p>{{ str.p4t2 }}</p>
 
@@ -300,7 +304,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p4Caption2 }}</p>
+                      <p class="leo-caption leo-caption--white">
+                        {{ str.p4Caption2 }}
+                      </p>
                     </div>
                     <p>{{ str.p4t3 }}</p>
                   </div>
@@ -313,6 +319,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   <div
                     class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
                   >
+                    <p>{{ str.p5t1 }}</p>
                     <div class="leo-section-sm">
                       <LeoPic
                         src="img/newspaceera2025_pic10_4"
@@ -321,18 +328,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p5Caption1 }}</p>
-                    </div>
-                    <p>{{ str.p5t2 }}</p>
-                    <div class="leo-section-sm">
-                      <LeoPic
-                        src="img/newspaceera2025_pic10_5"
-                        :webp="false"
-                        :use-prefix="false"
-                        :width="430"
-                        :height="120"
-                      />
-                      <p class="leo-caption">{{ str.p5Caption2 }}</p>
+                      <p class="leo-caption leo-caption--white">
+                        {{ str.p5Caption1 }}
+                      </p>
                     </div>
                   </div>
                 </LeoScrollTrigger>
@@ -344,16 +342,6 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   <div
                     class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
                   >
-                    <div class="leo-section-sm">
-                      <LeoPic
-                        src="img/newspaceera2025_pic10_4"
-                        :webp="false"
-                        :use-prefix="false"
-                        :width="430"
-                        :height="120"
-                      />
-                      <p class="leo-caption">{{ str.p5Caption1 }}</p>
-                    </div>
                     <p>{{ str.p5t2 }}</p>
                     <div class="leo-section-sm">
                       <LeoPic
@@ -363,7 +351,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p5Caption2 }}</p>
+                      <p class="leo-caption leo-caption--white">
+                        {{ str.p5Caption2 }}
+                      </p>
                     </div>
                   </div>
                 </LeoScrollTrigger>
@@ -373,7 +363,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'others')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[800px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[calc(var(--init-screen-height)*0.25)] mx-auto"
                   >
                     <p>{{ str.p6t1 }}</p>
                     <div class="leo-section-sm">
@@ -384,7 +374,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p6Caption1 }}</p>
+                      <p class="leo-caption leo-caption--white">
+                        {{ str.p6Caption1 }}
+                      </p>
                     </div>
                     <p>{{ str.p6t2 }}</p>
                     <div class="leo-section-sm">
@@ -395,7 +387,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p6Caption2 }}</p>
+                      <p class="leo-caption leo-caption--white">
+                        {{ str.p6Caption2 }}
+                      </p>
                     </div>
                   </div>
                 </LeoScrollTrigger>

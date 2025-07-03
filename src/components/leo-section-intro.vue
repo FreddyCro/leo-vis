@@ -65,7 +65,7 @@ function onClick(item: { text: string; link: string }) {
       >
         <slot />
       </div>
-      <div v-if="chapter" class="ls-intro__chapter hidden md:block">
+      <div v-if="chapter" class="ls-intro__chapter hidden md:block montserrat">
         {{ chapter }}
       </div>
     </div>

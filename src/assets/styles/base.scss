@@ -122,6 +122,10 @@ p.leo-caption {
   font-size: 15px;
   line-height: 22px;
   color: #9f9f9f;
+
+  &--white {
+    color: #fff;
+  }
 }
 
 .leo-section {
@@ -188,8 +192,8 @@ p.leo-caption {
 .leo-container-pc {
   @include rwd-min(pc) {
     width: 100%;
-    margin: 0 auto;
     max-width: calc(620px + 110px * 2);
+    margin: 0 auto;
     padding-left: 110px;
     padding-right: 110px;
   }
@@ -209,7 +213,9 @@ p.leo-caption {
 
   @include rwd-min(pc) {
     width: 100%;
-    max-width: 1060px;
+    padding-left: 110px;
+    padding-right: 110px;
+    max-width: calc(1060px + 110px * 2);
   }
 }
 

@@ -67,10 +67,10 @@ function onEarthReady() {
         </div>
       </template>
       <template #article>
-        <div class="h-screen w-full">
+        <div class="h-[calc(var(--init-screen-height)*0.5)] w-full">
           <!-- hide intro, move globe to center -->
           <LeoScrollTrigger
-            class="flex items-center justify-center h-screen w-full"
+            class="flex items-center justify-center h-[calc(var(--init-screen-height)*0.5)] w-full"
             :threshold="0"
             scroll-height="calc(var(--init-screen-height)*0.5)"
             @change="onZoomOutIntersectChange"
@@ -87,7 +87,7 @@ function onEarthReady() {
         <!-- chart 1 -->
         <div class="leo-container">
           <div
-            class="min-h-[calc(var(--init-screen-height)*2)] flex flex-col justify-center items-center"
+            class="min-h-[calc(var(--init-screen-height)*1.5)] flex flex-col justify-center items-center"
           >
             <div
               class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"

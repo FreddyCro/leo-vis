@@ -186,7 +186,6 @@ function onDialogClose() {
 
             <!-- trigger OneWeb, Kuiper -->
             <LeoScrollTrigger
-              class="my-[calc(var(--init-screen-height)*0.6)]"
               scroll-height="calc(var(--init-screen-height)*1)"
               @change="
                 handleChangeCategory($event, SATELLITE_LABEL_ONEWEB_KUIPER)
@@ -278,7 +277,7 @@ function onDialogClose() {
 
           <LeoDialog v-model="showDialog" @close="onDialogClose">
             <template #title>
-              <h4 class="leo-h4">{{ str.dialogTitle }}</h4>
+              <h4 class="leo-h4 noto-sans-tc">{{ str.dialogTitle }}</h4>
             </template>
             <template #content>
               <div class="ls-one__dialog relative">

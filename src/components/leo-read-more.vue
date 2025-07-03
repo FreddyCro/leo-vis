@@ -37,14 +37,15 @@ function onClick(item: Item) {
     <div class="mt-8 sm:mt-10">
       <ul
         :class="{
-          'grid sm:grid-cols-2 gap-4': data.length % 2 === 0, // 2, 4
-          'grid sm:grid-cols-2 md:grid-cols-3 gap-4': data.length % 3 === 0, // 3
+          'grid sm:grid-cols-2 gap-[13px]': data.length % 2 === 0, // 2, 4
+          'grid sm:grid-cols-2 md:grid-cols-3 gap-[13px]':
+            data.length % 3 === 0, // 3
         }"
       >
         <li v-for="(item, index) in data" :key="index">
           <a
             :href="item.link"
-            class="leo-read-more__link relative h-full min-h-[124px] flex flex-col justify-between border border-[#808080] rounded-[20px] overflow-hidden"
+            class="leo-read-more__link relative h-full min-h-[124px] md:min-h-[153px] flex flex-col justify-between border border-[#808080] rounded-[20px] overflow-hidden"
             :class="{
               'px-[25px] py-[28px]': !item.desc,
               'min-h-[376px] px-[16px] py-[35px] sm:min-h-[492px] px-[21px] py-[46px] md:min-h-[0] md:px-[50px] md:py-[42px]':

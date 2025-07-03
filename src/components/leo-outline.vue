@@ -102,7 +102,7 @@ function onClick(item: { text: string; link: string; bg: string }) {
       <!-- chapter title -->
       <div class="inline-flex items-center gap-2 mb-3 md:mb-6">
         <!-- number -->
-        <div class="text-7xl text-[#00F4DC]">0{{ index + 1 }}</div>
+        <div class="text-7xl text-[#00F4DC] montserrat">0{{ index + 1 }}</div>
 
         <!-- title -->
         <div>

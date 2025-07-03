@@ -301,12 +301,12 @@ function handleTranshFloatEnter(enter: boolean) {
 
     &--1 {
       margin-bottom: 50px;
-      transform: translateX(-100%);
+      transform: translateX(-10%);
       transition: 1s ease-in-out;
     }
 
     &--2 {
-      transform: translateX(100%);
+      transform: translateX(10%);
       transition: 1s ease-in-out;
     }
 
