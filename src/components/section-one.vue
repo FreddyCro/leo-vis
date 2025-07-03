@@ -240,7 +240,7 @@ function onDialogClose() {
                 <!-- see full data -->
                 <li class="ls-one__feat-grid-item">
                   <button
-                    class="ls-one__feat-grid-item-content ls-one__feat-grid-item-content--gray flex flex-col items-center justify-center px-[20px] py-[30px] leo-h4 font-medium"
+                    class="ls-one__feat-grid-item-content ls-one__feat-grid-item-content--gray min-h-[255px] md:min-h-auto flex flex-col items-center justify-center px-[20px] py-[30px] leo-h4 font-medium"
                     @click="handleOpenDialog"
                   >
                     <span class="mb-2 md:mb-3">

@@ -206,7 +206,7 @@ p.leo-caption {
   padding-right: 26px;
 
   @include rwd-min(pad) {
-    max-width: calc(530px + 57px * 2);
+    max-width: calc(654px + 57px * 2);
     padding-left: 57px;
     padding-right: 57px;
   }

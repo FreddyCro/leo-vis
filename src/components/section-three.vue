@@ -267,7 +267,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption leo-caption--white">
+                      <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p3Caption }}
                       </p>
                     </div>
@@ -290,7 +290,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption leo-caption--white">
+                      <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p4Caption1 }}
                       </p>
                     </div>
@@ -304,7 +304,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption leo-caption--white">
+                      <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p4Caption2 }}
                       </p>
                     </div>
@@ -328,7 +328,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption leo-caption--white">
+                      <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p5Caption1 }}
                       </p>
                     </div>
@@ -351,7 +351,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption leo-caption--white">
+                      <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p5Caption2 }}
                       </p>
                     </div>
@@ -374,7 +374,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption leo-caption--white">
+                      <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p6Caption1 }}
                       </p>
                     </div>
@@ -387,7 +387,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption leo-caption--white">
+                      <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p6Caption2 }}
                       </p>
                     </div>
@@ -507,7 +507,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
         <div class="leo-container">
           <div class="leo-section">
-            <p>{{ str.p3t1 }}</p>
+            <p>{{ str.p7t1 }}</p>
           </div>
 
           <div class="leo-section leo-section--no-mb leo-section--pb">

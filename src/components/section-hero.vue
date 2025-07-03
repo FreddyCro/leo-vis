@@ -122,8 +122,10 @@ function onEarthReady() {
               </LeoScrollTrigger>
             </div>
           </div>
+        </div>
 
-          <!-- text 2 -->
+        <!-- text 2 -->
+        <div class="leo-container-pc">
           <div
             class="relative z-10 h-[calc(var(--init-screen-height)*1)] flex items-center"
           >
@@ -131,8 +133,10 @@ function onEarthReady() {
               <p>{{ str.p2t1 }}</p>
             </div>
           </div>
+        </div>
 
-          <!-- chart 2 -->
+        <!-- chart 2 -->
+        <div class="leo-container">
           <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
             <div
               class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center"
