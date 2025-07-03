@@ -70,8 +70,9 @@ function onEarthReady() {
         <div class="h-screen w-full">
           <!-- hide intro, move globe to center -->
           <LeoScrollTrigger
+            class="flex items-center justify-center h-screen w-full"
             :threshold="0"
-            scroll-height="calc(var(--init-screen-height)*0.8)"
+            scroll-height="calc(var(--init-screen-height)*0.5)"
             @change="onZoomOutIntersectChange"
           >
             <div class="leo-container-pc">
@@ -93,7 +94,6 @@ function onEarthReady() {
             >
               <LeoScrollTrigger
                 class="w-full"
-                scroll-height="calc(var(--init-screen-height) * 1)"
                 @change="onChart1IntersectChange"
               >
                 <figure
@@ -124,18 +124,21 @@ function onEarthReady() {
           </div>
 
           <!-- text 2 -->
-          <div class="relative z-10 leo-text-box">
-            <p>{{ str.p2t1 }}</p>
+          <div
+            class="relative z-10 h-[calc(var(--init-screen-height)*1)] flex items-center"
+          >
+            <div class="leo-text-box">
+              <p>{{ str.p2t1 }}</p>
+            </div>
           </div>
 
           <!-- chart 2 -->
           <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
             <div
-              class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+              class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center"
             >
               <LeoScrollTrigger
                 class="w-full"
-                scroll-height="calc(var(--init-screen-height) * 1)"
                 @change="onFlourishChartIntersectChange"
               >
                 <figure

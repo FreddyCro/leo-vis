@@ -129,7 +129,7 @@ function onClick(item: { text: string; link: string }) {
   }
 
   &__present-line-2 {
-    top: calc(100vh - 67px);
+    top: calc(var(--init-screen-height) - 67px);
     width: 100%;
     height: 1px;
 

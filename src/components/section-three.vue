@@ -128,7 +128,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
             </div>
 
             <div
-              class="h-[calc(var(--init-screen-height)*0.36)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.45)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
+              class="h-[calc(var(--init-screen-height)*0.45)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.45)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
             >
               <div class="absolute bottom-0 left-0 w-full h-full">
                 <!-- bg -->
