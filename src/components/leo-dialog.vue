@@ -128,11 +128,15 @@ function handleClose() {
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  padding: 32px 24px 24px 24px;
+  padding: 42px 24px 24px 24px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+
+  @include rwd-min(sm) {
+    padding: 32px 24px 24px 24px;
+  }
 
   &__title {
     color: #000;

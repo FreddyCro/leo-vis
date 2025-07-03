@@ -90,63 +90,104 @@ function handleChangeArticle(isIntersecting: boolean) {
           <div class="leo-section leo-section--pt leo-section--no-mt">
             <p>{{ str.p1t1 }}</p>
             <p>{{ str.p1t2 }}</p>
-            <p role="presentation"></p>
-            <figure>
+
+            <!-- chart 1 -->
+            <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
               <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23266793"
-              />
-            </figure>
+                class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+              >
+                <figure class="w-full">
+                  <div
+                    class="flourish-embed flourish-chart"
+                    data-src="visualisation/23266793"
+                  />
+                </figure>
+              </div>
+            </div>
             <p>{{ str.p2t1 }}</p>
-            <p role="presentation"></p>
-            <figure>
+
+            <!-- chart 2 -->
+            <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
               <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23267137"
-              />
-            </figure>
+                class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+              >
+                <figure class="w-full">
+                  <div
+                    class="flourish-embed flourish-chart"
+                    data-src="visualisation/23267137"
+                  />
+                </figure>
+              </div>
+            </div>
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
-            <p role="presentation"></p>
-          </div>
-          <div class="leo-section">
-            <figure>
-              <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23265551"
-              />
-            </figure>
-            <p>{{ str.p4t1 }}</p>
           </div>
         </div>
 
-        <figure>
-          <figcaption>
-            {{ str.g4Title }}
-          </figcaption>
+        <!-- chart 3 -->
+        <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
+          <div
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+          >
+            <div class="leo-container">
+              <figure class="w-full">
+                <div
+                  class="flourish-embed flourish-chart"
+                  data-src="visualisation/23265551"
+                />
+              </figure>
+            </div>
+          </div>
+          <div class="leo-container-pc">
+            <div
+              class="leo-section leo-section--no-mb pb-[calc(var(--init-screen-height)*1)]"
+            >
+              <p class="leo-text-box">{{ str.p4t1 }}</p>
+            </div>
+          </div>
+        </div>
 
-          <LeoPic
-            src="img/newspaceera2025_pic6_chart"
-            ext="svg"
-            :use2x="false"
-            :webp="false"
-            :width="430"
-            :height="120"
-          />
+        <!-- chart 4 -->
+        <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
+          <div
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+          >
+            <figure class="w-full">
+              <figcaption>
+                {{ str.g4Title }}
+              </figcaption>
 
-          <figcaption>
-            {{ str.g4Caption }}
-          </figcaption>
-        </figure>
+              <LeoPic
+                src="img/newspaceera2025_pic6_chart"
+                ext="svg"
+                :use2x="false"
+                :webp="false"
+                :width="430"
+                :height="120"
+              />
+
+              <figcaption>
+                {{ str.g4Caption }}
+              </figcaption>
+            </figure>
+          </div>
+          <div class="leo-container-pc">
+            <div
+              class="leo-section leo-section--no-mb pb-[calc(var(--init-screen-height)*1)]"
+            >
+              <p class="leo-text-box">{{ str.p5t1 }}</p>
+            </div>
+          </div>
+        </div>
 
         <div class="leo-container">
-          <p>{{ str.p5t1 }}</p>
           <p>{{ str.p5t2 }}</p>
         </div>
 
         <div class="leo-container-lg">
           <div class="leo-section">
             <LeoReadMore
+              chapter="ch2"
               :title="str.relatedTitle"
               :data="[
                 {

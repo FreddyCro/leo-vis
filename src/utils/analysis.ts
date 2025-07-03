@@ -1,8 +1,21 @@
 interface GAEvent {
-  type: 'event';
-  category: string;
-  action: string;
-  label: string;
+  hitType: 'event';
+  eventCategory: string;
+  eventAction: string;
+  eventLabel: string;
+  eventValue: string;
+}
+
+// Declare global ga function
+declare global {
+  interface Window {
+    ga?: (
+      command: string,
+      fields: GAEvent | string,
+      fieldsObject?: any,
+    ) => void;
+    gtag?: (...args: any[]) => void;
+  }
 }
 
 /**
@@ -16,12 +29,18 @@ interface GAEvent {
  *   eventLabel: title,
  * });
  */
-function sendGA({ type, category, action, label }: GAEvent) {
+function sendGA({
+  eventCategory,
+  eventAction,
+  eventLabel,
+  eventValue,
+}: GAEvent) {
   window.ga('send', {
-    hitType: type,
-    eventCategory: category,
-    eventAction: action,
-    eventLabel: label,
+    hitType: 'event',
+    eventCategory,
+    eventAction,
+    eventLabel,
+    eventValue,
   });
 }
 

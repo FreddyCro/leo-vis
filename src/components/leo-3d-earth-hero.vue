@@ -1,6 +1,6 @@
 <!-- ref: https://github.com/vasturiano/three-globe -->
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import ThreeGlobe from 'three-globe';
 import * as THREE from 'three';
 import { createGlowTexture } from '@/utils/3d-utils';
@@ -24,6 +24,9 @@ let observer = null;
 class GlobeController {
   constructor(targetId, options = {}) {
     this.targetId = targetId;
+    this.moving = true; // 添加移動狀態控制
+    this.lastRenderTime = 0;
+    this.renderInterval = 1000 / 60; // 60 FPS
     this.options = {
       arcsCount: 50,
       spotsCount: 500,
@@ -40,7 +43,6 @@ class GlobeController {
     this.camera = null;
     this.renderer = null;
     this.globe = null;
-    this.moving = true;
     this.animationId = null;
   }
 
@@ -137,72 +139,88 @@ class GlobeController {
    * Start animation loop
    */
   animate() {
-    const animateLoop = () => {
+    const animateLoop = (currentTime) => {
       this.animationId = requestAnimationFrame(animateLoop);
 
-      // Camera movement animation
-      // Zoom out
-      if (props.isZoomOut && this.moving) {
-        // x
-        this.camera.position.x +=
-          (0 - this.camera.position.x) * this.options.cameraSpeed;
-        if (Math.abs(this.camera.position.x) < 0.1) {
-          this.camera.position.x = 0;
-          this.moving = false;
-        }
-
-        // y
-        this.camera.position.y +=
-          (0 - this.camera.position.y) * this.options.cameraSpeed;
-        if (Math.abs(this.camera.position.y) < 0.1) {
-          this.camera.position.y = 0;
-        }
-
-        // if (
-        //   Math.abs(this.camera.position.x) < 0.1 &&
-        //   Math.abs(this.camera.position.y) < 0.1
-        // ) {
-        //   this.moving = false;
-        // }
-
-        // z
-        this.camera.translateZ(this.options.zoomSpeed);
+      // 控制渲染頻率，避免過度渲染
+      if (currentTime - this.lastRenderTime < this.renderInterval) {
+        return;
       }
+      this.lastRenderTime = currentTime;
 
-      // Zoom in
-      else if (!props.isZoomOut && this.moving) {
-        const [x, y, z] = this.options.cameraPosition;
+      // 只有在移動時才執行相機動畫
+      if (this.moving) {
+        // Camera movement animation
+        // Zoom out
+        if (props.isZoomOut) {
+          let isMoving = false;
 
-        // x
-        this.camera.position.x +=
-          (x - this.camera.position.x) * this.options.cameraSpeed;
-        if (Math.abs(this.camera.position.x - x) < 0.1) {
-          this.camera.position.x = x;
+          // x
+          if (Math.abs(this.camera.position.x) > 0.1) {
+            this.camera.position.x +=
+              (0 - this.camera.position.x) * this.options.cameraSpeed;
+            isMoving = true;
+          } else {
+            this.camera.position.x = 0;
+          }
+
+          // y
+          if (Math.abs(this.camera.position.y) > 0.1) {
+            this.camera.position.y +=
+              (0 - this.camera.position.y) * this.options.cameraSpeed;
+            isMoving = true;
+          } else {
+            this.camera.position.y = 0;
+          }
+
+          // z - 持續縮放
+          this.camera.translateZ(this.options.zoomSpeed);
+
+          // 如果 x, y 都到位且 z 超過最大縮放，停止移動
+          if (!isMoving && this.camera.position.z >= this.options.maxZoom) {
+            this.moving = false;
+          }
         }
+        // Zoom in
+        else {
+          const [x, y, z] = this.options.cameraPosition;
+          let isMoving = false;
 
-        // y
-        this.camera.position.y +=
-          (y - this.camera.position.y) * this.options.cameraSpeed;
-        if (Math.abs(this.camera.position.y - y) < 0.1) {
-          this.camera.position.y = y;
-        }
+          // x
+          if (Math.abs(this.camera.position.x - x) > 0.1) {
+            this.camera.position.x +=
+              (x - this.camera.position.x) * this.options.cameraSpeed;
+            isMoving = true;
+          } else {
+            this.camera.position.x = x;
+          }
 
-        // z
-        const currentZ = this.camera.position.z;
-        const dz = (z - currentZ) * this.options.cameraSpeed;
-        this.camera.translateZ(
-          (dz / Math.abs(dz || 1)) * this.options.zoomSpeed,
-        );
+          // y
+          if (Math.abs(this.camera.position.y - y) > 0.1) {
+            this.camera.position.y +=
+              (y - this.camera.position.y) * this.options.cameraSpeed;
+            isMoving = true;
+          } else {
+            this.camera.position.y = y;
+          }
 
-        // TODO: 研究怎麼樣讓 moving = false
-        // 檢查是否已達到目標點
-        if (
-          Math.abs(this.camera.position.x - x) < 0.1 &&
-          Math.abs(this.camera.position.y - y) < 0.1 &&
-          Math.abs(this.camera.position.z - z) < 0.1
-        ) {
-          this.camera.position.set(x, y, z); // snap 精確
-          // this.moving = false;
+          // z
+          if (Math.abs(this.camera.position.z - z) > 0.1) {
+            const currentZ = this.camera.position.z;
+            const dz = (z - currentZ) * this.options.cameraSpeed;
+            this.camera.translateZ(
+              (dz / Math.abs(dz || 1)) * this.options.zoomSpeed,
+            );
+            isMoving = true;
+          } else {
+            this.camera.position.z = z;
+          }
+
+          // 檢查是否已達到目標點
+          if (!isMoving) {
+            this.camera.position.set(x, y, z);
+            this.moving = false;
+          }
         }
       }
 
@@ -211,7 +229,7 @@ class GlobeController {
         this.camera.position.z = this.options.maxZoom;
       }
 
-      // Globe rotation
+      // Globe rotation - 總是執行
       if (this.globe) {
         this.globe.rotation.y += this.options.rotationSpeed.y;
         this.globe.rotation.x += this.options.rotationSpeed.x;
@@ -275,6 +293,19 @@ class GlobeController {
     blending: THREE.AdditiveBlending,
   });
 
+  // 添加材質池
+  static materialPool = new Map();
+
+  static getMaterial(color) {
+    const colorKey = color.toString();
+    if (!this.materialPool.has(colorKey)) {
+      const material = this.sharedSpriteMaterial.clone();
+      material.color = new THREE.Color(color);
+      this.materialPool.set(colorKey, material);
+    }
+    return this.materialPool.get(colorKey);
+  }
+
   /**
    * Create custom 3D object with glow effect
    */
@@ -286,9 +317,8 @@ class GlobeController {
     );
     mesh.scale.set(d.radius, d.radius, d.radius);
 
-    // 共用 glow texture/material，顏色用 SpriteMaterial color 設定
-    const spriteMaterial = GlobeController.sharedSpriteMaterial.clone();
-    spriteMaterial.color = new THREE.Color(d.color);
+    // 使用材質池而不是每次 clone
+    const spriteMaterial = GlobeController.getMaterial(d.color);
     const sprite = new THREE.Sprite(spriteMaterial);
     sprite.scale.set(d.radius * 6, d.radius * 6, 1);
 
@@ -313,7 +343,7 @@ class GlobeController {
   resetCamera() {
     if (this.camera) {
       this.camera.position.set(...this.options.cameraPosition);
-      this.moving = true;
+      this.moving = true; // 重置時重新啟動動畫
     }
     return this;
   }
@@ -339,9 +369,33 @@ class GlobeController {
 
   dispose() {
     this.stop();
+
+    // 清理場景中的物件
+    if (this.scene) {
+      this.scene.traverse((object) => {
+        if (object.geometry) object.geometry.dispose();
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach((material) => material.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
+      });
+      this.scene.clear();
+    }
+
+    // 清理材質池
+    if (GlobeController.materialPool) {
+      GlobeController.materialPool.forEach((material) => material.dispose());
+      GlobeController.materialPool.clear();
+    }
+
     if (this.renderer) {
       this.renderer.dispose();
+      this.renderer.domElement.remove();
     }
+
     return this;
   }
 }
@@ -360,6 +414,16 @@ onMounted(() => {
     })
     .setLight()
     .animate();
+
+  // 監聽 props 變化，重新啟動動畫
+  watch(
+    () => props.isZoomOut,
+    () => {
+      if (Globe) {
+        Globe.moving = true; // 重新啟動動畫
+      }
+    },
+  );
 
   // Additional control methods:
   // globe.stop();

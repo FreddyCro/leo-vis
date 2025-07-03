@@ -20,7 +20,7 @@ const labels = {
   us: { text: str.moonLabelUSA, color: '#0800FF' },
   cn: { text: str.moonLabelChina, color: '#FF0037' },
   india: { text: str.moonLabelIndia, color: '#FF7700' },
-  japan: { text: str.moonLabelJapan, color: '#B42EF1' },
+  japan: { text: str.moonLabelJapan, color: '#D069FF' },
   private: { text: str.moonLabelPrivate, color: '#00F4DC' },
 };
 
@@ -66,22 +66,6 @@ function handleSatelliteContent(isIntersecting: boolean) {
           >
             <LeoPic
               src="img/newspaceera2025_pic8_1_bg"
-              :webp="false"
-              :use2x="false"
-              :width="450"
-              :height="450"
-            />
-          </div>
-          <div
-            class="ls-three__space-pic-2"
-            :class="{
-              'ls-three__space-pic-2--enter': isSpaceEnter,
-              'ls-three__space-pic-2--under': isArticleEnter,
-            }"
-          >
-            <LeoPic
-              src="img/newspaceera2025_pic8_2_bg"
-              ext="png"
               :webp="false"
               :use2x="false"
               :width="450"
@@ -144,7 +128,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
             </div>
 
             <div
-              class="h-[calc(var(--init-screen-height)*0.36)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.45)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
+              class="h-[calc(var(--init-screen-height)*0.45)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.45)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
             >
               <div class="absolute bottom-0 left-0 w-full h-full">
                 <!-- bg -->
@@ -227,14 +211,14 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <div class="grid">
           <!-- moon -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)]"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('./img/bg_star.jpg')] bg-repeat"
           >
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
 
               <!-- label -->
               <div
-                class="absolute left-0 left-[50%] bottom-[16%] flex gap-2 translate-x-[-50%] whitespace-nowrap"
+                class="absolute left-[50%] bottom-auto md:bottom-[16%] top-[20%] md:top-auto flex gap-2 translate-x-[-50%] whitespace-nowrap"
               >
                 <div
                   v-for="country in labels"
@@ -283,7 +267,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p3Caption }}</p>
+                      <p class="leo-caption leo-caption--white pt-[6px]">
+                        {{ str.p3Caption }}
+                      </p>
                     </div>
                     <p>{{ str.p3t2 }}</p>
                   </div>
@@ -304,7 +290,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p4Caption1 }}</p>
+                      <p class="leo-caption leo-caption--white pt-[6px]">
+                        {{ str.p4Caption1 }}
+                      </p>
                     </div>
                     <p>{{ str.p4t2 }}</p>
 
@@ -316,17 +304,22 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p4Caption2 }}</p>
+                      <p class="leo-caption leo-caption--white pt-[6px]">
+                        {{ str.p4Caption2 }}
+                      </p>
                     </div>
                     <p>{{ str.p4t3 }}</p>
                   </div>
                 </LeoScrollTrigger>
 
-                <!-- 3d moon site part cn -->
-                <LeoScrollTrigger @change="handleChangeCategory($event, 'cn')">
+                <!-- 3d moon site part cn-2 -->
+                <LeoScrollTrigger
+                  @change="handleChangeCategory($event, 'cn-1')"
+                >
                   <div
                     class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
                   >
+                    <p>{{ str.p5t1 }}</p>
                     <div class="leo-section-sm">
                       <LeoPic
                         src="img/newspaceera2025_pic10_4"
@@ -335,8 +328,20 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p5Caption1 }}</p>
+                      <p class="leo-caption leo-caption--white pt-[6px]">
+                        {{ str.p5Caption1 }}
+                      </p>
                     </div>
+                  </div>
+                </LeoScrollTrigger>
+
+                <!-- 3d moon site part cn-1 -->
+                <LeoScrollTrigger
+                  @change="handleChangeCategory($event, 'cn-2')"
+                >
+                  <div
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                  >
                     <p>{{ str.p5t2 }}</p>
                     <div class="leo-section-sm">
                       <LeoPic
@@ -346,7 +351,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p5Caption2 }}</p>
+                      <p class="leo-caption leo-caption--white pt-[6px]">
+                        {{ str.p5Caption2 }}
+                      </p>
                     </div>
                   </div>
                 </LeoScrollTrigger>
@@ -356,7 +363,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'others')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[800px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[calc(var(--init-screen-height)*0.25)] mx-auto"
                   >
                     <p>{{ str.p6t1 }}</p>
                     <div class="leo-section-sm">
@@ -367,7 +374,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p6Caption1 }}</p>
+                      <p class="leo-caption leo-caption--white pt-[6px]">
+                        {{ str.p6Caption1 }}
+                      </p>
                     </div>
                     <p>{{ str.p6t2 }}</p>
                     <div class="leo-section-sm">
@@ -378,7 +387,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         :width="430"
                         :height="120"
                       />
-                      <p class="leo-caption">{{ str.p6Caption2 }}</p>
+                      <p class="leo-caption leo-caption--white pt-[6px]">
+                        {{ str.p6Caption2 }}
+                      </p>
                     </div>
                   </div>
                 </LeoScrollTrigger>
@@ -496,11 +507,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
         <div class="leo-container">
           <div class="leo-section">
-            <p>{{ str.p3t1 }}</p>
+            <p>{{ str.p7t1 }}</p>
           </div>
 
           <div class="leo-section leo-section--no-mb leo-section--pb">
             <LeoReadMore
+              chapter="ch3"
               :title="str.relatedTitle"
               :data="[
                 {

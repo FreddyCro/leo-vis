@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sendGA } from '../utils/ga';
 import str1 from '@/locales/section1.json';
 import str2 from '@/locales/section2.json';
 import str3 from '@/locales/section3.json';
@@ -8,7 +9,7 @@ interface Props {
   chapter?: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const tocList = [
   { text: str1.title, link: '#economic' },
@@ -16,6 +17,29 @@ const tocList = [
   { text: str3.title, link: '#moon' },
   { text: str4.title, link: '#debris' },
 ];
+
+function onClick(item: { text: string; link: string }) {
+  // 根據連結的 hash 值決定要發送的 term 值
+  const termMap: Record<string, string> = {
+    '#economic': 'economic',
+    '#security': 'security',
+    '#moon': 'moon',
+    '#debris': 'debris',
+  };
+
+  const term = props.chapter
+    ? `ch${props.chapter}_${termMap[item.link]}`
+    : termMap[item.link];
+
+  if (term) {
+    sendGA({
+      hitType: 'event',
+      eventAction: 'click_anchor',
+      eventCategory: 'navigation',
+      term,
+    });
+  }
+}
 </script>
 
 <template>
@@ -41,7 +65,7 @@ const tocList = [
       >
         <slot />
       </div>
-      <div v-if="chapter" class="ls-intro__chapter hidden md:block">
+      <div v-if="chapter" class="ls-intro__chapter hidden md:block montserrat">
         {{ chapter }}
       </div>
     </div>
@@ -59,7 +83,7 @@ const tocList = [
           class="ls-intro__toc-item relative"
           :class="{ 'ls-intro__toc-item--active': chapter === `0${index + 1}` }"
         >
-          <a :href="item.link">
+          <a :href="item.link" @click="onClick(item)">
             <div class="ls-intro__toc-item-dot" role="presentation">
               <!-- outer -->
               <div class="ls-intro__toc-item-dot-out" />
@@ -90,6 +114,7 @@ const tocList = [
   &__present-line {
     position: absolute;
     background-color: var(--white);
+    opacity: 0.5;
   }
 
   &__present-line-1 {
@@ -104,11 +129,13 @@ const tocList = [
   }
 
   &__present-line-2 {
-    bottom: 67px;
+    /* top: calc(var(--init-screen-height) - 67px); */
+    top: calc(var(--init-screen-height) - 50px);
     width: 100%;
     height: 1px;
 
     @include rwd-min(sm) {
+      top: auto;
       bottom: 126px;
     }
 

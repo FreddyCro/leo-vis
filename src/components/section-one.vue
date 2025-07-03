@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { sendGA } from '../utils/ga';
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
@@ -71,6 +72,14 @@ function handleChangeCategory(isIntersecting: boolean, category: string) {
 
 function handleOpenDialog() {
   showDialog.value = true;
+
+  // 發送 GA 事件：click_btn with term = supplychains
+  sendGA({
+    hitType: 'event',
+    eventAction: 'click_btn',
+    eventCategory: 'interaction',
+    term: 'supplychains',
+  });
 }
 
 function onDialogClose() {
@@ -177,7 +186,6 @@ function onDialogClose() {
 
             <!-- trigger OneWeb, Kuiper -->
             <LeoScrollTrigger
-              class="my-[calc(var(--init-screen-height)*0.6)]"
               scroll-height="calc(var(--init-screen-height)*1)"
               @change="
                 handleChangeCategory($event, SATELLITE_LABEL_ONEWEB_KUIPER)
@@ -232,7 +240,7 @@ function onDialogClose() {
                 <!-- see full data -->
                 <li class="ls-one__feat-grid-item">
                   <button
-                    class="ls-one__feat-grid-item-content ls-one__feat-grid-item-content--gray flex flex-col items-center justify-center px-[20px] py-[30px] leo-h4 font-medium"
+                    class="ls-one__feat-grid-item-content ls-one__feat-grid-item-content--gray min-h-[255px] md:min-h-auto flex flex-col items-center justify-center px-[20px] py-[30px] leo-h4 font-medium"
                     @click="handleOpenDialog"
                   >
                     <span class="mb-2 md:mb-3">
@@ -269,7 +277,7 @@ function onDialogClose() {
 
           <LeoDialog v-model="showDialog" @close="onDialogClose">
             <template #title>
-              <h4 class="leo-h4">{{ str.dialogTitle }}</h4>
+              <h4 class="leo-h4 noto-sans-tc">{{ str.dialogTitle }}</h4>
             </template>
             <template #content>
               <div class="ls-one__dialog relative">
@@ -299,6 +307,7 @@ function onDialogClose() {
         <div class="leo-section">
           <div class="leo-container-lg">
             <LeoReadMore
+              chapter="ch1"
               :title="str.relatedTitle"
               :data="[
                 {
@@ -432,6 +441,32 @@ function onDialogClose() {
         box-shadow: 0px 0px 12px 0px rgba(0, 244, 220, 1);
       }
     }
+  }
+
+  .country-label {
+    color: #000;
+    border-radius: 2px;
+    padding: 2px;
+  }
+
+  .orange {
+    background-color: #ff8f00;
+  }
+
+  .white {
+    background-color: #fff;
+  }
+
+  .green {
+    background-color: #00f4dc;
+  }
+
+  .yellow {
+    background-color: #fffb18;
+  }
+
+  .purple {
+    background-color: #8d41d9;
   }
 }
 </style>

@@ -181,7 +181,6 @@ class MoonController {
     };
 
     let lastCategory = props.currentCategory;
-    let cnStep = 0; // 0: not in cn, 1: moving to pos1, 2: moving to pos2
     const targetPosition = this.camera.position.clone();
 
     const animateLoop = () => {
@@ -189,43 +188,25 @@ class MoonController {
 
       // Detect category change
       if (props.currentCategory !== lastCategory) {
-        if (props.currentCategory === 'cn') {
-          cnStep = 1; // Start cn two-step transition
+        if (props.currentCategory === 'all') {
+          targetPosition.copy(positions.all);
+        } else if (props.currentCategory === 'soviet') {
+          targetPosition.copy(positions.soviet);
+        } else if (props.currentCategory === 'us') {
+          targetPosition.copy(positions.us);
+        } else if (props.currentCategory === 'cn-1') {
           targetPosition.copy(positions.cn1);
-        } else {
-          cnStep = 0;
-          if (props.currentCategory === 'all') {
-            targetPosition.copy(positions.all);
-          } else if (props.currentCategory === 'soviet') {
-            targetPosition.copy(positions.soviet);
-          } else if (props.currentCategory === 'us') {
-            targetPosition.copy(positions.us);
-          } else if (props.currentCategory === 'others') {
-            targetPosition.copy(positions.others);
-          }
+        } else if (props.currentCategory === 'cn-2') {
+          targetPosition.copy(positions.cn2);
+        } else if (props.currentCategory === 'others') {
+          targetPosition.copy(positions.others);
         }
         lastCategory = props.currentCategory;
       }
 
-      // Handle cn two-step transition
+      // Move camera to target position
       const SLERP_FACTOR = 0.12;
-      if (props.currentCategory === 'cn') {
-        if (cnStep === 1) {
-          // Move to position 1
-          this.moveCameraSlerp(positions.cn1, SLERP_FACTOR);
-          // If close enough to pos1, proceed to pos2
-          if (this.camera.position.distanceTo(positions.cn1) < 2) {
-            cnStep = 2;
-            targetPosition.copy(positions.cn2);
-          }
-        } else if (cnStep === 2) {
-          // Move to position 2
-          this.moveCameraSlerp(positions.cn2, SLERP_FACTOR);
-        }
-      } else {
-        // Other categories: single target
-        this.moveCameraSlerp(targetPosition, SLERP_FACTOR);
-      }
+      this.moveCameraSlerp(targetPosition, SLERP_FACTOR);
 
       if (props.currentCategory === 'all') {
         // rotate globe
@@ -344,6 +325,9 @@ function handleResize() {
 function isCategoryMatch(current, elCategory) {
   if (current === 'all') return true;
   if (current === elCategory) return true;
+  // 處理 cn-1 和 cn-2 對應到 cn 元素
+  if ((current === 'cn-1' || current === 'cn-2') && elCategory === 'cn')
+    return true;
   if (current === 'others')
     return ['india', 'japan', 'folk'].includes(elCategory);
   return false;
