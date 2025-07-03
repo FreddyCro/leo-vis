@@ -443,5 +443,31 @@ function onDialogClose() {
       }
     }
   }
+
+  .country-label {
+    color: #000;
+    border-radius: 2px;
+    padding: 2px;
+  }
+
+  .orange {
+    background-color: #ff8f00;
+  }
+
+  .white {
+    background-color: #fff;
+  }
+
+  .green {
+    background-color: #00f4dc;
+  }
+
+  .yellow {
+    background-color: #fffb18;
+  }
+
+  .purple {
+    background-color: #8d41d9;
+  }
 }
 </style>
