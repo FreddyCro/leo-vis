@@ -68,6 +68,7 @@ function onEarthReady() {
       </template>
       <template #article>
         <div class="h-[calc(var(--init-screen-height)*0.5)] w-full">
+          <!-- text 1 -->
           <!-- hide intro, move globe to center -->
           <LeoScrollTrigger
             class="flex items-center justify-center h-[calc(var(--init-screen-height)*0.5)] w-full"
@@ -164,6 +165,8 @@ function onEarthReady() {
             <p>{{ str.p3t2 }}</p>
           </div>
         </div>
+
+        <!-- read more -->
         <div class="leo-section">
           <div class="leo-container-lg">
             <LeoOutline />

@@ -154,7 +154,7 @@ function onClick(item: { text: string; link: string }) {
     @include rwd-min(md) {
       padding-bottom: 66px;
       padding-left: 107px;
-      border-top: 1px solid var(--white);
+      border-top: 1px solid rgba($color: #fff, $alpha: 0.5);
     }
 
     @include rwd-min(3xl) {
