@@ -213,17 +213,29 @@ p.leo-caption {
 
   @include rwd-min(pc) {
     width: 100%;
-    padding-left: 110px;
-    padding-right: 110px;
-    max-width: calc(1060px + 110px * 2);
+    padding-left: 100px;
+    padding-right: 100px;
+    max-width: calc(1060px + 100px * 2);
   }
 }
 
 .leo-text-box {
-  padding: 40px 48px;
+  padding: 40px 20px;
   border: solid 1px #808080;
   background-color: rgba(82, 82, 82, 0.4);
 
   // blur 10px
   @include mixins.blur(10px);
+
+  @include rwd-min(xxs) {
+    padding: 40px 26px;
+  }
+
+  @include rwd-min(pad) {
+    padding: 40px 57px;
+  }
+
+  @include rwd-min(pc) {
+    padding: 40px 48px;
+  }
 }

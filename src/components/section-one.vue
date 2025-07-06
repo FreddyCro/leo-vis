@@ -140,7 +140,7 @@ function onDialogClose() {
       <template #article>
         <div class="leo-section leo-section--pt leo-section--no-mt">
           <div class="min-h-[calc(var(--init-screen-height)*4)]">
-            <div class="sticky top-0">
+            <div class="sticky top-0 bg-[url('./img/bg_star.jpg')]">
               <Leo3dEarthSatellite :current-category="currentCategory" />
             </div>
 
@@ -277,7 +277,9 @@ function onDialogClose() {
 
           <LeoDialog v-model="showDialog" @close="onDialogClose">
             <template #title>
-              <h4 class="leo-h4 noto-sans-tc">{{ str.dialogTitle }}</h4>
+              <h4 class="leo-h4 font-bold noto-sans-tc text-[#404040]">
+                {{ str.dialogTitle }}
+              </h4>
             </template>
             <template #content>
               <div class="ls-one__dialog relative">

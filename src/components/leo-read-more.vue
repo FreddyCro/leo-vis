@@ -31,7 +31,7 @@ function onClick(item: Item) {
 
 <template>
   <div class="leo-read-more">
-    <h2 v-if="title" class="leo-h3 font-bold text-center">
+    <h2 v-if="title" class="leo-h3 font-medium text-center">
       {{ title }}
     </h2>
     <div class="mt-8 sm:mt-10">
@@ -48,7 +48,7 @@ function onClick(item: Item) {
             class="leo-read-more__link relative h-full min-h-[124px] md:min-h-[153px] flex flex-col justify-between border border-[#808080] rounded-[20px] overflow-hidden"
             :class="{
               'px-[25px] py-[28px]': !item.desc,
-              'min-h-[376px] px-[16px] py-[35px] sm:min-h-[492px] px-[21px] py-[46px] md:min-h-[0] md:px-[50px] md:py-[42px]':
+              'min-h-[376px] px-[16px] py-[35px] sm:min-h-[492px] sm:px-[21px] sm:py-[46px] md:min-h-[0] md:px-[50px] md:py-[42px]':
                 item.desc,
             }"
             target="_blank"

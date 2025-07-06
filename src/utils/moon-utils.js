@@ -15,7 +15,7 @@ function stationColor(category) {
     case 'india':
       return '#FF7700';
     case 'japan':
-      return '#B42EF2';
+      return '#D069FF';
     case 'folk':
       return '#00F4DC';
     default:
