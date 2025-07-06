@@ -70,13 +70,21 @@ function handleChangeArticle(isIntersecting: boolean) {
       </div>
     </div>
 
-    <LeoScrollTrigger :threshold="0" @change="handleChangeArticle">
+    <div class="ls-layout-before-article">
+      <slot name="before-article" />
+    </div>
+
+    <LeoScrollTrigger
+      class="ls-layout-article-trigger"
+      :threshold="0"
+      @change="handleChangeArticle"
+    >
       <template v-if="isCustomArticle">
         <slot name="article" />
       </template>
       <div
         v-else
-        class="relative z-30 mt-[calc(var(--init-screen-height)*0.8)] bg-black"
+        class="ls-layout-article relative z-30 mt-[calc(var(--init-screen-height)*0.8)] bg-black"
       >
         <div
           class="h-[calc(var(--init-screen-height)*0.15)] -translate-y-[calc(var(--init-screen-height)*0.14)] bg-gradient-to-b from-transparent to-black pointer-events-none"

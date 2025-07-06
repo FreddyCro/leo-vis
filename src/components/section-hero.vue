@@ -66,17 +66,15 @@ function onEarthReady() {
           </LeoSectionIntro>
         </div>
       </template>
-      <template #article>
-        <div>
-          <!-- text 1 -->
-          <!-- hide intro, move globe to center -->
-          <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
-          >
+      <template #before-article>
+        <!-- text 1 -->
+        <!-- hide intro, move globe to center -->
+        <div class="min-h-[calc(var(--init-screen-height)*2)]">
+          <div class="sticky top-0 w-full flex items-center">
             <LeoScrollTrigger
-              class="flex items-center justify-center h-[calc(var(--init-screen-height)*0.5)] w-full"
+              class="flex items-center justify-center h-[calc(var(--init-screen-height)*1)] w-full"
               :threshold="0"
-              scroll-height="calc(var(--init-screen-height)*0.5)"
+              scroll-height="calc(var(--init-screen-height)*1)"
               @change="onZoomOutIntersectChange"
             >
               <div class="leo-container-pc">
@@ -87,7 +85,10 @@ function onEarthReady() {
               </div>
             </LeoScrollTrigger>
           </div>
-
+        </div>
+      </template>
+      <template #article>
+        <div>
           <!-- chart 1 -->
           <div
             class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
@@ -179,6 +180,16 @@ function onEarthReady() {
 
 <style lang="scss">
 .ls-hero {
+  .ls-layout-article {
+    margin-top: 0;
+  }
+
+  .ls-layout-before-article,
+  .ls-layout-article-trigger {
+    position: sticky;
+    top: 0;
+  }
+
   &__title-shadow {
     text-shadow: 0 0 16px #fff;
   }

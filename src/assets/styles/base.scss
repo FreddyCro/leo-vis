@@ -222,6 +222,7 @@ p.leo-caption {
 .leo-text-box {
   padding: 40px 48px;
   border: solid 1px #808080;
+  background-color: rgba(82, 82, 82, 0.4);
 
   // blur 10px
   @include mixins.blur(10px);
