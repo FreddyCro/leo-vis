@@ -67,32 +67,32 @@ function onEarthReady() {
         </div>
       </template>
       <template #article>
-        <div class="h-[calc(var(--init-screen-height)*0.5)] w-full">
+        <div>
           <!-- text 1 -->
           <!-- hide intro, move globe to center -->
-          <LeoScrollTrigger
-            class="flex items-center justify-center h-[calc(var(--init-screen-height)*0.5)] w-full"
-            :threshold="0"
-            scroll-height="calc(var(--init-screen-height)*0.5)"
-            @change="onZoomOutIntersectChange"
-          >
-            <div class="leo-container-pc">
-              <div class="leo-text-box">
-                <p>{{ str.p1t1 }}</p>
-                <p>{{ str.p1t2 }}</p>
-              </div>
-            </div>
-          </LeoScrollTrigger>
-        </div>
-
-        <!-- chart 1 -->
-        <div class="leo-container">
           <div
-            class="min-h-[calc(var(--init-screen-height)*1.5)] flex flex-col justify-center items-center"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
           >
-            <div
-              class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+            <LeoScrollTrigger
+              class="flex items-center justify-center h-[calc(var(--init-screen-height)*0.5)] w-full"
+              :threshold="0"
+              scroll-height="calc(var(--init-screen-height)*0.5)"
+              @change="onZoomOutIntersectChange"
             >
+              <div class="leo-container-pc">
+                <div class="leo-text-box">
+                  <p>{{ str.p1t1 }}</p>
+                  <p>{{ str.p1t2 }}</p>
+                </div>
+              </div>
+            </LeoScrollTrigger>
+          </div>
+
+          <!-- chart 1 -->
+          <div
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
+          >
+            <div class="leo-container">
               <LeoScrollTrigger
                 class="w-full"
                 @change="onChart1IntersectChange"
@@ -123,25 +123,23 @@ function onEarthReady() {
               </LeoScrollTrigger>
             </div>
           </div>
-        </div>
 
-        <!-- text 2 -->
-        <div class="leo-container-pc">
+          <!-- text 2 -->
           <div
-            class="relative z-10 h-[calc(var(--init-screen-height)*1)] flex items-center"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
           >
-            <div class="leo-text-box">
-              <p>{{ str.p2t1 }}</p>
+            <div class="leo-container-pc">
+              <div class="leo-text-box">
+                <p>{{ str.p2t1 }}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- chart 2 -->
-        <div class="leo-container">
-          <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
-            <div
-              class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center"
-            >
+          <!-- chart 2 -->
+          <div
+            class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
+          >
+            <div class="leo-container">
               <LeoScrollTrigger
                 class="w-full"
                 @change="onFlourishChartIntersectChange"
@@ -158,9 +156,11 @@ function onEarthReady() {
               </LeoScrollTrigger>
             </div>
           </div>
+        </div>
 
-          <!-- rest article -->
-          <div class="leo-section">
+        <!-- rest article -->
+        <div class="leo-section">
+          <div class="leo-container">
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
           </div>
