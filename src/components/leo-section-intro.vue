@@ -75,7 +75,7 @@ function onClick(item: { text: string; link: string }) {
       class="ls-intro__toc-wrap relative w-full max-md:flex max-md:justify-between max-md:items-end max-md:px-[40px]"
     >
       <ul
-        class="ls-intro__toc inline-grid max-md:grid-rows-4 md:grid-cols-4 gap-10"
+        class="ls-intro__toc inline-grid max-md:grid-rows-4 md:grid-cols-4 gap-[18px] md:gap-10"
       >
         <li
           v-for="(item, index) in tocList"
@@ -102,7 +102,7 @@ function onClick(item: { text: string; link: string }) {
         </li>
       </ul>
 
-      <div v-if="chapter" class="ls-intro__chapter md:hidden">
+      <div v-if="chapter" class="ls-intro__chapter montserrat md:hidden">
         {{ chapter }}
       </div>
     </div>
@@ -154,7 +154,7 @@ function onClick(item: { text: string; link: string }) {
     @include rwd-min(md) {
       padding-bottom: 66px;
       padding-left: 107px;
-      border-top: 1px solid var(--white);
+      border-top: 1px solid rgba($color: #fff, $alpha: 0.5);
     }
 
     @include rwd-min(3xl) {

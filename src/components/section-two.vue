@@ -80,8 +80,8 @@ function handleChangeArticle(isIntersecting: boolean) {
       <template #intro>
         <LeoSectionIntro chapter="02">
           <h2 class="max-w-[448px]">
-            <span class="block text-4xl md:text-6xl mb-5">{{ str.title }}</span>
-            <span class="block text-2xl">{{ str.subTitle }}</span>
+            <span class="block leo-intro-h2">{{ str.title }}</span>
+            <span class="block leo-intro-h2-sub">{{ str.subTitle }}</span>
           </h2>
         </LeoSectionIntro>
       </template>
@@ -90,35 +90,26 @@ function handleChangeArticle(isIntersecting: boolean) {
           <div class="leo-section leo-section--pt leo-section--no-mt">
             <p>{{ str.p1t1 }}</p>
             <p>{{ str.p1t2 }}</p>
+            <p></p>
 
             <!-- chart 1 -->
-            <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
+            <figure class="w-full">
               <div
-                class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
-              >
-                <figure class="w-full">
-                  <div
-                    class="flourish-embed flourish-chart"
-                    data-src="visualisation/23266793"
-                  />
-                </figure>
-              </div>
-            </div>
+                class="flourish-embed flourish-chart"
+                data-src="visualisation/23266793"
+              />
+            </figure>
             <p>{{ str.p2t1 }}</p>
+            <p></p>
 
             <!-- chart 2 -->
-            <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
+            <figure class="w-full">
               <div
-                class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
-              >
-                <figure class="w-full">
-                  <div
-                    class="flourish-embed flourish-chart"
-                    data-src="visualisation/23267137"
-                  />
-                </figure>
-              </div>
-            </div>
+                class="flourish-embed flourish-chart"
+                data-src="visualisation/23267137"
+              />
+            </figure>
+            <p></p>
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
           </div>
@@ -251,24 +242,38 @@ function handleChangeArticle(isIntersecting: boolean) {
     }
   }
 
+  /* moon */
   &__space-pic-2 {
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
-    transform: rotate(5deg);
+    transform: scale(0.5) translate(-25%, -25%);
+    transform-origin: 0 0;
 
     &--enter {
       /* rotate 15deg => 0 */
-      transform: rotate(0deg);
+      transform: scale(0.5) translate(0, 0);
       opacity: 1;
       transition: 2s ease-in-out;
     }
 
     &--under {
-      transform: rotate(0deg);
+      transform: scale(0.5) translate(0, 0);
       opacity: 1;
       transition: 2s ease-in-out;
+    }
+
+    @include rwd-min(md) {
+      transform: translate(-25%, -25%);
+
+      &--enter {
+        transform: translate(0, 0);
+      }
+
+      &--under {
+        transform: translate(0, 0);
+      }
     }
 
     img {
@@ -281,25 +286,25 @@ function handleChangeArticle(isIntersecting: boolean) {
     top: 35%;
     left: 35%;
     opacity: 0;
-    transform: translate(0%, 0%) rotate(20deg);
+    transform: translate(0%, 50%) rotate(25deg);
 
     @include rwd-min(md) {
-      transform: translate(0%, 0%) rotate(20deg);
+      transform: translate(0%, 0%) rotate(25deg);
     }
 
     &--enter {
       /* rotate 15deg => 0 */
-      transform: translate(0%, 0%) rotate(0);
+      transform: translate(0%, 50%) rotate(0);
       opacity: 1;
       transition: 3.5s ease-in-out;
 
       @include rwd-min(md) {
-        transform: translate(10%, 5%) rotate(0deg);
+        transform: translate(30%, 5%) rotate(0deg);
       }
     }
 
     &--under {
-      transform: translate(50%, 50%) rotate(0deg);
+      transform: translate(50%, 100%) rotate(0deg);
       opacity: 1;
       transition: 3.5s ease-in-out;
 

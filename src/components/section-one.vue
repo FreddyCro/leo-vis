@@ -131,16 +131,16 @@ function onDialogClose() {
       </template>
       <template #intro>
         <LeoSectionIntro chapter="01">
-          <h2 class="max-w-[448px]">
-            <span class="block text-4xl md:text-6xl mb-5">{{ str.title }}</span>
-            <span class="block text-2xl">{{ str.subTitle }}</span>
+          <h2 class="pt-20 sm:pt-0 max-w-[448px]">
+            <span class="block leo-intro-h2">{{ str.title }}</span>
+            <span class="block leo-intro-h2-sub">{{ str.subTitle }}</span>
           </h2>
         </LeoSectionIntro>
       </template>
       <template #article>
         <div class="leo-section leo-section--pt leo-section--no-mt">
           <div class="min-h-[calc(var(--init-screen-height)*4)]">
-            <div class="sticky top-0">
+            <div class="sticky top-0 bg-[url('./img/bg_star.jpg')]">
               <Leo3dEarthSatellite :current-category="currentCategory" />
             </div>
 
@@ -211,7 +211,7 @@ function onDialogClose() {
           <div class="leo-container-lg">
             <!-- feature grid -->
             <div class="ls-one-feat-grid-wrap">
-              <ul class="grid gap-4 sm:grid-cols-2">
+              <ul class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                 <li
                   v-for="item in FEAT_GRID_DATA"
                   :key="item.title"
@@ -277,7 +277,9 @@ function onDialogClose() {
 
           <LeoDialog v-model="showDialog" @close="onDialogClose">
             <template #title>
-              <h4 class="leo-h4 noto-sans-tc">{{ str.dialogTitle }}</h4>
+              <h4 class="leo-h4 font-bold noto-sans-tc text-[#404040]">
+                {{ str.dialogTitle }}
+              </h4>
             </template>
             <template #content>
               <div class="ls-one__dialog relative">
@@ -371,7 +373,7 @@ function onDialogClose() {
     top: 10%;
     left: 10%;
     opacity: 0;
-    transform: translate(-30%, -10%) rotate(10deg);
+    transform: scale(0.8) translate(-30%, -10%) rotate(10deg);
 
     @include rwd-min(md) {
       transform: translate(50%, -10%) rotate(10deg);
@@ -379,7 +381,7 @@ function onDialogClose() {
 
     &--enter {
       /* fly from left 10% to left 90% */
-      transform: translate(30%, -10%) rotate(0deg);
+      transform: scale(0.8) translate(10%, -10%) rotate(0deg);
       opacity: 1;
       transition: 3.5s ease-in-out;
 
@@ -389,12 +391,12 @@ function onDialogClose() {
     }
 
     &--under {
-      transform: translate(0%, -100%) rotate(0deg);
+      transform: scale(0.8) translate(0%, -100%) rotate(0deg);
       opacity: 1;
       transition: 3s ease-in-out;
 
       @include rwd-min(md) {
-        transform: translate(-20%, -30%) rotate(0deg);
+        transform: translate(-20%, -120%) rotate(0deg);
       }
     }
 

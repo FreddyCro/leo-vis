@@ -77,8 +77,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
       <template #intro>
         <LeoSectionIntro chapter="03">
           <h2 class="max-w-[448px]">
-            <span class="block text-4xl md:text-6xl mb-5">{{ str.title }}</span>
-            <span class="block text-2xl">{{ str.subTitle }}</span>
+            <span class="block leo-intro-h2">{{ str.title }}</span>
+            <span class="block leo-intro-h2-sub">{{ str.subTitle }}</span>
           </h2>
         </LeoSectionIntro>
       </template>
@@ -128,7 +128,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
             </div>
 
             <div
-              class="h-[calc(var(--init-screen-height)*0.45)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.45)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
+              class="h-[calc(var(--init-screen-height)*0.45)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.6)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
             >
               <div class="absolute bottom-0 left-0 w-full h-full">
                 <!-- bg -->
@@ -139,11 +139,11 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   :webp="false"
                 />
 
+                <!-- workaround: 覆蓋掉當 bg image 因尺寸不是整數造成白色邊框  -->
+                <div class="absolute bottom-0 left-0 w-full h-[2px] bg-black" />
+
                 <!-- machine -->
-                <LeoScrollTrigger
-                  class="ls-three__fall-down-satellite"
-                  @change="handleSatelliteContent"
-                >
+                <div class="ls-three__fall-down-satellite">
                   <LeoPic
                     src="img/newspaceera2025_pic9_2"
                     ext="png"
@@ -195,9 +195,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     </svg>
                     {{ str.satelliteLocation }}
                   </div>
-                </LeoScrollTrigger>
+                </div>
               </div>
             </div>
+
+            <!-- show machine label -->
+            <LeoScrollTrigger @change="handleSatelliteContent" />
           </div>
         </div>
 
@@ -255,7 +258,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'soviet')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:mt-0 sm:mb-[500px] mx-auto"
                   >
                     <p>{{ str.p3t1 }}</p>
 
@@ -278,7 +281,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                 <!-- 3d moon site part us -->
                 <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p4t1 }}</p>
 
@@ -317,7 +320,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'cn-1')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t1 }}</p>
                     <div class="leo-section-sm">
@@ -340,7 +343,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'cn-2')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t2 }}</p>
                     <div class="leo-section-sm">
@@ -363,7 +366,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'others')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[calc(var(--init-screen-height)*0.25)] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mx-auto"
                   >
                     <p>{{ str.p6t1 }}</p>
                     <div class="leo-section-sm">
@@ -394,6 +397,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   </div>
                 </LeoScrollTrigger>
               </div>
+
+              <div
+                class="h-[calc(var(--init-screen-height)*0.35)] sm:h-[calc(var(--init-screen-height)*0.25)]"
+              />
             </div>
           </div>
         </div>
@@ -417,6 +424,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   <LeoPic
                     src="img/newspaceera2025_pic11_1_chart"
                     ext="svg"
+                    :pc-breakpoint="1024"
                     :use2x="false"
                     :webp="false"
                     :width="430"
@@ -432,6 +440,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   <LeoPic
                     src="img/newspaceera2025_pic11_2_chart"
                     ext="svg"
+                    :pc-breakpoint="1024"
                     :use2x="false"
                     :webp="false"
                     :width="430"
@@ -634,26 +643,24 @@ function handleSatelliteContent(isIntersecting: boolean) {
   &__fall-down-satellite-text {
     position: absolute;
     z-index: 20;
-    bottom: 45%;
+    top: -5%;
     left: 78%;
     width: calc(100vw - 200px);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 
     @include rwd-min(pad) {
-      bottom: 67%;
-      left: 85%;
+      top: 0%;
+      left: 80%;
       width: 265px;
     }
 
     @include rwd-min(md) {
-      bottom: 75%;
       left: 82%;
       width: 450px;
     }
 
     @include rwd-min(lg) {
-      bottom: 82%;
       left: 82%;
     }
 
@@ -733,7 +740,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__moon-svg-title {
-    @include rwd-min(lg) {
+    @include rwd-min(pad) {
       position: absolute;
       z-index: 10;
       left: 25%;
@@ -758,10 +765,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
     top: 0;
     left: 0;
     width: $base-width-mob;
+    line-height: 1.1;
     opacity: 0.3;
 
     @include rwd-min(pad) {
       width: $base-width-pad;
+      line-height: 1.5;
     }
 
     @include rwd-min(pc) {
@@ -782,9 +791,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 1%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc;
-        top: $base-y-pc;
+        top: $base-y-pc - 0.5%;
       }
     }
 
@@ -797,7 +806,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 16%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc + 6%;
         top: $base-y-pc + 18.5%;
       }
@@ -812,7 +821,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 30%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc + 9%;
         top: $base-y-pc + 34%;
       }
@@ -827,7 +836,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 45%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc + 6%;
         top: $base-y-pc + 54.5%;
       }
@@ -842,7 +851,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 59%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc;
         top: $base-y-pc + 71%;
       }

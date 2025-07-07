@@ -114,7 +114,12 @@ function onClick(item: { text: string; link: string; bg: string }) {
       <!-- chapter articles  -->
       <ul class="flex flex-col md:grid md:grid-cols-2 gap-2 sm:gap-4">
         <li v-for="article in chapter.articles" :key="article.text">
-          <a :href="article.link" class="flex gap-3" @click="onClick(article)">
+          <a
+            :href="article.link"
+            target="_blank"
+            class="flex gap-3"
+            @click="onClick(article)"
+          >
             <!-- img -->
             <div
               class="relative min-h-[74px] sm:min-h-[88px] aspect-[120/74] shrink-0 rounded-lg border border-[#808080] overflow-hidden"

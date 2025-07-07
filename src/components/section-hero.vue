@@ -66,13 +66,13 @@ function onEarthReady() {
           </LeoSectionIntro>
         </div>
       </template>
-      <template #article>
-        <div class="h-[calc(var(--init-screen-height)*0.5)] w-full">
-          <!-- hide intro, move globe to center -->
+      <template #before-article>
+        <!-- text 1 -->
+        <!-- hide intro, move globe to center -->
+        <div class="min-h-[calc(var(--init-screen-height)*1)]">
           <LeoScrollTrigger
-            class="flex items-center justify-center h-[calc(var(--init-screen-height)*0.5)] w-full"
             :threshold="0"
-            scroll-height="calc(var(--init-screen-height)*0.5)"
+            scroll-height="calc(var(--init-screen-height)*1)"
             @change="onZoomOutIntersectChange"
           >
             <div class="leo-container-pc">
@@ -83,28 +83,26 @@ function onEarthReady() {
             </div>
           </LeoScrollTrigger>
         </div>
-
-        <!-- chart 1 -->
-        <div class="leo-container">
-          <div
-            class="min-h-[calc(var(--init-screen-height)*1.5)] flex flex-col justify-center items-center"
-          >
-            <div
-              class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+      </template>
+      <template #article>
+        <div>
+          <!-- chart 1 -->
+          <div class="leo-container-larger">
+            <LeoScrollTrigger
+              class="w-full flex items-center justify-center"
+              scroll-height="calc(var(--init-screen-height)*1)"
+              @change="onChart1IntersectChange"
             >
-              <LeoScrollTrigger
-                class="w-full"
-                @change="onChart1IntersectChange"
-              >
+              <div class="leo-section-chart">
                 <figure
                   class="w-full transition-all duration-500 ease-in-out"
                   :class="{ 'opacity-0': !isChart1Intersecting }"
                 >
-                  <h3 class="leo-h3 text-left">
+                  <!-- <h3 class="leo-h3 text-left">
                     {{ str.g1Title }}
-                  </h3>
-                  <div>
-                    <figure class="w-full ls-hero__chart">
+                  </h3> -->
+                  <div class="flex justify-center">
+                    <figure class="w-full ls-hero__chart flex justify-center">
                       <LeoPic
                         src="img/newspaceera2025_pic1_1_chart"
                         ext="svg"
@@ -112,58 +110,64 @@ function onEarthReady() {
                         :webp="false"
                       />
                     </figure>
-                    <div class="mt-4">
+                    <!-- <div class="mt-4">
                       <p class="leo-caption">
                         {{ str.g1Caption }}
                       </p>
-                    </div>
+                    </div> -->
                   </div>
                 </figure>
-              </LeoScrollTrigger>
-            </div>
+              </div>
+            </LeoScrollTrigger>
           </div>
-        </div>
 
-        <!-- text 2 -->
-        <div class="leo-container-pc">
+          <!-- chart 2 -->
           <div
-            class="relative z-10 h-[calc(var(--init-screen-height)*1)] flex items-center"
+            class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center"
           >
-            <div class="leo-text-box">
-              <p>{{ str.p2t1 }}</p>
+            <div class="leo-container-larger bg-black">
+              <div class="leo-section-chart">
+                <LeoScrollTrigger
+                  class="w-full"
+                  @change="onFlourishChartIntersectChange"
+                >
+                  <figure
+                    class="w-full flex items-center justify-center transition-all duration-500 ease-in-out"
+                    :class="{ 'opacity-0': !isFlourishChartIntersecting }"
+                  >
+                    <div
+                      class="w-full flourish-embed flourish-chart"
+                      data-src="visualisation/23264843"
+                    />
+                  </figure>
+                </LeoScrollTrigger>
+              </div>
+            </div>
+          </div>
+
+          <!-- text 2 -->
+          <div
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1.15)] flex items-center"
+          >
+            <div class="leo-container-pc">
+              <div class="min-h-[calc(var(--init-screen-height)*1)]">
+                <div class="leo-text-box">
+                  <p>{{ str.p2t1 }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- chart 2 -->
-        <div class="leo-container">
-          <div class="min-h-[calc(var(--init-screen-height)*2)] w-full">
-            <div
-              class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center"
-            >
-              <LeoScrollTrigger
-                class="w-full"
-                @change="onFlourishChartIntersectChange"
-              >
-                <figure
-                  class="w-full transition-all duration-500 ease-in-out"
-                  :class="{ 'opacity-0': !isFlourishChartIntersecting }"
-                >
-                  <div
-                    class="flourish-embed flourish-chart"
-                    data-src="visualisation/23264843"
-                  />
-                </figure>
-              </LeoScrollTrigger>
-            </div>
-          </div>
-
-          <!-- rest article -->
-          <div class="leo-section">
+        <!-- rest article -->
+        <div class="leo-section">
+          <div class="leo-container">
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
           </div>
         </div>
+
+        <!-- read more -->
         <div class="leo-section">
           <div class="leo-container-lg">
             <LeoOutline />
@@ -176,6 +180,15 @@ function onEarthReady() {
 
 <style lang="scss">
 .ls-hero {
+  .ls-layout-article {
+    margin-top: 0;
+  }
+
+  .ls-layout-article-trigger {
+    position: sticky;
+    top: 0;
+  }
+
   &__title-shadow {
     text-shadow: 0 0 16px #fff;
   }

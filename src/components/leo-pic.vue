@@ -19,6 +19,7 @@ interface LeoPicProps {
   use2x?: boolean;
   usePrefix?: boolean;
   webp?: boolean;
+  pcBreakpoint?: number;
 }
 
 const props = withDefaults(defineProps<LeoPicProps>(), {
@@ -39,7 +40,7 @@ const use2xValue = computed(() => props.use2x ?? true);
 const usePrefixValue = computed(() => props.usePrefix ?? true);
 
 const mediaQueries = {
-  pc: `(min-width: ${PC_BREAKPOINTS}px)`,
+  pc: `(min-width: ${props.pcBreakpoint || PC_BREAKPOINTS}px)`,
   pad: `(min-width: ${TABLET_BREAKPOINTS}px)`,
   mob: '',
 };
