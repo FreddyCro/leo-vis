@@ -69,22 +69,19 @@ function onEarthReady() {
       <template #before-article>
         <!-- text 1 -->
         <!-- hide intro, move globe to center -->
-        <div class="min-h-[calc(var(--init-screen-height)*2)]">
-          <div class="sticky top-0 w-full flex items-center">
-            <LeoScrollTrigger
-              class="flex items-center justify-center h-[calc(var(--init-screen-height)*1)] w-full"
-              :threshold="0"
-              scroll-height="calc(var(--init-screen-height)*1)"
-              @change="onZoomOutIntersectChange"
-            >
-              <div class="leo-container-pc">
-                <div class="leo-text-box">
-                  <p>{{ str.p1t1 }}</p>
-                  <p>{{ str.p1t2 }}</p>
-                </div>
+        <div class="min-h-[calc(var(--init-screen-height)*1)]">
+          <LeoScrollTrigger
+            :threshold="0"
+            scroll-height="calc(var(--init-screen-height)*1)"
+            @change="onZoomOutIntersectChange"
+          >
+            <div class="leo-container-pc">
+              <div class="leo-text-box">
+                <p>{{ str.p1t1 }}</p>
+                <p>{{ str.p1t2 }}</p>
               </div>
-            </LeoScrollTrigger>
-          </div>
+            </div>
+          </LeoScrollTrigger>
         </div>
       </template>
       <template #article>
@@ -184,7 +181,6 @@ function onEarthReady() {
     margin-top: 0;
   }
 
-  .ls-layout-before-article,
   .ls-layout-article-trigger {
     position: sticky;
     top: 0;
