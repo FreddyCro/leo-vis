@@ -248,19 +248,32 @@ function handleChangeArticle(isIntersecting: boolean) {
     top: 0;
     left: 0;
     opacity: 0;
-    transform: translate(-25%, -25%);
+    transform: scale(0.5) translate(-25%, -25%);
+    transform-origin: 0 0;
 
     &--enter {
       /* rotate 15deg => 0 */
-      transform: translate(0, 0);
+      transform: scale(0.5) translate(0, 0);
       opacity: 1;
       transition: 2s ease-in-out;
     }
 
     &--under {
-      transform: translate(0, 0);
+      transform: scale(0.5) translate(0, 0);
       opacity: 1;
       transition: 2s ease-in-out;
+    }
+
+    @include rwd-min(md) {
+      transform: translate(-25%, -25%);
+
+      &--enter {
+        transform: translate(0, 0);
+      }
+
+      &--under {
+        transform: translate(0, 0);
+      }
     }
 
     img {
@@ -273,7 +286,7 @@ function handleChangeArticle(isIntersecting: boolean) {
     top: 35%;
     left: 35%;
     opacity: 0;
-    transform: translate(0%, 0%) rotate(25deg);
+    transform: translate(0%, 50%) rotate(25deg);
 
     @include rwd-min(md) {
       transform: translate(0%, 0%) rotate(25deg);
@@ -281,7 +294,7 @@ function handleChangeArticle(isIntersecting: boolean) {
 
     &--enter {
       /* rotate 15deg => 0 */
-      transform: translate(0%, 0%) rotate(0);
+      transform: translate(0%, 50%) rotate(0);
       opacity: 1;
       transition: 3.5s ease-in-out;
 
@@ -291,7 +304,7 @@ function handleChangeArticle(isIntersecting: boolean) {
     }
 
     &--under {
-      transform: translate(50%, 50%) rotate(0deg);
+      transform: translate(50%, 100%) rotate(0deg);
       opacity: 1;
       transition: 3.5s ease-in-out;
 

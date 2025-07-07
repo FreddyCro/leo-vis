@@ -40,7 +40,7 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 <template>
   <div id="taiwan" class="ls-tw leo-article text-[#404040]">
     <div class="leo-container">
-      <div class="leo-section">
+      <div class="leo-section leo-section--no-mb">
         <h2 class="ls-tw-h3 text-center font-medium">{{ str.title1 }}</h2>
         <div class="mt-10">
           <p>{{ str.p1t1 }}</p>
@@ -50,7 +50,7 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 
     <!-- feature grid -->
     <div class="leo-container-lg">
-      <div class="leo-section">
+      <div class="my-[60px] md:my-[80px]">
         <h3 class="ls-tw-h3 md:text-center">{{ str.title2 }}</h3>
         <div class="my-5">
           <h4 class="ls-tw-h3-sub md:text-center">
@@ -142,14 +142,14 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
       <p>{{ str.p2t4 }}</p>
       <p>{{ str.p2t5 }}</p>
 
-      <div class="leo-section">
+      <div class="leo-section-chart">
         <h3 class="ls-tw-h3">{{ str.title3 }}</h3>
         <div class="mt-10">
           <p>{{ str.p3t1 }}</p>
         </div>
       </div>
 
-      <div class="leo-section text-white">
+      <div class="leo-section-chart text-white">
         <LeoReadMore
           chapter="tw"
           :title="str.relatedTitle"
@@ -163,7 +163,7 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
           ]"
         />
       </div>
-      <div class="leo-section">
+      <div class="leo-section-chart">
         <p>{{ str.p3t2 }}</p>
       </div>
     </div>

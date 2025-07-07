@@ -178,8 +178,13 @@ p.leo-caption {
 .leo-container {
   width: 100%;
   margin: 0 auto;
-  padding-left: 26px;
-  padding-right: 26px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include rwd-min(xxs) {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
 
   @include rwd-min(pad) {
     max-width: calc(530px + 57px * 2);
@@ -207,8 +212,13 @@ p.leo-caption {
 .leo-container-larger {
   width: 100%;
   margin: 0 auto;
-  padding-left: 26px;
-  padding-right: 26px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include rwd-min(xxs) {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
 
   @include rwd-min(pad) {
     max-width: calc(530px + 57px * 2);
@@ -226,8 +236,13 @@ p.leo-caption {
 .leo-container-lg {
   width: 100%;
   margin: 0 auto;
-  padding-left: 26px;
-  padding-right: 26px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include rwd-min(xxs) {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
 
   @include rwd-min(pad) {
     max-width: calc(654px + 57px * 2);

@@ -107,7 +107,7 @@ function handleTranshFloatEnter(enter: boolean) {
           class="ls-four__trash relative h-[calc(var(--init-screen-height)*1)] md:h-[calc(var(--init-screen-height)*1.5)]"
         >
           <div
-            class="ls-four__trash-bg absolute bottom-0 left-[50%] w-full flex translate-x-[-50%]"
+            class="ls-four__trash-bg absolute bottom-0 left-[50%] w-[200%] md:w-full flex translate-x-[-50%]"
           >
             <!-- workaround: 覆蓋掉當 bg image 因尺寸不是整數造成白色邊框  -->
             <div class="absolute top-0 left-0 w-full h-[5px] bg-black" />
@@ -213,6 +213,10 @@ function handleTranshFloatEnter(enter: boolean) {
 .ls-four {
   position: relative;
 
+  .ls-layout-article-wrap {
+    overflow: hidden;
+  }
+
   &__space-pic-1 {
     position: absolute;
     top: 0;
@@ -247,21 +251,32 @@ function handleTranshFloatEnter(enter: boolean) {
     position: absolute;
     top: 0%;
     left: 0%;
-    transform: translate(-50%, 0);
-
-    @include rwd-min(md) {
-      top: -30%;
-      left: 50%;
-    }
+    transform: scale(0.5) translate(0%, 100%);
 
     &--enter {
       transition: 3.5s ease;
-      transform: translate(0%, 100%);
+      transform: scale(0.5) translate(50%, 200%);
     }
 
     &--under {
       transition: 3.5s ease;
-      transform: translate(50%, 200%);
+      transform: scale(0.5) translate(100%, 300%);
+    }
+
+    @include rwd-min(md) {
+      top: -30%;
+      left: 50%;
+      transform: translate(-50%, 0);
+
+      &--enter {
+        transition: 3.5s ease;
+        transform: translate(0%, 100%);
+      }
+
+      &--under {
+        transition: 3.5s ease;
+        transform: translate(50%, 200%);
+      }
     }
 
     img {
@@ -273,6 +288,7 @@ function handleTranshFloatEnter(enter: boolean) {
     position: absolute;
     top: 10%;
     left: 0;
+    display: none;
     transform: translate(-50%, 0);
 
     &--enter {
@@ -283,6 +299,10 @@ function handleTranshFloatEnter(enter: boolean) {
     &--under {
       transition: 3.5s ease;
       transform: translate(150%, -100%);
+    }
+
+    @include rwd-min(md) {
+      display: block;
     }
 
     img {

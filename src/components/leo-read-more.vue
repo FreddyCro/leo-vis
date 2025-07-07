@@ -48,7 +48,7 @@ function onClick(item: Item) {
             class="leo-read-more__link relative h-full min-h-[124px] md:min-h-[153px] flex flex-col justify-between border border-[#808080] rounded-[20px] overflow-hidden"
             :class="{
               'px-[25px] py-[28px]': !item.desc,
-              'min-h-[376px] px-[16px] py-[35px] sm:min-h-[492px] sm:px-[21px] sm:py-[46px] md:min-h-[0] md:px-[50px] md:py-[42px]':
+              'leo-read-more__link--one min-h-[376px] px-[16px] py-[35px] sm:min-h-[492px] sm:px-[21px] sm:py-[46px] md:min-h-[0] md:px-[50px] md:py-[42px]':
                 item.desc,
             }"
             target="_blank"
@@ -74,7 +74,7 @@ function onClick(item: Item) {
                 >
                   {{ item.title }}
                 </h3>
-                <div v-if="item.desc" class="mt-4">
+                <div v-if="item.desc" class="leo-read-more-p">
                   <p>{{ item.desc }}</p>
                 </div>
               </div>
@@ -133,15 +133,31 @@ function onClick(item: Item) {
 .leo-read-more-h3 {
   font-size: 20px;
   line-height: 28px;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
 }
 
 .leo-read-more-h3-w-desc {
   font-size: 28px;
   line-height: 40px;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
 
   @include rwd-min(pc) {
     font-size: 32px;
     line-height: 38px;
+  }
+}
+
+.leo-read-more-p {
+  font-size: 18px;
+  line-height: 30px;
+  margin-bottom: 36px;
+
+  @include rwd-min(xxs) {
+    margin-bottom: 162px;
+  }
+
+  @include rwd-min(pad) {
+    margin-bottom: 0;
   }
 }
 </style>
