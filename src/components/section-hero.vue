@@ -126,11 +126,11 @@ function onEarthReady() {
                   @change="onFlourishChartIntersectChange"
                 >
                   <figure
-                    class="w-full flex items-center transition-all duration-500 ease-in-out"
+                    class="w-full flex items-center justify-center transition-all duration-500 ease-in-out"
                     :class="{ 'opacity-0': !isFlourishChartIntersecting }"
                   >
                     <div
-                      class="flourish-embed flourish-chart"
+                      class="w-full flourish-embed flourish-chart"
                       data-src="visualisation/23264843"
                     />
                   </figure>
@@ -141,7 +141,7 @@ function onEarthReady() {
 
           <!-- text 2 -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1.25)] flex items-center"
           >
             <div class="leo-container-pc">
               <div class="min-h-[calc(var(--init-screen-height)*1)]">
@@ -154,7 +154,7 @@ function onEarthReady() {
         </div>
 
         <!-- rest article -->
-        <div class="leo-section">
+        <div class="leo-section leo-section--no-mt">
           <div class="leo-container">
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
