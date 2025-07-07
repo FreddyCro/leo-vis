@@ -239,3 +239,25 @@ p.leo-caption {
     padding: 40px 48px;
   }
 }
+
+.leo-intro-h2 {
+  font-size: 50px;
+  line-height: 62px;
+  font-weight: 500;
+  margin-bottom: 8px;
+
+  @include rwd-min(pad) {
+    font-size: 72px;
+    line-height: 1;
+  }
+}
+
+.leo-intro-h2-sub {
+  font-size: 22px;
+  line-height: 36px;
+
+  @include rwd-min(pad) {
+    font-size: 24px;
+    line-height: 36px;
+  }
+}

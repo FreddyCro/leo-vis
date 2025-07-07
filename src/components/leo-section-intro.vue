@@ -102,7 +102,7 @@ function onClick(item: { text: string; link: string }) {
         </li>
       </ul>
 
-      <div v-if="chapter" class="ls-intro__chapter md:hidden">
+      <div v-if="chapter" class="ls-intro__chapter montserrat md:hidden">
         {{ chapter }}
       </div>
     </div>

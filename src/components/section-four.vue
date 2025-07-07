@@ -86,8 +86,8 @@ function handleTranshFloatEnter(enter: boolean) {
       <template #intro>
         <LeoSectionIntro chapter="04">
           <h2 class="max-w-[448px]">
-            <span class="block text-4xl md:text-6xl mb-5">{{ str.title }}</span>
-            <span class="block text-2xl">{{ str.subTitle }}</span>
+            <span class="block leo-intro-h2">{{ str.title }}</span>
+            <span class="block leo-intro-h2-sub">{{ str.subTitle }}</span>
           </h2>
         </LeoSectionIntro>
       </template>

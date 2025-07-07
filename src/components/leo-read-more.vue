@@ -67,10 +67,9 @@ function onClick(item: Item) {
               <!-- text -->
               <div class="relative">
                 <h3
-                  class="font-medium"
                   :class="{
-                    'text-xl': !item.desc,
-                    'text-3xl': item.desc,
+                    'leo-read-more-h3': !item.desc,
+                    'leo-read-more-h3-w-desc': item.desc,
                   }"
                 >
                   {{ item.title }}
@@ -128,6 +127,21 @@ function onClick(item: Item) {
     object-fit: cover;
     object-position: center;
     pointer-events: none;
+  }
+}
+
+.leo-read-more-h3 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.leo-read-more-h3-w-desc {
+  font-size: 28px;
+  line-height: 40px;
+
+  @include rwd-min(pc) {
+    font-size: 32px;
+    line-height: 38px;
   }
 }
 </style>
