@@ -75,7 +75,7 @@ function onClick(item: { text: string; link: string }) {
       class="ls-intro__toc-wrap relative w-full max-md:flex max-md:justify-between max-md:items-end max-md:px-[40px]"
     >
       <ul
-        class="ls-intro__toc inline-grid max-md:grid-rows-4 md:grid-cols-4 gap-5 md:gap-10"
+        class="ls-intro__toc inline-grid max-md:grid-rows-4 md:grid-cols-4 gap-[18px] md:gap-10"
       >
         <li
           v-for="(item, index) in tocList"

@@ -424,6 +424,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   <LeoPic
                     src="img/newspaceera2025_pic11_1_chart"
                     ext="svg"
+                    :pc-breakpoint="1024"
                     :use2x="false"
                     :webp="false"
                     :width="430"
@@ -439,6 +440,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   <LeoPic
                     src="img/newspaceera2025_pic11_2_chart"
                     ext="svg"
+                    :pc-breakpoint="1024"
                     :use2x="false"
                     :webp="false"
                     :width="430"
@@ -738,7 +740,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__moon-svg-title {
-    @include rwd-min(lg) {
+    @include rwd-min(pad) {
       position: absolute;
       z-index: 10;
       left: 25%;
@@ -763,10 +765,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
     top: 0;
     left: 0;
     width: $base-width-mob;
+    line-height: 1.1;
     opacity: 0.3;
 
     @include rwd-min(pad) {
       width: $base-width-pad;
+      line-height: 1.5;
     }
 
     @include rwd-min(pc) {
@@ -787,9 +791,9 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 1%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc;
-        top: $base-y-pc;
+        top: $base-y-pc - 0.5%;
       }
     }
 
@@ -802,7 +806,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 16%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc + 6%;
         top: $base-y-pc + 18.5%;
       }
@@ -817,7 +821,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 30%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc + 9%;
         top: $base-y-pc + 34%;
       }
@@ -832,7 +836,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 45%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc + 6%;
         top: $base-y-pc + 54.5%;
       }
@@ -847,7 +851,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 59%;
       }
 
-      @include rwd-min(lg) {
+      @include rwd-min(pc) {
         left: $base-x-pc;
         top: $base-y-pc + 71%;
       }

@@ -122,36 +122,40 @@ function onEarthReady() {
             </div>
           </div>
 
-          <!-- text 2 -->
+          <!-- chart 2 -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
+            class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center"
           >
-            <div class="leo-container-pc">
-              <div class="leo-text-box">
-                <p>{{ str.p2t1 }}</p>
+            <div class="leo-container-larger bg-black">
+              <div class="py-[30px] sm:py-[60px] md:py-[80px]">
+                <LeoScrollTrigger
+                  class="w-full"
+                  @change="onFlourishChartIntersectChange"
+                >
+                  <figure
+                    class="w-full transition-all duration-500 ease-in-out"
+                    :class="{ 'opacity-0': !isFlourishChartIntersecting }"
+                  >
+                    <div
+                      class="flourish-embed flourish-chart"
+                      data-src="visualisation/23264843"
+                    />
+                  </figure>
+                </LeoScrollTrigger>
               </div>
             </div>
           </div>
 
-          <!-- chart 2 -->
+          <!-- text 2 -->
           <div
-            class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center"
           >
-            <div class="leo-container-larger">
-              <LeoScrollTrigger
-                class="w-full"
-                @change="onFlourishChartIntersectChange"
-              >
-                <figure
-                  class="w-full transition-all duration-500 ease-in-out"
-                  :class="{ 'opacity-0': !isFlourishChartIntersecting }"
-                >
-                  <div
-                    class="flourish-embed flourish-chart"
-                    data-src="visualisation/23264843"
-                  />
-                </figure>
-              </LeoScrollTrigger>
+            <div class="leo-container-pc">
+              <div class="min-h-[calc(var(--init-screen-height)*1)]">
+                <div class="leo-text-box">
+                  <p>{{ str.p2t1 }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
