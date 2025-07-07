@@ -149,6 +149,21 @@ p.leo-caption {
   }
 }
 
+.leo-section-chart {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  @include rwd-min(pad) {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  @include rwd-min(pc) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+}
+
 .leo-section-sm {
   margin-top: 40px;
   margin-bottom: 40px;

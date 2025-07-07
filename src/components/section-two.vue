@@ -242,22 +242,23 @@ function handleChangeArticle(isIntersecting: boolean) {
     }
   }
 
+  /* moon */
   &__space-pic-2 {
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
-    transform: rotate(5deg);
+    transform: translate(-25%, -25%);
 
     &--enter {
       /* rotate 15deg => 0 */
-      transform: rotate(0deg);
+      transform: translate(0, 0);
       opacity: 1;
       transition: 2s ease-in-out;
     }
 
     &--under {
-      transform: rotate(0deg);
+      transform: translate(0, 0);
       opacity: 1;
       transition: 2s ease-in-out;
     }
@@ -272,10 +273,10 @@ function handleChangeArticle(isIntersecting: boolean) {
     top: 35%;
     left: 35%;
     opacity: 0;
-    transform: translate(0%, 0%) rotate(20deg);
+    transform: translate(0%, 0%) rotate(25deg);
 
     @include rwd-min(md) {
-      transform: translate(0%, 0%) rotate(20deg);
+      transform: translate(0%, 0%) rotate(25deg);
     }
 
     &--enter {
@@ -285,7 +286,7 @@ function handleChangeArticle(isIntersecting: boolean) {
       transition: 3.5s ease-in-out;
 
       @include rwd-min(md) {
-        transform: translate(10%, 5%) rotate(0deg);
+        transform: translate(30%, 5%) rotate(0deg);
       }
     }
 

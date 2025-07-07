@@ -396,7 +396,7 @@ function onDialogClose() {
       transition: 3s ease-in-out;
 
       @include rwd-min(md) {
-        transform: translate(-20%, -30%) rotate(0deg);
+        transform: translate(-20%, -120%) rotate(0deg);
       }
     }
 

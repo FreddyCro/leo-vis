@@ -139,11 +139,11 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   :webp="false"
                 />
 
+                <!-- workaround: 覆蓋掉當 bg image 因尺寸不是整數造成白色邊框  -->
+                <div class="absolute bottom-0 left-0 w-full h-[2px] bg-black" />
+
                 <!-- machine -->
-                <LeoScrollTrigger
-                  class="ls-three__fall-down-satellite"
-                  @change="handleSatelliteContent"
-                >
+                <div class="ls-three__fall-down-satellite">
                   <LeoPic
                     src="img/newspaceera2025_pic9_2"
                     ext="png"
@@ -195,9 +195,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     </svg>
                     {{ str.satelliteLocation }}
                   </div>
-                </LeoScrollTrigger>
+                </div>
               </div>
             </div>
+
+            <!-- show machine label -->
+            <LeoScrollTrigger @change="handleSatelliteContent" />
           </div>
         </div>
 
@@ -255,7 +258,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'soviet')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:mt-0 sm:mb-[500px] mx-auto"
                   >
                     <p>{{ str.p3t1 }}</p>
 
@@ -278,7 +281,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                 <!-- 3d moon site part us -->
                 <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p4t1 }}</p>
 
@@ -317,7 +320,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'cn-1')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t1 }}</p>
                     <div class="leo-section-sm">
@@ -340,7 +343,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'cn-2')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[500px] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t2 }}</p>
                     <div class="leo-section-sm">
@@ -363,7 +366,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'others')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mb-[calc(var(--init-screen-height)*0.25)] mx-auto"
+                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mx-auto"
                   >
                     <p>{{ str.p6t1 }}</p>
                     <div class="leo-section-sm">
@@ -394,6 +397,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   </div>
                 </LeoScrollTrigger>
               </div>
+
+              <div
+                class="h-[calc(var(--init-screen-height)*0.35)] sm:h-[calc(var(--init-screen-height)*0.25)]"
+              />
             </div>
           </div>
         </div>
@@ -634,26 +641,24 @@ function handleSatelliteContent(isIntersecting: boolean) {
   &__fall-down-satellite-text {
     position: absolute;
     z-index: 20;
-    bottom: 45%;
+    top: -5%;
     left: 78%;
     width: calc(100vw - 200px);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 
     @include rwd-min(pad) {
-      bottom: 67%;
-      left: 85%;
+      top: 0%;
+      left: 80%;
       width: 265px;
     }
 
     @include rwd-min(md) {
-      bottom: 75%;
       left: 82%;
       width: 450px;
     }
 
     @include rwd-min(lg) {
-      bottom: 82%;
       left: 82%;
     }
 

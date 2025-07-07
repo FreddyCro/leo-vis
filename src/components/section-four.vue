@@ -93,7 +93,7 @@ function handleTranshFloatEnter(enter: boolean) {
       </template>
       <template #article>
         <div
-          class="leo-section leo-section--no-mt leo-section--pt relative z-10"
+          class="leo-section leo-section--no-mt leo-section--pt relative z-20"
         >
           <div class="leo-container">
             <p>{{ str.p1t1 }}</p>
@@ -104,11 +104,13 @@ function handleTranshFloatEnter(enter: boolean) {
 
         <!-- trash float -->
         <div
-          class="ls-four__trash relative h-[calc(var(--init-screen-height)*1)] overflow-hidden"
+          class="ls-four__trash relative h-[calc(var(--init-screen-height)*1)] md:h-[calc(var(--init-screen-height)*1.5)]"
         >
           <div
             class="ls-four__trash-bg absolute bottom-0 left-[50%] w-full flex translate-x-[-50%]"
           >
+            <!-- workaround: 覆蓋掉當 bg image 因尺寸不是整數造成白色邊框  -->
+            <div class="absolute top-0 left-0 w-full h-[5px] bg-black" />
             <LeoPic
               src="img/newspaceera2025_pic14_bg"
               :webp="false"
@@ -175,12 +177,14 @@ function handleTranshFloatEnter(enter: boolean) {
             <p>{{ str.p2t2 }}</p>
             <p>{{ str.p2t3 }}</p>
 
-            <figure>
-              <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23290332"
-              />
-            </figure>
+            <div class="leo-section-chart">
+              <figure>
+                <div
+                  class="flourish-embed flourish-chart"
+                  data-src="visualisation/23290332"
+                />
+              </figure>
+            </div>
 
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
