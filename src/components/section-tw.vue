@@ -41,7 +41,7 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
   <div id="taiwan" class="ls-tw leo-article text-[#404040]">
     <div class="leo-container">
       <div class="leo-section">
-        <h2 class="leo-h3 text-center font-medium">{{ str.title1 }}</h2>
+        <h2 class="ls-tw-h3 text-center font-medium">{{ str.title1 }}</h2>
         <div class="mt-10">
           <p>{{ str.p1t1 }}</p>
         </div>
@@ -51,9 +51,9 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
     <!-- feature grid -->
     <div class="leo-container-lg">
       <div class="leo-section">
-        <h3 class="leo-h3 text-center font-medium">{{ str.title2 }}</h3>
+        <h3 class="ls-tw-h3 md:text-center">{{ str.title2 }}</h3>
         <div class="my-5">
-          <h4 class="text-xl text-center font-medium">
+          <h4 class="ls-tw-h3-sub md:text-center">
             {{ str.title2Subtitle }}
           </h4>
         </div>
@@ -70,16 +70,16 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
               }"
             >
               <div class="ls-tw__feat-grid-item-content px-[20px] py-[30px]">
-                <h4 class="leo-p font-bold">
+                <h4 class="ls-tw__feat-title">
                   {{ item.title }}
                 </h4>
-                <div class="mb-5">
+                <div>
                   <p class="text-[#00F4DC]">
-                    <span class="text-5xl font-bold">{{ item.amount }}</span>
-                    <span class="font-medium">{{ str.featBillion }}</span>
+                    <span class="ls-tw__feat-digit">{{ item.amount }}</span>
+                    <span class="ls-tw__feat-unit">{{ str.featBillion }}</span>
                   </p>
                 </div>
-                <p>{{ item.desc }}</p>
+                <p class="ls-tw__feat-desc">{{ item.desc }}</p>
               </div>
             </li>
           </ul>
@@ -143,7 +143,7 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
       <p>{{ str.p2t5 }}</p>
 
       <div class="leo-section">
-        <h3 class="leo-h3">{{ str.title3 }}</h3>
+        <h3 class="ls-tw-h3">{{ str.title3 }}</h3>
         <div class="mt-10">
           <p>{{ str.p3t1 }}</p>
         </div>
@@ -173,6 +173,34 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 <style lang="scss">
 .ls-tw {
   position: relative;
+
+  &__feat-title {
+    font-size: 18px;
+    line-height: 36px;
+    font-weight: 700;
+  }
+
+  &__feat-digit {
+    font-size: 36px;
+    line-height: 46px;
+    font-weight: 700;
+
+    @include rwd-min(pc) {
+      font-size: 50px;
+      line-height: 68px;
+    }
+  }
+
+  &__feat-unit {
+    font-size: 18px;
+    line-height: 36px;
+    font-weight: 500;
+  }
+
+  &__feat-desc {
+    margin-top: 20px;
+    font-weight: 300;
+  }
 
   &__feat-grid-item {
     position: relative;
@@ -204,5 +232,22 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
       }
     }
   }
+}
+
+.ls-tw-h3 {
+  font-size: 28px;
+  line-height: 40px;
+  font-weight: 500;
+
+  @include rwd-min(pad) {
+    font-size: 32px;
+    line-height: 48px;
+  }
+}
+
+.ls-tw-h3-sub {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 500;
 }
 </style>
