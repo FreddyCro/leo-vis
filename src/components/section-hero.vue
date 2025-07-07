@@ -88,30 +88,36 @@ function onEarthReady() {
         <div>
           <!-- chart 1 -->
           <div class="leo-container-larger">
-            <LeoScrollTrigger class="w-full" @change="onChart1IntersectChange">
-              <figure
-                class="w-full transition-all duration-500 ease-in-out"
-                :class="{ 'opacity-0': !isChart1Intersecting }"
-              >
-                <!-- <h3 class="leo-h3 text-left">
-                  {{ str.g1Title }}
-                </h3> -->
-                <div class="flex justify-center">
-                  <figure class="w-full ls-hero__chart flex justify-center">
-                    <LeoPic
-                      src="img/newspaceera2025_pic1_1_chart"
-                      ext="svg"
-                      :use2x="false"
-                      :webp="false"
-                    />
-                  </figure>
-                  <!-- <div class="mt-4">
-                    <p class="leo-caption">
-                      {{ str.g1Caption }}
-                    </p>
-                  </div> -->
-                </div>
-              </figure>
+            <LeoScrollTrigger
+              class="w-full flex items-center justify-center"
+              scroll-height="calc(var(--init-screen-height)*1)"
+              @change="onChart1IntersectChange"
+            >
+              <div class="leo-section-chart">
+                <figure
+                  class="w-full transition-all duration-500 ease-in-out"
+                  :class="{ 'opacity-0': !isChart1Intersecting }"
+                >
+                  <!-- <h3 class="leo-h3 text-left">
+                    {{ str.g1Title }}
+                  </h3> -->
+                  <div class="flex justify-center">
+                    <figure class="w-full ls-hero__chart flex justify-center">
+                      <LeoPic
+                        src="img/newspaceera2025_pic1_1_chart"
+                        ext="svg"
+                        :use2x="false"
+                        :webp="false"
+                      />
+                    </figure>
+                    <!-- <div class="mt-4">
+                      <p class="leo-caption">
+                        {{ str.g1Caption }}
+                      </p>
+                    </div> -->
+                  </div>
+                </figure>
+              </div>
             </LeoScrollTrigger>
           </div>
 
@@ -120,7 +126,7 @@ function onEarthReady() {
             class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center"
           >
             <div class="leo-container-larger bg-black">
-              <div class="py-[30px] sm:py-[60px] md:py-[80px]">
+              <div class="leo-section-chart">
                 <LeoScrollTrigger
                   class="w-full"
                   @change="onFlourishChartIntersectChange"
@@ -141,7 +147,7 @@ function onEarthReady() {
 
           <!-- text 2 -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1.25)] flex items-center"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1.15)] flex items-center"
           >
             <div class="leo-container-pc">
               <div class="min-h-[calc(var(--init-screen-height)*1)]">
@@ -154,7 +160,7 @@ function onEarthReady() {
         </div>
 
         <!-- rest article -->
-        <div class="leo-section leo-section--no-mt">
+        <div class="leo-section">
           <div class="leo-container">
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
