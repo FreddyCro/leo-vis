@@ -93,36 +93,31 @@ function onEarthReady() {
           <div
             class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
           >
-            <div class="leo-container">
-              <LeoScrollTrigger
-                class="w-full"
-                @change="onChart1IntersectChange"
+            <LeoScrollTrigger class="w-full" @change="onChart1IntersectChange">
+              <figure
+                class="w-full transition-all duration-500 ease-in-out"
+                :class="{ 'opacity-0': !isChart1Intersecting }"
               >
-                <figure
-                  class="w-full transition-all duration-500 ease-in-out"
-                  :class="{ 'opacity-0': !isChart1Intersecting }"
-                >
-                  <h3 class="leo-h3 text-left">
-                    {{ str.g1Title }}
-                  </h3>
-                  <div>
-                    <figure class="w-full ls-hero__chart">
-                      <LeoPic
-                        src="img/newspaceera2025_pic1_1_chart"
-                        ext="svg"
-                        :use2x="false"
-                        :webp="false"
-                      />
-                    </figure>
-                    <div class="mt-4">
-                      <p class="leo-caption">
-                        {{ str.g1Caption }}
-                      </p>
-                    </div>
-                  </div>
-                </figure>
-              </LeoScrollTrigger>
-            </div>
+                <!-- <h3 class="leo-h3 text-left">
+                  {{ str.g1Title }}
+                </h3> -->
+                <div class="flex justify-center">
+                  <figure class="w-full ls-hero__chart">
+                    <LeoPic
+                      src="img/newspaceera2025_pic1_1_chart"
+                      ext="svg"
+                      :use2x="false"
+                      :webp="false"
+                    />
+                  </figure>
+                  <!-- <div class="mt-4">
+                    <p class="leo-caption">
+                      {{ str.g1Caption }}
+                    </p>
+                  </div> -->
+                </div>
+              </figure>
+            </LeoScrollTrigger>
           </div>
 
           <!-- text 2 -->
@@ -140,7 +135,7 @@ function onEarthReady() {
           <div
             class="sticky top-0 w-full h-[calc(var(--init-screen-height)*1)] flex items-center bg-black"
           >
-            <div class="leo-container">
+            <div class="leo-container-larger">
               <LeoScrollTrigger
                 class="w-full"
                 @change="onFlourishChartIntersectChange"
