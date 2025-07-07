@@ -103,7 +103,7 @@ function onEarthReady() {
                   {{ str.g1Title }}
                 </h3> -->
                   <div class="flex justify-center">
-                    <figure class="w-full ls-hero__chart">
+                    <figure class="w-full ls-hero__chart flex justify-center">
                       <LeoPic
                         src="img/newspaceera2025_pic1_1_chart"
                         ext="svg"
