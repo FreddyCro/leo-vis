@@ -140,6 +140,10 @@ function onClick(item: { text: string; link: string }) {
       bottom: 126px;
     }
 
+    @media screen and (min-width: 800px) {
+      bottom: 176px;
+    }
+
     @include rwd-min(md) {
       display: none;
     }
@@ -150,6 +154,11 @@ function onClick(item: { text: string; link: string }) {
 
     @include rwd-min(sm) {
       padding-bottom: calc(126px + 64px);
+    }
+
+    /* min 800px */
+    @media screen and (min-width: 800px) {
+      padding-bottom: calc(176px + 64px);
     }
 
     @include rwd-min(md) {

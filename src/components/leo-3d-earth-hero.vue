@@ -6,6 +6,10 @@ import * as THREE from 'three';
 import { createGlowTexture } from '@/utils/3d-utils';
 
 const props = defineProps({
+  readyDelay: {
+    type: Number,
+    default: 500, // 預設延遲 1000 毫秒
+  },
   isZoomOut: {
     type: Boolean,
     default: false,
@@ -139,6 +143,8 @@ class GlobeController {
    * Start animation loop
    */
   animate() {
+    let isFirstRender = true;
+
     const animateLoop = (currentTime) => {
       this.animationId = requestAnimationFrame(animateLoop);
 
@@ -238,13 +244,19 @@ class GlobeController {
       // Render the scene
       if (this.renderer && this.scene && this.camera) {
         this.renderer.render(this.scene, this.camera);
+
+        // 在第一次渲染完成後執行 callback
+        if (isFirstRender) {
+          setTimeout(() => {
+            // emit
+            emit('onReady');
+          }, props.readyDelay);
+          isFirstRender = false;
+        }
       }
     };
 
     animateLoop();
-
-    // emit
-    emit('onReady');
 
     return this;
   }
