@@ -131,7 +131,7 @@ function onDialogClose() {
       </template>
       <template #intro>
         <LeoSectionIntro chapter="01">
-          <h2 class="pt-20 sm:pt-0 max-w-[448px]">
+          <h2 class="max-w-[448px]">
             <span class="block leo-intro-h2">{{ str.title }}</span>
             <span class="block leo-intro-h2-sub">{{ str.subTitle }}</span>
           </h2>
