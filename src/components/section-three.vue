@@ -128,7 +128,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
             </div>
 
             <div
-              class="h-[calc(var(--init-screen-height)*0.45)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.6)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
+              class="h-[calc(var(--init-screen-height)*0.55)] sm:h-[calc(var(--init-screen-height)*0.5)] md:h-[calc(var(--init-screen-height)*0.6)] lg:h-[calc(var(--init-screen-height)*0.75)] 3xl:h-[calc(var(--init-screen-height)*0.5)] lg:min-h-[600px]"
             >
               <div class="absolute bottom-0 left-0 w-full h-full">
                 <!-- bg -->
@@ -214,7 +214,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <div class="grid">
           <!-- moon -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('./img/bg_star.jpg')] bg-repeat"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('img/bg_star.jpg')] bg-repeat"
           >
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
@@ -258,7 +258,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'soviet')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:mt-0 sm:mb-[500px] mx-auto"
+                    class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] md:mt-0 md:mb-[500px] mx-auto"
                   >
                     <p>{{ str.p3t1 }}</p>
 
@@ -281,7 +281,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                 <!-- 3d moon site part us -->
                 <LeoScrollTrigger @change="handleChangeCategory($event, 'us')">
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
+                    class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p4t1 }}</p>
 
@@ -320,7 +320,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'cn-1')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
+                    class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t1 }}</p>
                     <div class="leo-section-sm">
@@ -343,7 +343,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   @change="handleChangeCategory($event, 'cn-2')"
                 >
                   <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
+                    class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t2 }}</p>
                     <div class="leo-section-sm">
@@ -365,9 +365,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                 <LeoScrollTrigger
                   @change="handleChangeCategory($event, 'others')"
                 >
-                  <div
-                    class="ls-three__moon-text-box min-h-[calc(var(--init-screen-height)*1)] mx-auto"
-                  >
+                  <div class="ls-three__moon-text-box mx-auto">
                     <p>{{ str.p6t1 }}</p>
                     <div class="leo-section-sm">
                       <LeoPic
@@ -399,7 +397,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
               </div>
 
               <div
-                class="h-[calc(var(--init-screen-height)*0.35)] sm:h-[calc(var(--init-screen-height)*0.25)]"
+                class="h-[calc(var(--init-screen-height)*0.5)] sm:h-[calc(var(--init-screen-height)*0.25)]"
               />
             </div>
           </div>

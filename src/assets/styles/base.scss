@@ -154,6 +154,21 @@ p.leo-caption {
   margin-bottom: 30px;
 }
 
+.leo-section-chart-lg {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  @include rwd-min(pad) {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  @include rwd-min(pc) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+}
+
 .leo-section-sm {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -298,5 +313,20 @@ p.leo-caption {
   @include rwd-min(pad) {
     font-size: 24px;
     line-height: 36px;
+  }
+}
+
+.leo-intro-h2-sub-lg {
+  font-size: 22px;
+  line-height: 1.5;
+
+  @include rwd-min(xxs) {
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  @include rwd-min(pad) {
+    font-size: 32px;
+    line-height: 46px;
   }
 }

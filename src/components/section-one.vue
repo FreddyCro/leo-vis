@@ -140,13 +140,13 @@ function onDialogClose() {
       <template #article>
         <div class="leo-section leo-section--pt leo-section--no-mt">
           <div class="min-h-[calc(var(--init-screen-height)*4)]">
-            <div class="sticky top-0 bg-[url('./img/bg_star.jpg')]">
+            <div class="sticky top-0 bg-[url('img/bg_star.jpg')]">
               <Leo3dEarthSatellite :current-category="currentCategory" />
             </div>
 
             <!-- trigger all -->
             <LeoScrollTrigger
-              class="my-[calc(var(--init-screen-height)*0.6)]"
+              class="l-scroll-trigger my-[calc(var(--init-screen-height)*1)] sm:my-[calc(var(--init-screen-height)*0.6)]"
               scroll-height="calc(var(--init-screen-height)*1)"
               @change="handleChangeCategory($event, SATELLITE_LABEL_ALL)"
             >
@@ -159,7 +159,7 @@ function onDialogClose() {
 
             <!-- trigger LEO -->
             <LeoScrollTrigger
-              class="my-[calc(var(--init-screen-height)*0.6)]"
+              class="l-scroll-trigger my-[calc(var(--init-screen-height)*1)] sm:my-[calc(var(--init-screen-height)*0.6)]"
               scroll-height="calc(var(--init-screen-height)*1)"
               @change="handleChangeCategory($event, SATELLITE_LABEL_APOGEE)"
             >
@@ -173,7 +173,7 @@ function onDialogClose() {
 
             <!-- trigger SpaceX -->
             <LeoScrollTrigger
-              class="my-[calc(var(--init-screen-height)*0.6)]"
+              class="l-scroll-trigger my-[calc(var(--init-screen-height)*1)] sm:my-[calc(var(--init-screen-height)*0.6)]"
               scroll-height="calc(var(--init-screen-height)*1)"
               @change="handleChangeCategory($event, SATELLITE_LABEL_STARLINK)"
             >

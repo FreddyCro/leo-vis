@@ -145,7 +145,11 @@ function onClick(item: { text: string; link: string }) {
   }
 
   &__toc-wrap {
-    padding-bottom: calc(67px + 64px);
+    padding-bottom: 80px;
+
+    @include rwd-min(xxs) {
+      padding-bottom: calc(67px + 64px);
+    }
 
     @include rwd-min(sm) {
       padding-bottom: calc(126px + 64px);
@@ -181,14 +185,15 @@ function onClick(item: { text: string; link: string }) {
 
     @include rwd-min(md) {
       margin-left: 0;
-      margin-top: 15px;
+      margin-top: 9px;
     }
   }
 
   &__toc-item-content-number {
-    /* font-family: Noto Sans Telugu UI; */
+    font-family: Noto Sans Telugu;
     font-size: 28px;
     margin-right: 2px;
+    margin-top: 6px;
   }
 
   &__toc-item-dot {

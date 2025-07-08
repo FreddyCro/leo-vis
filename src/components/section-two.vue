@@ -90,26 +90,27 @@ function handleChangeArticle(isIntersecting: boolean) {
           <div class="leo-section leo-section--pt leo-section--no-mt">
             <p>{{ str.p1t1 }}</p>
             <p>{{ str.p1t2 }}</p>
-            <p></p>
 
             <!-- chart 1 -->
-            <figure class="w-full">
-              <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23266793"
-              />
-            </figure>
+            <div class="leo-section-sm">
+              <figure class="w-full">
+                <div
+                  class="flourish-embed flourish-chart"
+                  data-src="visualisation/23266793"
+                />
+              </figure>
+            </div>
             <p>{{ str.p2t1 }}</p>
-            <p></p>
 
             <!-- chart 2 -->
-            <figure class="w-full">
-              <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23267137"
-              />
-            </figure>
-            <p></p>
+            <div class="leo-section-sm">
+              <figure class="w-full">
+                <div
+                  class="flourish-embed flourish-chart"
+                  data-src="visualisation/23267137"
+                />
+              </figure>
+            </div>
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
           </div>

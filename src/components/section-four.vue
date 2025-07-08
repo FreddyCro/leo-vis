@@ -177,7 +177,7 @@ function handleTranshFloatEnter(enter: boolean) {
             <p>{{ str.p2t2 }}</p>
             <p>{{ str.p2t3 }}</p>
 
-            <div class="leo-section-chart">
+            <div class="leo-section-chart-lg">
               <figure>
                 <div
                   class="flourish-embed flourish-chart"
