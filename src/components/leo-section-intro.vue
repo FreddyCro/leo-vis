@@ -145,11 +145,7 @@ function onClick(item: { text: string; link: string }) {
   }
 
   &__toc-wrap {
-    padding-bottom: 80px;
-
-    @include rwd-min(xxs) {
-      padding-bottom: calc(67px + 64px);
-    }
+    padding-bottom: calc(67px + 64px);
 
     @include rwd-min(sm) {
       padding-bottom: calc(126px + 64px);
