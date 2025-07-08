@@ -91,7 +91,7 @@ function onClick(item: { text: string; link: string }) {
               <div class="ls-intro__toc-item-dot-in" />
             </div>
             <div class="ls-intro__toc-item-content">
-              <span class="ls-intro__toc-item-content-number">
+              <span class="ls-intro__toc-item-content-number montserrat">
                 0{{ index + 1 }}
               </span>
               <span>
@@ -185,15 +185,13 @@ function onClick(item: { text: string; link: string }) {
 
     @include rwd-min(md) {
       margin-left: 0;
-      margin-top: 9px;
+      margin-top: 15px;
     }
   }
 
   &__toc-item-content-number {
-    font-family: Noto Sans Telugu;
     font-size: 28px;
     margin-right: 2px;
-    margin-top: 6px;
   }
 
   &__toc-item-dot {

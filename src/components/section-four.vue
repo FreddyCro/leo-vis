@@ -115,8 +115,6 @@ function handleTranshFloatEnter(enter: boolean) {
               src="img/newspaceera2025_pic14_bg"
               :webp="false"
               :use2x="false"
-              :width="430"
-              :height="120"
             />
           </div>
 
@@ -133,9 +131,10 @@ function handleTranshFloatEnter(enter: boolean) {
               >
                 <div class="w-full max-w-[475px]">
                   <div>
-                    <span class="text-[80px] sm:text-[100px] leading-[100px]">{{
-                      str.p1t4
-                    }}</span>
+                    <span
+                      class="text-[80px] sm:text-[100px] leading-[100px] montserrat"
+                      >{{ str.p1t4 }}</span
+                    >
                     <span class="text-[24px] leading-[36px]">{{
                       str.p1tBillion
                     }}</span>
@@ -154,9 +153,10 @@ function handleTranshFloatEnter(enter: boolean) {
               >
                 <div class="w-full max-w-[475px]">
                   <div>
-                    <span class="text-[80px] sm:text-[100px] leading-[100px]">{{
-                      str.p1t6
-                    }}</span>
+                    <span
+                      class="text-[80px] sm:text-[100px] leading-[100px] montserrat"
+                      >{{ str.p1t6 }}</span
+                    >
                     <span class="text-[24px] leading-[36px]">{{
                       str.p1tBillion
                     }}</span>
@@ -190,7 +190,7 @@ function handleTranshFloatEnter(enter: boolean) {
             <p>{{ str.p3t2 }}</p>
 
             <LeoReadMore
-              chapter="ch1"
+              chapter="ch4"
               :data="[
                 {
                   title: str.related1Title,

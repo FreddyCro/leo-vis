@@ -176,7 +176,7 @@ function handleChangeArticle(isIntersecting: boolean) {
           <p>{{ str.p5t2 }}</p>
         </div>
 
-        <div class="leo-container-lg">
+        <div class="leo-container-card24">
           <div class="leo-section">
             <LeoReadMore
               chapter="ch2"

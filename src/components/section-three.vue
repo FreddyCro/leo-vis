@@ -214,14 +214,14 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <div class="grid">
           <!-- moon -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('img/bg_star.jpg')] bg-repeat"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('/img/bg_star.jpg')] bg-repeat"
           >
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
 
               <!-- label -->
               <div
-                class="absolute left-[50%] bottom-auto md:bottom-[16%] top-[20%] md:top-auto flex gap-2 translate-x-[-50%] whitespace-nowrap"
+                class="absolute left-[50%] bottom-auto md:bottom-[16%] top-[20%] md:top-auto flex gap-1 xxs:gap-2 translate-x-[-50%] whitespace-nowrap"
               >
                 <div
                   v-for="country in labels"
@@ -229,7 +229,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   class="flex gap-1 items-center"
                 >
                   <span
-                    class="w-[15px] h-[15px] rounded-full"
+                    class="w-[12px] xxs:w-[15px] h-[12px] xxs:h-[15px] rounded-full"
                     :style="{ backgroundColor: country.color }"
                   />
                   <span>
@@ -407,9 +407,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <div class="overflow-hidden">
           <LeoScrollTrigger @change="handleSvgContent">
             <div class="ls-three__moon-svg-wrap">
-              <h3
-                class="ls-three__moon-svg-title leo-h3 leo-h3--no-mb text-center"
-              >
+              <h3 class="ls-three__moon-svg-title">
                 {{ str.moonTitle }}
               </h3>
               <div class="ls-three__moon-svg-imgs">
@@ -512,7 +510,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
           </LeoScrollTrigger>
         </div>
 
-        <div class="leo-container">
+        <div class="leo-container-card24">
           <div class="leo-section">
             <p>{{ str.p7t1 }}</p>
           </div>
@@ -738,10 +736,22 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__moon-svg-title {
+    padding: 0 20px;
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: 500;
+    transform: translateY(100%);
+
+    @include rwd-min(sm) {
+      font-size: 32px;
+      line-height: 48px;
+      text-align: center;
+    }
+
     @include rwd-min(md) {
       position: absolute;
       z-index: 10;
-      left: 25%;
+      left: 24.5%;
       top: 50%;
       width: 232px;
       transform: translate(-25%, -50%);
@@ -789,7 +799,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
         top: $base-y-pad + 1%;
       }
 
-      @include rwd-min(pc) {
+      @include rwd-min(md) {
+        left: $base-x-pc;
+        top: $base-y-pc - 2.5%;
+      }
+
+      @include rwd-min(lg) {
         left: $base-x-pc;
         top: $base-y-pc - 0.5%;
       }
