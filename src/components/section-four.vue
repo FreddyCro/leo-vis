@@ -115,6 +115,7 @@ function handleTranshFloatEnter(enter: boolean) {
               src="img/newspaceera2025_pic14_bg"
               :webp="false"
               :use2x="false"
+              loading="eager"
             />
           </div>
 

@@ -137,6 +137,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   src="img/newspaceera2025_pic9_1_bg"
                   :use2x="false"
                   :webp="false"
+                  loading="eager"
                 />
 
                 <!-- workaround: 覆蓋掉當 bg image 因尺寸不是整數造成白色邊框  -->
@@ -151,6 +152,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     :use2x="false"
                     :width="430"
                     :height="120"
+                    loading="eager"
                   />
                   <div
                     class="ls-three__fall-down-satellite-text"
