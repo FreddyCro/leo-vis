@@ -44,8 +44,8 @@ function handleTranshFloatEnter(enter: boolean) {
               src="img/newspaceera2025_pic13_1_bg"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="720"
+              :height="1280"
             />
           </div>
           <div
@@ -60,8 +60,8 @@ function handleTranshFloatEnter(enter: boolean) {
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="369"
+              :height="370"
             />
           </div>
           <div
@@ -77,8 +77,8 @@ function handleTranshFloatEnter(enter: boolean) {
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="298"
+              :height="316"
             />
           </div>
         </div>
@@ -115,6 +115,8 @@ function handleTranshFloatEnter(enter: boolean) {
               src="img/newspaceera2025_pic14_bg"
               :webp="false"
               :use2x="false"
+              :width="1144"
+              :height="2426"
               loading="eager"
             />
           </div>

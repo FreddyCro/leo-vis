@@ -68,8 +68,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
               src="img/newspaceera2025_pic8_1_bg"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="720"
+              :height="1280"
             />
           </div>
         </div>
@@ -137,6 +137,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                   src="img/newspaceera2025_pic9_1_bg"
                   :use2x="false"
                   :webp="false"
+                  :width="1110"
+                  :height="2917"
                   loading="eager"
                 />
 
@@ -150,8 +152,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     ext="png"
                     :webp="false"
                     :use2x="false"
-                    :width="430"
-                    :height="120"
+                    :width="253"
+                    :height="233"
                     loading="eager"
                   />
                   <div
@@ -269,8 +271,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         src="img/newspaceera2025_pic10_1"
                         :webp="false"
                         :use-prefix="false"
-                        :width="430"
-                        :height="120"
+                        :width="415"
+                        :height="234"
                       />
                       <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p3Caption }}
@@ -292,8 +294,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         src="img/newspaceera2025_pic10_2"
                         :webp="false"
                         :use-prefix="false"
-                        :width="430"
-                        :height="120"
+                        :width="415"
+                        :height="234"
                       />
                       <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p4Caption1 }}
@@ -306,8 +308,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         src="img/newspaceera2025_pic10_3"
                         :webp="false"
                         :use-prefix="false"
-                        :width="430"
-                        :height="120"
+                        :width="415"
+                        :height="234"
                       />
                       <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p4Caption2 }}
@@ -330,8 +332,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         src="img/newspaceera2025_pic10_4"
                         :webp="false"
                         :use-prefix="false"
-                        :width="430"
-                        :height="120"
+                        :width="415"
+                        :height="234"
                       />
                       <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p5Caption1 }}
@@ -353,8 +355,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         src="img/newspaceera2025_pic10_5"
                         :webp="false"
                         :use-prefix="false"
-                        :width="430"
-                        :height="120"
+                        :width="415"
+                        :height="298"
                       />
                       <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p5Caption2 }}
@@ -374,8 +376,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         src="img/newspaceera2025_pic10_6"
                         :webp="false"
                         :use-prefix="false"
-                        :width="430"
-                        :height="120"
+                        :width="415"
+                        :height="234"
                       />
                       <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p6Caption1 }}
@@ -387,8 +389,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                         src="img/newspaceera2025_pic10_7"
                         :webp="false"
                         :use-prefix="false"
-                        :width="430"
-                        :height="120"
+                        :width="415"
+                        :height="234"
                       />
                       <p class="leo-caption leo-caption--white pt-[6px]">
                         {{ str.p6Caption2 }}
@@ -425,8 +427,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     :pc-breakpoint="1024"
                     :use2x="false"
                     :webp="false"
-                    :width="430"
-                    :height="120"
+                    :width="415"
+                    :height="971"
                   />
                 </div>
                 <div
@@ -441,8 +443,8 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     :pc-breakpoint="1024"
                     :use2x="false"
                     :webp="false"
-                    :width="430"
-                    :height="120"
+                    :width="415"
+                    :height="971"
                   />
                 </div>
                 <div class="ls-three__moon-svg-labels">
@@ -753,10 +755,14 @@ function handleSatelliteContent(isIntersecting: boolean) {
     @include rwd-min(md) {
       position: absolute;
       z-index: 10;
-      left: 24.5%;
+      left: 23.5%;
       top: 50%;
-      width: 232px;
+      width: 266px;
       transform: translate(-25%, -50%);
+    }
+
+    @include rwd-min(lg) {
+      left: 25%;
     }
   }
 

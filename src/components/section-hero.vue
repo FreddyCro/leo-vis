@@ -104,6 +104,8 @@ function onEarthReady() {
                         ext="svg"
                         :use2x="false"
                         :webp="false"
+                        width="362"
+                        height="607"
                       />
                     </figure>
                     <!-- <div class="mt-4">

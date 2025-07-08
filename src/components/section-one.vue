@@ -106,8 +106,8 @@ function onDialogClose() {
               src="img/newspaceera2025_pic3_1_bg"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="720"
+              :height="1280"
             />
           </div>
 
@@ -123,8 +123,8 @@ function onDialogClose() {
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="369"
+              :height="246"
             />
           </div>
         </div>
@@ -289,8 +289,8 @@ function onDialogClose() {
                     ext="jpg"
                     :use-prefix="false"
                     :webp="false"
-                    :width="430"
-                    :height="120"
+                    :width="760"
+                    :height="42"
                   />
                 </div>
                 <LeoPic
@@ -298,8 +298,8 @@ function onDialogClose() {
                   ext="jpg"
                   :use-prefix="false"
                   :webp="false"
-                  :width="430"
-                  :height="120"
+                  :width="760"
+                  :height="3494"
                 />
               </div>
             </template>

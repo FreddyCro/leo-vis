@@ -37,8 +37,8 @@ function handleChangeArticle(isIntersecting: boolean) {
               src="img/newspaceera2025_pic5_1_bg"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="720"
+              :height="1280"
             />
           </div>
 
@@ -54,8 +54,8 @@ function handleChangeArticle(isIntersecting: boolean) {
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="256"
+              :height="240"
             />
           </div>
 
@@ -71,8 +71,8 @@ function handleChangeArticle(isIntersecting: boolean) {
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="355"
+              :height="245"
             />
           </div>
         </div>
@@ -154,8 +154,8 @@ function handleChangeArticle(isIntersecting: boolean) {
                 ext="svg"
                 :use2x="false"
                 :webp="false"
-                :width="430"
-                :height="120"
+                :width="414"
+                :height="736"
               />
 
               <figcaption>
