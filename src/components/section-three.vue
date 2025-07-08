@@ -738,7 +738,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
   }
 
   &__moon-svg-title {
-    @include rwd-min(pad) {
+    @include rwd-min(md) {
       position: absolute;
       z-index: 10;
       left: 25%;
