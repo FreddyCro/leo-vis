@@ -827,7 +827,12 @@ function handleSatelliteContent(isIntersecting: boolean) {
 
     &--3 {
       left: $base-x-mob + 8%;
-      top: $base-y-mob + 32%;
+      top: $base-y-mob + 29%;
+
+      @include rwd-min(xxs) {
+        left: $base-x-mob + 8%;
+        top: $base-y-mob + 32%;
+      }
 
       @include rwd-min(pad) {
         left: $base-x-pad + 9%;

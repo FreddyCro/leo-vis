@@ -48,8 +48,7 @@ function onClick(item: Item) {
             class="leo-read-more__link relative h-full min-h-[124px] md:min-h-[153px] flex flex-col justify-between border border-[#808080] rounded-[20px] overflow-hidden"
             :class="{
               'px-[25px] py-[28px]': !item.desc,
-              'leo-read-more__link--ch4': item.desc && chapter === 'ch4',
-              'leo-read-more__link--tw': item.desc && chapter === 'tw',
+              'leo-read-more__link--one': item.desc,
             }"
             target="_blank"
             @click="onClick(item)"
@@ -111,20 +110,23 @@ function onClick(item: Item) {
 <style lang="scss">
 .leo-read-more {
   &__link {
-    width: 100%;
-    aspect-ratio: 364 / 492;
-    padding: 46px 21px;
     transition: 0.25s ease-in-out;
 
-    @include rwd-min(sm) {
-      aspect-ratio: auto;
-      min-height: 238px;
-      padding: 36px 33px 36px 43px;
-    }
+    &--one {
+      width: 100%;
+      aspect-ratio: 364 / 492;
+      padding: 46px 21px;
 
-    @include rwd-min(md) {
-      min-height: 278px;
-      padding: 42px 39px 42px 50px;
+      @include rwd-min(sm) {
+        aspect-ratio: auto;
+        min-height: 238px;
+        padding: 36px 33px 36px 43px;
+      }
+
+      @include rwd-min(md) {
+        min-height: 278px;
+        padding: 42px 39px 42px 50px;
+      }
     }
 
     &:hover {
