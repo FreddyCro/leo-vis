@@ -517,11 +517,13 @@ function handleSatelliteContent(isIntersecting: boolean) {
           </LeoScrollTrigger>
         </div>
 
-        <div class="leo-container-card24">
+        <div class="leo-container">
           <div class="leo-section">
             <p>{{ str.p7t1 }}</p>
           </div>
+        </div>
 
+        <div class="leo-container-card24">
           <div class="leo-section leo-section--no-mb leo-section--pb">
             <LeoReadMore
               chapter="ch3"

@@ -34,7 +34,11 @@ function onClick(item: Item) {
     <h2 v-if="title" class="leo-h3 font-medium text-center">
       {{ title }}
     </h2>
-    <div class="mt-8 sm:mt-10">
+    <div
+      :class="{
+        'mt-8 sm:mt-10': title,
+      }"
+    >
       <ul
         :class="{
           'grid sm:grid-cols-2 gap-[13px]': data.length % 2 === 0, // 2, 4
