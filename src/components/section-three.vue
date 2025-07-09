@@ -204,7 +204,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
             </div>
 
             <!-- show machine label -->
-            <LeoScrollTrigger @change="handleSatelliteContent" />
+            <LeoScrollTrigger
+              scroll-height="10px"
+              @change="handleSatelliteContent"
+            />
           </div>
         </div>
 
