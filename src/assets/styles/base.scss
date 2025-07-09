@@ -154,6 +154,21 @@ p.leo-caption {
   margin-bottom: 30px;
 }
 
+.leo-section-chart-lg {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  @include rwd-min(pad) {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  @include rwd-min(pc) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+}
+
 .leo-section-sm {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -233,6 +248,31 @@ p.leo-caption {
   }
 }
 
+.leo-container-card24 {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include rwd-min(xxs) {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+
+  @include rwd-min(pad) {
+    max-width: calc(654px + 57px * 2);
+    padding-left: 57px;
+    padding-right: 57px;
+  }
+
+  @include rwd-min(pc) {
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+    max-width: calc(704px + 100px * 2);
+  }
+}
+
 .leo-container-lg {
   width: 100%;
   margin: 0 auto;
@@ -280,10 +320,15 @@ p.leo-caption {
 }
 
 .leo-intro-h2 {
-  font-size: 50px;
-  line-height: 62px;
+  font-size: 42px;
+  line-height: 52px;
   font-weight: 500;
   margin-bottom: 8px;
+
+  @include rwd-min(xxs) {
+    font-size: 50px;
+    line-height: 62px;
+  }
 
   @include rwd-min(pad) {
     font-size: 72px;
@@ -293,10 +338,25 @@ p.leo-caption {
 
 .leo-intro-h2-sub {
   font-size: 22px;
-  line-height: 36px;
+  line-height: 32px;
 
   @include rwd-min(pad) {
     font-size: 24px;
     line-height: 36px;
+  }
+}
+
+.leo-intro-h2-sub-lg {
+  font-size: 22px;
+  line-height: 1.5;
+
+  @include rwd-min(xxs) {
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  @include rwd-min(pad) {
+    font-size: 32px;
+    line-height: 46px;
   }
 }

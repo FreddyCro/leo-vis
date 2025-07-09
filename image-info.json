@@ -1,0 +1,1094 @@
+{
+  "images": [
+    {
+      "filename": "bg_star.jpg",
+      "path": "public/img/bg_star.jpg",
+      "width": 1920,
+      "height": 1080,
+      "type": "jpg",
+      "file_size_bytes": 20392
+    },
+    {
+      "filename": "earth_night.jpg",
+      "path": "public/img/earth_night.jpg",
+      "width": 2872,
+      "height": 1436,
+      "type": "jpg",
+      "file_size_bytes": 319442
+    },
+    {
+      "filename": "moon_4k.jpg",
+      "path": "public/img/moon_4k.jpg",
+      "width": 4000,
+      "height": 2000,
+      "type": "jpg",
+      "file_size_bytes": 5987920
+    },
+    {
+      "filename": "newspaceera2025_pic10_1.jpg",
+      "path": "public/img/newspaceera2025_pic10_1.jpg",
+      "width": 415,
+      "height": 234,
+      "type": "jpg",
+      "file_size_bytes": 24193
+    },
+    {
+      "filename": "newspaceera2025_pic10_1@2x.jpg",
+      "path": "public/img/newspaceera2025_pic10_1@2x.jpg",
+      "width": 830,
+      "height": 468,
+      "type": "jpg",
+      "file_size_bytes": 60385
+    },
+    {
+      "filename": "newspaceera2025_pic10_2.jpg",
+      "path": "public/img/newspaceera2025_pic10_2.jpg",
+      "width": 415,
+      "height": 234,
+      "type": "jpg",
+      "file_size_bytes": 41411
+    },
+    {
+      "filename": "newspaceera2025_pic10_2@2x.jpg",
+      "path": "public/img/newspaceera2025_pic10_2@2x.jpg",
+      "width": 830,
+      "height": 468,
+      "type": "jpg",
+      "file_size_bytes": 89748
+    },
+    {
+      "filename": "newspaceera2025_pic10_3.jpg",
+      "path": "public/img/newspaceera2025_pic10_3.jpg",
+      "width": 415,
+      "height": 234,
+      "type": "jpg",
+      "file_size_bytes": 54191
+    },
+    {
+      "filename": "newspaceera2025_pic10_3@2x.jpg",
+      "path": "public/img/newspaceera2025_pic10_3@2x.jpg",
+      "width": 830,
+      "height": 468,
+      "type": "jpg",
+      "file_size_bytes": 216645
+    },
+    {
+      "filename": "newspaceera2025_pic10_4.jpg",
+      "path": "public/img/newspaceera2025_pic10_4.jpg",
+      "width": 415,
+      "height": 234,
+      "type": "jpg",
+      "file_size_bytes": 67115
+    },
+    {
+      "filename": "newspaceera2025_pic10_4@2x.jpg",
+      "path": "public/img/newspaceera2025_pic10_4@2x.jpg",
+      "width": 830,
+      "height": 468,
+      "type": "jpg",
+      "file_size_bytes": 121289
+    },
+    {
+      "filename": "newspaceera2025_pic10_5.jpg",
+      "path": "public/img/newspaceera2025_pic10_5.jpg",
+      "width": 415,
+      "height": 298,
+      "type": "jpg",
+      "file_size_bytes": 58243
+    },
+    {
+      "filename": "newspaceera2025_pic10_5@2x.jpg",
+      "path": "public/img/newspaceera2025_pic10_5@2x.jpg",
+      "width": 830,
+      "height": 596,
+      "type": "jpg",
+      "file_size_bytes": 91612
+    },
+    {
+      "filename": "newspaceera2025_pic10_6.jpg",
+      "path": "public/img/newspaceera2025_pic10_6.jpg",
+      "width": 415,
+      "height": 234,
+      "type": "jpg",
+      "file_size_bytes": 36003
+    },
+    {
+      "filename": "newspaceera2025_pic10_6@2x.jpg",
+      "path": "public/img/newspaceera2025_pic10_6@2x.jpg",
+      "width": 830,
+      "height": 468,
+      "type": "jpg",
+      "file_size_bytes": 57165
+    },
+    {
+      "filename": "newspaceera2025_pic10_7.jpg",
+      "path": "public/img/newspaceera2025_pic10_7.jpg",
+      "width": 415,
+      "height": 234,
+      "type": "jpg",
+      "file_size_bytes": 67691
+    },
+    {
+      "filename": "newspaceera2025_pic10_7@2x.jpg",
+      "path": "public/img/newspaceera2025_pic10_7@2x.jpg",
+      "width": 830,
+      "height": 468,
+      "type": "jpg",
+      "file_size_bytes": 162055
+    },
+    {
+      "filename": "newspaceera2025_pic11_1_chart_mob.svg",
+      "path": "public/img/newspaceera2025_pic11_1_chart_mob.svg",
+      "width": 415,
+      "height": 971,
+      "type": "svg",
+      "file_size_bytes": 25308
+    },
+    {
+      "filename": "newspaceera2025_pic11_1_chart_pad.svg",
+      "path": "public/img/newspaceera2025_pic11_1_chart_pad.svg",
+      "width": 769,
+      "height": 1024,
+      "type": "svg",
+      "file_size_bytes": 43250
+    },
+    {
+      "filename": "newspaceera2025_pic11_1_chart_pc.svg",
+      "path": "public/img/newspaceera2025_pic11_1_chart_pc.svg",
+      "width": 1280,
+      "height": 720,
+      "type": "svg",
+      "file_size_bytes": 23327
+    },
+    {
+      "filename": "newspaceera2025_pic11_2_chart_mob.svg",
+      "path": "public/img/newspaceera2025_pic11_2_chart_mob.svg",
+      "width": 415,
+      "height": 972,
+      "type": "svg",
+      "file_size_bytes": 25992
+    },
+    {
+      "filename": "newspaceera2025_pic11_2_chart_pad.svg",
+      "path": "public/img/newspaceera2025_pic11_2_chart_pad.svg",
+      "width": 769,
+      "height": 1024,
+      "type": "svg",
+      "file_size_bytes": 43367
+    },
+    {
+      "filename": "newspaceera2025_pic11_2_chart_pc.svg",
+      "path": "public/img/newspaceera2025_pic11_2_chart_pc.svg",
+      "width": 1280,
+      "height": 720,
+      "type": "svg",
+      "file_size_bytes": 25480
+    },
+    {
+      "filename": "newspaceera2025_pic12_1.jpg",
+      "path": "public/img/newspaceera2025_pic12_1.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 14214
+    },
+    {
+      "filename": "newspaceera2025_pic12_1@2x.jpg",
+      "path": "public/img/newspaceera2025_pic12_1@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 29711
+    },
+    {
+      "filename": "newspaceera2025_pic12_2.jpg",
+      "path": "public/img/newspaceera2025_pic12_2.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 20323
+    },
+    {
+      "filename": "newspaceera2025_pic12_2@2x.jpg",
+      "path": "public/img/newspaceera2025_pic12_2@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 50662
+    },
+    {
+      "filename": "newspaceera2025_pic13_1_bg_mob.jpg",
+      "path": "public/img/newspaceera2025_pic13_1_bg_mob.jpg",
+      "width": 720,
+      "height": 1280,
+      "type": "jpg",
+      "file_size_bytes": 103103
+    },
+    {
+      "filename": "newspaceera2025_pic13_1_bg_pad.jpg",
+      "path": "public/img/newspaceera2025_pic13_1_bg_pad.jpg",
+      "width": 1024,
+      "height": 1365,
+      "type": "jpg",
+      "file_size_bytes": 212556
+    },
+    {
+      "filename": "newspaceera2025_pic13_1_bg_pc.jpg",
+      "path": "public/img/newspaceera2025_pic13_1_bg_pc.jpg",
+      "width": 1920,
+      "height": 1080,
+      "type": "jpg",
+      "file_size_bytes": 278365
+    },
+    {
+      "filename": "newspaceera2025_pic13_2_bg_mob.png",
+      "path": "public/img/newspaceera2025_pic13_2_bg_mob.png",
+      "width": 369,
+      "height": 370,
+      "type": "png",
+      "file_size_bytes": 58935
+    },
+    {
+      "filename": "newspaceera2025_pic13_2_bg_pad.png",
+      "path": "public/img/newspaceera2025_pic13_2_bg_pad.png",
+      "width": 498,
+      "height": 447,
+      "type": "png",
+      "file_size_bytes": 88754
+    },
+    {
+      "filename": "newspaceera2025_pic13_2_bg_pc.png",
+      "path": "public/img/newspaceera2025_pic13_2_bg_pc.png",
+      "width": 544,
+      "height": 488,
+      "type": "png",
+      "file_size_bytes": 95207
+    },
+    {
+      "filename": "newspaceera2025_pic13_3_bg_pc.png",
+      "path": "public/img/newspaceera2025_pic13_3_bg_pc.png",
+      "width": 298,
+      "height": 316,
+      "type": "png",
+      "file_size_bytes": 19786
+    },
+    {
+      "filename": "newspaceera2025_pic14_bg_mob.jpg",
+      "path": "public/img/newspaceera2025_pic14_bg_mob.jpg",
+      "width": 1144,
+      "height": 2426,
+      "type": "jpg",
+      "file_size_bytes": 33462
+    },
+    {
+      "filename": "newspaceera2025_pic14_bg_pad.jpg",
+      "path": "public/img/newspaceera2025_pic14_bg_pad.jpg",
+      "width": 1307,
+      "height": 1931,
+      "type": "jpg",
+      "file_size_bytes": 31159
+    },
+    {
+      "filename": "newspaceera2025_pic14_bg_pc.jpg",
+      "path": "public/img/newspaceera2025_pic14_bg_pc.jpg",
+      "width": 2292,
+      "height": 3030,
+      "type": "jpg",
+      "file_size_bytes": 73870
+    },
+    {
+      "filename": "newspaceera2025_pic15_mob.jpg",
+      "path": "public/img/newspaceera2025_pic15_mob.jpg",
+      "width": 363,
+      "height": 492,
+      "type": "jpg",
+      "file_size_bytes": 40421
+    },
+    {
+      "filename": "newspaceera2025_pic15_mob.webp",
+      "path": "public/img/newspaceera2025_pic15_mob.webp",
+      "width": 363,
+      "height": 492,
+      "type": "webp",
+      "file_size_bytes": 10014
+    },
+    {
+      "filename": "newspaceera2025_pic15_mob@2x.jpg",
+      "path": "public/img/newspaceera2025_pic15_mob@2x.jpg",
+      "width": 726,
+      "height": 984,
+      "type": "jpg",
+      "file_size_bytes": 47987
+    },
+    {
+      "filename": "newspaceera2025_pic15_mob@2x.webp",
+      "path": "public/img/newspaceera2025_pic15_mob@2x.webp",
+      "width": 726,
+      "height": 984,
+      "type": "webp",
+      "file_size_bytes": 22284
+    },
+    {
+      "filename": "newspaceera2025_pic15_pad.jpg",
+      "path": "public/img/newspaceera2025_pic15_pad.jpg",
+      "width": 530,
+      "height": 238,
+      "type": "jpg",
+      "file_size_bytes": 39134
+    },
+    {
+      "filename": "newspaceera2025_pic15_pad.webp",
+      "path": "public/img/newspaceera2025_pic15_pad.webp",
+      "width": 530,
+      "height": 238,
+      "type": "webp",
+      "file_size_bytes": 11140
+    },
+    {
+      "filename": "newspaceera2025_pic15_pad@2x.jpg",
+      "path": "public/img/newspaceera2025_pic15_pad@2x.jpg",
+      "width": 1060,
+      "height": 476,
+      "type": "jpg",
+      "file_size_bytes": 55576
+    },
+    {
+      "filename": "newspaceera2025_pic15_pad@2x.webp",
+      "path": "public/img/newspaceera2025_pic15_pad@2x.webp",
+      "width": 1060,
+      "height": 476,
+      "type": "webp",
+      "file_size_bytes": 23664
+    },
+    {
+      "filename": "newspaceera2025_pic15_pc.jpg",
+      "path": "public/img/newspaceera2025_pic15_pc.jpg",
+      "width": 620,
+      "height": 278,
+      "type": "jpg",
+      "file_size_bytes": 48429
+    },
+    {
+      "filename": "newspaceera2025_pic15_pc.webp",
+      "path": "public/img/newspaceera2025_pic15_pc.webp",
+      "width": 620,
+      "height": 278,
+      "type": "webp",
+      "file_size_bytes": 13618
+    },
+    {
+      "filename": "newspaceera2025_pic15_pc@2x.jpg",
+      "path": "public/img/newspaceera2025_pic15_pc@2x.jpg",
+      "width": 1240,
+      "height": 556,
+      "type": "jpg",
+      "file_size_bytes": 69551
+    },
+    {
+      "filename": "newspaceera2025_pic15_pc@2x.webp",
+      "path": "public/img/newspaceera2025_pic15_pc@2x.webp",
+      "width": 1240,
+      "height": 556,
+      "type": "webp",
+      "file_size_bytes": 28394
+    },
+    {
+      "filename": "newspaceera2025_pic16_mob.jpg",
+      "path": "public/img/newspaceera2025_pic16_mob.jpg",
+      "width": 363,
+      "height": 492,
+      "type": "jpg",
+      "file_size_bytes": 40792
+    },
+    {
+      "filename": "newspaceera2025_pic16_mob.webp",
+      "path": "public/img/newspaceera2025_pic16_mob.webp",
+      "width": 363,
+      "height": 492,
+      "type": "webp",
+      "file_size_bytes": 9450
+    },
+    {
+      "filename": "newspaceera2025_pic16_mob@2x.jpg",
+      "path": "public/img/newspaceera2025_pic16_mob@2x.jpg",
+      "width": 726,
+      "height": 984,
+      "type": "jpg",
+      "file_size_bytes": 34817
+    },
+    {
+      "filename": "newspaceera2025_pic16_mob@2x.webp",
+      "path": "public/img/newspaceera2025_pic16_mob@2x.webp",
+      "width": 726,
+      "height": 984,
+      "type": "webp",
+      "file_size_bytes": 19726
+    },
+    {
+      "filename": "newspaceera2025_pic16_pad.jpg",
+      "path": "public/img/newspaceera2025_pic16_pad.jpg",
+      "width": 530,
+      "height": 238,
+      "type": "jpg",
+      "file_size_bytes": 32396
+    },
+    {
+      "filename": "newspaceera2025_pic16_pad.webp",
+      "path": "public/img/newspaceera2025_pic16_pad.webp",
+      "width": 530,
+      "height": 238,
+      "type": "webp",
+      "file_size_bytes": 8320
+    },
+    {
+      "filename": "newspaceera2025_pic16_pad@2x.jpg",
+      "path": "public/img/newspaceera2025_pic16_pad@2x.jpg",
+      "width": 1060,
+      "height": 476,
+      "type": "jpg",
+      "file_size_bytes": 38731
+    },
+    {
+      "filename": "newspaceera2025_pic16_pad@2x.webp",
+      "path": "public/img/newspaceera2025_pic16_pad@2x.webp",
+      "width": 1060,
+      "height": 476,
+      "type": "webp",
+      "file_size_bytes": 17334
+    },
+    {
+      "filename": "newspaceera2025_pic16_pc.jpg",
+      "path": "public/img/newspaceera2025_pic16_pc.jpg",
+      "width": 620,
+      "height": 278,
+      "type": "jpg",
+      "file_size_bytes": 39949
+    },
+    {
+      "filename": "newspaceera2025_pic16_pc.webp",
+      "path": "public/img/newspaceera2025_pic16_pc.webp",
+      "width": 620,
+      "height": 278,
+      "type": "webp",
+      "file_size_bytes": 9626
+    },
+    {
+      "filename": "newspaceera2025_pic16_pc@2x.jpg",
+      "path": "public/img/newspaceera2025_pic16_pc@2x.jpg",
+      "width": 1240,
+      "height": 556,
+      "type": "jpg",
+      "file_size_bytes": 53120
+    },
+    {
+      "filename": "newspaceera2025_pic16_pc@2x.webp",
+      "path": "public/img/newspaceera2025_pic16_pc@2x.webp",
+      "width": 1240,
+      "height": 556,
+      "type": "webp",
+      "file_size_bytes": 20910
+    },
+    {
+      "filename": "newspaceera2025_pic1_1_chart_mob.svg",
+      "path": "public/img/newspaceera2025_pic1_1_chart_mob.svg",
+      "width": 362,
+      "height": 607,
+      "type": "svg",
+      "file_size_bytes": 159807
+    },
+    {
+      "filename": "newspaceera2025_pic1_1_chart_pad.svg",
+      "path": "public/img/newspaceera2025_pic1_1_chart_pad.svg",
+      "width": 530,
+      "height": 462,
+      "type": "svg",
+      "file_size_bytes": 161440
+    },
+    {
+      "filename": "newspaceera2025_pic1_1_chart_pc.svg",
+      "path": "public/img/newspaceera2025_pic1_1_chart_pc.svg",
+      "width": 640,
+      "height": 411,
+      "type": "svg",
+      "file_size_bytes": 158377
+    },
+    {
+      "filename": "newspaceera2025_pic1_2_chart_mob.svg",
+      "path": "public/img/newspaceera2025_pic1_2_chart_mob.svg",
+      "width": 315,
+      "height": 479,
+      "type": "svg",
+      "file_size_bytes": 24965
+    },
+    {
+      "filename": "newspaceera2025_pic1_2_chart_pad.svg",
+      "path": "public/img/newspaceera2025_pic1_2_chart_pad.svg",
+      "width": 490,
+      "height": 301,
+      "type": "svg",
+      "file_size_bytes": 35096
+    },
+    {
+      "filename": "newspaceera2025_pic1_2_chart_pc.svg",
+      "path": "public/img/newspaceera2025_pic1_2_chart_pc.svg",
+      "width": 604,
+      "height": 301,
+      "type": "svg",
+      "file_size_bytes": 35096
+    },
+    {
+      "filename": "newspaceera2025_pic2_1.jpg",
+      "path": "public/img/newspaceera2025_pic2_1.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 21611
+    },
+    {
+      "filename": "newspaceera2025_pic2_10.jpg",
+      "path": "public/img/newspaceera2025_pic2_10.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 20938
+    },
+    {
+      "filename": "newspaceera2025_pic2_10@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_10@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 70232
+    },
+    {
+      "filename": "newspaceera2025_pic2_1@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_1@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 61577
+    },
+    {
+      "filename": "newspaceera2025_pic2_2.jpg",
+      "path": "public/img/newspaceera2025_pic2_2.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 21521
+    },
+    {
+      "filename": "newspaceera2025_pic2_2@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_2@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 61052
+    },
+    {
+      "filename": "newspaceera2025_pic2_3.jpg",
+      "path": "public/img/newspaceera2025_pic2_3.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 13755
+    },
+    {
+      "filename": "newspaceera2025_pic2_3@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_3@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 40953
+    },
+    {
+      "filename": "newspaceera2025_pic2_4.jpg",
+      "path": "public/img/newspaceera2025_pic2_4.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 17149
+    },
+    {
+      "filename": "newspaceera2025_pic2_4@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_4@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 53204
+    },
+    {
+      "filename": "newspaceera2025_pic2_5.jpg",
+      "path": "public/img/newspaceera2025_pic2_5.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 17927
+    },
+    {
+      "filename": "newspaceera2025_pic2_5@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_5@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 51655
+    },
+    {
+      "filename": "newspaceera2025_pic2_6.jpg",
+      "path": "public/img/newspaceera2025_pic2_6.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 13065
+    },
+    {
+      "filename": "newspaceera2025_pic2_6@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_6@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 36069
+    },
+    {
+      "filename": "newspaceera2025_pic2_7.jpg",
+      "path": "public/img/newspaceera2025_pic2_7.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 10899
+    },
+    {
+      "filename": "newspaceera2025_pic2_7@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_7@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 24261
+    },
+    {
+      "filename": "newspaceera2025_pic2_8.jpg",
+      "path": "public/img/newspaceera2025_pic2_8.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 10404
+    },
+    {
+      "filename": "newspaceera2025_pic2_8@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_8@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 30215
+    },
+    {
+      "filename": "newspaceera2025_pic2_9.jpg",
+      "path": "public/img/newspaceera2025_pic2_9.jpg",
+      "width": 212,
+      "height": 131,
+      "type": "jpg",
+      "file_size_bytes": 17727
+    },
+    {
+      "filename": "newspaceera2025_pic2_9@2x.jpg",
+      "path": "public/img/newspaceera2025_pic2_9@2x.jpg",
+      "width": 424,
+      "height": 262,
+      "type": "jpg",
+      "file_size_bytes": 48008
+    },
+    {
+      "filename": "newspaceera2025_pic3_1_bg_mob.jpg",
+      "path": "public/img/newspaceera2025_pic3_1_bg_mob.jpg",
+      "width": 720,
+      "height": 1280,
+      "type": "jpg",
+      "file_size_bytes": 121504
+    },
+    {
+      "filename": "newspaceera2025_pic3_1_bg_pad.jpg",
+      "path": "public/img/newspaceera2025_pic3_1_bg_pad.jpg",
+      "width": 1024,
+      "height": 1365,
+      "type": "jpg",
+      "file_size_bytes": 128315
+    },
+    {
+      "filename": "newspaceera2025_pic3_1_bg_pc.jpg",
+      "path": "public/img/newspaceera2025_pic3_1_bg_pc.jpg",
+      "width": 1920,
+      "height": 1080,
+      "type": "jpg",
+      "file_size_bytes": 139557
+    },
+    {
+      "filename": "newspaceera2025_pic3_2_bg_mob.png",
+      "path": "public/img/newspaceera2025_pic3_2_bg_mob.png",
+      "width": 369,
+      "height": 246,
+      "type": "png",
+      "file_size_bytes": 15909
+    },
+    {
+      "filename": "newspaceera2025_pic3_2_bg_pad.png",
+      "path": "public/img/newspaceera2025_pic3_2_bg_pad.png",
+      "width": 511,
+      "height": 341,
+      "type": "png",
+      "file_size_bytes": 23169
+    },
+    {
+      "filename": "newspaceera2025_pic3_2_bg_pc.png",
+      "path": "public/img/newspaceera2025_pic3_2_bg_pc.png",
+      "width": 650,
+      "height": 434,
+      "type": "png",
+      "file_size_bytes": 34029
+    },
+    {
+      "filename": "newspaceera2025_pic4_1.jpg",
+      "path": "public/img/newspaceera2025_pic4_1.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 22975
+    },
+    {
+      "filename": "newspaceera2025_pic4_1@2x.jpg",
+      "path": "public/img/newspaceera2025_pic4_1@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 68289
+    },
+    {
+      "filename": "newspaceera2025_pic4_2.jpg",
+      "path": "public/img/newspaceera2025_pic4_2.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 15223
+    },
+    {
+      "filename": "newspaceera2025_pic4_2@2x.jpg",
+      "path": "public/img/newspaceera2025_pic4_2@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 37451
+    },
+    {
+      "filename": "newspaceera2025_pic4_3.jpg",
+      "path": "public/img/newspaceera2025_pic4_3.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 23537
+    },
+    {
+      "filename": "newspaceera2025_pic4_3@2x.jpg",
+      "path": "public/img/newspaceera2025_pic4_3@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 60668
+    },
+    {
+      "filename": "newspaceera2025_pic5_1_bg_mob.jpg",
+      "path": "public/img/newspaceera2025_pic5_1_bg_mob.jpg",
+      "width": 720,
+      "height": 1280,
+      "type": "jpg",
+      "file_size_bytes": 115513
+    },
+    {
+      "filename": "newspaceera2025_pic5_1_bg_pad.jpg",
+      "path": "public/img/newspaceera2025_pic5_1_bg_pad.jpg",
+      "width": 1024,
+      "height": 1365,
+      "type": "jpg",
+      "file_size_bytes": 132887
+    },
+    {
+      "filename": "newspaceera2025_pic5_1_bg_pc.jpg",
+      "path": "public/img/newspaceera2025_pic5_1_bg_pc.jpg",
+      "width": 1920,
+      "height": 1080,
+      "type": "jpg",
+      "file_size_bytes": 66566
+    },
+    {
+      "filename": "newspaceera2025_pic5_2_bg_mob.png",
+      "path": "public/img/newspaceera2025_pic5_2_bg_mob.png",
+      "width": 256,
+      "height": 240,
+      "type": "png",
+      "file_size_bytes": 17935
+    },
+    {
+      "filename": "newspaceera2025_pic5_2_bg_pad.png",
+      "path": "public/img/newspaceera2025_pic5_2_bg_pad.png",
+      "width": 407,
+      "height": 381,
+      "type": "png",
+      "file_size_bytes": 39599
+    },
+    {
+      "filename": "newspaceera2025_pic5_2_bg_pc.png",
+      "path": "public/img/newspaceera2025_pic5_2_bg_pc.png",
+      "width": 467,
+      "height": 438,
+      "type": "png",
+      "file_size_bytes": 49963
+    },
+    {
+      "filename": "newspaceera2025_pic5_3_bg_mob.png",
+      "path": "public/img/newspaceera2025_pic5_3_bg_mob.png",
+      "width": 355,
+      "height": 245,
+      "type": "png",
+      "file_size_bytes": 20494
+    },
+    {
+      "filename": "newspaceera2025_pic5_3_bg_pad.png",
+      "path": "public/img/newspaceera2025_pic5_3_bg_pad.png",
+      "width": 408,
+      "height": 382,
+      "type": "png",
+      "file_size_bytes": 26881
+    },
+    {
+      "filename": "newspaceera2025_pic5_3_bg_pc.png",
+      "path": "public/img/newspaceera2025_pic5_3_bg_pc.png",
+      "width": 480,
+      "height": 459,
+      "type": "png",
+      "file_size_bytes": 35931
+    },
+    {
+      "filename": "newspaceera2025_pic6_chart_mob.svg",
+      "path": "public/img/newspaceera2025_pic6_chart_mob.svg",
+      "width": 414,
+      "height": 736,
+      "type": "svg",
+      "file_size_bytes": 1309994
+    },
+    {
+      "filename": "newspaceera2025_pic6_chart_pad.svg",
+      "path": "public/img/newspaceera2025_pic6_chart_pad.svg",
+      "width": 768,
+      "height": 1024,
+      "type": "svg",
+      "file_size_bytes": 1323109
+    },
+    {
+      "filename": "newspaceera2025_pic6_chart_pc.svg",
+      "path": "public/img/newspaceera2025_pic6_chart_pc.svg",
+      "width": 1280,
+      "height": 720,
+      "type": "svg",
+      "file_size_bytes": 1292052
+    },
+    {
+      "filename": "newspaceera2025_pic7_1.jpg",
+      "path": "public/img/newspaceera2025_pic7_1.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 22530
+    },
+    {
+      "filename": "newspaceera2025_pic7_1@2x.jpg",
+      "path": "public/img/newspaceera2025_pic7_1@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 61516
+    },
+    {
+      "filename": "newspaceera2025_pic7_2.jpg",
+      "path": "public/img/newspaceera2025_pic7_2.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 14883
+    },
+    {
+      "filename": "newspaceera2025_pic7_2@2x.jpg",
+      "path": "public/img/newspaceera2025_pic7_2@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 29745
+    },
+    {
+      "filename": "newspaceera2025_pic7_2@3x.jpg",
+      "path": "public/img/newspaceera2025_pic7_2@3x.jpg",
+      "width": 1035,
+      "height": 459,
+      "type": "jpg",
+      "file_size_bytes": 23793
+    },
+    {
+      "filename": "newspaceera2025_pic7_3.jpg",
+      "path": "public/img/newspaceera2025_pic7_3.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 20356
+    },
+    {
+      "filename": "newspaceera2025_pic7_3@2x.jpg",
+      "path": "public/img/newspaceera2025_pic7_3@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 53448
+    },
+    {
+      "filename": "newspaceera2025_pic7_4.jpg",
+      "path": "public/img/newspaceera2025_pic7_4.jpg",
+      "width": 345,
+      "height": 153,
+      "type": "jpg",
+      "file_size_bytes": 12708
+    },
+    {
+      "filename": "newspaceera2025_pic7_4@2x.jpg",
+      "path": "public/img/newspaceera2025_pic7_4@2x.jpg",
+      "width": 690,
+      "height": 306,
+      "type": "jpg",
+      "file_size_bytes": 22798
+    },
+    {
+      "filename": "newspaceera2025_pic8_1_bg_mob.jpg",
+      "path": "public/img/newspaceera2025_pic8_1_bg_mob.jpg",
+      "width": 720,
+      "height": 1280,
+      "type": "jpg",
+      "file_size_bytes": 83808
+    },
+    {
+      "filename": "newspaceera2025_pic8_1_bg_pad.jpg",
+      "path": "public/img/newspaceera2025_pic8_1_bg_pad.jpg",
+      "width": 1024,
+      "height": 1365,
+      "type": "jpg",
+      "file_size_bytes": 106105
+    },
+    {
+      "filename": "newspaceera2025_pic8_1_bg_pc.jpg",
+      "path": "public/img/newspaceera2025_pic8_1_bg_pc.jpg",
+      "width": 1920,
+      "height": 1080,
+      "type": "jpg",
+      "file_size_bytes": 172760
+    },
+    {
+      "filename": "newspaceera2025_pic8_2_bg_mob.png",
+      "path": "public/img/newspaceera2025_pic8_2_bg_mob.png",
+      "width": 369,
+      "height": 399,
+      "type": "png",
+      "file_size_bytes": 31654
+    },
+    {
+      "filename": "newspaceera2025_pic8_2_bg_pad.png",
+      "path": "public/img/newspaceera2025_pic8_2_bg_pad.png",
+      "width": 416,
+      "height": 452,
+      "type": "png",
+      "file_size_bytes": 48545
+    },
+    {
+      "filename": "newspaceera2025_pic8_2_bg_pc.png",
+      "path": "public/img/newspaceera2025_pic8_2_bg_pc.png",
+      "width": 548,
+      "height": 594,
+      "type": "png",
+      "file_size_bytes": 76681
+    },
+    {
+      "filename": "newspaceera2025_pic9_1_bg_mob.jpg",
+      "path": "public/img/newspaceera2025_pic9_1_bg_mob.jpg",
+      "width": 1110,
+      "height": 2917,
+      "type": "jpg",
+      "file_size_bytes": 54503
+    },
+    {
+      "filename": "newspaceera2025_pic9_1_bg_pad.jpg",
+      "path": "public/img/newspaceera2025_pic9_1_bg_pad.jpg",
+      "width": 1300,
+      "height": 1865,
+      "type": "jpg",
+      "file_size_bytes": 53509
+    },
+    {
+      "filename": "newspaceera2025_pic9_1_bg_pc.jpg",
+      "path": "public/img/newspaceera2025_pic9_1_bg_pc.jpg",
+      "width": 2250,
+      "height": 2273,
+      "type": "jpg",
+      "file_size_bytes": 122198
+    },
+    {
+      "filename": "newspaceera2025_pic9_2_mob.png",
+      "path": "public/img/newspaceera2025_pic9_2_mob.png",
+      "width": 253,
+      "height": 233,
+      "type": "png",
+      "file_size_bytes": 15654
+    },
+    {
+      "filename": "newspaceera2025_pic9_2_pad.png",
+      "path": "public/img/newspaceera2025_pic9_2_pad.png",
+      "width": 373,
+      "height": 344,
+      "type": "png",
+      "file_size_bytes": 30367
+    },
+    {
+      "filename": "newspaceera2025_pic9_2_pc.png",
+      "path": "public/img/newspaceera2025_pic9_2_pc.png",
+      "width": 528,
+      "height": 487,
+      "type": "png",
+      "file_size_bytes": 56372
+    },
+    {
+      "filename": "supplier.jpg",
+      "path": "public/img/supplier.jpg",
+      "width": 760,
+      "height": 3494,
+      "type": "jpg",
+      "file_size_bytes": 1297982
+    },
+    {
+      "filename": "supplier@2x.jpg",
+      "path": "public/img/supplier@2x.jpg",
+      "width": 1520,
+      "height": 6988,
+      "type": "jpg",
+      "file_size_bytes": 3640523
+    },
+    {
+      "filename": "supplier_head.jpg",
+      "path": "public/img/supplier_head.jpg",
+      "width": 760,
+      "height": 42,
+      "type": "jpg",
+      "file_size_bytes": 8675
+    },
+    {
+      "filename": "supplier_head@2x.jpg",
+      "path": "public/img/supplier_head@2x.jpg",
+      "width": 1520,
+      "height": 84,
+      "type": "jpg",
+      "file_size_bytes": 20925
+    }
+  ],
+  "total_images": 136,
+  "generated_at": "2025-07-08T17:14:17.310Z"
+}

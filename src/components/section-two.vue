@@ -37,8 +37,8 @@ function handleChangeArticle(isIntersecting: boolean) {
               src="img/newspaceera2025_pic5_1_bg"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="720"
+              :height="1280"
             />
           </div>
 
@@ -54,8 +54,8 @@ function handleChangeArticle(isIntersecting: boolean) {
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="256"
+              :height="240"
             />
           </div>
 
@@ -71,8 +71,8 @@ function handleChangeArticle(isIntersecting: boolean) {
               ext="png"
               :webp="false"
               :use2x="false"
-              :width="450"
-              :height="450"
+              :width="355"
+              :height="245"
             />
           </div>
         </div>
@@ -90,26 +90,27 @@ function handleChangeArticle(isIntersecting: boolean) {
           <div class="leo-section leo-section--pt leo-section--no-mt">
             <p>{{ str.p1t1 }}</p>
             <p>{{ str.p1t2 }}</p>
-            <p></p>
 
             <!-- chart 1 -->
-            <figure class="w-full">
-              <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23266793"
-              />
-            </figure>
+            <div class="leo-section-sm">
+              <figure class="w-full">
+                <div
+                  class="flourish-embed flourish-chart"
+                  data-src="visualisation/23266793"
+                />
+              </figure>
+            </div>
             <p>{{ str.p2t1 }}</p>
-            <p></p>
 
             <!-- chart 2 -->
-            <figure class="w-full">
-              <div
-                class="flourish-embed flourish-chart"
-                data-src="visualisation/23267137"
-              />
-            </figure>
-            <p></p>
+            <div class="leo-section-sm">
+              <figure class="w-full">
+                <div
+                  class="flourish-embed flourish-chart"
+                  data-src="visualisation/23267137"
+                />
+              </figure>
+            </div>
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
           </div>
@@ -153,8 +154,8 @@ function handleChangeArticle(isIntersecting: boolean) {
                 ext="svg"
                 :use2x="false"
                 :webp="false"
-                :width="430"
-                :height="120"
+                :width="414"
+                :height="736"
               />
 
               <figcaption>
@@ -175,7 +176,7 @@ function handleChangeArticle(isIntersecting: boolean) {
           <p>{{ str.p5t2 }}</p>
         </div>
 
-        <div class="leo-container-lg">
+        <div class="leo-container-card24">
           <div class="leo-section">
             <LeoReadMore
               chapter="ch2"
@@ -238,7 +239,7 @@ function handleChangeArticle(isIntersecting: boolean) {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: right;
+      object-position: left;
     }
   }
 

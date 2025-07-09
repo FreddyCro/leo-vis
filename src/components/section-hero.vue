@@ -56,12 +56,8 @@ function onEarthReady() {
         >
           <LeoSectionIntro>
             <h1 class="ls-hero__title-shadow max-w-[362px] sm:max-w-[448px]">
-              <span class="block text-5xl md:text-7xl mb-5 font-medium">{{
-                str.title
-              }}</span>
-              <span class="block text-[28px] leading-10 font-light">{{
-                str.subTitle
-              }}</span>
+              <span class="block leo-intro-h2">{{ str.title }}</span>
+              <span class="block leo-intro-h2-sub-lg">{{ str.subTitle }}</span>
             </h1>
           </LeoSectionIntro>
         </div>
@@ -89,7 +85,7 @@ function onEarthReady() {
           <!-- chart 1 -->
           <div class="leo-container-larger">
             <LeoScrollTrigger
-              class="w-full flex items-center justify-center"
+              class="w-full flex items-center justify-center mb-[100px] sm:mb-0"
               scroll-height="calc(var(--init-screen-height)*1)"
               @change="onChart1IntersectChange"
             >
@@ -108,6 +104,8 @@ function onEarthReady() {
                         ext="svg"
                         :use2x="false"
                         :webp="false"
+                        width="362"
+                        height="607"
                       />
                     </figure>
                     <!-- <div class="mt-4">

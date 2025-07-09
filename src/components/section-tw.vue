@@ -51,9 +51,9 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
     <!-- feature grid -->
     <div class="leo-container-lg">
       <div class="my-[60px] md:my-[80px]">
-        <h3 class="ls-tw-h3 md:text-center">{{ str.title2 }}</h3>
+        <h3 class="ls-tw-h3 sm:text-center">{{ str.title2 }}</h3>
         <div class="my-5">
-          <h4 class="ls-tw-h3-sub md:text-center">
+          <h4 class="ls-tw-h3-sub sm:text-center">
             {{ str.title2Subtitle }}
           </h4>
         </div>

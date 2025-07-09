@@ -1,12 +1,5 @@
 <script lang="ts" setup>
-import {
-  defineEmits,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from 'vue';
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { getScrollbarWidth } from '@/utils/get-scrollbar-width';
 
 const props = defineProps<{

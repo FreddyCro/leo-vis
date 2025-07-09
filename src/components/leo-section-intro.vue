@@ -91,7 +91,7 @@ function onClick(item: { text: string; link: string }) {
               <div class="ls-intro__toc-item-dot-in" />
             </div>
             <div class="ls-intro__toc-item-content">
-              <span class="ls-intro__toc-item-content-number">
+              <span class="ls-intro__toc-item-content-number montserrat">
                 0{{ index + 1 }}
               </span>
               <span>
@@ -130,13 +130,18 @@ function onClick(item: { text: string; link: string }) {
 
   &__present-line-2 {
     /* top: calc(var(--init-screen-height) - 67px); */
-    top: calc(var(--init-screen-height) - 50px);
+    /* top: calc(var(--init-screen-height) - 50px); */
+    top: calc(var(--init-screen-height) - 36px);
     width: 100%;
     height: 1px;
 
     @include rwd-min(sm) {
       top: auto;
       bottom: 126px;
+    }
+
+    @media screen and (min-width: 800px) {
+      bottom: 176px;
     }
 
     @include rwd-min(md) {
@@ -149,6 +154,11 @@ function onClick(item: { text: string; link: string }) {
 
     @include rwd-min(sm) {
       padding-bottom: calc(126px + 64px);
+    }
+
+    /* min 800px */
+    @media screen and (min-width: 800px) {
+      padding-bottom: calc(176px + 64px);
     }
 
     @include rwd-min(md) {
@@ -186,7 +196,6 @@ function onClick(item: { text: string; link: string }) {
   }
 
   &__toc-item-content-number {
-    /* font-family: Noto Sans Telugu UI; */
     font-size: 28px;
     margin-right: 2px;
   }
