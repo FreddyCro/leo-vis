@@ -12,19 +12,19 @@ interface Props {
 const props = defineProps<Props>();
 
 const tocList = [
-  { text: str1.title, link: '#economic' },
-  { text: str2.title, link: '#security' },
-  { text: str3.title, link: '#moon' },
-  { text: str4.title, link: '#debris' },
+  { text: str1.title, link: '#ch1_economic' },
+  { text: str2.title, link: '#ch2_security' },
+  { text: str3.title, link: '#ch3_moon' },
+  { text: str4.title, link: '#ch4_debris' },
 ];
 
 function onClick(item: { text: string; link: string }) {
   // 根據連結的 hash 值決定要發送的 term 值
   const termMap: Record<string, string> = {
-    '#economic': 'economic',
-    '#security': 'security',
-    '#moon': 'moon',
-    '#debris': 'debris',
+    '#ch1_economic': 'economic',
+    '#ch2_security': 'security',
+    '#ch3_moon': 'moon',
+    '#ch4_debris': 'debris',
   };
 
   const term = props.chapter
