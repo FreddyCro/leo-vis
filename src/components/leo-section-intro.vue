@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sendGA } from '../utils/ga';
+import { sendGA } from '@/utils/ga';
 import str1 from '@/locales/section1.json';
 import str2 from '@/locales/section2.json';
 import str3 from '@/locales/section3.json';
@@ -33,10 +33,9 @@ function onClick(item: { text: string; link: string }) {
 
   if (term) {
     sendGA({
-      hitType: 'event',
-      eventAction: 'click_anchor',
-      eventCategory: 'navigation',
-      term,
+      action: 'click_anchor',
+      category: 'term',
+      label: term,
     });
   }
 }

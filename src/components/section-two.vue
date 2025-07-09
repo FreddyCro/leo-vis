@@ -19,7 +19,7 @@ function handleChangeArticle(isIntersecting: boolean) {
 </script>
 
 <template>
-  <div id="security" class="ls-two leo-article">
+  <div id="ch2_security" class="ls-two leo-article">
     <LeoSectionLayout
       @change-space="handleChangeSpace"
       @change-article="handleChangeArticle"
@@ -86,7 +86,7 @@ function handleChangeArticle(isIntersecting: boolean) {
         </LeoSectionIntro>
       </template>
       <template #article>
-        <div class="leo-container">
+        <div id="ch2_overview" class="leo-container">
           <div class="leo-section leo-section--pt leo-section--no-mt">
             <p>{{ str.p1t1 }}</p>
             <p>{{ str.p1t2 }}</p>

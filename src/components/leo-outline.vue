@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sendGA } from '../utils/ga';
+import { sendGA } from '@/utils/ga';
 import LeoPic from '@/components/leo-pic.vue';
 import strOutline from '@/locales/outline.json';
 import str1 from '@/locales/section1.json';
@@ -86,10 +86,9 @@ const data = [
 
 function onClick(item: { text: string; link: string; bg: string }) {
   sendGA({
-    hitType: 'event',
-    eventAction: 'click_series',
-    eventCategory: 'content',
-    term: item.text,
+    action: 'click_series',
+    category: 'term',
+    label: item.text,
   });
 }
 </script>
