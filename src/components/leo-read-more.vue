@@ -15,7 +15,7 @@ interface Props {
   data: Item[];
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 function onClick(item: Item) {
   // 發送 GA 事件：click_news with term = ch2
@@ -23,7 +23,7 @@ function onClick(item: Item) {
     hitType: 'event',
     eventAction: 'click_news',
     eventCategory: 'news',
-    term: 'ch2',
+    term: props.chapter || '',
     eventLabel: item.title,
   });
 }
