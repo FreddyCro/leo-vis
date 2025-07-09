@@ -140,7 +140,7 @@ function onDialogClose() {
       <template #article>
         <div class="leo-section leo-section--pt leo-section--no-mt">
           <div class="min-h-[calc(var(--init-screen-height)*4)]">
-            <div class="sticky top-0 bg-[url('/img/bg_star.jpg')]">
+            <div class="sticky top-0">
               <Leo3dEarthSatellite :current-category="currentCategory" />
             </div>
 
