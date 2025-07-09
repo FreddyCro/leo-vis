@@ -204,7 +204,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
             </div>
 
             <!-- show machine label -->
-            <LeoScrollTrigger @change="handleSatelliteContent" />
+            <LeoScrollTrigger
+              scroll-height="10px"
+              @change="handleSatelliteContent"
+            />
           </div>
         </div>
 
@@ -218,7 +221,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         <div class="grid">
           <!-- moon -->
           <div
-            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-[url('/img/bg_star.jpg')] bg-repeat"
+            class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-black bg-repeat"
           >
             <div class="ls-three__3d-moon-site">
               <Leo3dMoonSite :current-category="currentCategory" />
@@ -327,7 +330,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t1 }}</p>
-                    <div class="leo-section-sm">
+                    <div class="leo-section-sm leo-section-sm--no-mb">
                       <LeoPic
                         src="img/newspaceera2025_pic10_4"
                         :webp="false"
@@ -350,7 +353,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t2 }}</p>
-                    <div class="leo-section-sm">
+                    <div class="leo-section-sm leo-section-sm--no-mb">
                       <LeoPic
                         src="img/newspaceera2025_pic10_5"
                         :webp="false"
@@ -384,7 +387,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                       </p>
                     </div>
                     <p>{{ str.p6t2 }}</p>
-                    <div class="leo-section-sm">
+                    <div class="leo-section-sm leo-section-sm--no-mb">
                       <LeoPic
                         src="img/newspaceera2025_pic10_7"
                         :webp="false"
@@ -514,11 +517,13 @@ function handleSatelliteContent(isIntersecting: boolean) {
           </LeoScrollTrigger>
         </div>
 
-        <div class="leo-container-card24">
+        <div class="leo-container">
           <div class="leo-section">
             <p>{{ str.p7t1 }}</p>
           </div>
+        </div>
 
+        <div class="leo-container-card24">
           <div class="leo-section leo-section--no-mb leo-section--pb">
             <LeoReadMore
               chapter="ch3"

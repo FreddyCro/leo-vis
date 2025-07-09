@@ -109,7 +109,7 @@ function handleTranshFloatEnter(enter: boolean) {
           <div
             class="ls-four__trash-bg absolute bottom-0 left-[50%] w-[200%] md:w-full flex translate-x-[-50%]"
           >
-            <!-- workaround: 覆蓋掉當 bg image 因尺寸不是整數造成白色邊框  -->
+            <!-- workaround: 覆蓋掉當 bg image 因尺寸不是整數造成白色邊框 -->
             <div class="absolute top-0 left-0 w-full h-[5px] bg-black" />
             <LeoPic
               src="img/newspaceera2025_pic14_bg"
@@ -174,7 +174,7 @@ function handleTranshFloatEnter(enter: boolean) {
           </div>
         </div>
 
-        <div class="leo-section leo-section--pb relative z-40">
+        <div class="leo-section relative z-40">
           <div class="leo-container">
             <p>{{ str.p2t1 }}</p>
             <p>{{ str.p2t2 }}</p>
@@ -192,17 +192,19 @@ function handleTranshFloatEnter(enter: boolean) {
             <p>{{ str.p3t1 }}</p>
             <p>{{ str.p3t2 }}</p>
 
-            <LeoReadMore
-              chapter="ch4"
-              :data="[
-                {
-                  title: str.related1Title,
-                  desc: str.related1Desc,
-                  link: str.related1Link,
-                  bg: 'img/newspaceera2025_pic15',
-                },
-              ]"
-            />
+            <div class="leo-section leo-section--no-mb">
+              <LeoReadMore
+                chapter="ch4"
+                :data="[
+                  {
+                    title: str.related1Title,
+                    desc: str.related1Desc,
+                    link: str.related1Link,
+                    bg: 'img/newspaceera2025_pic15',
+                  },
+                ]"
+              />
+            </div>
           </div>
         </div>
 

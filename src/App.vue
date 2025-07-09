@@ -2,9 +2,15 @@
 import { defineAsyncComponent, onMounted, onUnmounted, ref } from 'vue';
 import LeoNavbar from '@/components/leo-navbar.vue';
 import LeoFooter from '@/components/leo-footer.vue';
-import LeoHero from '@/components/section-hero.vue';
+import SectionHero from '@/components/section-hero.vue';
+
+// import SectionOne from '@/components/section-one.vue';
 import SectionTwo from '@/components/section-two.vue';
+
+// import SectionThree from '@/components/section-three.vue';
 import SectionFour from '@/components/section-four.vue';
+
+// import SectionTw from '@/components/section-tw.vue';
 
 const AsyncSectionOne = defineAsyncComponent(
   () => import('@/components/section-one.vue'),
@@ -43,18 +49,22 @@ function setInitScreenHeight() {
     <LeoNavbar />
     <main class="leo-main">
       <div class="bg-black text-white">
-        <LeoHero />
+        <SectionHero />
+
         <AsyncSectionOne />
+        <!-- <SectionOne /> -->
 
         <!-- don't use async component to prevent flourish error -->
         <SectionTwo />
 
         <AsyncSectionThree />
+        <!-- <SectionThree /> -->
 
         <!-- don't use async component to prevent flourish error -->
         <SectionFour />
       </div>
       <AsyncSectionTw />
+      <!-- <SectionTw /> -->
     </main>
     <LeoFooter />
   </div>

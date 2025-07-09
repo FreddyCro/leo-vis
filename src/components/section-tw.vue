@@ -38,19 +38,17 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
 </script>
 
 <template>
-  <div id="taiwan" class="ls-tw leo-article text-[#404040]">
+  <div id="taiwan" class="ls-tw leo-section leo-article text-[#404040]">
     <div class="leo-container">
-      <div class="leo-section leo-section--no-mb">
-        <h2 class="ls-tw-h3 text-center font-medium">{{ str.title1 }}</h2>
-        <div class="mt-10">
-          <p>{{ str.p1t1 }}</p>
-        </div>
+      <h2 class="ls-tw-h3 text-center font-medium">{{ str.title1 }}</h2>
+      <div class="mt-[20px]">
+        <p>{{ str.p1t1 }}</p>
       </div>
     </div>
 
     <!-- feature grid -->
     <div class="leo-container-lg">
-      <div class="my-[60px] md:my-[80px]">
+      <div class="leo-section-chart-lg">
         <h3 class="ls-tw-h3 sm:text-center">{{ str.title2 }}</h3>
         <div class="my-5">
           <h4 class="ls-tw-h3-sub sm:text-center">
@@ -135,21 +133,24 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
         </div>
       </div>
     </div>
-    <div class="leo-container">
-      <p>{{ str.p2t1 }}</p>
-      <p>{{ str.p2t2 }}</p>
-      <p>{{ str.p2t3 }}</p>
-      <p>{{ str.p2t4 }}</p>
-      <p>{{ str.p2t5 }}</p>
 
-      <div class="leo-section-chart">
+    <div class="leo-container">
+      <div class="leo-section-chart-lg">
+        <p>{{ str.p2t1 }}</p>
+        <p>{{ str.p2t2 }}</p>
+        <p>{{ str.p2t3 }}</p>
+        <p>{{ str.p2t4 }}</p>
+        <p>{{ str.p2t5 }}</p>
+      </div>
+
+      <div class="leo-section-chart-lg">
         <h3 class="ls-tw-h3">{{ str.title3 }}</h3>
-        <div class="mt-10">
+        <div class="mt-[20px]">
           <p>{{ str.p3t1 }}</p>
         </div>
       </div>
 
-      <div class="leo-section-chart text-white">
+      <div class="leo-section-chart-lg text-white">
         <LeoReadMore
           chapter="tw"
           :title="str.relatedTitle"
@@ -163,7 +164,8 @@ const FEAT_GRID_DATA: FeatGridItem[] = [
           ]"
         />
       </div>
-      <div class="leo-section-chart">
+
+      <div class="leo-section-chart-lg">
         <p>{{ str.p3t2 }}</p>
       </div>
     </div>

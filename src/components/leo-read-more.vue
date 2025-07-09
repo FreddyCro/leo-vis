@@ -15,7 +15,7 @@ interface Props {
   data: Item[];
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 function onClick(item: Item) {
   // 發送 GA 事件：click_news with term = ch2
@@ -23,7 +23,7 @@ function onClick(item: Item) {
     hitType: 'event',
     eventAction: 'click_news',
     eventCategory: 'news',
-    term: 'ch2',
+    term: props.chapter || '',
     eventLabel: item.title,
   });
 }
@@ -34,7 +34,11 @@ function onClick(item: Item) {
     <h2 v-if="title" class="leo-h3 font-medium text-center">
       {{ title }}
     </h2>
-    <div class="mt-8 sm:mt-10">
+    <div
+      :class="{
+        'mt-8 sm:mt-10': title,
+      }"
+    >
       <ul
         :class="{
           'grid sm:grid-cols-2 gap-[13px]': data.length % 2 === 0, // 2, 4
@@ -114,8 +118,13 @@ function onClick(item: Item) {
 
     &--one {
       width: 100%;
-      aspect-ratio: 364 / 492;
-      padding: 46px 21px;
+      aspect-ratio: 279 / 378;
+      padding: 36px 16px;
+
+      @include rwd-min(xxs) {
+        aspect-ratio: 364 / 492;
+        padding: 46px 21px;
+      }
 
       @include rwd-min(sm) {
         aspect-ratio: auto;
