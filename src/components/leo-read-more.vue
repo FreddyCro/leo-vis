@@ -114,8 +114,13 @@ function onClick(item: Item) {
 
     &--one {
       width: 100%;
-      aspect-ratio: 364 / 492;
-      padding: 46px 21px;
+      aspect-ratio: 279 / 378;
+      padding: 36px 16px;
+
+      @include rwd-min(xxs) {
+        aspect-ratio: 364 / 492;
+        padding: 46px 21px;
+      }
 
       @include rwd-min(sm) {
         aspect-ratio: auto;

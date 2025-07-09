@@ -327,7 +327,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t1 }}</p>
-                    <div class="leo-section-sm">
+                    <div class="leo-section-sm leo-section-sm--no-mb">
                       <LeoPic
                         src="img/newspaceera2025_pic10_4"
                         :webp="false"
@@ -350,7 +350,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                     class="ls-three__moon-text-box my-[calc(var(--init-screen-height)*1)] sm:my-[500px] mx-auto"
                   >
                     <p>{{ str.p5t2 }}</p>
-                    <div class="leo-section-sm">
+                    <div class="leo-section-sm leo-section-sm--no-mb">
                       <LeoPic
                         src="img/newspaceera2025_pic10_5"
                         :webp="false"
@@ -384,7 +384,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
                       </p>
                     </div>
                     <p>{{ str.p6t2 }}</p>
-                    <div class="leo-section-sm">
+                    <div class="leo-section-sm leo-section-sm--no-mb">
                       <LeoPic
                         src="img/newspaceera2025_pic10_7"
                         :webp="false"
