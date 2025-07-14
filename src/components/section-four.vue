@@ -25,7 +25,7 @@ function handleTranshFloatEnter(enter: boolean) {
 </script>
 
 <template>
-  <div id="debris" class="ls-four leo-article">
+  <div id="ch4_debris" class="ls-four leo-article">
     <LeoSectionLayout
       @change-space="handleChangeSpace"
       @change-article="handleChangeArticle"
@@ -93,6 +93,7 @@ function handleTranshFloatEnter(enter: boolean) {
       </template>
       <template #article>
         <div
+          id="ch4_overview"
           class="leo-section leo-section--no-mt leo-section--pt relative z-20"
         >
           <div class="leo-container">

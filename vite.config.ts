@@ -25,6 +25,7 @@ export default defineConfig((mode) => {
           data: {
             title: meta.metaTitle,
             description: meta.metaDesc,
+            x_description: meta.metaXDesc,
             keywords: meta.metaKeywords,
             url: VITE_URL,
             // url: meta.metaURL,

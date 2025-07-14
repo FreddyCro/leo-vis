@@ -15,16 +15,14 @@ interface Props {
   data: Item[];
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 function onClick(item: Item) {
   // 發送 GA 事件：click_news with term = ch2
   sendGA({
-    hitType: 'event',
-    eventAction: 'click_news',
-    eventCategory: 'news',
-    term: props.chapter || '',
-    eventLabel: item.title,
+    action: 'click_news',
+    category: 'term',
+    label: item.title,
   });
 }
 </script>

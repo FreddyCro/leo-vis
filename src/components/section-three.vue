@@ -50,7 +50,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
 </script>
 
 <template>
-  <div id="moon" class="ls-three leo-article">
+  <div id="ch3_moon" class="ls-three leo-article">
     <LeoSectionLayout
       @change-space="handleChangeSpace"
       @change-article="handleChangeArticle"
@@ -84,7 +84,10 @@ function handleSatelliteContent(isIntersecting: boolean) {
       </template>
       <template #article>
         <!-- satellite fall down -->
-        <div class="leo-section leo-section--no-mt leo-section--pt">
+        <div
+          id="ch3_overview"
+          class="leo-section leo-section--no-mt leo-section--pt"
+        >
           <div class="ls-three__fall-down relative overflow-hidden">
             <!-- text -->
             <div class="leo-container relative z-10 leading-[2]">
@@ -218,7 +221,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         </div>
 
         <!-- 3d moon site -->
-        <div class="grid">
+        <div id="ch3_mission" class="grid">
           <!-- moon -->
           <div
             class="sticky top-0 w-full min-h-[calc(var(--init-screen-height)*1)] bg-black bg-repeat"
@@ -411,7 +414,7 @@ function handleSatelliteContent(isIntersecting: boolean) {
         </div>
 
         <!-- moon svg content -->
-        <div class="overflow-hidden">
+        <div id="ch3_resources" class="overflow-hidden">
           <LeoScrollTrigger @change="handleSvgContent">
             <div class="ls-three__moon-svg-wrap">
               <h3 class="ls-three__moon-svg-title">

@@ -12,7 +12,7 @@ const CURRENT_YEAR = new Date().getFullYear();
 </script>
 
 <template>
-  <div class="leo-footer">
+  <div id="editor" class="leo-footer">
     <div class="leo-footer__info">
       <NmdAuthor>
         <template #統籌製作>{{ strFooter.editor1 }}</template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { sendGA } from '../utils/ga';
+import { sendGA } from '@/utils/ga';
 import LeoScrollTrigger from '@/components/leo-scroll-trigger.vue';
 import LeoSectionIntro from '@/components/leo-section-intro.vue';
 import LeoSectionLayout from '@/components/leo-section-layout.vue';
@@ -75,10 +75,9 @@ function handleOpenDialog() {
 
   // 發送 GA 事件：click_btn with term = supplychains
   sendGA({
-    hitType: 'event',
-    eventAction: 'click_btn',
-    eventCategory: 'interaction',
-    term: 'supplychains',
+    action: 'click_btn',
+    category: 'term',
+    label: 'supplychains',
   });
 }
 
@@ -88,7 +87,7 @@ function onDialogClose() {
 </script>
 
 <template>
-  <div id="economic" class="ls-one leo-article">
+  <div id="ch1_economic" class="ls-one leo-article">
     <LeoSectionLayout
       @change-space="handleChangeSpace"
       @change-article="handleChangeArticle"
@@ -138,7 +137,10 @@ function onDialogClose() {
         </LeoSectionIntro>
       </template>
       <template #article>
-        <div class="leo-section leo-section--pt leo-section--no-mt">
+        <div
+          id="ch1_satellite"
+          class="leo-section leo-section--pt leo-section--no-mt"
+        >
           <div class="min-h-[calc(var(--init-screen-height)*4)]">
             <div class="sticky top-0">
               <Leo3dEarthSatellite :current-category="currentCategory" />
@@ -277,7 +279,10 @@ function onDialogClose() {
 
           <LeoDialog v-model="showDialog" @close="onDialogClose">
             <template #title>
-              <h4 class="leo-h4 font-bold noto-sans-tc text-[#404040]">
+              <h4
+                id="ch1_supplychains"
+                class="leo-h4 font-bold noto-sans-tc text-[#404040]"
+              >
                 {{ str.dialogTitle }}
               </h4>
             </template>

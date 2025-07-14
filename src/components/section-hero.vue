@@ -33,7 +33,7 @@ function onEarthReady() {
 </script>
 
 <template>
-  <div class="ls-hero leo-article">
+  <div id="overview" class="ls-hero leo-article">
     <div
       class="relative z-10 transition-all duration-1000 ease-in-out"
       :class="{
@@ -81,7 +81,7 @@ function onEarthReady() {
         </div>
       </template>
       <template #article>
-        <div>
+        <div id="contents">
           <!-- chart 1 -->
           <div class="leo-container-larger">
             <LeoScrollTrigger
